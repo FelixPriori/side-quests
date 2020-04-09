@@ -77,7 +77,7 @@ CREATE TABLE unlocked_achievements (
 CREATE TABLE class_progress (
   class_id INTEGER REFERENCES classes(id) ON DELETE CASCADE
   adventurer_id INTEGER REFERENCES users(id) ON DELETE CASCADE
-  level INTEGER NOT NULL,
-  experience INTEGER NOT NULL,
-  quest_count INTEGER NOT NULL
+  level INTEGER DEFAULT 1,
+  experience INTEGER DEFAULT 0,
+  quest_count INTEGER DEFAULT 0
 );
