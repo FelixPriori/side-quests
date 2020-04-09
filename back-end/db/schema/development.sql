@@ -8,6 +8,15 @@ VALUES
   ),
   (
     'SueSusanson', 'Sue', 'Susanson', 'sue@example.com', 'password', 'https://i.imgur.com/TdOAdde.jpg, true'
+  ),
+  (
+    'CingyMingus', 'Clinton', 'Andrews', 'drandrews@example.com', 'password', 'https://i.imgur.com/TdOAdde.jpg, true'
+  ),
+  (
+    'Putem', 'Leeroy', 'Darling', 'darlingwriter@example.com', 'password', 'https://i.imgur.com/TdOAdde.jpg, true'
+  ),
+  (
+    'MsSturgeon', 'Shae', 'Ramsay', 'sramsay@example.com', 'password', 'https://i.imgur.com/TdOAdde.jpg, true'
   );
 --
 
@@ -50,10 +59,22 @@ VALUES
     'https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/256x256/medal.png'
     'Help someone every day for 7 days'
   ),
+  (
     'Master Rogue',
     'https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/256x256/medal.png',
     'Have a level 10 Rogue'
-  );
+  ),
+  (
+    'Master Chef',
+    'https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/256x256/medal.png',
+    'Complete 5 Alchemist Quests'
+  ),
+  (
+    'Teach A Man To Fish',
+    'https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/256x256/medal.png',
+    'Complete 5 Mage Quests'
+  )
+
 --
 
 INSERT INTO achievements (name, image, requirement)
@@ -88,3 +109,4 @@ VALUES
   (1, 1, 3, 330, 18),
   (3, 5, 1, 30, 3);
 --
+
