@@ -55,11 +55,6 @@ VALUES
 INSERT INTO badges (name, image, requirement)
 VALUES 
   (
-    'Week Streak', 
-    'https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/256x256/medal.png'
-    'Help someone every day for 7 days'
-  ),
-  (
     'Master Rogue',
     'https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/256x256/medal.png',
     'Have a level 10 Rogue'
@@ -74,11 +69,15 @@ VALUES
     'https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/256x256/medal.png',
     'Complete 5 Mage Quests'
   )
-
 --
 
 INSERT INTO achievements (name, image, requirement)
 VALUES 
+  (
+    'Week Streak', 
+    'https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/256x256/medal.png'
+    'Help someone every day for 7 days'
+  ),
   (
     'Jack of All Trades',
     'https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/256x256/medal.png',

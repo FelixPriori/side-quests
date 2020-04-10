@@ -1,6 +1,4 @@
 DROP TABLE IF EXISTS users CASCADE;
--- DROP TABLE IF EXISTS conversations CASCADE;
--- DROP TABLE IF EXISTS messages CASCADE;
 DROP TABLE IF EXISTS quests CASCADE;
 DROP TABLE IF EXISTS badges CASCADE;
 DROP TABLE IF EXISTS achievements CASCADE;
@@ -20,20 +18,6 @@ CREATE TABLE users (
   avatar VARCHAR(255) NOT NULL,
   adventurer BOOLEAN NOT NULL
 );
-
--- CREATE TABLE conversations (
---   id SERIAL PRIMARY KEY NOT NULL,
---   villager_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
---   adventurer_id INTEGER REFERENCES users(id) ON DELETE CASCADE
--- );
-
--- CREATE TABLE messages (
---   id SERIAL PRIMARY KEY NOT NULL,
---   author_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
---   conversation_id INTEGER REFERENCES conversations(id),
---   timestamp TIMESTAMP NOT NULL,
---   text TEXT NOT NULL
--- );
 
 CREATE TABLE quests (
   id SERIAL PRIMARY KEY NOT NULL,
