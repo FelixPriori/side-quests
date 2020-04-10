@@ -5,6 +5,7 @@ const classnames = require('classnames');
 
 export default function Button(props) {
   const buttonClass = classnames("btn", {
+    "btn-outline-secondary": props.navbar,
     "btn-primary": props.confirm,
     "btn-danger": props.danger,
   });
