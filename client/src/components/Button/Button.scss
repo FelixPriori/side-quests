@@ -1,0 +1,18 @@
+@import "~bootstrap/scss/bootstrap";
+@import '../../styles/palette.scss';
+
+.btn-outline-secondary {
+  color: $color1;
+  border-color: $color1;
+}
+
+.btn-outline-secondary:hover {
+  color: $color4;
+  background-color: $color1;
+}
+
+.btn-outline-secondary:focus {
+  color: $color1;
+  border-color: $color1;
+  background-color: $color4;
+}
