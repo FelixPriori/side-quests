@@ -25,7 +25,6 @@ module.exports = () => {
         .then(passwordMatch => {
           if (passwordMatch) {
             req.session.userId = email;
-            //UPDATE (UPDATE NAVBAR)
           }
         });
     }

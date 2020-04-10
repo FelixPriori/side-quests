@@ -15,13 +15,13 @@ SideQuests is a web app which facilitates helping people in need, solving curren
 - (stretch) As someone who is competitive, I like to keep track of the other players, and see where I stand in the leaderboard.
 - (stretch) As someone who uses the app for help a lot, I want to be able to review who helps me, so that if I have a bad experience, I can avoid the person for next time.
 
-
 ## Stacks
 
 ### Front End
 * React
 * Scss
 * Bootstrap
+* Socket.io
 
 ### Back End
 * Express.js
@@ -29,6 +29,26 @@ SideQuests is a web app which facilitates helping people in need, solving curren
 
 ### Database
 * PostgreSQL
+
+## Routes
+
+| HTTP METHOD  | URL PATTERN        | USE                      |
+| ------------ | :----------------- |--------------------------|
+| POST         | /register          | Register new user        |
+| POST         | /login             | Login existing user      |
+| GET          | /users             | Get users                |
+| GET          | /users/:id         | Get data for user        |
+| GET          | /quests            | Get all the quests       |
+| POST         | /quests/:id/new    | Add a new quest          |
+| GET          | /quests/:id        | Get a single quest       |
+| PUT          | /quests/:id/edit   | Edit a quest             |
+| DELETE       | /quests/:id/delete | Delete a quest           |
+| GET          | /achievements      | Get all achievements     |
+| GET          | /achievements/:id  | Get a single achievement |
+| GET          | /badges            | Get all badges           |
+| GET          | /badges/:id        | Get a single badge       |
+| GET          | /classes           | Get all classes          |
+| GET          | /classes/:id       | Get a single class       |
 
 ## ERD
 ![ERD](./docs/SideQuests_ERD.png)

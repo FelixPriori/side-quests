@@ -10,80 +10,94 @@ const bcrypt = require('bcrypt');
 // }));
 
 
-const { myPosts, postComments, findUsernameBasedOnId, howManyPeopleLike, incrementLikes, decreaseLikes, addComment, rateTheHook, avgRatings } = require('../db/helpers');
+// const { } = require('../db/helpers');
 
 module.exports = () => {
 
-  router.get("/user/:userid/achievements", (req, res) => {
-    myPosts(req.params.userid).then(result => {
+  router.get("/users", (req, res) => {
+    allUsers(req.params.userid).then(result => {
       res.send(result);
     });
   });
 
-  router.get("/user/:userid/newPost", (req, res) => {
-    newPost(req.params.userid).then(result => {
+  router.get("/users/:id", (req, res) => {
+    getUser(req.params.userid).then(result => {
       res.send(result);
     });
   })
 
-  router.get("/user/:postId/comments", (req, res) => {
-    postComments(req.params.postId).then(result => {
+  router.get("/quests", (req, res) => {
+    allQuests(req.params.postId).then(result => {
       res.send(result);
     })
   });
 
-  router.get("/user/:userId", (req, res) => {
-    findUsernameBasedOnId(req.params.userId).then(result => {
+  router.get("/quests/:id", (req, res) => {
+    getQuest(req.params.userId).then(result => {
       res.send(result);
     })
   });
 
-  router.get("/:postId/likes", (req, res) => {
-    howManyPeopleLike(req.params.postId).then(result => res.send(result));
+  router.post("/quests/:id/new", (req, res) => {
+    createNewQuest(req.params.postId).then(result => res.send(result));
   });
 
-  router.post("/posts/:postId/rating/:ratingNumber", (req, res) => {
+  router.delete("/quests/:id/delete", (req, res) => {
 
-    rateTheHook(req.params.postId, req.params.ratingNumber).then(result => {
+    removeQuest(req.params.postId, req.params.ratingNumber).then(result => {
       res.send(result);
     }
     );
   });
 
-  router.get("/posts/:postId/rating", (req, res) => {
-    avgRatings(req.params.postId).then(result => {
+  router.put("/quests/:id/edit", (req, res) => {
+    editQuest(req.params.postId).then(result => {
       res.send(result);
     });
 
   });
 
-
-
-  router.post("/:postId/increaseLikes", (req, res) => {
-    incrementLikes(req.session.userId.id, req.params.postId).then(result => {
+  router.get("/achievements", (req, res) => {
+    allAchievements(req.session.userId.id, req.params.postId).then(result => {
       res.send(result);
 
     });
   });
 
-  // router.post("/:postId/decreaseLikes", (req, res) => {
-  //   decreaseLikes(req.session.userId.id, req.params.postId).then(result => {
-  //     res.send(result);
-  //     // getPostInfo(req.params.postId).then( postInfo => {
-  //     // });
-  //   });
-  // });
+  router.get("/achievements/:id", (req, res) => {
 
-  router.post("/user/:postId/comments/:commentContent", (req, res) => {
-    console.log("content", req.params.commentContent);
-    console.log("userid", req.session.userId.id);
-    console.log("postId", req.params.postId);
-
-    addComment(req.params.commentContent, req.session.userId.id, req.params.postId).then(result => {
+    getAchievement(req.params.commentContent, req.session.userId.id, req.params.postId).then(result => {
       res.send(result);
     });
   });
 
+  router.get("/badges", (req, res) => {
+
+    allBadges(req.params.commentContent, req.session.userId.id, req.params.postId).then(result => {
+      res.send(result);
+    });
+  });
+
+  router.get("/badges/:id", (req, res) => {
+
+    getBadge(req.params.commentContent, req.session.userId.id, req.params.postId).then(result => {
+      res.send(result);
+    });
+  });
+
+  router.get("/classes", (req, res) => {
+
+    allClasses(req.params.commentContent, req.session.userId.id, req.params.postId).then(result => {
+      res.send(result);
+    });
+  });
+
+  router.get("/classes/:id", (req, res) => {
+
+    getClass(req.params.commentContent, req.session.userId.id, req.params.postId).then(result => {
+      res.send(result);
+    });
+  });
 
 
   return router;

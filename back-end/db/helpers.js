@@ -44,6 +44,62 @@ const addUser = function (username, first_name, last_name, email, password, avat
   )
   `
   return db.query(queryStr, [username, first_name, last_name, email, password, avatar, adventurer])
+    .then();
+}
+
+const allUsers = function () {
+  const queryStr = `
+    SELECT * FROM users
+  `
+
+}
+
+const getUser = function (userId) {
+
+}
+
+const allQuests = function () {
+
+}
+
+const getQuest = function (questId) {
+
+}
+
+const createNewQuest = function (/*input quest info required */) {
+
+}
+
+const deleteQuest = function (questId) {
+
+}
+
+const editQuest = function (/* new quest info */) {
+
+}
+
+const allAchievements = function () {
+
+}
+
+const getAchievement = function (achievementId) {
+
+}
+
+const allBadges = function () {
+
+}
+
+const getBadge = function (badgeId) {
+
+}
+
+const allClasses = function () {
+
+}
+
+const getClass = function (classId) {
+
 }
 
 module.exports = {
