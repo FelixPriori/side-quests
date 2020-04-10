@@ -10,7 +10,7 @@ const bcrypt = require('bcrypt');
 // }));
 
 
-// const { } = require('../db/helpers');
+const { allUsers, getUser, allQuests, getQuest } = require('../db/helpers');
 
 module.exports = () => {
 
@@ -44,7 +44,7 @@ module.exports = () => {
 
   router.delete("/quests/:id/delete", (req, res) => {
 
-    removeQuest(req.params.postId, req.params.ratingNumber).then(result => {
+    deleteQuest(req.params.postId, req.params.ratingNumber).then(result => {
       res.send(result);
     }
     );
