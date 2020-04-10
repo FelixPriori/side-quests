@@ -9,14 +9,19 @@ DROP TABLE IF EXISTS class_progress CASCADE;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
-  name VARCHAR(255) NOT NULL,
   username VARCHAR(255) NOT NULL,
   first_name VARCHAR(255) NOT NULL,
   last_name VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
-  password password NOT NULL,
+  password VARCHAR(255) NOT NULL,
   avatar VARCHAR(255) NOT NULL,
   adventurer BOOLEAN NOT NULL
+);
+
+CREATE TABLE classes (
+  id SERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  description TEXT NOT NULL
 );
 
 CREATE TABLE quests (
@@ -33,36 +38,29 @@ CREATE TABLE badges (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
   image VARCHAR(255) NOT NULL,
-  requirement VARCHAR(255) NOT NULL,
-
+  requirement VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE achievements (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
   image VARCHAR(255) NOT NULL,
-  requirement VARCHAR(255) NOT NULL,
-);
-
-CREATE TABLE classes (
-  id SERIAL PRIMARY KEY NOT NULL,
-  name VARCHAR(255) NOT NULL,
-  description VARCHAR(255) NOT NULL,
+  requirement VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE assigned_badges (
-  badge_id INTEGER REFERENCES badges(id)
+  badge_id INTEGER REFERENCES badges(id) ON DELETE CASCADE,
   adventurer_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE unlocked_achievements (
-  id SERIAL PRIMARY KEY NOT NULL,
+  achievement_id INTEGER REFERENCES achievements(id) ON DELETE CASCADE,
   adventurer_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE class_progress (
-  class_id INTEGER REFERENCES classes(id) ON DELETE CASCADE
-  adventurer_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+  class_id INTEGER REFERENCES classes(id) ON DELETE CASCADE,
+  adventurer_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   level INTEGER DEFAULT 1,
   experience INTEGER DEFAULT 0,
   quest_count INTEGER DEFAULT 0
