@@ -12,6 +12,8 @@ SideQuests is a web app which facilitates helping people in need, solving curren
 - As a power user who uses the same websites a lot, I like to have an achievement aspect so that all my actions are acknowledged by the site in some way.
 - (stretch) As someone who still wants to pay for my own things, I like to be able to decide if my errand that I am asking for is free or if I will pay for it.
 - (stretch) As someone who likes to keep things above board, I like to be able to take a picture of my receipts and tie them to an errand.
+- (stretch) As someone who is competitive, I like to keep track of the other players, and see where I stand in the leaderboard.
+- (stretch) As someone who uses the app for help a lot, I want to be able to review who helps me, so that if I have a bad experience, I can avoid the person for next time.
 
 
 ## Stacks
@@ -19,6 +21,7 @@ SideQuests is a web app which facilitates helping people in need, solving curren
 ### Front End
 * React
 * Scss
+* Bootstrap
 
 ### Back End
 * Express.js
