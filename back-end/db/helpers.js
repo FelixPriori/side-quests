@@ -18,7 +18,36 @@ const correctPassword = function (email, password) {
     })
 };
 
+const checkIfUserExists = function (email) {
+  const queryStr = `
+    SELECT password
+    FROM users
+    WHERE email = $1
+  `
+  return db.query(queryStr, [email])
+    .then(res => {
+      if (res.rows.length === 0) {
+        return false
+      } else {
+        return true
+      }
+    });
+
+}
+
+const addUser = function (username, first_name, last_name, email, password, avatar, adventurer) {
+  const queryStr = `
+  INSERT INTO users (username, first_name, last_name, email, password, avatar, adventurer)
+  VALUES
+  (
+    $1, $2, $3, $4, $5, $6, $7
+  )
+  `
+  return db.query(queryStr, [username, first_name, last_name, email, password, avatar, adventurer])
+}
 
 module.exports = {
-  correctPassword
+  correctPassword,
+  checkIfUserExists,
+  addUser
 }

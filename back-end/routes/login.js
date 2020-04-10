@@ -4,10 +4,10 @@ const bcrypt = require('bcrypt');
 
 //Still need to npm install cookieSession and bcrypt
 
-app.use(cookieSession({
-  name: 'session',
-  keys: ['key1', 'key2']
-}));
+// app.use(cookieSession({
+//   name: 'session',
+//   keys: ['key1', 'key2']
+// }));
 
 //Helper functions
 const { correctPassword } = require('../db/helpers');
@@ -17,7 +17,7 @@ module.exports = () => {
     const { email, password } = req.body;
     const loginError = "Error: Login credentials invalid. Please try again.";
 
-    if (email === '' || password === '') {
+    if (!email || !password) {
       console.log(loginError);
       res.send(loginError);
     } else {
