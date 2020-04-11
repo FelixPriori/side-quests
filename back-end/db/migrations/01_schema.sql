@@ -31,7 +31,9 @@ CREATE TABLE quests (
   completed BOOLEAN NOT NULL DEFAULT FALSE,
   latitude FLOAT NOT NULL,
   longitude FLOAT NOT NULL,
-  class_id INTEGER REFERENCES classes(id)
+  class_id INTEGER REFERENCES classes(id),
+  villager_id INTEGER REFERENCES users(id),
+  adventurer_id INTEGER REFERENCES users(id) DEFAULT NULL
 );
 
 CREATE TABLE badges (

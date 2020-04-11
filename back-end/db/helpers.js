@@ -116,6 +116,8 @@ const completeQuest = function (questId) {
   SET completed = true
   WHERE id = $1
   `
+
+
   return db.query(queryStr, [questId]).then()
 }
 
@@ -179,6 +181,13 @@ const getClass = function (classId) {
 
 const acceptQuest = function (questId, userId) {
   //This function adds the quest to the users quests
+  const queryStr = `
+  UPDATE quests
+  SET adventurer_id = $1
+  WHERE id = $2
+  `
+  return db.query(queryStr, [userId, questId]).then()
+
 }
 
 const getUserBadges = function (userId) {
@@ -207,8 +216,57 @@ const getUserAchievements = function (userId) {
     .then(res => res.rows);
 }
 
-const getBadgesForClass = function (classId) {
+const getBadgesByClass = function (classId) {
+  const queryStr = `
+    SELECT *
+    FROM badges
+    WHERE class_id = $1;
+  `;
 
+  return db.query(queryStr, [class_id])
+    .then(res => res.rows);
+}
+
+const getQuestsByUser = function (userId) {
+  const queryStr = `
+    SELECT * 
+    FROM quests
+    WHERE adventurer_id = $1;
+  `
+  return db.query(queryStr, [userId])
+    .then(res => res.rows);
+}
+
+const increaseClassLevel = function (userId, classId, amount) {
+  const queryStr = `
+  UPDATE class_progress
+  SET quest_count = quest_count + $1
+  WHERE adventurer_id = $2 AND class_id = $3
+  `
+  return db.query(queryStr, [amount, userId, classId])
+    .then();
+}
+
+const setExperiencePoints = function (userId, classId, amount) {
+  const queryStr = `
+  UPDATE class_progress
+  SET experience_points = $1
+  WHERE adventurer_id = $2 AND class_id = $3
+  `
+  return db.query(queryStr, [amount, userId, classId])
+    .then()
+
+}
+
+const increaseQuestCount = function (userId, classId, amount) {
+  const queryStr = `
+  UPDATE class_progress
+  SET quest_count = quest_count + $1
+  WHERE adventurer_id = $2 AND class_id = $3
+  `
+
+  return db.query(queryStr, [amount, userId, classId])
+    .then();
 }
 
 module.exports = {
@@ -228,5 +286,13 @@ module.exports = {
   allBadges,
   getBadge,
   allClasses,
-  getClass
+  getClass,
+  acceptQuest,
+  getUserBadges,
+  getUserAchievements,
+  getBadgesByClass,
+  getQuestsByUser,
+  increaseClassLevel,
+  setExperiencePoints,
+  increaseQuestCount
 }
