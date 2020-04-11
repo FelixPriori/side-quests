@@ -178,9 +178,12 @@ const getClass = function (classId) {
 }
 
 const acceptQuest = function (questId, userId) {
-
+  //This function adds the quest to the users quests
 }
 
+const getUserBadges = function (userId) {
+
+}
 
 module.exports = {
   correctPassword,
