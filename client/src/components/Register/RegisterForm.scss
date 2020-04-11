@@ -1,0 +1,31 @@
+@import '../../styles/palette.scss';
+@import "~bootstrap/scss/bootstrap";
+
+main {
+  background-color: $color3;
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h3 {
+    margin-top: 0.5em;
+    justify-self: center;
+    font-family: $title;
+    color: $color1;
+    text-shadow: 1px 1px $shadow1; 
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    input, select{
+      margin-bottom: 1em;
+    }
+  }
+  section {
+    display: flex;
+    margin-bottom: 1em;
+    button {
+      margin: 0 1em;
+    }
+  }
+}
