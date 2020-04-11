@@ -31,14 +31,9 @@ module.exports = () => {
 
   });
 
-
   router.post('/logout', (req, res) => {
     req.session = null;
-    //Update view
   });
-
-
-
 
   return router;
 };

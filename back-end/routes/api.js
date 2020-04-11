@@ -3,11 +3,10 @@ const router = express.Router();
 const cookieSession = require('cookie-session');
 const bcrypt = require('bcrypt');
 
-// router.use(cookieSession({
-//   name: 'session',
-//   keys: ['hummus', 'pen', 'working'],
-//   maxAge: 24 * 60 * 60 * 1000
-// }));
+router.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}));
 
 
 const { allUsers, getUser, allQuests, getQuest, createNewQuest, deleteQuest, editQuest, completeQuest, allAchievements, getAchievement, allBadges, getBadge, allClasses, getClass } = require('../db/helpers');

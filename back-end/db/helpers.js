@@ -177,6 +177,9 @@ const getClass = function (classId) {
     .then(res => res.rows)
 }
 
+const acceptQuest = function (questId, userId) {
+
+}
 
 
 module.exports = {
