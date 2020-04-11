@@ -4,10 +4,10 @@ const bcrypt = require('bcrypt');
 
 //Still need to npm install cookieSession and bcrypt
 
-// app.use(cookieSession({
-//   name: 'session',
-//   keys: ['key1', 'key2']
-// }));
+router.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}));
 
 //Helper functions
 const { correctPassword } = require('../db/helpers');

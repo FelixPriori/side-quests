@@ -36,6 +36,7 @@ app.use(express.static("public"));
 // Note: Feel free to replace the example routes below with your own
 const registerRoutes = require("./routes/register");
 const loginRoutes = require("./routes/login");
+const apiRoutes = require("./routes/api");
 // const usersRoutes = require("./routes/users");
 
 
@@ -44,9 +45,11 @@ const loginRoutes = require("./routes/login");
 // Note: Feel free to replace the example routes below with your own
 app.use("/", registerRoutes());
 app.use("/", loginRoutes());
+app.use("/", apiRoutes());
 // Note: mount other resources here, using the same pattern above
 
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
