@@ -182,7 +182,16 @@ const acceptQuest = function (questId, userId) {
 }
 
 const getUserBadges = function (userId) {
+  const queryStr = `
+  SELECT * 
+  FROM users 
+  JOIN assigned_badges on assigned_badges.adventurer_id = id 
+  JOIN badges on badges.id = assigned_badges.badge_id 
+  WHERE users.id = $1;
+  `
 
+  return db.query(queryStr, [userId])
+    .then(res => res.rows);
 }
 
 module.exports = {
