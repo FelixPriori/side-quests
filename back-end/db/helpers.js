@@ -194,6 +194,23 @@ const getUserBadges = function (userId) {
     .then(res => res.rows);
 }
 
+const getUserAchievements = function (userId) {
+  const queryStr = `
+  SELECT *
+  FROM users
+  JOIN unlocked_achievements on unlocked_achievements.adventurer_id = id
+  JOIN achievements on achievements.id = unlocked_achievements.achievement_id
+  WHERE users.id = $1;
+  `
+
+  return db.query(queryStr, [userId])
+    .then(res => res.rows);
+}
+
+const getBadgesForClass = function (classId) {
+
+}
+
 module.exports = {
   correctPassword,
   checkIfUserExists,

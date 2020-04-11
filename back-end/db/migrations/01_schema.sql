@@ -38,7 +38,8 @@ CREATE TABLE badges (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
   image VARCHAR(255) NOT NULL,
-  requirement VARCHAR(255) NOT NULL
+  requirement VARCHAR(255) NOT NULL,
+  class_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE achievements (
