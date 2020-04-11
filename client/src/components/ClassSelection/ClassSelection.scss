@@ -1,0 +1,17 @@
+@import '../../styles/palette.scss';
+@import "~bootstrap/scss/bootstrap";
+
+
+main {
+  display: flex;
+  h4 {
+    font-family: $title;
+    color: $color1;
+  }
+  section {
+    label {
+      font-family: $title;
+      color: $color1;
+    }
+  }
+} 
