@@ -16,7 +16,7 @@ export default function ClassProgress(props) {
   const { questsNeeded, expDifference, percentage } = toNextLevel(level, experience);
 
   return (
-    <section>
+    <section className="progress-section">
       <h3>Class Progress:</h3>
       <div>
         <div className="progress-bar">
@@ -35,7 +35,7 @@ export default function ClassProgress(props) {
             </div>
             <div className="right">
               <p>Next Level: {level + 1}</p>
-              <p>Exp for next Level {expDifference}</p>
+              <p>Exp needed: {expDifference}</p>
               <p>Quests needed: {questsNeeded}</p>
             </div>
           </span>

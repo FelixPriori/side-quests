@@ -8,7 +8,7 @@ export default function Navbar(props) {
     <header>
       <Logo/>
       { props.user 
-        ? <span>
+        ? <span className="nav-items">
             <h3>Welcome, {props.user}</h3>
             { props.adventurer 
               ? <Button navbar>View Quest</Button>
@@ -16,7 +16,7 @@ export default function Navbar(props) {
             }
             <Button navbar>Logout</Button>
           </span>
-        : <span>
+        : <span className="nav-items">
             <Button navbar>Login</Button>
             <Button navbar>Register</Button>
           </span>

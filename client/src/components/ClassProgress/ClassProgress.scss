@@ -1,5 +1,5 @@
 @import '../../styles/palette.scss';
-section {
+.progress-section {
   display: flex;
   flex-direction: column;
   h3 {
@@ -15,6 +15,7 @@ section {
       margin-left: 1em;
       margin-right: 1em;
       .right {
+        margin-left: 2em;
         p {
           text-align: right;
         }
