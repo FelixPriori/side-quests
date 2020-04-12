@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS assigned_badges CASCADE;
 DROP TABLE IF EXISTS unlocked_achievements CASCADE;
 DROP TABLE IF EXISTS class_progress CASCADE;
 
+
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
   username VARCHAR(255) NOT NULL,
@@ -33,7 +34,8 @@ CREATE TABLE quests (
   longitude FLOAT NOT NULL,
   class_id INTEGER REFERENCES classes(id),
   villager_id INTEGER REFERENCES users(id),
-  adventurer_id INTEGER REFERENCES users(id) DEFAULT NULL
+  adventurer_id INTEGER REFERENCES users(id) DEFAULT NULL,
+  experience_points INTEGER NOT NULL DEFAULT 100
 );
 
 CREATE TABLE badges (
@@ -41,6 +43,8 @@ CREATE TABLE badges (
   name VARCHAR(255) NOT NULL,
   image VARCHAR(255) NOT NULL,
   requirement VARCHAR(255) NOT NULL,
+  int_requirement INTEGER NOT NULL,
+  criteria_type VARCHAR(255) NOT NULL,
   class_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
 
@@ -50,6 +54,7 @@ CREATE TABLE achievements (
   image VARCHAR(255) NOT NULL,
   requirement VARCHAR(255) NOT NULL
 );
+
 
 CREATE TABLE assigned_badges (
   badge_id INTEGER REFERENCES badges(id) ON DELETE CASCADE,
