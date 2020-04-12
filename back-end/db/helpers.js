@@ -104,7 +104,7 @@ const deleteQuest = function (questId) {
   return db.query(queryStr, [questId]).then()
 }
 
-const editQuest = function (/* questId and all the fields to make a quest */) {
+const editQuest = function (questId, name, description, completed, latitude, longitude, class_id) {
   const queryStr = `
   
   `
