@@ -29,7 +29,7 @@ main {
       flex-direction: column;
       margin: 1em;
       p {
-        font-family: 'Comic Neue', cursive;
+        font-family: $paragraph;
         color: $color1;
         text-shadow: 0.5px 0.5px $highlight1;
       }
