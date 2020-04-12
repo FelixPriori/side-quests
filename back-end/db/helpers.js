@@ -180,7 +180,6 @@ const getClass = function (classId) {
 }
 
 const acceptQuest = function (questId, userId) {
-  //This function adds the quest to the users quests
   const queryStr = `
   UPDATE quests
   SET adventurer_id = $1
