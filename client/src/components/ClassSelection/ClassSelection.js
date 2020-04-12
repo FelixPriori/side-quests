@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
-import '../ClassSelection/ClassSelection.scss';
+import './ClassSelection.scss';
+import ClassProgress from '../ClassProgress/ClassProgress';
 
 
 export default function ClassSelection(props) {
   const [ classItem, setClassItem ] = useState(null);
-  const { classesData } = props;
+  const [ classProgress, setClassProgress ] = useState(null);
+  const { classesData, classesProgessData } = props;
 
   const changeClass = name => {
     const selectedClass = classesData.find(classData => classData.name === name);
+    const selectedClassProgress = classesProgessData.find(classProgress => selectedClass.id === classProgress.id)
     setClassItem(selectedClass);
+    setClassProgress(selectedClassProgress);
   };
 
   const classList = classesData.map((classData, index) => {
@@ -17,8 +21,6 @@ export default function ClassSelection(props) {
       <option 
         key={index}
         value={name}
-        // onClick={() => console.log('clicked')}
-        //() => changeClass(name)
       >
         {name}
       </option>
@@ -38,12 +40,15 @@ export default function ClassSelection(props) {
         </select>
       </div>
         {classItem && 
-          <div className="content">
-            <img src={classItem.avatar}/>
-            <span>
-              <h3>{classItem.name}</h3>
-              <p>{classItem.description}</p>
-            </span>
+          <div>
+            <div className="content">
+              <img src={classItem.avatar}/>
+              <span>
+                <h3>{classItem.name}</h3>
+                <p>{classItem.description}</p>
+              </span>
+            </div>
+            <ClassProgress data={classProgress}/>
           </div>
         }
     </main>
