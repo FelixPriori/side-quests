@@ -1,8 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Kavoon&display=swap');
 @import '../../styles/palette.scss';
 
 h1 {
   color: $color1;
-  font-family: 'Kavoon';
+  font-family: $title;
   text-shadow: 1px 1px $shadow1;
 }

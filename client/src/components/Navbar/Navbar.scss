@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Kavoon&display=swap');
 @import '../../styles/palette.scss';
 
 header {
@@ -16,7 +15,7 @@ header {
     }
     h3 {
       color: $color2;
-      font-family: 'Kavoon';
+      font-family: $title;
       align-self: center;
     }
   }
