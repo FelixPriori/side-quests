@@ -1,0 +1,41 @@
+@import '../../styles/palette.scss';
+section {
+  display: flex;
+  flex-direction: column;
+  h3 {
+    font-family: $title;
+    color: $color1;
+    text-align: center;
+  }
+  div {
+    display: flex;
+    flex-direction: column;
+    font-family: $paragraph;
+    .progress-bar, span {
+      margin-left: 1em;
+      margin-right: 1em;
+      .right {
+        p {
+          text-align: right;
+        }
+      }
+      p {
+        margin-bottom: 0;
+        color: $color1;
+      }
+    }
+    span {
+      display: flex;
+      justify-content: space-between;
+    }
+    .progress-bar {
+      border-radius: 15px;
+      padding: 0.1em;
+      background-color: $color1;
+      .progress-inside {
+        border-radius: 15px;
+        background-color: $color4;
+      }
+    }
+  }
+}
