@@ -106,8 +106,11 @@ const deleteQuest = function (questId) {
 
 const editQuest = function (questId, name, description, completed, latitude, longitude, class_id) {
   const queryStr = `
-  
+  UPDATE quests 
+  SET name = $1 AND description = $2 AND completed = $3 AND latitude = $4 AND longitude = $5 AND class_id = $6
+  WHERE quests.id = $7;
   `
+  return db.query(queryStr, description, completed, latitude, longitude, class_id[name, questId]).then();
 }
 
 const completeQuest = function (questId) {
