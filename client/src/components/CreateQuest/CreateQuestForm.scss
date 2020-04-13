@@ -4,7 +4,7 @@
 main {
   background-color: $color3;
   font-family: $paragraph;
-  background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+  background-image: $background;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,6 +1,6 @@
 import React from "react";
+import './RegisterForm.scss';
 import Button from '../Button/Button';
-import '../Register/RegisterForm.scss';
 
 export default function RegisterForm(props) {
   return (
