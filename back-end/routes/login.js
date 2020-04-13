@@ -30,6 +30,8 @@ module.exports = () => {
           if (user) {
             console.log("Login Successful");
             req.session.userId = user.id;
+            req.session.save();
+            console.log(req.session);
             res.send();
           } else {
             console.log("Error: Account does not exist.");

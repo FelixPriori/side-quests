@@ -36,6 +36,7 @@ app.use(session({
   secret: 'hfdgaskghsdfkljlgdfgskkhjriwu3h',
   resave: false,
   saveUninitialized: true,
+  cookie: { secure: false }
 }));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own

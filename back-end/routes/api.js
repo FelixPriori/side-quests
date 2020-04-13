@@ -4,16 +4,43 @@ const bcrypt = require('bcrypt');
 
 
 
-const { allUsers, getUser, allQuests, getQuest, createNewQuest, deleteQuest, editQuest, completeQuest, allAchievements, getAchievement, allBadges, getBadge, allClasses, getClass } = require('../db/helpers');
+const { getAllUserClassProgress, checkUserQuests, allUsers, getUser, allQuests, getQuest, createNewQuest, deleteQuest, editQuest, completeQuest, allAchievements, getAchievement, allBadges, getBadge, allClasses, getClass, checkUserLogin } = require('../db/helpers');
 
 module.exports = () => {
 
   router.get("/users", (req, res) => {
-    console.log(req.session);
     allUsers().then(result => {
-      res.send(result);
+      res.json(result);
     });
   });
+
+  //Information for front page
+
+  router.get("/checkSession", (req, res) => {
+    console.log(req.session.userId);
+    if (req.session.userId) {
+      checkUserLogin(req.session.userId).then(result => {
+        res.json(result);
+      });
+
+    } else {
+      const result = null;
+      res.json(result);
+    }
+  });
+
+  router.get("/userQuests", (req, res) => {
+    checkUserQuests(req.session.userId).then(result => {
+      res.json(result);
+    });
+  });
+
+  router.get("/userClassProgress", (req, res) => {
+    getAllUserClassProgress(req.session.userId).then(result => {
+      res.json(result);
+    });
+  });
+  ////////////////////////////////
 
   router.get("/users/:id", (req, res) => {
     getUser(req.params.id).then(result => {

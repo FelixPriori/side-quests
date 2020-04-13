@@ -62,6 +62,34 @@ const addUser = function (
     .then()
 }
 
+//Functions for front page of app
+const checkUserLogin = function (userId) {
+  const queryStr = `
+  SELECT * 
+  FROM users
+  WHERE users.id = $1
+  `
+  return db.query(queryStr, [userId]).then(res => res.rows);
+}
+
+const checkUserQuests = function (userId) {
+  const queryStr = `
+  SELECT * 
+  FROM quests
+  WHERE adventurer_id = $1
+  `
+  return db.query(queryStr, [userId]).then(res => res.rows);
+}
+
+const getAllUserClassProgress = function (userId) {
+  const queryStr = `
+  SELECT * 
+  FROM class_progress
+  WHERE adventurer_id = $1
+  `
+  return db.query(queryStr, [userId]).then(res => res.rows);
+}
+
 const allUsers = function () {
   const queryStr = `
     SELECT * FROM users;
@@ -466,5 +494,8 @@ module.exports = {
   getQuestsByUser,
   increaseClassLevel,
   setExperiencePoints,
-  increaseQuestCount
+  increaseQuestCount,
+  checkUserLogin,
+  checkUserQuests,
+  getAllUserClassProgress
 }
