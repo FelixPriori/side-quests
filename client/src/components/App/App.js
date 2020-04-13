@@ -6,7 +6,7 @@ import LoginForm from '../Login/LoginForm'
 import RegisterForm from '../Register/RegisterForm'
 
 function App () {
-  return <RegisterForm />
+  return <LoginForm />
 }
 
 export default App
