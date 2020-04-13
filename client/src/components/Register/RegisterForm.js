@@ -13,12 +13,12 @@ export default function RegisterForm(props) {
   const [firstName, setFirstName] = useState(props.firstName || "");
   const [lastName, setLastName] = useState(props.lastName || "");
   const [username, setUsername] = useState(props.username || "");
-
+  const [accountType, setAccountType] = useState(props.accountType || "");
 
   //Possibly implement axios over fetch?
   function handleSubmit() {
 
-    const data = { email, password, confirmPassword, firstName, lastName, username };
+    const data = { email, password, confirmPassword, firstName, lastName, username, accountType };
 
     axios.post(`/register`, data);
   }
@@ -29,8 +29,8 @@ export default function RegisterForm(props) {
     <main className="register__card">
       <h3>Register</h3>
       <form onSubmit={(event => event.preventDefault())} autoComplete="off">
-        <select className="browser-default custom-select">
-          <option selected>Account Type</option>
+        <select onChange={event => setAccountType(event.currentTarget.value)} className="browser-default custom-select">
+          <option defaultValue>Account Type</option>
           <option value="1">Villager</option>
           <option value="2">Adventurer</option>
         </select>
@@ -84,8 +84,8 @@ export default function RegisterForm(props) {
         />
       </form>
       <section className="register__actions">
-        <Button confirm>Next</Button>
-        <Button danger>Cancel</Button>
+        <Button onClick={() => handleSubmit()} confirm>Create</Button>
+        <Button onClick={props.onClick} danger>Cancel</Button>
       </section>
     </main>
   );

@@ -18,8 +18,6 @@ module.exports = () => {
   router.post(`/login`, (req, res) => {
     const { email, password } = req.body;
     console.log(req.body);
-    console.log("Email", email);
-    console.log("Password", password);
     const loginError = "Error: Login credentials invalid. Please try again.";
 
     if (!email || !password) {
@@ -29,7 +27,10 @@ module.exports = () => {
       correctPassword(email, password)
         .then(passwordMatch => {
           if (passwordMatch) {
+            console.log("Login Successful");
             req.session.userId = email;
+          } else {
+            console.log("Error: Account does not exist.");
           }
         });
     }
