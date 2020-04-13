@@ -82,7 +82,6 @@ export default function RegisterForm(props) {
       </form>
       <section className="register__actions">
         <Button onClick={() => handleSubmit()} confirm>Create</Button>
-        <Button onClick={props.onClick} danger>Cancel</Button>
       </section>
     </section>
   );

@@ -11,14 +11,14 @@ export default function Navbar(props) {
         ? <span className="nav-items">
             <h3>Welcome, {props.user}</h3>
             { props.adventurer 
-              ? <Button navbar>View Quests</Button>
-              : <Button navbar>Create Quest</Button>
+              ? <Button navbar onClick={props.onQuests}>View Quests</Button>
+              : <Button navbar onClick={props.onCreate}>Create Quest</Button>
             }
-            <Button navbar>Logout</Button>
+            <Button navbar onClick={props.onLogout}>Logout</Button>
           </span>
         : <span className="nav-items">
-            <Button navbar>Login</Button>
-            <Button navbar>Register</Button>
+            <Button navbar onClick={props.onLogin}>Login</Button>
+            <Button navbar onClick={props.onRegister}>Register</Button>
           </span>
       }
     </header>
