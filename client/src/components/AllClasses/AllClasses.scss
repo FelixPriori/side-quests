@@ -1,0 +1,15 @@
+@import '../../styles/palette.scss';
+
+.all-classses {
+  h2, h3 {
+    color: $color1;
+    text-shadow: 1px 1px $shadow1;
+    margin-left: 0.5em;
+  }
+  h2 {
+    text-align: center;
+  }
+  h3 {
+    margin-top: 1em
+  }
+}

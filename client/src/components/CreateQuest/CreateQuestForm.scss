@@ -1,13 +1,6 @@
 @import '../../styles/palette.scss';
-@import "~bootstrap/scss/bootstrap";
 
-main {
-  background-color: $color3;
-  font-family: $paragraph;
-  background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.create-quest {
   h3 {
     margin-top: 0.5em;
     justify-self: center;

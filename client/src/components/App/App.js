@@ -1,12 +1,19 @@
-import React from 'react'
-import './App.scss'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import React from 'react';
+import './App.scss';
 
-import LoginForm from '../Login/LoginForm'
-import RegisterForm from '../Register/RegisterForm'
+import AllClasses from '../AllClasses/AllClasses';
+import Navbar from '../Navbar/Navbar';
 
-function App () {
-  return <RegisterForm />
+const { data } = require('../../__mock__/data.js');
+const { classesData, classesProgessData } = data;
+
+export default function App() {
+  return (
+    <div className="App">
+      <Navbar/>
+      <main>
+        <AllClasses classesData={classesData} classesProgessData={classesProgessData} />
+      </main>
+    </div>
+  );
 }
-
-export default App

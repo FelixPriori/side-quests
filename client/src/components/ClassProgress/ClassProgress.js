@@ -17,7 +17,6 @@ export default function ClassProgress(props) {
 
   return (
     <section className="progress-section">
-      <h3>Class Progress:</h3>
       <div>
         <div className="progress-bar">
           <div 

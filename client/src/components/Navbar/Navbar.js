@@ -5,7 +5,7 @@ import Button from '../Button/Button';
 
 export default function Navbar(props) {
   return (
-    <header>
+    <header className="nav-container">
       <Logo/>
       { props.user 
         ? <span className="nav-items">

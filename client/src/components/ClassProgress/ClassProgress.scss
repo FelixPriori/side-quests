@@ -1,12 +1,8 @@
 @import '../../styles/palette.scss';
+
 .progress-section {
   display: flex;
   flex-direction: column;
-  h3 {
-    font-family: $title;
-    color: $color1;
-    text-align: center;
-  }
   div {
     display: flex;
     flex-direction: column;
