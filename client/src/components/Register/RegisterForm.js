@@ -4,7 +4,7 @@ import Button from '../Button/Button';
 
 export default function RegisterForm(props) {
   return (
-    <main className="register__card">
+    <section className="register">
       <h3>Register</h3>
       <form onSubmit={event => event.preventDefault()} autoComplete="off">
         <select className="browser-default custom-select">
@@ -57,6 +57,6 @@ export default function RegisterForm(props) {
         <Button confirm>Next</Button>
         <Button danger>Cancel</Button>
       </section>
-    </main>
+    </section>
   );
 }

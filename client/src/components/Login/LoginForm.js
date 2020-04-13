@@ -4,7 +4,7 @@ import './LoginForm.scss';
 
 export default function LoginForm(props) {
   return (
-    <main className="Login__card">
+    <section className="login">
       <h3>Login</h3>
       <form onSubmit={event => event.preventDefault()} autoComplete="off">
         <input
@@ -24,6 +24,6 @@ export default function LoginForm(props) {
       <section className="login__actions">
         <Button confirm>Login</Button>
       </section>
-    </main>
+    </section>
   );
 }
