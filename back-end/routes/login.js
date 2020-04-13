@@ -12,9 +12,14 @@ router.use(cookieSession({
 //Helper functions
 const { correctPassword } = require('../db/helpers');
 
+
+
 module.exports = () => {
-  router.post('/login', (req, res) => {
+  router.post(`/login`, (req, res) => {
     const { email, password } = req.body;
+    console.log(req.body);
+    console.log("Email", email);
+    console.log("Password", password);
     const loginError = "Error: Login credentials invalid. Please try again.";
 
     if (!email || !password) {
