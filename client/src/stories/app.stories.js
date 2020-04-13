@@ -3,4 +3,4 @@ import App from '../components/App/App';
 
 export default {title: 'App'};
 
-export const allClassProgress = () => <App></App>;
+export const app = () => <App></App>;

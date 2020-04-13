@@ -11,8 +11,8 @@ export default function Navbar(props) {
         ? <span className="nav-items">
             <h3>Welcome, {props.user}</h3>
             { props.adventurer 
-              ? <Button navbar>View Quest</Button>
-              : <Button navbar>Create Quests</Button>
+              ? <Button navbar>View Quests</Button>
+              : <Button navbar>Create Quest</Button>
             }
             <Button navbar>Logout</Button>
           </span>
