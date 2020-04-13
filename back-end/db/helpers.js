@@ -3,15 +3,16 @@ const bcrypt = require('bcrypt')
 
 const correctPassword = function (email, password) {
   const queryStr = `
-    SELECT password
+    SELECT *
     FROM users
     WHERE email = $1;
   `
   return db.query(queryStr, [email]).then(res => {
     if (res.rows.length !== 0) {
-      return bcrypt.compareSync(password, res.rows[0].password)
+      if (bcrypt.compareSync(password, res.rows[0].password))
+        return res.rows[0];
     } else {
-      return false
+      return null;
     }
   })
 }
@@ -47,7 +48,7 @@ const addUser = function (
   );
   `
   const avatar = null;
-  
+
   return db
     .query(queryStr, [
       username,

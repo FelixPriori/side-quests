@@ -1,13 +1,14 @@
 const router = require("express").Router();
-const cookieSession = require('cookie-session');
+// const cookieSession = require('cookie-session');
 const bcrypt = require('bcrypt');
 
 //Still need to npm install cookieSession and bcrypt
 
-router.use(cookieSession({
-  name: 'session',
-  keys: ['key1', 'key2']
-}));
+// router.use(cookieSession({
+//   name: 'session',
+//   keys: ['userId', 'key2']
+// }));
+
 
 //Helper functions
 const { correctPassword } = require('../db/helpers');
@@ -25,10 +26,11 @@ module.exports = () => {
       res.send(loginError);
     } else {
       correctPassword(email, password)
-        .then(passwordMatch => {
-          if (passwordMatch) {
+        .then(user => {
+          if (user) {
             console.log("Login Successful");
-            req.session.userId = email;
+            req.session.userId = user.id;
+            res.send();
           } else {
             console.log("Error: Account does not exist.");
           }
@@ -43,3 +45,9 @@ module.exports = () => {
 
   return router;
 };
+
+
+async function funcName(jlkdjgd) {
+
+  const user = await correctPassword();
+}

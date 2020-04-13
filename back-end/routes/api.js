@@ -1,12 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const cookieSession = require('cookie-session');
 const bcrypt = require('bcrypt');
 
-router.use(cookieSession({
-  name: 'session',
-  keys: ['key1', 'key2']
-}));
 
 
 const { allUsers, getUser, allQuests, getQuest, createNewQuest, deleteQuest, editQuest, completeQuest, allAchievements, getAchievement, allBadges, getBadge, allClasses, getClass } = require('../db/helpers');
@@ -14,6 +9,7 @@ const { allUsers, getUser, allQuests, getQuest, createNewQuest, deleteQuest, edi
 module.exports = () => {
 
   router.get("/users", (req, res) => {
+    console.log(req.session);
     allUsers().then(result => {
       res.send(result);
     });

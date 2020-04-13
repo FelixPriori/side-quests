@@ -1,13 +1,14 @@
-const router = require('express').Router()
-const cookieSession = require('cookie-session')
-const bcrypt = require('bcrypt')
+const router = require('express').Router();
+// const cookieSession = require('cookie-session')
+const bcrypt = require('bcrypt');
 
-router.use(
-  cookieSession({
-    name: 'session',
-    keys: ['key1', 'key2']
-  })
-)
+// router.use(
+//   cookieSession({
+//     name: 'session',
+//     keys: ['key1', 'key2']
+//   })
+// )
+
 
 const { checkIfUserExists, addUser } = require('../db/helpers')
 
