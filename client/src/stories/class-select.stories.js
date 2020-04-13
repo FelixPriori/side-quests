@@ -44,6 +44,5 @@ const classesProgessData = [
   }
 ];
 
-
 export default {title: 'Class Selection'}
 export const pickClass = () => <ClassSelection classesData={classesData} classesProgessData={classesProgessData}/>

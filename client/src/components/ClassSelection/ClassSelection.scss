@@ -1,8 +1,7 @@
 @import '../../styles/palette.scss';
 @import "~bootstrap/scss/bootstrap";
 
-main {
-  display: flex;
+.select-class {
   h4, h2 {
     font-family: $title;
     color: $color1;
@@ -34,4 +33,9 @@ main {
       }
     }
   }
-} 
+  h3 {
+    font-family: $title;
+    color: $color1;
+    text-align: center;
+  }
+}

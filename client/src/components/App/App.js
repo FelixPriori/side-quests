@@ -1,27 +1,20 @@
 import React from 'react';
-import logo from '../../logo.svg';
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function App() {
+import AllClasses from '../AllClasses/AllClasses';
+import Navbar from '../Navbar/Navbar';
+
+const { data } = require('../../__mock__/data.js');
+const { classesData, classesProgessData } = data;
+
+export default function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar/>
+      <main>
+        <AllClasses classesData={classesData} classesProgessData={classesProgessData} />
+      </main>
     </div>
   );
 }
-
-export default App;
