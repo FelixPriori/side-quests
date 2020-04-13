@@ -1,6 +1,9 @@
 @import '../../styles/palette.scss';
 
 .create-quest {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
   h3 {
     margin-top: 0.5em;
     justify-self: center;
@@ -11,7 +14,7 @@
   form {
     display: flex;
     flex-direction: column;
-    input, select{
+    input, select, textarea{
       margin-bottom: 1em;
     }
   }

@@ -24,7 +24,9 @@ export default function CreateQuestForm(props) {
           value={props.name}
           data-testid="name-input"
         />
-        <input
+        <textarea
+          rows="4" 
+          cols="50"
           name="description"
           type="text"
           placeholder={"Describe your quest"}
