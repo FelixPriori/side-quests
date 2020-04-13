@@ -5,7 +5,7 @@ import Button from '../Button/Button';
 export default function CreateQuestForm(props) {
 
   return (
-    <main className="create-quest__card">
+    <section className="create-quest">
       <h3>Create Quest</h3>
       <form onSubmit={event => event.preventDefault()} autoComplete="off">
         <select className="browser-default custom-select">
@@ -43,6 +43,6 @@ export default function CreateQuestForm(props) {
         <Button confirm>Confirm</Button>
         <Button danger>Cancel</Button>
       </section>
-    </main>
+    </section>
   )
 }

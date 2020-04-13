@@ -1,9 +1,7 @@
 import React, { useState } from "react";
+import axios from 'axios';
+import './RegisterForm.scss';
 import Button from '../Button/Button';
-import '../Register/RegisterForm.scss';
-import axios from "axios";
-
-
 
 export default function RegisterForm(props) {
 
@@ -25,8 +23,7 @@ export default function RegisterForm(props) {
 
 
   return (
-
-    <main className="register__card">
+    <section className="register">
       <h3>Register</h3>
       <form onSubmit={(event => event.preventDefault())} autoComplete="off">
         <select onChange={event => setAccountType(event.currentTarget.value)} className="browser-default custom-select">
@@ -87,6 +84,6 @@ export default function RegisterForm(props) {
         <Button onClick={() => handleSubmit()} confirm>Create</Button>
         <Button onClick={props.onClick} danger>Cancel</Button>
       </section>
-    </main>
+    </section>
   );
 }

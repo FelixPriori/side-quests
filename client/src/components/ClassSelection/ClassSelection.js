@@ -27,7 +27,7 @@ export default function ClassSelection(props) {
     );
   })
   return (
-    <main className="class__card">
+    <section className="select-class">
       <h2> Select a class </h2>
       <div className="menu">
         <select 
@@ -48,9 +48,10 @@ export default function ClassSelection(props) {
                 <p>{classItem.description}</p>
               </span>
             </div>
+            <h3>Class Progress:</h3>
             <ClassProgress data={classProgress}/>
           </div>
         }
-    </main>
+    </section>
   );
 }
