@@ -9,6 +9,9 @@ export default function ClassSelection(props) {
   const { classesData, classesProgessData } = props;
 
   const changeClass = name => {
+    if (name === 'Choose a class') {
+      return;
+    }
     const selectedClass = classesData.find(classData => classData.name === name);
     const selectedClassProgress = classesProgessData.find(classProgress => selectedClass.id === classProgress.id)
     setClassItem(selectedClass);

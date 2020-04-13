@@ -13,6 +13,29 @@
     button, h3 {
       margin-right: 1em;
     }
+    button {
+      height: 100%;
+      background-color: $color1;
+      border-color: $shadow1;
+    }
+    button:hover {
+      background-color: $color2;
+      border-color: $shadow2;
+      box-shadow: 0 0 0 0.2rem $highlight2;
+    }
+    button:focus {
+      background-color: $color3;
+      border-color: $shadow3;
+      box-shadow: 0 0 0 0.2rem $highlight3;
+    }
+    .btn-primary.dropdown-toggle:focus {
+      box-shadow: 0 0 0 0.2rem $highlight3;
+    }
+    button:not(:disabled):not(.disabled):active {
+      background-color: $color4;
+      border-color: $shadow4;
+      box-shadow: 0 0 0 0.2rem $highlight4;
+    }
     h3 {
       color: $color2;
       font-family: $title;

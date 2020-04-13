@@ -22,18 +22,16 @@ const adventurer = true;
 const user = 'test';
 
 export default function App() {
-
   const [ view, setView ] = useState( 
     sessions.id 
-    ? adventurer 
+    ? adventurer
       ? SHOW
-      : CREATE 
+      : CREATE
     : LOGIN 
   );
 
-  const [ state, setState ] = useState({});
-
   const changeView = (viewType) => {
+    console.log('YO!!!', viewType)
     setView(viewType);
   }
 
@@ -43,10 +41,12 @@ export default function App() {
         ? <Navbar
               user={user}
               adventurer={adventurer}
-              onQuests={() => changeView(SHOW)} 
+              onQuests={() => changeView(SHOW)}
               onLogout={() => changeView(LOGIN)}
               onCreate={() => changeView(CREATE)} 
               onLogout={() => changeView(LOGIN)}
+              onLogin={() => changeView(LOGIN)} 
+              onRegister={() => changeView(REGISTER)}
             />
         : <Navbar 
             onLogin={() => changeView(LOGIN)} 
