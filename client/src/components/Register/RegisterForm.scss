@@ -1,6 +1,9 @@
 @import '../../styles/palette.scss';
 
 .register {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
   h3 {
     margin-top: 0.5em;
     justify-self: center;
