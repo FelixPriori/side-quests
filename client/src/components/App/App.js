@@ -20,7 +20,7 @@ const SHOW = 'SHOW';
 const PROFILE = 'PROFILE';
 const EDIT = 'EDIT';
 
-const sessions = {id: true};
+const sessions = {id: false};
 const adventurer = true;
 const user = 'test';
 
