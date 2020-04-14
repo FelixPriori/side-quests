@@ -1,4 +1,4 @@
-import React, { setState, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.scss';
 import axios from "axios";
 
@@ -19,18 +19,10 @@ const CREATE = 'CREATE';
 const SHOW = 'SHOW';
 const PROFILE = 'PROFILE';
 const EDIT = 'EDIT';
-let sessions;
-let username;
-let adventurer;
+const LOADING = 'LOADING';
 
 export default function App() {
-  const [view, setView] = useState(
-    sessions
-      ? adventurer
-        ? SHOW
-        : CREATE
-      : LOGIN
-  );
+  const [view, setView] = useState(LOADING);
 
   const [state, setState] = useState({
     classesProgressData: [],
@@ -39,30 +31,41 @@ export default function App() {
     userQuests: []
   });
 
+  const [ sessions, setSessions ] = useState( state.userData.length ? state.userData.id : 0 );
+  const [ adventurer, setAdventurer ] = useState( state.userData.length ? state.userData.adventurer : false );
+  const [ username, setUsername ] = useState( state.userData.length ? state.userData.first_name : "" );
+
   useEffect(() => {
     Promise.all([
       axios
         .get('/checkSession')
         .catch(error => console.log(error)),
       axios
-        .get('/userQuests')
+        .get('/quests')
         .catch(error => console.log(error)),
       axios
         .get('/userClassProgress')
         .catch(error => console.log(error)),
       axios
-        .get('/quests')
+        .get('/classes')
         .catch(error => console.log(error))
     ]).then(result => {
       setState({
-        classesProgressData: result[2].data,
-        classesData: result[3],
         userData: result[0].data,
-        userQuests: [1]
+        userQuests: result[1].data,
+        classesProgressData: result[2].data,
+        classesData: result[3].data
       });
-      sessions = state.userData.length ? true : false;
-      adventurer = state.userData.length ? state.userData.adventurer : false;
-      username = state.userData.length ? state.userData.name : false;
+      setSessions(result[0].data.length > 0 ? result[0].data[0].id : false);
+      setAdventurer(result[0].data.length > 0 ? result[0].data[0].adventurer : false);
+      setUsername(result[0].data.length > 0 ? result[0].data[0].first_name : false);
+      setView(
+        result[0].data
+        ? result[0].data.adventurer
+          ? SHOW
+          : CREATE
+        : LOGIN
+      );
     })
   }, []);
 
@@ -71,10 +74,9 @@ export default function App() {
   const changeView = (viewType) => {
     setView(viewType);
   }
-
   return (
     <div className="App">
-      {sessions
+      { sessions
         ? <Navbar
           user={username}
           adventurer={adventurer}

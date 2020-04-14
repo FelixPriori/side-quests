@@ -9,7 +9,7 @@ export default function CreateQuestForm(props) {
       <h3>Create Quest</h3>
       <form onSubmit={event => event.preventDefault()} autoComplete="off">
         <select className="browser-default custom-select">
-          <option selected>Type of Quest</option>
+          <option defaultValue>Type of Quest</option>
           <option value="1">Errand</option>
           <option value="2">Entertainment</option>
           <option value="3">Workout</option>

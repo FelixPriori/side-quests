@@ -14,7 +14,7 @@ export default function ClassSelection(props) {
       return;
     }
     const selectedClass = classesData.find(classData => classData.name === name);
-    const selectedClassProgress = classesProgressData.find(classProgress => selectedClass.id === classProgress.id)
+    const selectedClassProgress = classesProgressData.find(classProgress => selectedClass.id === classProgress.class_id)
     setClassItem(selectedClass);
     setClassProgress(selectedClassProgress);
   };

@@ -8,19 +8,21 @@ export default function LoginForm(props) {
 
   const [email, setEmail] = useState(props.email || "");
   const [password, setPassword] = useState(props.password || "");
-
+  const [error, setError] = useState(null);
 
   //Possibly implement axios over fetch?
   function handleSubmit() {
-
     const data = { email, password };
-
-    axios.post(`/login`, data);
+    return axios
+      .post(`/login`, data)
+      .then(() => props.onLogin())
+      .catch(e => setError(e.response.data));
   }
 
   return (
     <section className="login">
       <h3>Login</h3>
+      { error && <div className="alert alert-danger">{error}</div>}
       <form onSubmit={(event) => event.preventDefault()} autoComplete="off">
         <input
           name="email"

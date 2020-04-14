@@ -3,6 +3,7 @@ import './ClassProgress.scss';
 
 export default function ClassProgress(props) {
 
+  console.log(props)
   const { level, experience, quest_count } = props.data;
 
   const toNextLevel = (level, experience) => {
