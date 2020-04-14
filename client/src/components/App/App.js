@@ -93,7 +93,7 @@ export default function App() {
         />
       }
       <main>
-        {view === LOGIN && <LoginForm />}
+        {view === LOGIN && <LoginForm onLogin={() => changeView(SHOW)}/>}
         {view === CLASSES && <AllClasses classesData={classesData} classesProgressData={classesProgressData} />}
         {view === REGISTER && <RegisterForm />}
         {view === CREATE && <CreateQuestForm />}
