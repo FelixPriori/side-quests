@@ -7,14 +7,14 @@ import QuestList from '../QuestList/QuestList';
 export default function ClassSelection(props) {
   const [ classItem, setClassItem ] = useState(null);
   const [ classProgress, setClassProgress ] = useState(null);
-  const { classesData, classesProgessData } = props;
+  const { classesData, classesProgressData } = props;
 
   const changeClass = name => {
     if (name === 'Choose a class') {
       return;
     }
     const selectedClass = classesData.find(classData => classData.name === name);
-    const selectedClassProgress = classesProgessData.find(classProgress => selectedClass.id === classProgress.id)
+    const selectedClassProgress = classesProgressData.find(classProgress => selectedClass.id === classProgress.id)
     setClassItem(selectedClass);
     setClassProgress(selectedClassProgress);
   };
