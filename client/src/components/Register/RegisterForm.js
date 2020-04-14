@@ -4,14 +4,13 @@ import './RegisterForm.scss';
 import Button from '../Button/Button';
 
 export default function RegisterForm(props) {
-
-  const [email, setEmail] = useState(props.email || "");
-  const [password, setPassword] = useState(props.password || "");
-  const [confirmPassword, setConfirmPassword] = useState(props.confirmPassword || "");
-  const [firstName, setFirstName] = useState(props.firstName || "");
-  const [lastName, setLastName] = useState(props.lastName || "");
-  const [username, setUsername] = useState(props.username || "");
-  const [accountType, setAccountType] = useState(props.accountType || "");
+  const [email, setEmail] = useState(props.userData[0].email || "");
+  const [password, setPassword] = useState(props.userData[0].password || "");
+  const [confirmPassword, setConfirmPassword] = useState(props.userData[0].confirmPassword || "");
+  const [firstName, setFirstName] = useState(props.userData[0].first_name || "");
+  const [lastName, setLastName] = useState(props.userData[0].last_name || "");
+  const [username, setUsername] = useState(props.userData[0].username || "");
+  const [accountType, setAccountType] = useState(props.userData[0].accountType || "");
 
   //Possibly implement axios over fetch?
   function handleSubmit() {
@@ -24,7 +23,11 @@ export default function RegisterForm(props) {
 
   return (
     <section className="register">
-      <h3>Register</h3>
+      {
+        props.userData[0] 
+        ? <h3>Edit Profile</h3>
+        : <h3>Register</h3>
+      }
       <form onSubmit={(event => event.preventDefault())} autoComplete="off">
         <select onChange={event => setAccountType(event.currentTarget.value)} className="browser-default custom-select">
           <option defaultValue>Account Type</option>
@@ -67,7 +70,6 @@ export default function RegisterForm(props) {
           name="password"
           type="password"
           placeholder={"Enter password"}
-          value={password}
           data-testid="password-input"
           onChange={event => setPassword(event.target.value)}
         />
@@ -82,6 +84,7 @@ export default function RegisterForm(props) {
       </form>
       <section className="register__actions">
         <Button onClick={() => handleSubmit()} confirm>Create</Button>
+        {props.userData[0] && <Button onClick={props.onProfile} danger>Cancel</Button>}
       </section>
     </section>
   );
