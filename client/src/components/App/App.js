@@ -1,5 +1,6 @@
-import React, { setState, useState } from 'react';
+import React, { setState, useState, useEffect } from 'react';
 import './App.scss';
+import axios from "axios";
 
 import AllClasses from '../AllClasses/AllClasses';
 import Navbar from '../Navbar/Navbar';
@@ -36,8 +37,35 @@ export default function App() {
   const [state, setState] = useState({
     classesProgressData: [],
     classesData: [],
-    userData: []
+    userData: [],
+    userQuests: []
   });
+
+  useEffect(() => {
+    Promise.all([
+      axios
+        .get('http://localhost:8081/checkSession')
+        .catch(error => console.log(error)),
+      axios
+        .get('http://localhost:8081/userQuests')
+        .catch(error => console.log(error)),
+      axios
+        .get('http://localhost:8081/userClassProgress')
+        .catch(error => console.log(error)),
+      axios
+        .get('http://localhost:8081/quests')
+        .catch(error => console.log(error))
+    ]).then(result => {
+      setState({
+        classesProgressData: result[2].data,
+        classesData: result[3],
+        userData: result[0].data,
+        userQuests: [1]
+      });
+    })
+  }, []);
+
+
 
   const changeView = (viewType) => {
     setView(viewType);
