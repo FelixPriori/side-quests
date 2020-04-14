@@ -39,6 +39,17 @@ const data = {
       description: 'Druids love a companion and are happy to help your furry friends stay in tip top shape. Whether it\s babysitting, or simply giving the dog a walk, Druids are happy to help!',
       avatar: 'http://placekitten.com/150/150'
     }
+  ],
+  userData: [
+    {
+      username: 'ClingyMingus',
+      first_name: 'Clinton',
+      last_name: 'Andrews',
+      email: 'drandrews@example.com',
+      password: '$2b$10$xPttDUv.c13m9X1ni9CqEOFk1P5exXZeq.2LL.YrztVIWMxi4FTVm',
+      avatar: 'https://i.imgur.com/TdOAdde.jpg',
+      adventurer: true
+    }
   ]
 };
 

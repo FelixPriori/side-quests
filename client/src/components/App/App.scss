@@ -9,3 +9,12 @@ main {
   padding: 1em;
   min-height: 60vh;
 }
+
+.custom-select:focus  {
+  border-color: $shadow1 !important;
+  box-shadow: 0 0 0 0.2rem $highlight1 !important;
+}
+
+button {
+  align-self: flex-end;
+}

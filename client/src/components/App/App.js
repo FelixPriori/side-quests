@@ -7,15 +7,18 @@ import LoginForm from '../Login/LoginForm';
 import RegisterForm from '../Register/RegisterForm';
 import CreateQuestForm from '../CreateQuest/CreateQuestForm';
 import ClassSelection from '../ClassSelection/ClassSelection';
+import Profile from '../Profile/Profile';
 
 const { data } = require('../../__mock__/data.js');
-const { classesData, classesProgessData } = data;
+const { classesData, classesProgessData, userData } = data;
 
 const LOGIN = 'LOGIN';
 const REGISTER = 'REGISTER';
 const CLASSES = 'CLASSES';
 const CREATE = 'CREATE';
 const SHOW = 'SHOW';
+const PROFILE = 'PROFILE';
+const EDIT = 'EDIT';
 
 const sessions = {id: true};
 const adventurer = true;
@@ -31,7 +34,6 @@ export default function App() {
   );
 
   const changeView = (viewType) => {
-    console.log('YO!!!', viewType)
     setView(viewType);
   }
 
@@ -43,10 +45,12 @@ export default function App() {
               adventurer={adventurer}
               onQuests={() => changeView(SHOW)}
               onLogout={() => changeView(LOGIN)}
-              onCreate={() => changeView(CREATE)} 
+              onCreate={() => changeView(CREATE)}
               onLogout={() => changeView(LOGIN)}
-              onLogin={() => changeView(LOGIN)} 
+              onLogin={() => changeView(LOGIN)}
               onRegister={() => changeView(REGISTER)}
+              onProgress={() => changeView(CLASSES)}
+              onProfile={() => changeView(PROFILE)}
             />
         : <Navbar 
             onLogin={() => changeView(LOGIN)} 
@@ -59,6 +63,8 @@ export default function App() {
         {view === REGISTER && <RegisterForm/>}
         {view === CREATE && <CreateQuestForm/>}
         {view === SHOW && <ClassSelection classesData={classesData} classesProgessData={classesProgessData} />}
+        {view === PROFILE && <Profile onEdit={() => changeView(EDIT)} userData={userData}/>}
+        {view === EDIT && <RegisterForm userData={userData} onProfile={() => changeView(PROFILE)} />}
       </main>
     </div>
   );
