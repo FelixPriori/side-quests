@@ -31,7 +31,6 @@ export default function App() {
   );
 
   const changeView = (viewType) => {
-    console.log('YO!!!', viewType)
     setView(viewType);
   }
 
@@ -43,10 +42,12 @@ export default function App() {
               adventurer={adventurer}
               onQuests={() => changeView(SHOW)}
               onLogout={() => changeView(LOGIN)}
-              onCreate={() => changeView(CREATE)} 
+              onCreate={() => changeView(CREATE)}
               onLogout={() => changeView(LOGIN)}
-              onLogin={() => changeView(LOGIN)} 
+              onLogin={() => changeView(LOGIN)}
               onRegister={() => changeView(REGISTER)}
+              onProgress={() => changeView(CLASSES)}
+              onProfile={() => console.log('to do')}
             />
         : <Navbar 
             onLogin={() => changeView(LOGIN)} 
