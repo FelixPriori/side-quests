@@ -36,6 +36,13 @@
       border-color: $shadow4;
       box-shadow: 0 0 0 0.2rem $highlight4;
     }
+    .show > .btn-primary.dropdown-toggle, .dropdown-item:active {
+      background-color: $color2;
+      border-color: $shadow2;
+    }
+    .dropdown-item:hover {
+      background-color: $highlight1;
+    }
     h3 {
       color: $color2;
       font-family: $title;
