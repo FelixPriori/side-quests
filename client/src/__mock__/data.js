@@ -42,6 +42,7 @@ const data = {
   ],
   userData: [
     {
+      id: 1,
       username: 'ClingyMingus',
       first_name: 'Clinton',
       last_name: 'Andrews',
@@ -49,6 +50,48 @@ const data = {
       password: '$2b$10$xPttDUv.c13m9X1ni9CqEOFk1P5exXZeq.2LL.YrztVIWMxi4FTVm',
       avatar: 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png',
       adventurer: true
+    }
+  ],
+  questData: [
+    {
+      id: 1,
+      name: 'Hungry for some soup!',
+      description: 'I am at home and feeling very sick. Can someone bring me some some soup please?',
+      completed: false,
+      latitude: 330,
+      longitude: 123,
+      class_id: 1,
+      villager_id: 1
+    },
+    {
+      id: 2,
+      name: 'My computer won\'t start! Can someone help?',
+      description: 'Ever since I installed this new app, my computer has been acting weird and won\'t start',
+      completed: true,
+      latitude: 330,
+      longitude: 234,
+      class_id: 1,
+      villager_id: 1
+    },
+    {
+      id: 3,
+      name: 'Can\'t figure out this math problem.',
+      description: 'I have a test coming up and I can\'t understand integrals.',
+      completed: false,
+      latitude: 321,
+      longitude: 92,
+      class_id: 2,
+      villager_id: 1
+    },
+    {
+      id: 4,
+      name: 'Can\'t figure out this math problem.',
+      description: 'I have a test coming up and I can\'t understand integrals.',
+      completed: false,
+      latitude: 321,
+      longitude: 92,
+      class_id: 1,
+      villager_id: 1
     }
   ]
 };
