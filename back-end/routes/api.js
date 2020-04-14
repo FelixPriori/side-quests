@@ -17,6 +17,7 @@ module.exports = () => {
   //Information for front page
 
   router.get("/checkSession", (req, res) => {
+    console.log(req.session);
     console.log(req.session.userId);
     if (req.session.userId) {
       checkUserLogin(req.session.userId).then(result => {
@@ -24,7 +25,7 @@ module.exports = () => {
       });
 
     } else {
-      const result = null;
+      const result = [];
       res.json(result);
     }
   });

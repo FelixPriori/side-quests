@@ -44,18 +44,19 @@ export default function App() {
   useEffect(() => {
     Promise.all([
       axios
-        .get('http://localhost:8081/checkSession')
+        .get('/checkSession')
         .catch(error => console.log(error)),
       axios
-        .get('http://localhost:8081/userQuests')
+        .get('/userQuests')
         .catch(error => console.log(error)),
       axios
-        .get('http://localhost:8081/userClassProgress')
+        .get('/userClassProgress')
         .catch(error => console.log(error)),
       axios
-        .get('http://localhost:8081/quests')
+        .get('/quests')
         .catch(error => console.log(error))
     ]).then(result => {
+      console.log(result);
       setState({
         classesProgressData: result[2].data,
         classesData: result[3],
@@ -98,15 +99,15 @@ export default function App() {
         {view === CREATE && <CreateQuestForm />}
         {view === SHOW && <ClassSelection classesData={classesData} classesProgessData={classesProgessData} />}
         {view === PROFILE && <Profile onEdit={() => changeView(EDIT)} userData={userData} />}
-        {view === REGISTER && <RegisterForm/>}
-        {view === CREATE && <CreateQuestForm/>}
-        {view === SHOW 
-          && <ClassSelection 
-              classesData={classesData} 
-              classesProgessData={classesProgessData} 
-              questData={questData}
-            />}
-        {view === PROFILE && <Profile onEdit={() => changeView(EDIT)} userData={userData}/>}
+        {view === REGISTER && <RegisterForm />}
+        {view === CREATE && <CreateQuestForm />}
+        {view === SHOW
+          && <ClassSelection
+            classesData={classesData}
+            classesProgessData={classesProgessData}
+            questData={questData}
+          />}
+        {view === PROFILE && <Profile onEdit={() => changeView(EDIT)} userData={userData} />}
         {view === EDIT && <RegisterForm userData={userData} onProfile={() => changeView(PROFILE)} />}
       </main>
     </div>
