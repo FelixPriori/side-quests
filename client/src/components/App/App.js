@@ -11,7 +11,7 @@ import ClassSelection from '../ClassSelection/ClassSelection';
 import Profile from '../Profile/Profile';
 
 const { data } = require('../../__mock__/data.js');
-const { classesData, classesProgessData, userData } = data;
+const { classesData, classesProgessData, userData, questData } = data;
 
 const LOGIN = 'LOGIN';
 const REGISTER = 'REGISTER';
@@ -98,6 +98,15 @@ export default function App() {
         {view === CREATE && <CreateQuestForm />}
         {view === SHOW && <ClassSelection classesData={classesData} classesProgessData={classesProgessData} />}
         {view === PROFILE && <Profile onEdit={() => changeView(EDIT)} userData={userData} />}
+        {view === REGISTER && <RegisterForm/>}
+        {view === CREATE && <CreateQuestForm/>}
+        {view === SHOW 
+          && <ClassSelection 
+              classesData={classesData} 
+              classesProgessData={classesProgessData} 
+              questData={questData}
+            />}
+        {view === PROFILE && <Profile onEdit={() => changeView(EDIT)} userData={userData}/>}
         {view === EDIT && <RegisterForm userData={userData} onProfile={() => changeView(PROFILE)} />}
       </main>
     </div>

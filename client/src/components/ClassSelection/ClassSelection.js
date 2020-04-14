@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './ClassSelection.scss';
 import ClassProgress from '../ClassProgress/ClassProgress';
+import QuestList from '../QuestList/QuestList';
 
 
 export default function ClassSelection(props) {
@@ -30,31 +31,34 @@ export default function ClassSelection(props) {
     );
   })
   return (
-    <section className="select-class">
-      <h2> Select a class </h2>
-      <div className="menu">
-        <select 
-          id="classes" 
-          className="browser-default custom-select"
-          onChange={e => changeClass(e.currentTarget.value)}
-        >
-          <option defaultValue>Choose a class</option>
-          {classList}
-        </select>
-      </div>
-        {classItem && 
-          <div>
-            <div className="content">
-              <img src={classItem.avatar}/>
-              <span>
-                <h3>{classItem.name}</h3>
-                <p>{classItem.description}</p>
-              </span>
+    <section className="quest-selection">
+      <section className="select-class">
+        <h2> Select a class </h2>
+        <div className="menu">
+          <select 
+            id="classes" 
+            className="browser-default custom-select"
+            onChange={e => changeClass(e.currentTarget.value)}
+          >
+            <option defaultValue>Choose a class</option>
+            {classList}
+          </select>
+        </div>
+          {classItem && 
+            <div>
+              <div className="content">
+                <img src={classItem.avatar}/>
+                <span>
+                  <h3>{classItem.name}</h3>
+                  <p>{classItem.description}</p>
+                </span>
+              </div>
+              <h3>Class Progress:</h3>
+              <ClassProgress data={classProgress}/>
             </div>
-            <h3>Class Progress:</h3>
-            <ClassProgress data={classProgress}/>
-          </div>
-        }
+          }
+      </section>
+      { classItem && <QuestList classItem={classItem} questData={props.questData}/> }
     </section>
   );
 }

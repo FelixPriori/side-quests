@@ -1,44 +1,59 @@
 @import '../../styles/palette.scss';
 
-.select-class {
-  display:flex;
-  flex-direction: column;
-  align-items: center;
-  h4, h2 {
-    font-family: $title;
-    color: $color1;
+.quest-selection {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-around;
+  .quest-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 45vw;
+    min-width: 400px;
   }
-  h2 {
-    text-shadow: 1px 1px $shadow1;
-  }
-  section {
-    label {
+  .select-class {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1em;
+    max-width: 45vw;
+    min-width: 400px;
+    h4, h2 {
       font-family: $title;
       color: $color1;
     }
-  }
-  .content {
-    display: flex;
-    margin: 1em;
-    img {
-      max-height: 150px;
-      align-self: center;
+    h2 {
+      text-shadow: 1px 1px $shadow1;
     }
-    span {
-      display: flex;
-      flex-direction: column;
-      margin: 1em;
-      p {
-        font-family: $paragraph;
+    section {
+      label {
+        font-family: $title;
         color: $color1;
-        text-shadow: 0.5px 0.5px $highlight1;
       }
     }
-  }
-  h3 {
-    font-family: $title;
-    color: $color1;
-    text-align: left;
-    margin-left: 1em;
+    .content {
+      display: flex;
+      margin: 1em;
+      img {
+        max-height: 150px;
+        align-self: center;
+      }
+      span {
+        display: flex;
+        flex-direction: column;
+        margin: 1em;
+        p {
+          font-family: $paragraph;
+          color: $color1;
+          text-shadow: 0.5px 0.5px $highlight1;
+        }
+      }
+    }
+    h3 {
+      font-family: $title;
+      color: $color1;
+      text-align: left;
+      margin-left: 1em;
+    }
   }
 }

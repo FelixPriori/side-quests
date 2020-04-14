@@ -4,27 +4,27 @@ import './RegisterForm.scss';
 import Button from '../Button/Button';
 
 export default function RegisterForm(props) {
-  const [email, setEmail] = useState(props.userData[0].email || "");
-  const [password, setPassword] = useState(props.userData[0].password || "");
-  const [confirmPassword, setConfirmPassword] = useState(props.userData[0].confirmPassword || "");
-  const [firstName, setFirstName] = useState(props.userData[0].first_name || "");
-  const [lastName, setLastName] = useState(props.userData[0].last_name || "");
-  const [username, setUsername] = useState(props.userData[0].username || "");
-  const [accountType, setAccountType] = useState(props.userData[0].accountType || "");
+
+  const edit = props.userData ? true : false;
+  const [accountType, setAccountType] = useState(props.userData ? props.userData[0].accountType : "");
+  const [firstName, setFirstName] = useState(props.userData ? props.userData[0].first_name : "");
+  const [lastName, setLastName] = useState(props.userData ? props.userData[0].last_name : "");
+  const [username, setUsername] = useState(props.userData ? props.userData[0].username : "");
+  const [email, setEmail] = useState(props.userData ? props.userData[0].email : "");
+  const [avatar, setAvatar] = useState(props.userData ? props.userData[0].avatar : "");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   //Possibly implement axios over fetch?
   function handleSubmit() {
-
     const data = { email, password, confirmPassword, firstName, lastName, username, accountType };
-
     axios.post(`/register`, data);
   }
-
 
   return (
     <section className="register">
       {
-        props.userData[0] 
+        edit 
         ? <h3>Edit Profile</h3>
         : <h3>Register</h3>
       }
@@ -67,6 +67,14 @@ export default function RegisterForm(props) {
           onChange={event => setEmail(event.target.value)}
         />
         <input
+          name="avatar"
+          type="url"
+          placeholder={"Link to avatar"}
+          value={avatar}
+          data-testid="avatar-input"
+          onChange={event => setAvatar(event.target.value)}
+        />
+        <input
           name="password"
           type="password"
           placeholder={"Enter password"}
@@ -83,8 +91,13 @@ export default function RegisterForm(props) {
         />
       </form>
       <section className="register__actions">
-        <Button onClick={() => handleSubmit()} confirm>Create</Button>
-        {props.userData[0] && <Button onClick={props.onProfile} danger>Cancel</Button>}
+        {edit 
+          ? <section>
+              <Button onClick={props.onProfile} danger>Cancel</Button>
+              <Button confirm>Update</Button>
+            </section>
+          : <Button onClick={() => handleSubmit()} confirm>Create</Button>
+        }
       </section>
     </section>
   );

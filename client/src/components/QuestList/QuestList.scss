@@ -1,0 +1,13 @@
+@import '../../styles/palette.scss';
+
+.quest-list {
+  h2 {
+    font-family: $title;
+    color: $color1;
+    text-shadow: 1px 1px $shadow1;
+  }
+  .quest-list-items {
+    display: flex;
+    flex-flow: column wrap;
+  }
+}
