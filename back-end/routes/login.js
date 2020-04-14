@@ -17,7 +17,8 @@ module.exports = () => {
 
     if (!email || !password) {
       console.log(loginError);
-      res.send(loginError);
+      res.status(401).send(loginError)
+        
     } else {
       correctPassword(email, password)
         .then(user => {
@@ -28,7 +29,8 @@ module.exports = () => {
             console.log(req.session);
             res.send();
           } else {
-            console.log("Error: Account does not exist.");
+            res.status(401).send("Error: Account does not exist.");
+            console.log("Error: Account does not exist.")
           }
         });
     }
