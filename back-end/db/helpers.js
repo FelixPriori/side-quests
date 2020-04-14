@@ -216,24 +216,26 @@ const editQuest = function (
   completed,
   latitude,
   longitude,
-  class_id
+  classId
 ) {
   const queryStr = `
   UPDATE quests 
   SET name = $1 AND description = $2 AND completed = $3 AND latitude = $4 AND longitude = $5 AND class_id = $6
   WHERE quests.id = $7;
   `
-  return db
-    .query(
-      queryStr,
-      description,
-      completed,
-      latitude,
-      longitude,
-      class_id[(name, questId)]
-    )
+  return db.query(queryStr, [name, description, completed, latitude, longitude, classId, questId])
     .then()
 }
+
+const editProfile = function (userId, username, firstName, lastName, email, password, avatar, adventurer) {
+  const queryStr = `
+  UPDATE users
+  SET username = $1 AND first_name = $2 AND last_name = $3 AND email = $4 AND password = $5 AND avatar = $6 AND adventurer = $7
+  WHERE users.id = $8
+  `
+  return db.query(queryStr, [username, firstName, lastName, email, password, avatar, adventurer, userId]).then(res => res.rows);
+}
+
 
 const increaseClassLevel = function (userId, classId, amount) {
   const queryStr = `
@@ -497,5 +499,6 @@ module.exports = {
   increaseQuestCount,
   checkUserLogin,
   checkUserQuests,
-  getAllUserClassProgress
+  getAllUserClassProgress,
+  editProfile
 }

@@ -2,12 +2,6 @@ const router = require("express").Router();
 // const cookieSession = require('cookie-session');
 const bcrypt = require('bcrypt');
 
-//Still need to npm install cookieSession and bcrypt
-
-// router.use(cookieSession({
-//   name: 'session',
-//   keys: ['userId', 'key2']
-// }));
 
 
 //Helper functions
