@@ -1,14 +1,6 @@
 INSERT INTO badges (name, image, requirement, int_requirement, criteria_type, class_id)
 VALUES 
   (
-    'Master Rogue',
-    'https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/256x256/medal.png',
-    'Have a level 10 Rogue',
-    10,
-    'level',
-    1
-  ),
-  (
     'Master Chef',
     'https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/256x256/medal.png',
     'Complete 5 Alchemist Quests',
