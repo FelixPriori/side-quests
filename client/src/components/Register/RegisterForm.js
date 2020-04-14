@@ -11,6 +11,7 @@ export default function RegisterForm(props) {
   const [lastName, setLastName] = useState(props.userData ? props.userData[0].last_name : "");
   const [username, setUsername] = useState(props.userData ? props.userData[0].username : "");
   const [email, setEmail] = useState(props.userData ? props.userData[0].email : "");
+  const [avatar, setAvatar] = useState(props.userData ? props.userData[0].avatar : "");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -64,6 +65,14 @@ export default function RegisterForm(props) {
           value={email}
           data-testid="email-input"
           onChange={event => setEmail(event.target.value)}
+        />
+        <input
+          name="avatar"
+          type="url"
+          placeholder={"Link to avatar"}
+          value={avatar}
+          data-testid="avatar-input"
+          onChange={event => setAvatar(event.target.value)}
         />
         <input
           name="password"
