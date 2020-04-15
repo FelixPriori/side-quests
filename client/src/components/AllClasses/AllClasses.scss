@@ -1,6 +1,19 @@
 @import '../../styles/palette.scss';
 
 .all-classses {
+  .class-items {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-around;
+    .class-item {
+      max-width: 45vw;
+      min-width: 400px;
+      border: 0.2em solid $color2;
+      padding: 1em;
+      margin: 1em;
+      background-color: $shadow3;
+    }
+  }
   h2, h3 {
     color: $color1;
     text-shadow: 1px 1px $shadow1;
@@ -9,8 +22,5 @@
   h2 {
     text-align: center;
     font-family: $title;
-  }
-  h3 {
-    margin-top: 1em
   }
 }

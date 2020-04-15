@@ -39,7 +39,10 @@ export default function QuestList(props) {
         <h2>Quests for {classItem.name}</h2>
       </div>
       <div class="quest-list-items">
-        {quests}
+        {quests.length
+          ? quests
+          : <div className="alert alert-danger">There are currently no {classItem.name.toLowerCase()} quests available</div>
+        }
       </div>
     </section>
   )

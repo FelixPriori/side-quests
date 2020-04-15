@@ -61,7 +61,7 @@ export default function App() {
       setUsername(result[0].data.length > 0 ? result[0].data[0].first_name : false);
       setView(
         result[0].data
-        ? result[0].data.adventurer
+        ? result[0].data[0].adventurer
           ? SHOW
           : CREATE
         : LOGIN

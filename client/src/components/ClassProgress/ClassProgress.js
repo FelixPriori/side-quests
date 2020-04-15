@@ -3,7 +3,6 @@ import './ClassProgress.scss';
 
 export default function ClassProgress(props) {
 
-  console.log(props)
   const { level, experience, quest_count } = props.data;
 
   const toNextLevel = (level, experience) => {
@@ -11,7 +10,7 @@ export default function ClassProgress(props) {
     const expDifference = totalRequired - experience;
     const percentage = Math.round(experience / totalRequired * 100);
     const questsNeeded = expDifference / 100;
-    return {questsNeeded, expDifference, percentage};
+    return { questsNeeded, expDifference, percentage };
   }
 
   const { questsNeeded, expDifference, percentage } = toNextLevel(level, experience);
