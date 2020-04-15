@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Profile.scss';
 import Button from '../Button/Button';
 import BadgeBox from '../BadgeBox/BadgeBox';
 
 export default function Profile(props) {
-  const { username, first_name, last_name, email, avatar, adventurer } = props.userData[0];
+  const { fetchBadges } = props;
+  
+  useEffect(() => {
+    fetchBadges();
+  }, []);
+
+  const { username, first_name, last_name, email, avatar, adventurer } = props.userData;
+
+
   const { badges } = props;
   return (
     <section className='profile'>
