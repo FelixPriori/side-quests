@@ -60,7 +60,7 @@ export default function App() {
       setAdventurer(result[0].data.length > 0 ? result[0].data[0].adventurer : false);
       setUsername(result[0].data.length > 0 ? result[0].data[0].first_name : false);
       setView(
-        result[0].data
+        result[0].data[0]
         ? result[0].data[0].adventurer
           ? SHOW
           : CREATE
