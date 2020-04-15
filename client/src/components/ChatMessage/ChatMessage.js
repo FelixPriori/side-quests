@@ -9,11 +9,11 @@ export default function ChatMessage(props) {
   return (
 
     props.currentUser ?
-      <div className="chatMessage">
+      <div className="chatMessage currentUser">
         <div className="speechBubble">{props.message}</div><img className="userImage rounded-circle" src={avatar} />
       </div>
       :
-      <div className="chatMessage">
+      <div className="chatMessage otherUser">
         <img className="userImage rounded-circle" src={avatar} /><div className="speechBubble">{props.message}</div>
       </div>
   )

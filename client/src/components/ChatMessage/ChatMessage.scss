@@ -17,4 +17,14 @@
   max-width: 2em;
   max-height: 2em;
   margin-left: 1em;
+  margin-right: 1em;
+}
+
+
+.currentUser {
+  align-self: flex-end;
+}
+
+.otherUser {
+  align-self: flex-start;
 }

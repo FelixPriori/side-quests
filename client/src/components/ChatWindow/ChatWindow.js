@@ -23,8 +23,8 @@ export default function ChatWindow(props) {
   return (
     <div className="chatWindow">
       <div className="chatOutput">
-        <ChatMessage userData={userData} message={"Howdy partner"} />
-        <ChatMessage userData={userData} message={"Howdy partner"} />
+        <ChatMessage currentUser={true} userData={userData} message={"Howdy partner"} />
+        <ChatMessage currentUser={false} userData={userData} message={"Howdy partner"} />
       </div>
       <ChatInput />
     </div>
