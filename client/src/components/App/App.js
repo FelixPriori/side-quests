@@ -41,8 +41,15 @@ export default function App() {
   const [username, setUsername] = useState(state.userData.length ? state.userData.first_name : "");
 
   useEffect(() => {
-    const socket = openSocket('localhost:8081/', { transports: ['websocket'] });
-
+    let socket = openSocket('localhost:8081');
+    socket.on('connect', function () {
+      console.log('connected!');
+      socket.emit('greet', { message: 'Hello Mr.Server!' });
+      socket.on('greet', msg => {
+        console.log("MSG IS BACK");
+        console.log(msg);
+      })
+    });
 
     Promise.all([
       axios
@@ -182,7 +189,7 @@ export default function App() {
             villagers={villagers}
             badges={badges}
           />}
-        {view === PROFILE && <Profile onEdit={() => changeView(EDIT)} userData={userData} badges={badges}/>}
+        {view === PROFILE && <Profile onEdit={() => changeView(EDIT)} userData={userData} badges={badges} />}
         {view === EDIT && <RegisterForm userData={userData} onProfile={() => changeView(PROFILE)} />}
       </main>
     </div>
