@@ -10,13 +10,13 @@ const express = require("express");
 const socketio = require("socket.io");
 const bodyParser = require("body-parser");
 
-
+//Maybe delete this
 const sass = require("node-sass-middleware");
-
+const cors = require('cors');
 const app = express();
-const server = http.createServer(app);
-const io = socketio(server);
-// const server = http.createServer(app);
+
+
+
 
 const morgan = require('morgan');
 const session = require('express-session');
@@ -28,7 +28,7 @@ const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
 app.use(morgan('dev'));
-
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use("/styles", sass({
@@ -50,8 +50,8 @@ const registerRoutes = require("./routes/register");
 const loginRoutes = require("./routes/login");
 const apiRoutes = require("./routes/api");
 
-
-
+const server = http.createServer(app);
+const io = socketio(server);
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -63,7 +63,7 @@ app.use("/", apiRoutes());
 
 //Run when client connects
 io.on('connection', socket => {
-  console.log("New WS connection...")
+  console.log("New WS connection...");
 });
 
 

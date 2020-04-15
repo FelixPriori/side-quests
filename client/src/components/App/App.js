@@ -11,6 +11,8 @@ import ClassSelection from '../ClassSelection/ClassSelection';
 import Profile from '../Profile/Profile';
 import Loading from '../Loading/Loading';
 
+import openSocket from "socket.io-client";
+
 const { data } = require('../../__mock__/data.js');
 
 const LOGIN = 'LOGIN';
@@ -32,11 +34,14 @@ export default function App() {
     userQuests: []
   });
 
-  const [ sessions, setSessions ] = useState( state.userData.length ? state.userData.id : 0 );
-  const [ adventurer, setAdventurer ] = useState( state.userData.length ? state.userData.adventurer : false );
-  const [ username, setUsername ] = useState( state.userData.length ? state.userData.first_name : "" );
+  const [sessions, setSessions] = useState(state.userData.length ? state.userData.id : 0);
+  const [adventurer, setAdventurer] = useState(state.userData.length ? state.userData.adventurer : false);
+  const [username, setUsername] = useState(state.userData.length ? state.userData.first_name : "");
 
   useEffect(() => {
+    const socket = openSocket('localhost:8081/', { transports: ['websocket'] });
+
+
     Promise.all([
       axios
         .get('/checkSession')
@@ -62,10 +67,10 @@ export default function App() {
       setUsername(result[0].data.length > 0 ? result[0].data[0].first_name : "");
       setView(
         result[0].data[0]
-        ? result[0].data[0].adventurer
-          ? SHOW
-          : CREATE
-        : LOGIN
+          ? result[0].data[0].adventurer
+            ? SHOW
+            : CREATE
+          : LOGIN
       );
     })
   }, []);
@@ -120,14 +125,14 @@ export default function App() {
         setSessions(0);
         setAdventurer(false);
         setUsername("");
-        changeView(LOGIN); 
+        changeView(LOGIN);
       })
       .catch(error => console.log(error))
   };
 
   return (
     <div className="App">
-      { sessions
+      {sessions
         ? <Navbar
           user={username}
           adventurer={adventurer}
@@ -145,8 +150,8 @@ export default function App() {
         />
       }
       <main>
-        {view === LOADING && <Loading/>}
-        {view === LOGIN && <LoginForm onLogin={() => handleLogin()}/>}
+        {view === LOADING && <Loading />}
+        {view === LOGIN && <LoginForm onLogin={() => handleLogin()} />}
         {view === CLASSES && <AllClasses classesData={classesData} classesProgressData={classesProgressData} />}
         {view === REGISTER && <RegisterForm />}
         {view === CREATE && <CreateQuestForm />}
