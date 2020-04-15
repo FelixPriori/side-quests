@@ -62,6 +62,15 @@ const addUser = function (
     .then()
 }
 
+const allVillagers = function() {
+  const queryStr = `
+  SELECT *
+  FROM users
+  WHERE adventurer = $1
+  `
+  return db.query(queryStr, [false]).then(res => res.rows);
+}
+
 //Functions for front page of app
 const checkUserLogin = function (userId) {
   const queryStr = `
@@ -500,5 +509,6 @@ module.exports = {
   checkUserLogin,
   checkUserQuests,
   getAllUserClassProgress,
-  editProfile
+  editProfile,
+  allVillagers
 }

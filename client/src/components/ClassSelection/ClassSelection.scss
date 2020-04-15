@@ -49,6 +49,13 @@
         }
       }
     }
+    .class-badges {
+      display:flex;
+      align-items: center;
+      h3 {
+        margin-right: 1em;
+      }
+    }
     h3 {
       font-family: $title;
       color: $color1;
