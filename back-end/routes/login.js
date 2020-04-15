@@ -18,7 +18,7 @@ module.exports = () => {
     if (!email || !password) {
       console.log(loginError);
       res.status(401).send(loginError)
-        
+
     } else {
       correctPassword(email, password)
         .then(user => {
@@ -39,6 +39,8 @@ module.exports = () => {
 
   router.post('/logout', (req, res) => {
     req.session = null;
+    req.session.save();
+    res.send();
   });
 
   return router;

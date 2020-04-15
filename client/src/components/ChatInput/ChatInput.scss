@@ -1,0 +1,16 @@
+.chatInput {
+  background-color: lightseagreen;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.input {
+  width: 40rem;
+  border-radius: 25px;
+}
+
+button {
+  margin-left: 1em;
+}
