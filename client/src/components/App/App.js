@@ -31,7 +31,9 @@ export default function App() {
     classesProgressData: [],
     classesData: [],
     userData: {},
-    userQuests: []
+    userQuests: [],
+    villagers: [],
+    badges: []
   });
 
   const [sessions, setSessions] = useState(state.userData.length ? state.userData.id : 0);
@@ -54,13 +56,21 @@ export default function App() {
         .catch(error => console.log(error)),
       axios
         .get('/classes')
+        .catch(error => console.log(error)),
+      axios
+        .get('/villagers')
+        .catch(error => console.log(error)),
+      axios
+        .get('/badges')
         .catch(error => console.log(error))
     ]).then(result => {
       setState({
         userData: result[0].data,
         userQuests: result[1].data,
         classesProgressData: result[2].data,
-        classesData: result[3].data
+        classesData: result[3].data,
+        villagers: result[4].data,
+        badges: result[5].data
       });
       setSessions(result[0].data.length > 0 ? result[0].data[0].id : 0);
       setAdventurer(result[0].data.length > 0 ? result[0].data[0].adventurer : false);
@@ -75,8 +85,7 @@ export default function App() {
     })
   }, []);
 
-  const { classesData, classesProgressData, userData, userQuests } = state;
-
+  const { classesData, classesProgressData, userData, userQuests, villagers, badges } = state;
   const changeView = (viewType) => {
     setView(LOADING)
     setTimeout(() => {
@@ -97,18 +106,26 @@ export default function App() {
         .catch(error => console.log(error)),
       axios
         .get('/classes')
+        .catch(error => console.log(error)),
+      axios
+        .get('/villagers')
+        .catch(error => console.log(error)),
+      axios
+        .get('/badges')
         .catch(error => console.log(error))
     ]).then(result => {
       setState({
         userData: result[0].data,
         userQuests: result[1].data,
         classesProgressData: result[2].data,
-        classesData: result[3].data
+        classesData: result[3].data,
+        villagers: result[4].data,
+        badges: result[5].data
       });
-      setSessions(result[0].data.length > 0 ? result[0].data[0].id : 0);
-      setAdventurer(result[0].data.length > 0 ? result[0].data[0].adventurer : false);
-      setUsername(result[0].data.length > 0 ? result[0].data[0].first_name : "");
-      changeView(SHOW)
+      setSessions(result[0].data[0].id);
+      setAdventurer(result[0].data[0].adventurer);
+      setUsername(result[0].data[0].first_name);
+      result[0].data[0].adventurer ? changeView(SHOW) : changeView(CREATE);
     });
   };
 
@@ -120,7 +137,9 @@ export default function App() {
           classesProgressData: [],
           classesData: [],
           userData: {},
-          userQuests: []
+          userQuests: [],
+          villagers: [],
+          badges: []
         });
         setSessions(0);
         setAdventurer(false);
@@ -160,8 +179,10 @@ export default function App() {
             classesData={classesData}
             classesProgressData={classesProgressData}
             questData={userQuests}
+            villagers={villagers}
+            badges={badges}
           />}
-        {view === PROFILE && <Profile onEdit={() => changeView(EDIT)} userData={userData} />}
+        {view === PROFILE && <Profile onEdit={() => changeView(EDIT)} userData={userData} badges={badges}/>}
         {view === EDIT && <RegisterForm userData={userData} onProfile={() => changeView(PROFILE)} />}
       </main>
     </div>

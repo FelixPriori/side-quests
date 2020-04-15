@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import './ClassSelection.scss';
 import ClassProgress from '../ClassProgress/ClassProgress';
 import QuestList from '../QuestList/QuestList';
-
+import Badge from '../Badge/Badge';
 
 export default function ClassSelection(props) {
   const [ classItem, setClassItem ] = useState(null);
   const [ classProgress, setClassProgress ] = useState(null);
-  const { classesData, classesProgressData } = props;
+  const { classesData, classesProgressData, villagers, badges } = props;
 
   const changeClass = name => {
     if (name === 'Choose a class') {
@@ -53,12 +53,19 @@ export default function ClassSelection(props) {
                   <p>{classItem.description}</p>
                 </span>
               </div>
+              <div className="class-badges">
+                <h3>Badges:</h3>
+                <Badge classId={classItem.id}></Badge>
+                <Badge classId={classItem.id}></Badge>
+                <Badge classId={classItem.id}></Badge>
+                <Badge classId={classItem.id}></Badge>
+              </div>
               <h3>Class Progress:</h3>
               <ClassProgress data={classProgress}/>
             </div>
           }
       </section>
-      { classItem && <QuestList classItem={classItem} questData={props.questData}/> }
+      { classItem && <QuestList classItem={classItem} questData={props.questData} villagers={villagers}/> }
     </section>
   );
 }

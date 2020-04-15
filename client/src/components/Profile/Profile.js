@@ -1,9 +1,11 @@
 import React from 'react';
 import './Profile.scss';
 import Button from '../Button/Button';
+import BadgeBox from '../BadgeBox/BadgeBox';
 
 export default function Profile(props) {
   const { username, first_name, last_name, email, avatar, adventurer } = props.userData[0];
+  const { badges } = props;
   return (
     <section className='profile'>
       <h2>Your profile</h2>
@@ -37,6 +39,12 @@ export default function Profile(props) {
               : <td> Villager </td>
             }
           </tr>
+          { adventurer &&
+            <tr>
+              <td className="start">Badges</td>  
+              <td> {<BadgeBox badges={badges}/>} </td> 
+            </tr>
+          }
         </tbody>
       </table>
       <Button onClick={props.onEdit} confirm>Edit Account</Button>

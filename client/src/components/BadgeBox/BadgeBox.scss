@@ -1,9 +1,9 @@
+@import '../../styles/palette.scss';
 
 .badgeBox {
   display: flex;
-  flex-direction: row;
-  background-color: #e6ab9c;
-  padding: 2em;
-  max-width: 40em;
-  
+  flex-flow: wrap;
+  background-color: $color1;
+  box-shadow: 0.2em 0.2em $shadow1;
+  justify-content: space-around;
 }

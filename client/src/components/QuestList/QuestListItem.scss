@@ -22,3 +22,14 @@
 .quest-item:hover {
   opacity: 100%;
 }
+
+.quest-footer {
+  display: flex;
+  align-items: flex-end;
+  .username {
+    margin: auto;
+  }
+  button {
+    margin-left: auto;
+  }
+}
