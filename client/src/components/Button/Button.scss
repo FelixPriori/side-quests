@@ -16,3 +16,44 @@
   border-color: $color1;
   background-color: $color4;
 }
+
+.btn-primary {
+  background-color: $color1;
+  border-color: $shadow1;
+}
+
+.btn-primary:hover {
+  background-color: $color2;
+  border-color: $shadow2;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active {
+  background-color: $color3;
+  border-color: $shadow3;
+  box-shadow: 0 0 0 0.2rem $highlight3;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus {
+  box-shadow: 0 0 0 0.2rem $highlight3;
+}
+
+.btn-primary:focus {
+  background-color: $color2;
+  border-color: $shadow2;
+  box-shadow: 0 0 0 0.2rem $highlight2;
+}
+
+.btn-danger {
+  background-color: $color5;
+  border-color: $shadow5;
+}
+
+.btn-danger:hover {
+  background-color: $shadow5;
+  border-color: $color5;
+}
+
+.btn-danger:not(:disabled):not(.disabled):active, .btn-danger:focus {
+  background-color: $color4;
+  border-color: $shadow4;
+}
