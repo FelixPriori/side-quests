@@ -9,6 +9,7 @@ import RegisterForm from '../Register/RegisterForm';
 import CreateQuestForm from '../CreateQuest/CreateQuestForm';
 import ClassSelection from '../ClassSelection/ClassSelection';
 import Profile from '../Profile/Profile';
+import Loading from '../Loading/Loading';
 
 const { data } = require('../../__mock__/data.js');
 
@@ -72,7 +73,10 @@ export default function App() {
   const { classesData, classesProgressData, userData, userQuests } = state;
 
   const changeView = (viewType) => {
-    setView(viewType);
+    setView(LOADING)
+    setTimeout(() => {
+      setView(viewType)
+    }, 500)
   }
   return (
     <div className="App">
@@ -95,6 +99,7 @@ export default function App() {
         />
       }
       <main>
+        {view === LOADING && <Loading/>}
         {view === LOGIN && <LoginForm onLogin={() => changeView(SHOW)}/>}
         {view === CLASSES && <AllClasses classesData={classesData} classesProgressData={classesProgressData} />}
         {view === REGISTER && <RegisterForm />}

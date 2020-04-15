@@ -1,0 +1,15 @@
+@import '../../styles/palette.scss';
+
+.loading {
+  text-align: center;
+  h2 {
+    font-family: $title;
+    color: $color1;
+  }
+  .spinner-border {
+    width: 3em;
+    height: 3em;
+    border: 0.25em solid $color1;
+    border-right-color: transparent;
+  }
+}
