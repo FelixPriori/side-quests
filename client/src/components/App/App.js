@@ -117,10 +117,10 @@ export default function App() {
         villagers: result[4].data,
         badges: result[5].data
       });
-      setSessions(result[0].data.length > 0 ? result[0].data[0].id : 0);
-      setAdventurer(result[0].data.length > 0 ? result[0].data[0].adventurer : false);
-      setUsername(result[0].data.length > 0 ? result[0].data[0].first_name : "");
-      changeView(SHOW)
+      setSessions(result[0].data[0].id);
+      setAdventurer(result[0].data[0].adventurer);
+      setUsername(result[0].data[0].first_name);
+      result[0].data[0].adventurer ? changeView(SHOW) : changeView(CREATE);
     });
   };
 
