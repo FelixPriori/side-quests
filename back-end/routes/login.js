@@ -38,9 +38,8 @@ module.exports = () => {
   });
 
   router.post('/logout', (req, res) => {
-    req.session = null;
-    req.session.save();
-    res.send();
+    req.session.userId = null;
+    res.status(200).send("Successfully logged out");
   });
 
   return router;
