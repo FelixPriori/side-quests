@@ -28,7 +28,7 @@ export default function App() {
   const [state, setState] = useState({
     classesProgressData: [],
     classesData: [],
-    userData: [],
+    userData: {},
     userQuests: []
   });
 
@@ -57,9 +57,9 @@ export default function App() {
         classesProgressData: result[2].data,
         classesData: result[3].data
       });
-      setSessions(result[0].data.length > 0 ? result[0].data[0].id : false);
+      setSessions(result[0].data.length > 0 ? result[0].data[0].id : 0);
       setAdventurer(result[0].data.length > 0 ? result[0].data[0].adventurer : false);
-      setUsername(result[0].data.length > 0 ? result[0].data[0].first_name : false);
+      setUsername(result[0].data.length > 0 ? result[0].data[0].first_name : "");
       setView(
         result[0].data[0]
         ? result[0].data[0].adventurer
@@ -77,7 +77,54 @@ export default function App() {
     setTimeout(() => {
       setView(viewType)
     }, 500)
-  }
+  };
+
+  const handleLogin = () => {
+    Promise.all([
+      axios
+        .get('/checkSession')
+        .catch(error => console.log(error)),
+      axios
+        .get('/quests')
+        .catch(error => console.log(error)),
+      axios
+        .get('/userClassProgress')
+        .catch(error => console.log(error)),
+      axios
+        .get('/classes')
+        .catch(error => console.log(error))
+    ]).then(result => {
+      setState({
+        userData: result[0].data,
+        userQuests: result[1].data,
+        classesProgressData: result[2].data,
+        classesData: result[3].data
+      });
+      setSessions(result[0].data.length > 0 ? result[0].data[0].id : 0);
+      setAdventurer(result[0].data.length > 0 ? result[0].data[0].adventurer : false);
+      setUsername(result[0].data.length > 0 ? result[0].data[0].first_name : "");
+      changeView(SHOW)
+    });
+  };
+
+  const handleLogout = () => {
+    return axios
+      .post('/logout')
+      .then(() => {
+        setState({
+          classesProgressData: [],
+          classesData: [],
+          userData: {},
+          userQuests: []
+        });
+        setSessions(0);
+        setAdventurer(false);
+        setUsername("");
+        changeView(LOGIN); 
+      })
+      .catch(error => console.log(error))
+  };
+
   return (
     <div className="App">
       { sessions
@@ -85,9 +132,8 @@ export default function App() {
           user={username}
           adventurer={adventurer}
           onQuests={() => changeView(SHOW)}
-          onLogout={() => changeView(LOGIN)}
           onCreate={() => changeView(CREATE)}
-          onLogout={() => changeView(LOGIN)}
+          onLogout={() => handleLogout()}
           onLogin={() => changeView(LOGIN)}
           onRegister={() => changeView(REGISTER)}
           onProgress={() => changeView(CLASSES)}
@@ -100,7 +146,7 @@ export default function App() {
       }
       <main>
         {view === LOADING && <Loading/>}
-        {view === LOGIN && <LoginForm onLogin={() => changeView(SHOW)}/>}
+        {view === LOGIN && <LoginForm onLogin={() => handleLogin()}/>}
         {view === CLASSES && <AllClasses classesData={classesData} classesProgressData={classesProgressData} />}
         {view === REGISTER && <RegisterForm />}
         {view === CREATE && <CreateQuestForm />}
