@@ -45,6 +45,8 @@ export default function App() {
   const [username, setUsername] = useState(!isEmpty(state.userData) ? state.userData.first_name : "");
 
   useEffect(() => {
+
+    //Socket.io
     let socket = openSocket('localhost:8081');
     socket.on('connect', function () {
       console.log('connected!');
