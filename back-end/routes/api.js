@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 
 
-const { allVillagers, getAllUserClassProgress, checkUserQuests, allUsers, getUser, allQuests, getQuest, createNewQuest, deleteQuest, editQuest, completeQuest, getBadgesByUser, allAchievements, getAchievement, allBadges, getBadge, allClasses, getClass, checkUserLogin } = require('../db/helpers');
+const { allVillagers, getAllUserClassProgress, checkUserQuests, allUsers, getUser, allQuests, getQuest, createNewQuest, deleteQuest, editQuest, completeQuest, getBadgesByUser, allAchievements, getAchievement, allBadges, getBadge, allClasses, getClass, checkUserLogin, getBadgesByClass } = require('../db/helpers');
 
 module.exports = () => {
 
@@ -134,6 +134,12 @@ module.exports = () => {
       res.send(result);
     });
   });
+
+  router.get("/classes/:id/badges", (req, res) => {
+    getBadgesByClass(req.params.id).then(result => {
+      res.send(result);
+    });
+  })
 
 
   return router;

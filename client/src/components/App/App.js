@@ -30,7 +30,8 @@ export default function App() {
     userQuests: [],
     villagers: [],
     badges: [],
-    userBadges: []
+    userBadges: [],
+    classBadges: []
   });
 
   function isEmpty(obj) {
@@ -83,6 +84,20 @@ export default function App() {
           return {
             ...prevState,
             userBadges: response.data
+          };
+        });
+      })
+      .catch(error => console.log(error))
+  }
+
+  const fetchClassBadges = id => {
+    return axios
+      .get(`/classes/${id}/badges`)
+      .then(response => {
+        setState(prevState => {
+          return {
+            ...prevState,
+            classBadges: response.data
           };
         });
       })
@@ -239,6 +254,8 @@ export default function App() {
             fetchProgress={fetchProgress}
             fetchVillagers={fetchVillagers}
             fetchBadges={fetchBadges}
+            fetchClassBadges={fetchClassBadges}
+            fetchUserBadges={fetchUserBadges}
           />}
         {view === PROFILE && 
           <Profile 

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import './Profile.scss';
 import Button from '../Button/Button';
 import BadgeBox from '../BadgeBox/BadgeBox';
+const { checkLocked } = require('../../helpers/badgeHelpers');
 
 export default function Profile(props) {
   const { fetchBadges, fetchUserBadges } = props;
@@ -14,14 +15,7 @@ export default function Profile(props) {
   const { username, first_name, last_name, email, avatar, adventurer } = props.state.userData;
   const { userBadges, badges } = props.state;
 
-  // TODO: FINISH THIS!!
-  const lockedBadges = badges && badges.filter(badge => {
-    const aquired = userBadges.find(userBadge => userBadge.id === badge.id)
-    if (!aquired) {
-      return true;
-    }
-    return false;
-  });
+  const lockedBadges = checkLocked(badges, userBadges);
 
   return (
     <section className='profile'>

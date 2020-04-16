@@ -467,8 +467,7 @@ const getBadgesByClass = function (classId) {
     FROM badges
     WHERE class_id = $1;
   `
-
-  return db.query(queryStr, [class_id]).then(res => res.rows)
+  return db.query(queryStr, [classId]).then(res => res.rows)
 }
 
 const getQuestsByUser = function (userId) {
