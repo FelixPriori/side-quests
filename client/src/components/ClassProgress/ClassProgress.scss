@@ -1,5 +1,6 @@
 @import '../../styles/palette.scss';
 
+// FIX TEXT ALIGN ON P (LEFT)
 .progress-section {
   display: flex;
   flex-direction: column;
@@ -14,6 +15,11 @@
         margin-left: 2em;
         p {
           text-align: right;
+        }
+      }
+      .left {
+        p {
+          text-align: left;
         }
       }
       p {

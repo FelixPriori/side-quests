@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './ClassSelection.scss';
 import ClassProgress from '../ClassProgress/ClassProgress';
 import QuestList from '../QuestList/QuestList';
-import Badge from '../Badge/Badge';
+import BadgeBox from '../BadgeBox/BadgeBox';
+const { checkLocked, filterLocked } = require('../../helpers/badgeHelpers');
 
 export default function ClassSelection(props) {
   const [ classItem, setClassItem ] = useState(null);
@@ -14,10 +15,11 @@ export default function ClassSelection(props) {
     fetchBadges();
     fetchVillagers();
     fetchClasses();
+    fetchUserBadges();
   }, []);
   
-  const { fetchQuests, fetchClasses, fetchProgress, fetchVillagers, fetchBadges } = props;
-  
+  const { fetchQuests, fetchClasses, fetchProgress, fetchVillagers, fetchBadges, fetchClassBadges, fetchUserBadges } = props;
+    
   const changeClass = name => {
     if (name === 'Choose a class') {
       return;
@@ -26,7 +28,11 @@ export default function ClassSelection(props) {
     const selectedClassProgress = props.state.classesProgressData.find(classProgress => selectedClass.id === classProgress.class_id)
     setClassItem(selectedClass);
     setClassProgress(selectedClassProgress);
+    fetchClassBadges(selectedClass.id);
   };
+
+  const lockedBadges = props.state.classBadges && checkLocked(props.state.classBadges, props.state.userBadges);
+  const unlockedForClass = lockedBadges && filterLocked(lockedBadges, props.state.classBadges);
 
   const classList = props.state.classesData && props.state.classesData.map((classData, index) => {
     const { name } = classData;
@@ -57,7 +63,7 @@ export default function ClassSelection(props) {
           {classItem && 
             <div>
               <div className="content">
-                <img src={classItem.avatar}/>
+                <img alt="avatar" src={classItem.avatar}/>
                 <span>
                   <h3>{classItem.name}</h3>
                   <p>{classItem.description}</p>
@@ -65,13 +71,10 @@ export default function ClassSelection(props) {
               </div>
               <div className="class-badges">
                 <h3>Badges:</h3>
-                <Badge classId={classItem.id}></Badge>
-                <Badge classId={classItem.id}></Badge>
-                <Badge classId={classItem.id}></Badge>
-                <Badge classId={classItem.id}></Badge>
+                <BadgeBox badges={unlockedForClass} lockedBadges={lockedBadges}/>
               </div>
               <h3>Class Progress:</h3>
-              <ClassProgress data={classProgress}/>
+              { classProgress && <ClassProgress data={classProgress}/> }
             </div>
           }
       </section>

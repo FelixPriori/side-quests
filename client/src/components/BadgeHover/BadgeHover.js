@@ -7,7 +7,7 @@ export default function BadgeHover(props) {
 
   return (
     <div className="badgeHover rounded">
-      <h4>{props.title}</h4>
+      <h4>{props.name}</h4>
       <p>{props.requirement}</p>
     </div>
   )

@@ -435,7 +435,17 @@ const getUserBadges = function (userId) {
   JOIN badges on badges.id = assigned_badges.badge_id 
   WHERE users.id = $1;
   `
+  return db.query(queryStr, [userId]).then(res => res.rows)
+}
 
+const getBadgesByUser = function (userId) {
+  const queryStr = `
+    SELECT badges.* 
+    FROM badges 
+    JOIN assigned_badges on assigned_badges.badge_id = badges.id
+    JOIN users on users.id = assigned_badges.adventurer_id
+    WHERE users.id = $1;
+  `
   return db.query(queryStr, [userId]).then(res => res.rows)
 }
 
@@ -459,8 +469,7 @@ const getBadgesByClass = function (classId) {
     FROM badges
     WHERE class_id = $1;
   `
-
-  return db.query(queryStr, [class_id]).then(res => res.rows)
+  return db.query(queryStr, [classId]).then(res => res.rows)
 }
 
 const getQuestsByUser = function (userId) {
@@ -501,7 +510,7 @@ module.exports = {
   allClasses,
   getClass,
   acceptQuest,
-  getUserBadges,
+  getBadgesByUser,
   getUserAchievements,
   getBadgesByClass,
   getQuestsByUser,

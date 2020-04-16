@@ -17,7 +17,7 @@ import { ChatDotsFill } from 'react-bootstrap-icons';
 */
 
 export default function QuestListItem(props) {
-  const { name, description, class_id, villager_id } = props.userQuests;
+  const { name, description } = props.userQuests;
 
   return (
     <div className="quest-item">

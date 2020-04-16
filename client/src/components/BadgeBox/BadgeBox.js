@@ -4,13 +4,16 @@ import './BadgeBox.scss';
 
 
 
-export default function BadgeBox() {
+export default function BadgeBox(props) {
 
-  const classIds = [1, 2, 3, 4, 5, 6, 7];
-  const badges = classIds.map(classId => <Badge key={classId} classId={classId} />)
+  const { lockedBadges, badges } = props;
+  const unlocked = badges && badges.map(badge => <Badge key={badge.id} badge={badge} />)
+  const locked = lockedBadges && lockedBadges.map(badge => <Badge key={badge.id} badge={badge} locked={true} />)
+
   return (
     <div className="badgeBox rounded">
-      {badges}
+      {unlocked}
+      {locked}
     </div>
   )
 }
