@@ -8,8 +8,7 @@ const { editProfile, correctPassword } = require('../db/helpers');
 module.exports = () => {
 
   router.post('/users/edit', (req, res) => {
-    const {
-      email, password, firstName, lastName, username, avatar, accountType } = req.body;
+    let { email, password, firstName, lastName, username, avatar, accountType } = req.body;
 
     console.log(req.body);
     if (!password) {
@@ -20,16 +19,14 @@ module.exports = () => {
 
         if (user) {
           const hashedPassword = bcrypt.hashSync(password, 10);
-          console.log("made it here");
-          if (accountType === 1) {
-            accountType = false;
-          } else {
-            accountType = true;
-          }
-          editProfile(req.session.userId, username, firstName, lastName, email, hashedPassword, avatar, accountType).then();
+          editProfile(username, firstName, lastName, email, hashedPassword, avatar, accountType, req.session.userId)
+            .then(() => {
+              res.send();
+            });
+
         } else {
           console.log("Incorrect password entered. Please try again.");
-          res.status(401).send("Incorrect password entered. Please try again.")
+          res.status(401).send("Incorrect password entered. Please try again.");
         }
 
       });

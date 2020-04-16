@@ -52,7 +52,6 @@ export default function App() {
   const [username, setUsername] = useState(!isEmpty(state.userData) ? state.userData.first_name : "");
 
   useEffect(() => {
-
     axios
       .get('/checkSession')
       .then(response => {
@@ -78,6 +77,24 @@ export default function App() {
       .catch(error => console.log(error))
   }, []);
 
+  const fetchUserData = () => {
+    axios
+      .get('/checkSession')
+      .then(response => {
+        if (!isEmpty(response.data[0])) {
+          setSessions(response.data[0].id);
+          setAdventurer(response.data[0].adventurer);
+          setUsername(response.data[0].first_name);
+        }
+        setState(prevState => {
+          return {
+            ...prevState,
+            userData: response.data[0]
+          };
+        });
+      })
+      .catch(e => console.log(e))
+  }
 
   //Socket.io
   const addNewMessage = function (msgObj) {
@@ -310,7 +327,7 @@ export default function App() {
             fetchProgress={fetchProgress}
             fetchClasses={fetchClasses}
           />}
-        {view === REGISTER && <RegisterForm />}
+        {view === REGISTER && <RegisterForm onProfile={() => changeView(PROFILE)} />}
         {view === CREATE && <CreateQuestForm />}
         {view === SHOW
           && <ClassSelection
@@ -328,13 +345,14 @@ export default function App() {
             onEdit={() => changeView(EDIT)}
             fetchBadges={fetchBadges}
             fetchUserBadges={fetchUserBadges}
+            fetchUserData={fetchUserData}
             state={state}
             edit={true}
           />}
         {view === EDIT &&
           <RegisterForm
             userData={state.userData}
-            onProfile={() => changeView(PROFILE)}
+            onProfile={changeView}
           />}
         {view === CHAT &&
           <ChatWindow

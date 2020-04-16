@@ -18,15 +18,16 @@ export default function RegisterForm(props) {
   //Possibly implement axios over fetch?
   function handleSubmit() {
     const data = { email, password, confirmPassword, firstName, lastName, username, accountType };
-    axios.post(`/register`, data);
+    axios.post(`/register`, data)
+      .then(() => props.onProfile('PROFILE'));
   }
 
 
   //if props.edit then use this for the onclick instead
   function handleEditSubmit() {
-    //got here
     const data = { email, password, confirmPassword, firstName, lastName, username, accountType, avatar };
-    axios.post('/users/edit', data);
+    axios.post('/users/edit', data)
+      .then(() => props.onProfile('PROFILE'))
   }
 
   return (
@@ -39,8 +40,8 @@ export default function RegisterForm(props) {
       <form onSubmit={(event => event.preventDefault())} autoComplete="off">
         <select onChange={event => setAccountType(event.currentTarget.value)} className="browser-default custom-select">
           <option defaultValue>Account Type</option>
-          <option value="1">Villager</option>
-          <option value="2">Adventurer</option>
+          <option value="0">Villager</option>
+          <option value="1">Adventurer</option>
         </select>
         <input
           name="firstName"

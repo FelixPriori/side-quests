@@ -4,11 +4,13 @@ import Button from '../Button/Button';
 import BadgeBox from '../BadgeBox/BadgeBox';
 
 export default function Profile(props) {
-  const { fetchBadges, fetchUserBadges } = props;
-  
+  const { fetchBadges, fetchUserBadges, fetchUserData } = props;
+
   useEffect(() => {
     fetchBadges();
     fetchUserBadges();
+    fetchUserData();
+
   }, []);
 
   const { username, first_name, last_name, email, avatar, adventurer } = props.state.userData;
@@ -17,7 +19,7 @@ export default function Profile(props) {
   return (
     <section className='profile'>
       <h2>Your profile</h2>
-      <img alt="avatar" src={avatar}/>
+      <img alt="avatar" src={avatar} />
       <table className="table table-striped table-bordered">
         <tbody>
           <tr>
@@ -41,16 +43,16 @@ export default function Profile(props) {
             <td>**************</td>
           </tr>
           <tr>
-            <td className="start">Account Type</td>  
-            { adventurer 
-              ? <td> Adventurer </td> 
+            <td className="start">Account Type</td>
+            {adventurer
+              ? <td> Adventurer </td>
               : <td> Villager </td>
             }
           </tr>
-          { adventurer &&
+          {adventurer &&
             <tr>
-              <td className="start">Badges</td>  
-              <td> {<BadgeBox badges={userBadges}/>} </td> 
+              <td className="start">Badges</td>
+              <td> {<BadgeBox badges={userBadges} />} </td>
             </tr>
           }
         </tbody>

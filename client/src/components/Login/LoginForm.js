@@ -22,7 +22,7 @@ export default function LoginForm(props) {
   return (
     <section className="login">
       <h3>Login</h3>
-      { error && <div className="alert alert-danger">{error}</div>}
+      {error && <div className="alert alert-danger">{error}</div>}
       <form onSubmit={(event) => event.preventDefault()} autoComplete="off">
         <input
           name="email"
