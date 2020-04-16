@@ -7,7 +7,6 @@ import Badge from '../Badge/Badge';
 export default function ClassSelection(props) {
   const [ classItem, setClassItem ] = useState(null);
   const [ classProgress, setClassProgress ] = useState(null);
-  // const { classesData, classesProgressData, villagers } = props.state;
   
   useEffect(() => {
     fetchQuests();
@@ -29,17 +28,18 @@ export default function ClassSelection(props) {
     setClassProgress(selectedClassProgress);
   };
 
-  // const classList = classesData.map((classData, index) => {
-  //   const { name } = classData;
-  //   return (
-  //     <option 
-  //       key={index}
-  //       value={name}
-  //     >
-  //       {name}
-  //     </option>
-  //   );
-  // })
+  const classList = props.state.classesData && props.state.classesData.map((classData, index) => {
+    const { name } = classData;
+    return (
+      <option 
+        key={index}
+        value={name}
+      >
+        {name}
+      </option>
+    );
+  })
+
   return (
     <section className="quest-selection">
       <section className="select-class">
@@ -51,17 +51,7 @@ export default function ClassSelection(props) {
             onChange={e => changeClass(e.currentTarget.value)}
           >
             <option defaultValue>Choose a class</option>
-            {props.state.classesData && props.state.classesData.map((classData, index) => {
-              const { name } = classData;
-              return (
-                <option 
-                  key={index}
-                  value={name}
-                >
-                  {name}
-                </option>
-              );
-            })}
+            {classList}
           </select>
         </div>
           {classItem && 
