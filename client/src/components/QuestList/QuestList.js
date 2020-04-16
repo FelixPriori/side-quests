@@ -40,7 +40,7 @@ export default function QuestList(props) {
 
   const { userQuests, classItem, villagers } = props;
 
-  const validQuests = userQuests.filter(quest => {
+  const validQuests = userQuests && userQuests.filter(quest => {
     return quest.class_id === classItem.id && quest.completed === false;
   })
   
@@ -48,7 +48,7 @@ export default function QuestList(props) {
     const output = [];
     for (const quest of validQuests) {
       const questObject = {}
-      const villager = villagers.find(villager => villager.id === quest.villager_id);
+      const villager = villagers && villagers.find(villager => villager.id === quest.villager_id);
       questObject[villager.username] = quest;
       output.push(questObject);
     }
@@ -56,7 +56,7 @@ export default function QuestList(props) {
   };
 
   const villagerQuests = villagerForQuest(villagers, validQuests);
-  const quests = villagerQuests.map((quest, index) => {
+  const quests = villagerQuests && villagerQuests.map((quest, index) => {
     const villargerName = Object.keys(quest)[0]
     return (
       <QuestListItem 
