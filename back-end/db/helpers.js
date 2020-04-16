@@ -62,7 +62,7 @@ const addUser = function (
     .then()
 }
 
-const allVillagers = function() {
+const allVillagers = function () {
   const queryStr = `
   SELECT *
   FROM users
@@ -438,6 +438,8 @@ const getUserBadges = function (userId) {
 
   return db.query(queryStr, [userId]).then(res => res.rows)
 }
+
+
 
 const getUserAchievements = function (userId) {
   const queryStr = `

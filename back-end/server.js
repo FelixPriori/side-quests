@@ -17,24 +17,10 @@ const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 
 const app = express();
-// const server = http.createServer(app);
-
 db.connect();
 app.use(morgan('dev'));
 app.use(cors());
-// const socketio = require("socket.io");
 
-//Maybe delete this
-
-
-
-
-
-
-
-
-
-// const io = require("socket.io").listen(server);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use("/styles", sass({
@@ -74,12 +60,14 @@ const io = require('socket.io').listen(server);
 
 io.on('connection', socket => {
   console.log("New WS connection...");
-  socket.on('greet', msg => {
-    console.log(msg)
-    io.emit('greet', msg);
 
-    socket.on('disconnect', () => {
-      console.log('user disconnected');
-    });
-  })
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+
+  socket.on('chat message', (msgObj) => {
+    console.log("msgObj:", msgObj);
+    console.log("message: ", msgObj.msg, msgObj.userId);
+    io.emit('chat message', msgObj);
+  });
 });
