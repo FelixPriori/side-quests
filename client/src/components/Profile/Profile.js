@@ -10,10 +10,10 @@ export default function Profile(props) {
     fetchBadges();
   }, []);
 
-  const { username, first_name, last_name, email, avatar, adventurer } = props.userData;
-
-
+  const { username, first_name, last_name, email, avatar, adventurer } = props.state.userData;
   const { badges } = props;
+
+
   return (
     <section className='profile'>
       <h2>Your profile</h2>

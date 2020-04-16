@@ -164,7 +164,12 @@ export default function App() {
     return axios
       .get('/checkSession')
       .then(response => {
-        setState({ ...state, userData: response.data })
+        setState(prevState => {
+          return {
+            ...prevState,
+            userData: response.data[0]
+          };
+        });
         setSessions(response.data[0].id);
         setAdventurer(response.data[0].adventurer);
         setUsername(response.data[0].first_name);
@@ -239,9 +244,8 @@ export default function App() {
         {view === PROFILE &&
           <Profile
             onEdit={() => changeView(EDIT)}
-            userData={state.userData}
-            badges={state.badges}
             fetchBadges={fetchBadges}
+            state={state}
           />}
         {view === EDIT &&
           <RegisterForm
