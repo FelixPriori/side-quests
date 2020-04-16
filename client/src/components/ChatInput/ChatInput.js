@@ -8,15 +8,20 @@ export default function ChatInput(props) {
 
   return (
     <div className="chatInput">
-      <input
-        className="input"
-        name="message"
-        type="text"
-        placeholder={"Send Message"}
-        value={message}
-        data-testid="message-input"
-        onChange={event => setMessage(event.target.value)}
-      /><button type="button" class="btn btn-primary">Send</button>
+      <form>
+        <input
+          className="input"
+          name="message"
+          type="text"
+          placeholder={"Send Message"}
+          value={message}
+          data-testid="message-input"
+          onChange={event => setMessage(event.target.value)}
+        /><button onClick={event => {
+          event.preventDefault();
+          props.onClick();
+        }} type="submit" class="btn btn-primary">Send</button>
+      </form>
     </div>
   )
 }

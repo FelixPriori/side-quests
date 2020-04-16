@@ -11,6 +11,7 @@ import ClassSelection from '../ClassSelection/ClassSelection';
 import Profile from '../Profile/Profile';
 import Loading from '../Loading/Loading';
 
+
 import openSocket from "socket.io-client";
 
 const { data } = require('../../__mock__/data.js');
@@ -197,6 +198,11 @@ export default function App() {
       })
       .catch(error => console.log(error))
   };
+
+  const chatSubmit = () => {
+
+  }
+
 
   return (
     <div className="App">
