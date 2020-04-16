@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ClassSelection.scss';
 import ClassProgress from '../ClassProgress/ClassProgress';
 import QuestList from '../QuestList/QuestList';
@@ -7,29 +7,39 @@ import Badge from '../Badge/Badge';
 export default function ClassSelection(props) {
   const [ classItem, setClassItem ] = useState(null);
   const [ classProgress, setClassProgress ] = useState(null);
-  const { classesData, classesProgressData, villagers, badges } = props;
-
+  // const { classesData, classesProgressData, villagers } = props.state;
+  
+  useEffect(() => {
+    fetchQuests();
+    fetchProgress();
+    fetchBadges();
+    fetchVillagers();
+    fetchClasses();
+  }, []);
+  
+  const { fetchQuests, fetchClasses, fetchProgress, fetchVillagers, fetchBadges } = props;
+  
   const changeClass = name => {
     if (name === 'Choose a class') {
       return;
     }
-    const selectedClass = classesData.find(classData => classData.name === name);
-    const selectedClassProgress = classesProgressData.find(classProgress => selectedClass.id === classProgress.class_id)
+    const selectedClass = props.state.classesData.find(classData => classData.name === name);
+    const selectedClassProgress = props.state.classesProgressData.find(classProgress => selectedClass.id === classProgress.class_id)
     setClassItem(selectedClass);
     setClassProgress(selectedClassProgress);
   };
 
-  const classList = classesData.map((classData, index) => {
-    const { name } = classData;
-    return (
-      <option 
-        key={index}
-        value={name}
-      >
-        {name}
-      </option>
-    );
-  })
+  // const classList = classesData.map((classData, index) => {
+  //   const { name } = classData;
+  //   return (
+  //     <option 
+  //       key={index}
+  //       value={name}
+  //     >
+  //       {name}
+  //     </option>
+  //   );
+  // })
   return (
     <section className="quest-selection">
       <section className="select-class">
@@ -41,7 +51,17 @@ export default function ClassSelection(props) {
             onChange={e => changeClass(e.currentTarget.value)}
           >
             <option defaultValue>Choose a class</option>
-            {classList}
+            {props.state.classesData && props.state.classesData.map((classData, index) => {
+              const { name } = classData;
+              return (
+                <option 
+                  key={index}
+                  value={name}
+                >
+                  {name}
+                </option>
+              );
+            })}
           </select>
         </div>
           {classItem && 
@@ -65,7 +85,7 @@ export default function ClassSelection(props) {
             </div>
           }
       </section>
-      { classItem && <QuestList classItem={classItem} questData={props.questData} villagers={villagers}/> }
+      { classItem && <QuestList classItem={classItem} userQuests={props.state.userQuests} villagers={props.state.villagers}/> }
     </section>
   );
 }

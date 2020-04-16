@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './AllClasses.scss';
 import ClassProgress from '../ClassProgress/ClassProgress';
 
 export default function AllClasses(props) {
-  const AllClassesProgressArray = props.classesProgressData.map(data => <ClassProgress data={data}/>);
+  const { fetchProgress, fetchClasses } = props;
+
+  useEffect(() => {
+    fetchProgress()
+    fetchClasses()
+  }, [])
+
+  const AllClassesProgressArray = props.classesProgressData.map(data => <ClassProgress data={data} />);
   const AllClassesNames = props.classesData.map(data => <h3 key={data.id}> {data.name}</h3>)
   const toRender = [];
   for (let i = 0; i < AllClassesProgressArray.length; i++) {

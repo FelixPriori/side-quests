@@ -12,7 +12,7 @@ import QuestListItem from './QuestListItem';
 */
 
 /* 
-  questData
+  userQuests
   {
     id: 1,
     name: 'Hungry for some soup!',
@@ -38,9 +38,9 @@ import QuestListItem from './QuestListItem';
 
 export default function QuestList(props) {
 
-  const { questData, classItem, villagers } = props;
+  const { userQuests, classItem, villagers } = props;
 
-  const validQuests = questData.filter(quest => {
+  const validQuests = userQuests.filter(quest => {
     return quest.class_id === classItem.id && quest.completed === false;
   })
   
@@ -61,7 +61,7 @@ export default function QuestList(props) {
     return (
       <QuestListItem 
         key={index} 
-        questData={quest[villargerName]} 
+        userQuests={quest[villargerName]} 
         villager={villargerName}
       />
     )
@@ -69,10 +69,10 @@ export default function QuestList(props) {
   
   return(
     <section className="quest-list">
-      <div class="quest-title">
+      <div className="quest-title">
         <h2>Quests for {classItem.name}</h2>
       </div>
-      <div class="quest-list-items">
+      <div className="quest-list-items">
         {quests.length
           ? quests
           : <div className="alert alert-danger">There are currently no {classItem.name.toLowerCase()} quests available</div>

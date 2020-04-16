@@ -25,7 +25,7 @@ const EDIT = 'EDIT';
 const LOADING = 'LOADING';
 
 export default function App() {
-  const [view, setView] = useState(LOADING);
+  const [view, setView] = useState(LOGIN);
 
   const [state, setState] = useState({
     classesProgressData: [],
@@ -36,9 +36,13 @@ export default function App() {
     badges: []
   });
 
-  const [sessions, setSessions] = useState(state.userData.length ? state.userData.id : 0);
-  const [adventurer, setAdventurer] = useState(state.userData.length ? state.userData.adventurer : false);
-  const [username, setUsername] = useState(state.userData.length ? state.userData.first_name : "");
+  function isEmpty(obj) {
+    return !obj || Object.keys(obj).length === 0;
+  }
+
+  const [sessions, setSessions] = useState(!isEmpty(state.userData) ? state.userData.id : 0);
+  const [adventurer, setAdventurer] = useState(!isEmpty(state.userData) ? state.userData.adventurer : false);
+  const [username, setUsername] = useState(!isEmpty(state.userData) ? state.userData.first_name : "");
 
   useEffect(() => {
     let socket = openSocket('localhost:8081');
@@ -51,48 +55,32 @@ export default function App() {
       })
     });
 
-    Promise.all([
-      axios
-        .get('/checkSession')
-        .catch(error => console.log(error)),
-      axios
-        .get('/quests')
-        .catch(error => console.log(error)),
-      axios
-        .get('/userClassProgress')
-        .catch(error => console.log(error)),
-      axios
-        .get('/classes')
-        .catch(error => console.log(error)),
-      axios
-        .get('/villagers')
-        .catch(error => console.log(error)),
-      axios
-        .get('/badges')
-        .catch(error => console.log(error))
-    ]).then(result => {
-      setState({
-        userData: result[0].data,
-        userQuests: result[1].data,
-        classesProgressData: result[2].data,
-        classesData: result[3].data,
-        villagers: result[4].data,
-        badges: result[5].data
-      });
-      setSessions(result[0].data.length > 0 ? result[0].data[0].id : 0);
-      setAdventurer(result[0].data.length > 0 ? result[0].data[0].adventurer : false);
-      setUsername(result[0].data.length > 0 ? result[0].data[0].first_name : "");
-      setView(
-        result[0].data[0]
-          ? result[0].data[0].adventurer
-            ? SHOW
-            : CREATE
-          : LOGIN
-      );
-    })
+    axios
+      .get('/checkSession')
+      .then(response => {
+        console.log(response.data)
+        if (!isEmpty(response.data[0])) {
+          setSessions(response.data[0].id);
+          setAdventurer(response.data[0].adventurer);
+          setUsername(response.data[0].first_name);
+        }
+        setState(prevState => {
+          return {
+            ...prevState,
+            userData: response.data[0]
+          };
+        });
+        setView(
+          response.data[0]
+            ? response.data[0].adventurer
+              ? SHOW
+              : CREATE
+            : LOGIN
+        );
+      })
+      .catch(error => console.log(error))
   }, []);
 
-  const { classesData, classesProgressData, userData, userQuests, villagers, badges } = state;
   const changeView = (viewType) => {
     setView(LOADING)
     setTimeout(() => {
@@ -100,40 +88,87 @@ export default function App() {
     }, 500)
   };
 
+  const fetchQuests = () => {
+    return axios
+      .get('/quests')
+      .then(response => {
+        setState(prevState => {
+          return {
+            ...prevState,
+            userQuests: response.data
+          };
+        });
+      })
+      .catch(error => console.log(error))
+  };
+
+  const fetchClasses = () => {
+    return axios
+      .get('/classes')
+      .then(response => {
+        setState(prevState => {
+          return {
+            ...prevState,
+            classesData: response.data
+          };
+        });
+      })
+      .catch(error => console.log(error));
+  };
+
+  const fetchProgress = () => {
+    return axios
+      .get('/userClassProgress')
+      .then(response => {
+        setState(prevState => {
+          return {
+            ...prevState,
+            classesProgressData: response.data
+          };
+        });
+      })
+      .catch(error => console.log(error))
+  };
+
+  const fetchVillagers = () => {
+    return axios
+      .get('/villagers')
+      .then(response => {
+        setState(prevState => {
+          return {
+            ...prevState,
+            villagers: response.data
+          };
+        });
+      })
+      .catch(error => console.log(error));
+  };
+
+  const fetchBadges = () => {
+    return axios
+      .get('/badges')
+      .then(response => {
+        setState(prevState => {
+          return {
+            ...prevState,
+            badges: response.data
+          };
+        });
+      })
+      .catch(error => console.log(error));
+  };
+
   const handleLogin = () => {
-    Promise.all([
-      axios
-        .get('/checkSession')
-        .catch(error => console.log(error)),
-      axios
-        .get('/quests')
-        .catch(error => console.log(error)),
-      axios
-        .get('/userClassProgress')
-        .catch(error => console.log(error)),
-      axios
-        .get('/classes')
-        .catch(error => console.log(error)),
-      axios
-        .get('/villagers')
-        .catch(error => console.log(error)),
-      axios
-        .get('/badges')
-        .catch(error => console.log(error))
-    ]).then(result => {
-      setState({
-        userData: result[0].data,
-        userQuests: result[1].data,
-        classesProgressData: result[2].data,
-        classesData: result[3].data,
-        villagers: result[4].data,
-        badges: result[5].data
-      });
-      setSessions(result[0].data[0].id);
-      setAdventurer(result[0].data[0].adventurer);
-      setUsername(result[0].data[0].first_name);
-      result[0].data[0].adventurer ? changeView(SHOW) : changeView(CREATE);
-    });
+    return axios
+      .get('/checkSession')
+      .then(response => {
+        setState({ ...state, userData: response.data })
+        setSessions(response.data[0].id);
+        setAdventurer(response.data[0].adventurer);
+        setUsername(response.data[0].first_name);
+        response.data[0].adventurer ? setView(SHOW) : setView(CREATE);
+      })
+      .catch(error => console.log(error))
   };
 
   const handleLogout = () => {
@@ -177,20 +212,40 @@ export default function App() {
       }
       <main>
         {view === LOADING && <Loading />}
-        {view === LOGIN && <LoginForm onLogin={() => handleLogin()} />}
-        {view === CLASSES && <AllClasses classesData={classesData} classesProgressData={classesProgressData} />}
+        {view === LOGIN &&
+          <LoginForm
+            onLogin={() => handleLogin()}
+          />}
+        {view === CLASSES &&
+          <AllClasses
+            classesData={state.classesData}
+            classesProgressData={state.classesProgressData}
+            fetchProgress={fetchProgress}
+            fetchClasses={fetchClasses}
+          />}
         {view === REGISTER && <RegisterForm />}
         {view === CREATE && <CreateQuestForm />}
         {view === SHOW
           && <ClassSelection
-            classesData={classesData}
-            classesProgressData={classesProgressData}
-            questData={userQuests}
-            villagers={villagers}
-            badges={badges}
+            state={state}
+            fetchQuests={fetchQuests}
+            fetchClasses={fetchClasses}
+            fetchProgress={fetchProgress}
+            fetchVillagers={fetchVillagers}
+            fetchBadges={fetchBadges}
           />}
-        {view === PROFILE && <Profile onEdit={() => changeView(EDIT)} userData={userData} badges={badges} />}
-        {view === EDIT && <RegisterForm userData={userData} onProfile={() => changeView(PROFILE)} />}
+        {view === PROFILE &&
+          <Profile
+            onEdit={() => changeView(EDIT)}
+            userData={state.userData}
+            badges={state.badges}
+            fetchBadges={fetchBadges}
+          />}
+        {view === EDIT &&
+          <RegisterForm
+            userData={state.userData}
+            onProfile={() => changeView(PROFILE)}
+          />}
       </main>
     </div>
   );
