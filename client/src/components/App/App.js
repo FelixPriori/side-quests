@@ -10,7 +10,8 @@ import CreateQuestForm from '../CreateQuest/CreateQuestForm';
 import ClassSelection from '../ClassSelection/ClassSelection';
 import Profile from '../Profile/Profile';
 import Loading from '../Loading/Loading';
-
+import ChatWindow from '../ChatWindow/ChatWindow';
+import ChatMessage from '../ChatMessage/ChatMessage';
 
 import openSocket from "socket.io-client";
 
@@ -24,6 +25,7 @@ const SHOW = 'SHOW';
 const PROFILE = 'PROFILE';
 const EDIT = 'EDIT';
 const LOADING = 'LOADING';
+const CHAT = 'CHAT';
 
 export default function App() {
   const [view, setView] = useState(LOGIN);
@@ -35,7 +37,10 @@ export default function App() {
     userQuests: [],
     villagers: [],
     badges: [],
-    userBadges: []
+    userBadges: [],
+    socket: [],
+    chatMessages: [],
+    knownUsers: {}
   });
 
   function isEmpty(obj) {
@@ -47,17 +52,6 @@ export default function App() {
   const [username, setUsername] = useState(!isEmpty(state.userData) ? state.userData.first_name : "");
 
   useEffect(() => {
-
-    //Socket.io
-    let socket = openSocket('localhost:8081');
-    socket.on('connect', function () {
-      console.log('connected!');
-      socket.emit('greet', { message: 'Hello Mr.Server!' });
-      socket.on('greet', msg => {
-        console.log("MSG IS BACK");
-        console.log(msg);
-      })
-    });
 
     axios
       .get('/checkSession')
@@ -84,6 +78,58 @@ export default function App() {
       })
       .catch(error => console.log(error))
   }, []);
+
+
+  //Socket.io
+  const addNewMessage = function (msgObj) {
+    setState(prevState => {
+      return {
+        ...prevState,
+        chatMessages: [...prevState.chatMessages,
+        {
+          message: msgObj.msg,
+          userData: prevState.knownUsers[msgObj.userId]
+
+        }]
+      }
+    });
+  };
+
+  const newUserCheck = function (msgObj) {
+    if (state.knownUsers[msgObj.userId]) {
+      addNewMessage(msgObj);
+    } else {
+      axios.get(`/users/${msgObj.userId}`).then(results => {
+
+        setState(prevState => {
+          return {
+            ...prevState,
+            knownUsers: { ...prevState.knownUsers, [msgObj.userId]: results.data[0] }
+          }
+        });
+        addNewMessage(msgObj)
+      })
+    }
+  }
+
+  const openNewSocket = () => {
+    let socket = openSocket('localhost:8081');
+
+    socket.on('connect', function () {
+      console.log('connected!');
+
+      socket.on('chat message', (msgObj) => {
+        newUserCheck(msgObj);
+      });
+      setState(prevState => {
+        return {
+          ...prevState,
+          socket: socket
+        };
+      });
+    });
+  }
+
 
   const changeView = (viewType) => {
     setView(LOADING)
@@ -215,9 +261,7 @@ export default function App() {
       .catch(error => console.log(error))
   };
 
-  const chatSubmit = () => {
 
-  }
 
 
   return (
@@ -233,6 +277,7 @@ export default function App() {
           onRegister={() => changeView(REGISTER)}
           onProgress={() => changeView(CLASSES)}
           onProfile={() => changeView(PROFILE)}
+          onChat={() => changeView(CHAT)}
         />
         : <Navbar
           onLogin={() => changeView(LOGIN)}
@@ -273,6 +318,13 @@ export default function App() {
           <RegisterForm
             userData={state.userData}
             onProfile={() => changeView(PROFILE)}
+          />}
+        {view === CHAT &&
+          <ChatWindow
+            socket={state.socket}
+            openNewSocket={openNewSocket}
+            messages={state.chatMessages}
+            loggedInUser={state.userData}
           />}
       </main>
     </div>

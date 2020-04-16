@@ -17,10 +17,13 @@ export default function ChatInput(props) {
           value={message}
           data-testid="message-input"
           onChange={event => setMessage(event.target.value)}
-        /><button onClick={event => {
+        />
+        <button onClick={event => {
           event.preventDefault();
-          props.onClick();
-        }} type="submit" class="btn btn-primary">Send</button>
+          props.onSubmit(message);
+          setMessage("");
+        }}
+          type="submit" className="btn btn-primary">Send</button>
       </form>
     </div>
   )

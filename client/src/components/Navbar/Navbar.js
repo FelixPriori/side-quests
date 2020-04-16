@@ -9,7 +9,7 @@ function LoginMenu(props) {
     <span className="nav-items">
       <Dropdown>
         <Dropdown.Toggle id="dropdown-basic">
-          <List/>
+          <List />
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
@@ -27,22 +27,23 @@ function UserMenu(props) {
       <h3>Welcome, {props.user}</h3>
       <Dropdown>
         <Dropdown.Toggle id="dropdown-basic">
-          <List/>
+          <List />
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          { props.adventurer
+          {props.adventurer
             ? <span className="button-group">
-                <Dropdown.Item navbar onClick={props.onQuests}>Quests</Dropdown.Item>
-                <Dropdown.Item navbar onClick={props.onProgress}>Progress</Dropdown.Item>
-                <Dropdown.Item navbar onClick={props.onProfile}>Profile</Dropdown.Item>
-              </span>
+              <Dropdown.Item navbar onClick={props.onQuests}>Quests</Dropdown.Item>
+              <Dropdown.Item navbar onClick={props.onProgress}>Progress</Dropdown.Item>
+              <Dropdown.Item navbar onClick={props.onProfile}>Profile</Dropdown.Item>
+              <Dropdown.Item navbar onClick={props.onChat}>Chat</Dropdown.Item>
+            </span>
             : <span className="button-group">
-                <Dropdown.Item navbar onClick={props.onCreate}>Create Quest</Dropdown.Item>
-                <Dropdown.Item navbar onClick={props.onProfile}>Profile</Dropdown.Item>
-              </span>
+              <Dropdown.Item navbar onClick={props.onCreate}>Create Quest</Dropdown.Item>
+              <Dropdown.Item navbar onClick={props.onProfile}>Profile</Dropdown.Item>
+            </span>
           }
-        <Dropdown.Item navbar onClick={props.onLogout}>Logout</Dropdown.Item>
+          <Dropdown.Item navbar onClick={props.onLogout}>Logout</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     </span>
@@ -52,8 +53,8 @@ function UserMenu(props) {
 export default function Navbar(props) {
   return (
     <header className="nav-container">
-      <Logo/>
-      { props.user 
+      <Logo />
+      {props.user
         ? <UserMenu {...props} />
         : <LoginMenu {...props} />
       }
