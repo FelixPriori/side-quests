@@ -29,7 +29,8 @@ export default function App() {
     userData: {},
     userQuests: [],
     villagers: [],
-    badges: []
+    badges: [],
+    userBadges: []
   });
 
   function isEmpty(obj) {
@@ -73,6 +74,21 @@ export default function App() {
       setView(viewType)
     }, 500)
   };
+
+
+  const fetchUserBadges = () => {
+    return axios
+      .get(`/users/${state.userData.id}/badges`)
+      .then(response => {
+        setState(prevState => {
+          return {
+            ...prevState,
+            userBadges: response.data
+          };
+        });
+      })
+      .catch(error => console.log(error))
+  }
 
   const fetchQuests = () => {
     return axios
