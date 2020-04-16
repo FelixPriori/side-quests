@@ -5,7 +5,10 @@ import './Badge.scss';
 export default function Badge(props) {
   return (
     <div className="badge">
-      <img className="badgeImg" src={`/images/badges/${props.classId}.png`} />
+      {props.locked 
+      ? <img className="badgeImg locked" alt={props.classId} src={`/images/badges/${props.classId}.png`} />
+      : <img className="badgeImg" alt={props.classId} src={`/images/badges/${props.classId}.png`} />
+    }
     </div>
   )
 }

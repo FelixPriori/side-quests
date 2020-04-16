@@ -57,7 +57,7 @@ export default function ClassSelection(props) {
           {classItem && 
             <div>
               <div className="content">
-                <img src={classItem.avatar}/>
+                <img alt="avatar" src={classItem.avatar}/>
                 <span>
                   <h3>{classItem.name}</h3>
                   <p>{classItem.description}</p>

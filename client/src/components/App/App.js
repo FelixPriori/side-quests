@@ -45,7 +45,6 @@ export default function App() {
     axios
       .get('/checkSession')
       .then(response => {
-        console.log(response.data)
         if (!isEmpty(response.data[0])) {
           setSessions(response.data[0].id);
           setAdventurer(response.data[0].adventurer);
@@ -245,7 +244,8 @@ export default function App() {
           <Profile 
             onEdit={() => changeView(EDIT)} 
             fetchBadges={fetchBadges}
-            state={state} 
+            fetchUserBadges={fetchUserBadges}
+            state={state}
           />}
         {view === EDIT && 
           <RegisterForm 

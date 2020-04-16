@@ -4,15 +4,24 @@ import Button from '../Button/Button';
 import BadgeBox from '../BadgeBox/BadgeBox';
 
 export default function Profile(props) {
-  const { fetchBadges } = props;
+  const { fetchBadges, fetchUserBadges } = props;
   
   useEffect(() => {
     fetchBadges();
+    fetchUserBadges();
   }, []);
 
   const { username, first_name, last_name, email, avatar, adventurer } = props.state.userData;
-  const { badges } = props;
+  const { userBadges, badges } = props.state;
 
+  // TODO: FINISH THIS!!
+  const lockedBadges = badges && badges.filter(badge => {
+    const aquired = userBadges.find(userBadge => userBadge.id === badge.id)
+    if (!aquired) {
+      return true;
+    }
+    return false;
+  });
 
   return (
     <section className='profile'>
@@ -50,7 +59,7 @@ export default function Profile(props) {
           { adventurer &&
             <tr>
               <td className="start">Badges</td>  
-              <td> {<BadgeBox badges={badges}/>} </td> 
+              <td> {<BadgeBox badges={userBadges} lockedBadges={lockedBadges}/>} </td> 
             </tr>
           }
         </tbody>
