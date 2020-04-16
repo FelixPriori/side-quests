@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import './Profile.scss';
 import Button from '../Button/Button';
 import BadgeBox from '../BadgeBox/BadgeBox';
-const { checkLocked } = require('../../helpers/badgeHelpers');
 
 export default function Profile(props) {
   const { fetchBadges, fetchUserBadges } = props;
@@ -13,9 +12,7 @@ export default function Profile(props) {
   }, []);
 
   const { username, first_name, last_name, email, avatar, adventurer } = props.state.userData;
-  const { userBadges, badges } = props.state;
-
-  const lockedBadges = checkLocked(badges, userBadges);
+  const { userBadges } = props.state;
 
   return (
     <section className='profile'>
@@ -53,7 +50,7 @@ export default function Profile(props) {
           { adventurer &&
             <tr>
               <td className="start">Badges</td>  
-              <td> {<BadgeBox badges={userBadges} lockedBadges={lockedBadges}/>} </td> 
+              <td> {<BadgeBox badges={userBadges}/>} </td> 
             </tr>
           }
         </tbody>
