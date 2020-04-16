@@ -6,12 +6,12 @@ import Button from '../Button/Button';
 export default function RegisterForm(props) {
 
   const edit = props.userData ? true : false;
-  const [accountType, setAccountType] = useState(props.userData ? props.userData[0].accountType : "");
-  const [firstName, setFirstName] = useState(props.userData ? props.userData[0].first_name : "");
-  const [lastName, setLastName] = useState(props.userData ? props.userData[0].last_name : "");
-  const [username, setUsername] = useState(props.userData ? props.userData[0].username : "");
-  const [email, setEmail] = useState(props.userData ? props.userData[0].email : "");
-  const [avatar, setAvatar] = useState(props.userData ? props.userData[0].avatar : "");
+  const [accountType, setAccountType] = useState(props.userData ? props.userData.adventurer : "");
+  const [firstName, setFirstName] = useState(props.userData ? props.userData.first_name : "");
+  const [lastName, setLastName] = useState(props.userData ? props.userData.last_name : "");
+  const [username, setUsername] = useState(props.userData ? props.userData.username : "");
+  const [email, setEmail] = useState(props.userData ? props.userData.email : "");
+  const [avatar, setAvatar] = useState(props.userData ? props.userData.avatar : "");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -21,12 +21,20 @@ export default function RegisterForm(props) {
     axios.post(`/register`, data);
   }
 
+
+  //if props.edit then use this for the onclick instead
+  function handleEditSubmit() {
+    //got here
+    const data = { email, password, confirmPassword, firstName, lastName, username, accountType, avatar };
+    axios.post('/users/edit', data);
+  }
+
   return (
     <section className="register">
       {
-        edit 
-        ? <h3>Edit Profile</h3>
-        : <h3>Register</h3>
+        edit
+          ? <h3>Edit Profile</h3>
+          : <h3>Register</h3>
       }
       <form onSubmit={(event => event.preventDefault())} autoComplete="off">
         <select onChange={event => setAccountType(event.currentTarget.value)} className="browser-default custom-select">
@@ -91,11 +99,12 @@ export default function RegisterForm(props) {
         />
       </form>
       <section className="register__actions">
-        {edit 
+
+        {!props.edit
           ? <section>
-              <Button onClick={props.onProfile} danger>Cancel</Button>
-              <Button confirm>Update</Button>
-            </section>
+            <Button onClick={props.onProfile} danger>Cancel</Button>
+            <Button onClick={() => handleEditSubmit()} confirm>Update</Button>
+          </section>
           : <Button onClick={() => handleSubmit()} confirm>Create</Button>
         }
       </section>

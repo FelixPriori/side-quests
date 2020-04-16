@@ -17,8 +17,6 @@ module.exports = () => {
   //Information for front page
 
   router.get("/checkSession", (req, res) => {
-    console.log(req.session);
-    console.log(req.session.userId);
     if (req.session.userId) {
       checkUserLogin(req.session.userId).then(result => {
         res.json(result);
@@ -35,6 +33,7 @@ module.exports = () => {
       res.json(result);
     })
   });
+
 
   router.get("/userQuests", (req, res) => {
     checkUserQuests(req.session.userId).then(result => {
@@ -74,8 +73,10 @@ module.exports = () => {
   });
 
   //Can't know the ID before it is created change this
-  router.post("/quests/:id/new", (req, res) => {
-    createNewQuest(req.params.id).then(result => res.send(result));
+  router.post("/quests/new", (req, res) => {
+    const { questType, name, description } = req.body;
+
+    createNewQuest(name, description, false, 0, 0, questType, req.session.userId).then();
   });
 
   router.delete("/quests/:id/delete", (req, res) => {

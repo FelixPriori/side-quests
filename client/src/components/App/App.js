@@ -11,7 +11,6 @@ import ClassSelection from '../ClassSelection/ClassSelection';
 import Profile from '../Profile/Profile';
 import Loading from '../Loading/Loading';
 import ChatWindow from '../ChatWindow/ChatWindow';
-import ChatMessage from '../ChatMessage/ChatMessage';
 
 import openSocket from "socket.io-client";
 
@@ -330,6 +329,7 @@ export default function App() {
             fetchBadges={fetchBadges}
             fetchUserBadges={fetchUserBadges}
             state={state}
+            edit={true}
           />}
         {view === EDIT &&
           <RegisterForm

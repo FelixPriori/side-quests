@@ -41,6 +41,7 @@ app.use(session({
 const registerRoutes = require("./routes/register");
 const loginRoutes = require("./routes/login");
 const apiRoutes = require("./routes/api");
+const editProfileRoutes = require("./routes/editProfile");
 
 // io.set('origins', 'http://localhost:8081');
 
@@ -49,6 +50,7 @@ const apiRoutes = require("./routes/api");
 app.use("/", registerRoutes());
 app.use("/", loginRoutes());
 app.use("/", apiRoutes());
+app.use("/", editProfileRoutes());
 // Note: mount other resources here, using the same pattern above
 
 

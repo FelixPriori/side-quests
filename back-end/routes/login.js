@@ -26,7 +26,6 @@ module.exports = () => {
             console.log("Login Successful");
             req.session.userId = user.id;
             req.session.save();
-            console.log(req.session);
             res.send();
           } else {
             res.status(401).send("Error: Account does not exist.");
@@ -44,9 +43,3 @@ module.exports = () => {
 
   return router;
 };
-
-
-async function funcName(jlkdjgd) {
-
-  const user = await correctPassword();
-}

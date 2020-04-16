@@ -191,12 +191,13 @@ const createNewQuest = function (
   completed,
   latitude,
   longitude,
-  class_id
+  class_id,
+  villager_id
 ) {
   const queryStr = `
-  INSERT INTO quests (name, description, completed, latitude, longitude, class_id)
+  INSERT INTO quests (name, description, completed, latitude, longitude, class_id, villager_id)
   VALUES
-    ($1, $2, $3, $4, $5, $6);
+    ($1, $2, $3, $4, $5, $6, $7);
   `
   return db
     .query(queryStr, [
@@ -205,7 +206,8 @@ const createNewQuest = function (
       completed,
       latitude,
       longitude,
-      class_id
+      class_id,
+      villager_id
     ])
     .then()
 }

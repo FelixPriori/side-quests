@@ -37,8 +37,6 @@ export default function ChatWindow(props) {
   return (
     <div className="chatWindow">
       <div className="chatOutput">
-        <ChatMessage currentUser={true} userData={userData} message={"Howdy partner"} />
-        <ChatMessage currentUser={false} userData={userData} message={"Oh hey!"} />
         {props.messages.map((message, index) => {
           console.log(props.loggedInUser);
           console.log(message.userData);
