@@ -29,23 +29,17 @@ export default function QuestList(props) {
     const villagerName = Object.keys(quest)[0]
     return (
       <QuestListItem
-<<<<<<< HEAD
-        key={index}
-        userQuests={quest[villagerName]}
-        villager={villagerName}
-=======
         newUserCheck={props.newUserCheck}
         openNewSocket={props.openNewSocket}
         addNewMessage={props.addNewMessage}
         chatMessages={props.chatMessages}
         socket={props.socket}
         knownUsers={props.knownUsers}
-        key={index} 
-        userQuests={quest[villargerName]} 
+        key={index}
+        userQuests={quest[villargerName]}
         villager={villargerName}
         onOpen={props.onOpen}
         userData={props.userData}
->>>>>>> 963c2327b7a1185f4bfd1b58b4d0f5899437a7a0
       />
     )
   })

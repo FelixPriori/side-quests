@@ -3,25 +3,9 @@ import './QuestListItem.scss';
 import Button from '../Button/Button';
 import ChatWindow from '../ChatWindow/ChatWindow';
 import { ChatDotsFill } from 'react-bootstrap-icons';
-<<<<<<< HEAD
-
-=======
-/* 
-  {
-    id: 1,
-    name: 'Hungry for some soup!',
-    description: 'I am at home and feeling very sick. Can someone bring me some some soup please?',
-    completed: false,
-    latitude: 330,
-    longitude: 123,
-    class_id: 1,
-    villager_id: 1
-  }
-*/
->>>>>>> 963c2327b7a1185f4bfd1b58b4d0f5899437a7a0
 
 export default function QuestListItem(props) {
-  const [ viewChat, setViewChat ] = useState(false);
+  const [viewChat, setViewChat] = useState(false);
   const { name, description } = props.userQuests;
   const toggleChat = () => {
     if (viewChat) {
@@ -40,14 +24,10 @@ export default function QuestListItem(props) {
       <p>{description}</p>
       <footer className="quest-footer">
         <Button confirm>Accept Quest</Button>
-<<<<<<< HEAD
-        <Button confirm><ChatDotsFill /></Button>
-=======
-        <Button confirm onClick={() => toggleChat()}><ChatDotsFill/></Button>
->>>>>>> 963c2327b7a1185f4bfd1b58b4d0f5899437a7a0
+        <Button confirm onClick={() => toggleChat()}><ChatDotsFill /></Button>
       </footer>
-      { viewChat && 
-        <ChatWindow 
+      {viewChat &&
+        <ChatWindow
           onClose={() => toggleChat(false)}
           newUserCheck={newUserCheck}
           openNewSocket={openNewSocket}
@@ -56,7 +36,7 @@ export default function QuestListItem(props) {
           chatMessages={chatMessages}
           knownUsers={knownUsers}
           userData={userData}
-        /> }
+        />}
     </div>
   )
 }
