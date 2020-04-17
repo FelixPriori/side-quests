@@ -14,12 +14,14 @@ export default function RegisterForm(props) {
   const [avatar, setAvatar] = useState(props.userData ? props.userData.avatar : "");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState(null);
 
   //Possibly implement axios over fetch?
   function handleSubmit() {
-    const data = { email, password, confirmPassword, firstName, lastName, username, accountType };
+    const data = { email, password, confirmPassword, firstName, lastName, username, accountType, avatar };
     axios.post(`/register`, data)
-      .then(() => props.onProfile('PROFILE'));
+      .then(() => props.onLogin())
+      .catch(e => setError(e));
   }
 
 
@@ -101,7 +103,7 @@ export default function RegisterForm(props) {
       </form>
       <section className="register__actions">
 
-        {!props.edit
+        {edit
           ? <section>
             <Button onClick={props.onProfile} danger>Cancel</Button>
             <Button onClick={() => handleEditSubmit()} confirm>Update</Button>

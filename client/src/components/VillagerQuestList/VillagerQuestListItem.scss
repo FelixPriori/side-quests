@@ -1,5 +1,14 @@
 @import '../../styles/palette.scss';
 
+.completed {
+  opacity: 25%;
+}
+
+.checkmark {
+  color: green;
+  opacity: 100%;
+}
+
 .quest-list-items {
   display: flex;
   flex-flow: wrap;

@@ -1,4 +1,4 @@
-INSERT INTO class_progress (class_id, adventurer_id, level, experience, quest_count)
+INSERT INTO class_progress (class_id, adventurer_id, level, experience_points, quest_count)
 VALUES
   (1, 1, 3, 300, 18),
   (2, 1, 3, 200, 5),
@@ -6,4 +6,10 @@ VALUES
   (4, 1, 2, 100, 3),
   (5, 1, 3, 300, 3),
   (6, 1, 3, 300, 3),
-  (7, 1, 4, 300, 3);
+  (7, 1, 4, 300, 3),
+  (1, 3, 4, 300, 3),
+  (2, 3, 4, 300, 3),
+  (3, 3, 4, 300, 3),
+  (4, 3, 4, 300, 3),
+  (5, 3, 4, 300, 3),
+  (6, 3, 4, 300, 3);

@@ -32,13 +32,39 @@ const checkIfUserExists = function (email) {
   })
 }
 
+const getUserByUsername = function (username) {
+  const queryStr = `
+  SELECT * 
+  FROM users
+  WHERE username = $1
+  `
+  return db.query(queryStr, [username]).then(res => res.rows[0]);
+}
+
+const classProgressForNewUser = function (userId) {
+  const queryStr = `
+  INSERT INTO class_progress (class_id, adventurer_id, level, experience_points, quest_count)
+  VALUES
+  (1, $1, 0, 0, 0),
+  (2, $1, 0, 0, 0),
+  (3, $1, 0, 0, 0),
+  (4, $1, 0, 0, 0),
+  (5, $1, 0, 0, 0),
+  (6, $1, 0, 0, 0),
+  (7, $1, 0, 0, 0)
+  `
+  return db.query(queryStr, [userId]).then();
+}
+
+
 const addUser = function (
   username,
   first_name,
   last_name,
   email,
   password,
-  adventurer
+  adventurer,
+  avatar
 ) {
   const queryStr = `
   INSERT INTO users (username, first_name, last_name, email, password, avatar, adventurer)
@@ -47,7 +73,6 @@ const addUser = function (
     $1, $2, $3, $4, $5, $6, $7
   );
   `
-  const avatar = null;
 
   return db
     .query(queryStr, [
@@ -245,9 +270,10 @@ const getQuestsByVillager = function (villagerId) {
 const increaseClassLevel = function (userId, classId, amount) {
   const queryStr = `
   UPDATE class_progress
-  SET quest_count = quest_count + $1
+  SET level = level + $1
   WHERE adventurer_id = $2 AND class_id = $3;
   `
+
   return db.query(queryStr, [amount, userId, classId]).then()
 }
 
@@ -279,9 +305,9 @@ const getAllBadgesForClass = function (classId) {
 }
 
 const getUserBadgesByClass = function (userId, classId) {
-  const classBadges = []
 
-  getUserBadges(userId).then(userBadges => {
+  return getUserBadges(userId).then(userBadges => {
+    const classBadges = [];
     for (let i = 0; i < userBadges; i++) {
       if (userBadges[i].class_id === classId) {
         classBadges.push(userBadges[i])
@@ -292,18 +318,22 @@ const getUserBadgesByClass = function (userId, classId) {
 }
 
 const unassignedBadgesForClass = function (userId, classId) {
-  getAllBadgesForClass(classId).then(badges => {
-    getUserBadgesByClass(userId, classId).then(userBadges => {
-      for (let i = 0; i < badges.length; i++) {
-        for (let y = 0; y < userBadges.length; y++) {
-          if ((badges[i].id = userBadges[y].badge_id)) {
-            badges.splice(i, 1)
+  return getAllBadgesForClass(classId)
+    .then(badges => {
+      return getUserBadgesByClass(userId, classId)
+        .then(userBadges => {
+          for (let i = 0; i < badges.length; i++) {
+            for (let y = 0; y < userBadges.length; y++) {
+              if ((badges[i].id = userBadges[y].badge_id)) {
+                badges.splice(i, 1)
+              }
+            }
           }
-        }
-      }
-      return badges
+          return badges;
+        })
+      // .then(result => console.log("BADGES:", result));
+
     })
-  })
 }
 
 const giveUserBadge = function (userId, badgeId) {
@@ -312,23 +342,23 @@ const giveUserBadge = function (userId, badgeId) {
   VALUES
   ($1, $2);
   `
-  return db.query(queryStr, [userId, badgeId]).then()
+  return db.query(queryStr, [userId, badgeId]).then();
 }
 
 const badgeForQuestsCheck = function (userId, classId) {
   unassignedBadgesForClass(userId, classId).then(unassignedBadges => {
     getClassProgress(userId, classId).then(classProgress => {
-      const questBadges = []
+      const questBadges = [];
 
       for (let i = 0; i < unassignedBadges.length; i++) {
         if (unassignedBadges[i].criteria_type === 'quest') {
-          questBadges.push(unassignedBadges[i])
+          questBadges.push(unassignedBadges[i]);
         }
       }
       for (let i = 0; i < questBadges; i++) {
         if (questBadges[i].int_requirement <= classProgress.quest_count) {
           //Award the badge!
-          giveUserBadge(userId, questBadges[i].id).then()
+          giveUserBadge(userId, questBadges[i].id).then();
         }
       }
     })
@@ -338,8 +368,7 @@ const badgeForQuestsCheck = function (userId, classId) {
 const badgeForLevelsCheck = function (userId, classId) {
   unassignedBadgesForClass(userId, classId).then(unassignedBadges => {
     getClassProgress(userId, classId).then(classProgress => {
-      const questBadges = []
-
+      const questBadges = [];
       for (let i = 0; i < unassignedBadges.length; i++) {
         if (unassignedBadges[i].criteria_type === 'level') {
           questBadges.push(unassignedBadges[i])
@@ -365,6 +394,8 @@ const badgeCheck = function (userId, classId) {
 }
 
 const levelUpCheck = function (userId, experiencePoints, classId) {
+  //userId is the currently the villager and not the adventurer which it should be
+  console.log(arguments);
   const queryStr = `
   SELECT *
   FROM class_progress
@@ -378,32 +409,33 @@ const levelUpCheck = function (userId, experiencePoints, classId) {
       const extraPoints =
         res.rows[0].experience_points +
         experiencePoints -
-        res.rows[0].level * 100
+        (res.rows[0].level + 1) * 100
       increaseClassLevel(userId, classId, 1).then(() => {
         setExperiencePoints(userId, classId, extraPoints).then(() => {
+
           //CHECK FOR BADGES
-          badgeCheck(userId, classId)
+          badgeCheck(userId, classId);
         })
       })
     } else {
       setExperiencePoints(userId, classId, experiencePoints).then(() => {
         //CHECK FOR BADGES
-        badgeCheck(userId, classId)
+        badgeCheck(userId, classId);
       })
     }
   })
 }
 
-const completeQuest = function (questId, userId, class_id) {
+const completeQuest = function (questId, adventurerId, class_id) {
   const queryStr = `
   UPDATE quests
   SET completed = true
   WHERE id = $1;
   `
-
+  //increase quest count
   return db
     .query(queryStr, [questId])
-    .then(res => levelUpCheck(userId, 100, class_id))
+    .then(() => increaseQuestCount(adventurerId, class_id, 1).then(() => levelUpCheck(adventurerId, 100, class_id)));
 }
 
 const acceptQuest = function (questId, userId) {
@@ -446,7 +478,7 @@ const getBadgesByClass = function (classId) {
   return db.query(queryStr, [classId]).then(res => res.rows)
 }
 
-const getQuestsByUser = function (userId) {
+const getQuestsByAdventurer = function (userId) {
   const queryStr = `
     SELECT * 
     FROM quests
@@ -484,7 +516,7 @@ module.exports = {
   acceptQuest,
   getBadgesByUser,
   getBadgesByClass,
-  getQuestsByUser,
+  getQuestsByAdventurer,
   increaseClassLevel,
   setExperiencePoints,
   increaseQuestCount,
@@ -493,5 +525,7 @@ module.exports = {
   getAllUserClassProgress,
   editProfile,
   allVillagers,
-  getQuestsByVillager
+  getQuestsByVillager,
+  classProgressForNewUser,
+  getUserByUsername
 }

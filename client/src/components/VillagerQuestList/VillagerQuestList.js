@@ -1,28 +1,47 @@
 import React, { useEffect } from "react";
 import './VillagerQuestList.scss';
 import VillagerQuestListItem from './VillagerQuestListItem';
+import axios from "axios";
 
 export default function VillagerQuestList(props) {
-
-  //quests should be all the quests that the villager has made
-  //Which is served at the /users/:villagerId/quests route
-
 
   useEffect(() => {
     fetchUserData();
     fetchQuestsByVillager();
   }, [])
 
+
   const { fetchUserData, fetchQuestsByVillager } = props;
+
+  const completeQuest = function (classId, questId, adventurerId) {
+    const data = { adventurerId };
+    axios.post(`/quests/${questId}/completeQuest/${classId}`, data).then(() => {
+      const quests = props.state.questsByVillager.map(quest => {
+        if (quest.id === questId) {
+          quest.completed = true;
+          return quest;
+        } else {
+          return quest;
+        }
+      })
+
+      props.setState(prevState => ({
+        ...prevState,
+        questsByVillager: quests
+      }))
+    });
+  }
+
 
   //All i need to do is map all the quests by a specific villager
   const quests = props.state.questsByVillager && props.state.questsByVillager.map((quest, index) => {
-    console.log(quest);
     return (
       <VillagerQuestListItem
         key={index}
         villagerQuest={quest}
         onEdit={props.onEdit}
+        onComplete={completeQuest}
+        fetchQuestsByVillager={fetchQuestsByVillager}
       />
     )
   })

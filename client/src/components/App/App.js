@@ -339,9 +339,9 @@ export default function App() {
             fetchProgress={fetchProgress}
             fetchClasses={fetchClasses}
           />}
-        {view === REGISTER && <RegisterForm onProfile={() => changeView(PROFILE)} />}
-        {view === CREATE && 
-          <CreateQuestForm 
+        {view === REGISTER && <RegisterForm onLogin={handleLogin} onProfile={() => changeView(PROFILE)} />}
+        {view === CREATE &&
+          <CreateQuestForm
             onCreate={() => changeView(VILLAGER_QUESTS)}
             fetchQuestsByVillager={fetchQuestsByVillager}
             fetchUserData={fetchUserData}
@@ -356,9 +356,11 @@ export default function App() {
             fetchBadges={fetchBadges}
             fetchClassBadges={fetchClassBadges}
             fetchUserBadges={fetchUserBadges}
+            fetchUserData={fetchUserData}
             newUserCheck={newUserCheck}
             openNewSocket={openNewSocket}
             addNewMessage={addNewMessage}
+            setState={setState}
           />}
         {view === PROFILE &&
           <Profile
@@ -374,22 +376,23 @@ export default function App() {
             userData={state.userData}
             onProfile={changeView}
           />}
-      {view === CHAT &&
-        <ChatWindow
-          socket={state.socket}
-          openNewSocket={openNewSocket}
-          messages={state.chatMessages}
-          loggedInUser={state.userData}
-        />}
-      {view === VILLAGER_QUESTS &&
-        <VillagerQuestList 
-          state={state} 
-          fetchQuestsByVillager={fetchQuestsByVillager} 
-          fetchUserData={fetchUserData}
+        {view === CHAT &&
+          <ChatWindow
+            socket={state.socket}
+            openNewSocket={openNewSocket}
+            messages={state.chatMessages}
+            loggedInUser={state.userData}
+          />}
+        {view === VILLAGER_QUESTS &&
+          <VillagerQuestList
+            state={state}
+            setState={setState}
+            fetchQuestsByVillager={fetchQuestsByVillager}
+            fetchUserData={fetchUserData}
           // onEdit={() => changeView(CREATE_EDIT)}
 
-        />}
-      {/* {view === CREATE_EDIT && 
+          />}
+        {/* {view === CREATE_EDIT && 
         <CreateQuestForm 
           state={state}
           fetchQuestsByVillager={fetchQuestsByVillager}
