@@ -22,6 +22,7 @@ export default function VillagerQuestList(props) {
       <VillagerQuestListItem
         key={index}
         villagerQuest={quest}
+        onEdit={props.onEdit}
       />
     )
   })
