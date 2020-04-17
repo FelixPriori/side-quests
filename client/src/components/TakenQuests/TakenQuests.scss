@@ -1,0 +1,8 @@
+@import '../../styles/palette.scss';
+
+h2 {
+  font-family: $title;
+  text-shadow: 1px 1px $shadow1;
+  color: $color1;
+  text-align: center;
+}

@@ -446,7 +446,7 @@ const getBadgesByClass = function (classId) {
   return db.query(queryStr, [classId]).then(res => res.rows)
 }
 
-const getQuestsByUser = function (userId) {
+const getQuestsByAdventurer = function (userId) {
   const queryStr = `
     SELECT * 
     FROM quests
@@ -484,7 +484,7 @@ module.exports = {
   acceptQuest,
   getBadgesByUser,
   getBadgesByClass,
-  getQuestsByUser,
+  getQuestsByAdventurer,
   increaseClassLevel,
   setExperiencePoints,
   increaseQuestCount,

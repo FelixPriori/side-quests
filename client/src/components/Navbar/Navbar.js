@@ -36,6 +36,7 @@ function UserMenu(props) {
               <Dropdown.Item navbar onClick={props.onQuests}>Quests</Dropdown.Item>
               <Dropdown.Item navbar onClick={props.onProgress}>Progress</Dropdown.Item>
               <Dropdown.Item navbar onClick={props.onProfile}>Profile</Dropdown.Item>
+              <Dropdown.Item navbar onClick={props.onTaken}>Current Quests</Dropdown.Item>
             </span>
             : <span className="button-group">
               <Dropdown.Item navbar onClick={props.onCreate}>Create Quest</Dropdown.Item>

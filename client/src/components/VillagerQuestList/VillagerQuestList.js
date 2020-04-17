@@ -17,7 +17,6 @@ export default function VillagerQuestList(props) {
 
   //All i need to do is map all the quests by a specific villager
   const quests = props.state.questsByVillager && props.state.questsByVillager.map((quest, index) => {
-    console.log(quest);
     return (
       <VillagerQuestListItem
         key={index}

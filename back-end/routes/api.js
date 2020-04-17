@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 
 
-const { getQuestsByVillager, allVillagers, getAllUserClassProgress, checkUserQuests, allUsers, getUser, allQuests, getQuest, createNewQuest, deleteQuest, editQuest, completeQuest, getBadgesByUser, allBadges, getBadge, allClasses, getClass, checkUserLogin, getBadgesByClass } = require('../db/helpers');
+const { getQuestsByVillager, allVillagers, getAllUserClassProgress, checkUserQuests, allUsers, getUser, allQuests, getQuest, createNewQuest, deleteQuest, editQuest, completeQuest, getBadgesByUser, allBadges, getBadge, allClasses, getClass, checkUserLogin, getBadgesByClass, getQuestsByAdventurer } = require('../db/helpers');
 
 module.exports = () => {
 
@@ -78,6 +78,12 @@ module.exports = () => {
       res.send(result);
     })
   });
+
+  router.get("/users/adventurer/:adventurerId/quests", (req, res) => {
+    getQuestsByAdventurer(req.params.adventurerId).then(result => {
+      res.send(result);
+    });
+  })
 
 
   //Can't know the ID before it is created change this

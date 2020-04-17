@@ -12,6 +12,7 @@ import Profile from '../Profile/Profile';
 import Loading from '../Loading/Loading';
 import ChatWindow from '../ChatWindow/ChatWindow';
 import VillagerQuestList from '../VillagerQuestList/VillagerQuestList';
+import TakenQuests from '../TakenQuests/TakenQuests';
 
 import openSocket from "socket.io-client";
 
@@ -25,6 +26,7 @@ const EDIT = 'EDIT';
 const LOADING = 'LOADING';
 const CHAT = 'CHAT';
 const VILLAGER_QUESTS = 'VILLAGER_QUESTS';
+const TAKEN = 'TAKEN';
 // const CREATE_EDIT = 'CREATE_EDIT';
 
 export default function App() {
@@ -42,7 +44,8 @@ export default function App() {
     chatMessages: [],
     knownUsers: {},
     classBadges: [],
-    questsByVillager: []
+    questsByVillager: [],
+    questsByAdventurer: []
   });
 
   function isEmpty(obj) {
@@ -106,6 +109,19 @@ export default function App() {
           return {
             ...prevState,
             questsByVillager: response.data
+          }
+        })
+      })
+  }
+
+  const fetchQuestsByAdventurer = () => {
+    axios
+      .get(`/users/adventurer/${state.userData.id}/quests`)
+      .then(response => {
+        setState(prevState => {
+          return {
+            ...prevState,
+            questsByAdventurer: response.data
           }
         })
       })
@@ -320,6 +336,7 @@ export default function App() {
           onProfile={() => changeView(PROFILE)}
           onChat={() => changeView(CHAT)}
           onVillagerQuests={() => changeView(VILLAGER_QUESTS)}
+          onTaken={() => changeView(TAKEN)}
         />
         : <Navbar
           onLogin={() => changeView(LOGIN)}
@@ -397,6 +414,12 @@ export default function App() {
           onConfirm={() => changeView(VILLAGER_QUESTS)}
         />
       } */}
+      { view === TAKEN &&
+        <TakenQuests
+          state={state}
+          fetchQuestsByAdventurer={fetchQuestsByAdventurer}
+        />
+      }
       </main>
     </div >
   );

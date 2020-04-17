@@ -1,0 +1,49 @@
+@import '../../styles/palette.scss';
+
+.current-quest-list {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-around;
+  .quest-item {
+    display: flex;
+    flex-direction: column;
+    border: 0.2em solid $color2;
+    padding: 1em;
+    margin: 1em;
+    background-color: $color4;
+    opacity: 75%;
+    max-width: 45vw;
+    min-width: 400px;
+    .quest-footer {
+      display: flex;
+      align-items: flex-end;
+      .username {
+        margin: auto;
+      }
+      button {
+        margin-left: auto;
+      }
+    }
+    p, h3 {
+      color: $color1;
+    }
+    .quest-item:hover {
+      opacity: 100%;
+    }
+    .btn-group, .btn-group-vertical {
+      display: flex;
+      margin-left: auto;
+    }
+    .alert {
+      margin-top: 1em;
+      display: flex;
+      p {
+        text-justify: center;
+        color: $color4;
+      }
+      button {
+        margin-left: auto;
+      }
+    }
+  }
+}
