@@ -1,9 +1,13 @@
 @import '../../styles/palette.scss';
 
+* {
+  border: 1px solid black;
+}
+
 .quest-list-items {
   display: flex;
   flex-flow: wrap;
-  justify-content: space-around;
+  justify-content: flex-start;
   .quest-item {
     display: flex;
     flex-direction: column;

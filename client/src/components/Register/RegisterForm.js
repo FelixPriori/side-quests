@@ -14,12 +14,14 @@ export default function RegisterForm(props) {
   const [avatar, setAvatar] = useState(props.userData ? props.userData.avatar : "");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState('');
 
   //Possibly implement axios over fetch?
   function handleSubmit() {
     const data = { email, password, confirmPassword, firstName, lastName, username, accountType };
     axios.post(`/register`, data)
-      .then(() => props.onProfile('PROFILE'));
+      .then(() => props.onProfile('PROFILE'))
+      .catch(e => setError(e));
   }
 
 
@@ -28,6 +30,7 @@ export default function RegisterForm(props) {
     const data = { email, password, confirmPassword, firstName, lastName, username, accountType, avatar };
     axios.post('/users/edit', data)
       .then(() => props.onProfile('PROFILE'))
+      .catch(e => setError(e));
   }
 
   return (
@@ -37,6 +40,7 @@ export default function RegisterForm(props) {
           ? <h3>Edit Profile</h3>
           : <h3>Register</h3>
       }
+      {error && <div className="alert alert-danger">{error}</div>}
       <form onSubmit={(event => event.preventDefault())} autoComplete="off">
         <select onChange={event => setAccountType(event.currentTarget.value)} className="browser-default custom-select">
           <option defaultValue>Account Type</option>
