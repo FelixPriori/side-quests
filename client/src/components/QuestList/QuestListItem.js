@@ -3,10 +3,11 @@ import './QuestListItem.scss';
 import Button from '../Button/Button';
 import ChatWindow from '../ChatWindow/ChatWindow';
 import { ChatDotsFill } from 'react-bootstrap-icons';
+import { Check } from 'react-bootstrap-icons';
 
 export default function QuestListItem(props) {
   const [viewChat, setViewChat] = useState(false);
-  const { name, description } = props.userQuests;
+  const { name, description, adventurer_id } = props.userQuests;
   const toggleChat = () => {
     if (viewChat) {
       setViewChat(false)
@@ -15,7 +16,9 @@ export default function QuestListItem(props) {
     }
   };
 
-  const { newUserCheck, openNewSocket, addNewMessage, socket, chatMessages, knownUsers, userData } = props;
+
+  const { newUserCheck, openNewSocket, addNewMessage, socket, chatMessages, knownUsers, userData, onAccept } = props;
+
 
   return (
     <div className="quest-item">
@@ -23,8 +26,11 @@ export default function QuestListItem(props) {
       <p className="username">Villager: {props.villager}</p>
       <p>{description}</p>
       <footer className="quest-footer">
-        <Button confirm>Accept Quest</Button>
-        <Button confirm onClick={() => toggleChat()}><ChatDotsFill /></Button>
+        {adventurer_id
+          ? <div className="checkmark"><Check /></div>
+          : <div className="btn-group"><Button confirm onClick={() => onAccept(props.userQuests.id)}>Accept Quest</Button>
+            <Button confirm onClick={() => toggleChat()}><ChatDotsFill /></Button></div>
+        }
       </footer>
       {viewChat &&
         <ChatWindow

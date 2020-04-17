@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import './ChatMessage.scss';
 
 
@@ -10,11 +10,11 @@ export default function ChatMessage(props) {
 
     props.currentUser ?
       <div className="chatMessage currentUser">
-        <div className="speechBubble">{props.message}</div><img className="userImage rounded-circle" src={avatar} />
+        <div className="speechBubble">{props.message}</div><img alt="ChatterProfile" className="userImage rounded-circle" src={avatar} />
       </div>
       :
       <div className="chatMessage otherUser">
-        <img className="userImage rounded-circle" src={avatar} /><div className="speechBubble">{props.message}</div>
+        <img alt="ChatterProfile" className="userImage rounded-circle" src={avatar} /><div className="speechBubble">{props.message}</div>
       </div>
   )
 }
