@@ -318,11 +318,8 @@ export default function App() {
           onRegister={() => changeView(REGISTER)}
           onProgress={() => changeView(CLASSES)}
           onProfile={() => changeView(PROFILE)}
-<<<<<<< HEAD
           onChat={() => changeView(CHAT)}
           onVillagerQuests={() => changeView(VILLAGER_QUESTS)}
-=======
->>>>>>> 963c2327b7a1185f4bfd1b58b4d0f5899437a7a0
         />
         : <Navbar
           onLogin={() => changeView(LOGIN)}
@@ -372,7 +369,6 @@ export default function App() {
             userData={state.userData}
             onProfile={changeView}
           />}
-<<<<<<< HEAD
       {view === CHAT &&
         <ChatWindow
           socket={state.socket}
@@ -382,8 +378,6 @@ export default function App() {
         />}
       {view === VILLAGER_QUESTS &&
         <VillagerQuestList state={state} fetchQuestsByVillager={fetchQuestsByVillager} fetchUserData={fetchUserData} />}
-=======
->>>>>>> 963c2327b7a1185f4bfd1b58b4d0f5899437a7a0
       </main>
     </div >
   );

@@ -1,37 +1,35 @@
 @import '../../styles/palette.scss';
 
-
-.quest-item {
-
+.quest-list-items {
   display: flex;
-  flex-direction: column;
-  border: 0.2em solid $color2;
-  padding: 1em;
-  margin: 1em;
-  background-color: $color4;
-  opacity: 75%;
-  justify-content: center;
-  align-items: center;
-  max-width: 50em;
-  min-width: 50em ;
-
-
-  p, h3 {
-    color: $color1;
-  }
-}
-
-.quest-item:hover {
-  opacity: 100%;
-}
-
-.quest-footer {
-  display: flex;
-  align-items: flex-end;
-  .username {
-    margin: auto;
-  }
-  button {
-    margin-left: auto;
+  flex-flow: wrap;
+  justify-content: space-around;
+  .quest-item {
+    display: flex;
+    flex-direction: column;
+    border: 0.2em solid $color2;
+    padding: 1em;
+    margin: 1em;
+    background-color: $color4;
+    opacity: 75%;
+    max-width: 45vw;
+    min-width: 400px;
+    .quest-footer {
+      display: flex;
+      align-items: flex-end;
+      .username {
+        margin: auto;
+      }
+      button {
+        margin-left: auto;
+      }
+    }
+    p, h3 {
+      color: $color1;
+    }
+    .quest-item:hover {
+      opacity: 100%;
+    }
+    
   }
 }

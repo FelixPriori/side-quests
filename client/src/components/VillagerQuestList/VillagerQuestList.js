@@ -16,7 +16,7 @@ export default function VillagerQuestList(props) {
   const { fetchUserData, fetchQuestsByVillager } = props;
 
   //All i need to do is map all the quests by a specific villager
-  const quests = props.state.questsByVillager.map((quest, index) => {
+  const quests = props.state.questsByVillager && props.state.questsByVillager.map((quest, index) => {
     console.log(quest);
     return (
       <VillagerQuestListItem
@@ -32,7 +32,7 @@ export default function VillagerQuestList(props) {
         <h2>Your Created Quests</h2>
       </div>
       <div className="quest-list-items">
-        {quests.length
+        {quests
           ? quests
           : <div className="alert alert-danger">You currently do not have any created quests.</div>
         }

@@ -26,7 +26,7 @@ export default function QuestList(props) {
 
   const villagerQuests = villagerForQuest(villagers, validQuests);
   const quests = villagerQuests && villagerQuests.map((quest, index) => {
-    const villagerName = Object.keys(quest)[0]
+  const villagerName = Object.keys(quest)[0];
     return (
       <QuestListItem
         newUserCheck={props.newUserCheck}
@@ -36,8 +36,8 @@ export default function QuestList(props) {
         socket={props.socket}
         knownUsers={props.knownUsers}
         key={index}
-        userQuests={quest[villargerName]}
-        villager={villargerName}
+        userQuests={quest[villagerName]}
+        villager={villagerName}
         onOpen={props.onOpen}
         userData={props.userData}
       />
