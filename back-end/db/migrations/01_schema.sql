@@ -1,10 +1,8 @@
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS quests CASCADE;
 DROP TABLE IF EXISTS badges CASCADE;
-DROP TABLE IF EXISTS achievements CASCADE;
 DROP TABLE IF EXISTS classes CASCADE;
 DROP TABLE IF EXISTS assigned_badges CASCADE;
-DROP TABLE IF EXISTS unlocked_achievements CASCADE;
 DROP TABLE IF EXISTS class_progress CASCADE;
 
 -- UPDATE users
@@ -51,23 +49,12 @@ CREATE TABLE badges (
   class_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
 
-CREATE TABLE achievements (
-  id SERIAL PRIMARY KEY NOT NULL,
-  name VARCHAR(255) NOT NULL,
-  image VARCHAR(255) NOT NULL,
-  requirement VARCHAR(255) NOT NULL
-);
-
 
 CREATE TABLE assigned_badges (
   badge_id INTEGER REFERENCES badges(id) ON DELETE CASCADE,
   adventurer_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
 
-CREATE TABLE unlocked_achievements (
-  achievement_id INTEGER REFERENCES achievements(id) ON DELETE CASCADE,
-  adventurer_id INTEGER REFERENCES users(id) ON DELETE CASCADE
-);
 
 CREATE TABLE class_progress (
   class_id INTEGER REFERENCES classes(id) ON DELETE CASCADE,

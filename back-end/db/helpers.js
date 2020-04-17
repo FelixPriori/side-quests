@@ -115,22 +115,6 @@ const getUser = function (userId) {
   return db.query(queryStr, [userId]).then(res => res.rows)
 }
 
-const allAchievements = function () {
-  const queryStr = `
-  SELECT * 
-  FROM achievements;
-  `
-  return db.query(queryStr, []).then(res => res.rows)
-}
-
-const getAchievement = function (achievementId) {
-  const queryStr = `
-  SELECT * 
-  FROM achievements
-  WHERE id = $1;
-  `
-  return db.query(queryStr, [achievementId]).then(res => res.rows)
-}
 
 const allBadges = function () {
   const queryStr = `
@@ -371,21 +355,13 @@ const badgeForLevelsCheck = function (userId, classId) {
   })
 }
 
-const giveUserAchievement = function (userId, achievementId) {
-  const queryStr = `
-  INSERT INTO unlocked_achievements (adventurer_id, achievement_id)
-  VALUES
-  ($1, $2);
-  `
-  return db.query(queryStr, [userId, achievementId]).then()
-}
 
-const achievementAndBadgeCheck = function (userId, classId) {
+const badgeCheck = function (userId, classId) {
   //Check for badges requiring quests complete
   badgeForQuestsCheck(userId, classId)
   //Check for badges requiring levels
   badgeForLevelsCheck(userId, classId)
-  //IMPLEMENT CHECK FOR ACHIEVEMENTS
+
 }
 
 const levelUpCheck = function (userId, experiencePoints, classId) {
@@ -405,14 +381,14 @@ const levelUpCheck = function (userId, experiencePoints, classId) {
         res.rows[0].level * 100
       increaseClassLevel(userId, classId, 1).then(() => {
         setExperiencePoints(userId, classId, extraPoints).then(() => {
-          //CHECK FOR BADGES AND ACHIEVEMENTS
-          achievementAndBadgeCheck(userId, classId)
+          //CHECK FOR BADGES
+          badgeCheck(userId, classId)
         })
       })
     } else {
       setExperiencePoints(userId, classId, experiencePoints).then(() => {
-        //CHECK FOR BADGES AND ACHIEVEMENTS
-        achievementAndBadgeCheck(userId, classId)
+        //CHECK FOR BADGES
+        badgeCheck(userId, classId)
       })
     }
   })
@@ -461,20 +437,6 @@ const getBadgesByUser = function (userId) {
   return db.query(queryStr, [userId]).then(res => res.rows)
 }
 
-
-
-const getUserAchievements = function (userId) {
-  const queryStr = `
-  SELECT *
-  FROM users
-  JOIN unlocked_achievements on unlocked_achievements.adventurer_id = id
-  JOIN achievements on achievements.id = unlocked_achievements.achievement_id
-  WHERE users.id = $1;
-  `
-
-  return db.query(queryStr, [userId]).then(res => res.rows)
-}
-
 const getBadgesByClass = function (classId) {
   const queryStr = `
     SELECT *
@@ -515,15 +477,12 @@ module.exports = {
   deleteQuest,
   editQuest,
   completeQuest,
-  allAchievements,
-  getAchievement,
   allBadges,
   getBadge,
   allClasses,
   getClass,
   acceptQuest,
   getBadgesByUser,
-  getUserAchievements,
   getBadgesByClass,
   getQuestsByUser,
   increaseClassLevel,
