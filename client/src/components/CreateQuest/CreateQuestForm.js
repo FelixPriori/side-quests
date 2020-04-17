@@ -1,18 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CreateQuestForm.scss';
 import Button from '../Button/Button';
 import axios from 'axios';
 
 export default function CreateQuestForm(props) {
-
   const [questType, setQuestType] = useState(null);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetchUserData();
+    // fetchQuestsByVillager();
+  }, [])
+
+  const { fetchUserData } = props;
 
   function handleSubmit() {
     const data = { questType, name, description, address };
-    axios.post('/quests/new', data);
+    axios.post('/quests/new', data)
+      .then(() => props.onCreate())
+      .catch(e => setError(e.response.data));
   }
 
   const changeQuestType = type => {
@@ -22,10 +31,10 @@ export default function CreateQuestForm(props) {
     setQuestType(type);
   }
 
-
   return (
     <section className="create-quest">
       <h3>Create Quest</h3>
+      {error && <div className="alert alert-danger">{error}</div>}
       <form onSubmit={event => event.preventDefault()} autoComplete="off">
         <select onChange={event => changeQuestType(event.currentTarget.value)} className="browser-default custom-select">
           <option defaultValue>Type of Quest</option>

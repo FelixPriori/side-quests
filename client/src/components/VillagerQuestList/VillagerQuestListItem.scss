@@ -30,6 +30,20 @@
     .quest-item:hover {
       opacity: 100%;
     }
-    
+    .btn-group, .btn-group-vertical {
+      display: flex;
+      margin-left: auto;
+    }
+    .alert {
+      margin-top: 1em;
+      display: flex;
+      p {
+        text-justify: center;
+        color: $color4;
+      }
+      button {
+        margin-left: auto;
+      }
+    }
   }
 }

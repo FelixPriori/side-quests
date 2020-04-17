@@ -25,6 +25,7 @@ const EDIT = 'EDIT';
 const LOADING = 'LOADING';
 const CHAT = 'CHAT';
 const VILLAGER_QUESTS = 'VILLAGER_QUESTS';
+// const CREATE_EDIT = 'CREATE_EDIT';
 
 export default function App() {
   const [view, setView] = useState(LOGIN);
@@ -156,7 +157,6 @@ export default function App() {
       });
     });
   }
-
 
   const changeView = (viewType) => {
     setView(LOADING)
@@ -340,7 +340,12 @@ export default function App() {
             fetchClasses={fetchClasses}
           />}
         {view === REGISTER && <RegisterForm onProfile={() => changeView(PROFILE)} />}
-        {view === CREATE && <CreateQuestForm />}
+        {view === CREATE && 
+          <CreateQuestForm 
+            onCreate={() => changeView(VILLAGER_QUESTS)}
+            fetchQuestsByVillager={fetchQuestsByVillager}
+            fetchUserData={fetchUserData}
+          />}
         {view === SHOW
           && <ClassSelection
             state={state}
@@ -377,7 +382,21 @@ export default function App() {
           loggedInUser={state.userData}
         />}
       {view === VILLAGER_QUESTS &&
-        <VillagerQuestList state={state} fetchQuestsByVillager={fetchQuestsByVillager} fetchUserData={fetchUserData} />}
+        <VillagerQuestList 
+          state={state} 
+          fetchQuestsByVillager={fetchQuestsByVillager} 
+          fetchUserData={fetchUserData}
+          // onEdit={() => changeView(CREATE_EDIT)}
+
+        />}
+      {/* {view === CREATE_EDIT && 
+        <CreateQuestForm 
+          state={state}
+          fetchQuestsByVillager={fetchQuestsByVillager}
+          fetchUserData={fetchUserData}
+          onConfirm={() => changeView(VILLAGER_QUESTS)}
+        />
+      } */}
       </main>
     </div >
   );
