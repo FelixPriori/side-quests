@@ -15,8 +15,6 @@ import VillagerQuestList from '../VillagerQuestList/VillagerQuestList';
 
 import openSocket from "socket.io-client";
 
-const { data } = require('../../__mock__/data.js');
-
 const LOGIN = 'LOGIN';
 const REGISTER = 'REGISTER';
 const CLASSES = 'CLASSES';
@@ -121,7 +119,6 @@ export default function App() {
         {
           message: msgObj.msg,
           userData: prevState.knownUsers[msgObj.userId]
-
         }]
       }
     });
@@ -148,8 +145,6 @@ export default function App() {
     let socket = openSocket('localhost:8081');
 
     socket.on('connect', function () {
-      console.log('connected!');
-
       socket.on('chat message', (msgObj) => {
         newUserCheck(msgObj);
       });
@@ -323,8 +318,11 @@ export default function App() {
           onRegister={() => changeView(REGISTER)}
           onProgress={() => changeView(CLASSES)}
           onProfile={() => changeView(PROFILE)}
+<<<<<<< HEAD
           onChat={() => changeView(CHAT)}
           onVillagerQuests={() => changeView(VILLAGER_QUESTS)}
+=======
+>>>>>>> 963c2327b7a1185f4bfd1b58b4d0f5899437a7a0
         />
         : <Navbar
           onLogin={() => changeView(LOGIN)}
@@ -356,6 +354,9 @@ export default function App() {
             fetchBadges={fetchBadges}
             fetchClassBadges={fetchClassBadges}
             fetchUserBadges={fetchUserBadges}
+            newUserCheck={newUserCheck}
+            openNewSocket={openNewSocket}
+            addNewMessage={addNewMessage}
           />}
         {view === PROFILE &&
           <Profile
@@ -371,16 +372,19 @@ export default function App() {
             userData={state.userData}
             onProfile={changeView}
           />}
-        {view === CHAT &&
-          <ChatWindow
-            socket={state.socket}
-            openNewSocket={openNewSocket}
-            messages={state.chatMessages}
-            loggedInUser={state.userData}
-          />}
-        {view === VILLAGER_QUESTS &&
-          <VillagerQuestList state={state} fetchQuestsByVillager={fetchQuestsByVillager} fetchUserData={fetchUserData} />}
+<<<<<<< HEAD
+      {view === CHAT &&
+        <ChatWindow
+          socket={state.socket}
+          openNewSocket={openNewSocket}
+          messages={state.chatMessages}
+          loggedInUser={state.userData}
+        />}
+      {view === VILLAGER_QUESTS &&
+        <VillagerQuestList state={state} fetchQuestsByVillager={fetchQuestsByVillager} fetchUserData={fetchUserData} />}
+=======
+>>>>>>> 963c2327b7a1185f4bfd1b58b4d0f5899437a7a0
       </main>
-    </div>
+    </div >
   );
 }

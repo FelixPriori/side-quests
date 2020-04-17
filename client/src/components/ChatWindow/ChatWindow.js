@@ -29,25 +29,20 @@ export default function ChatWindow(props) {
 
 
   const chatSubmit = (message) => {
-    socket.emit('chat message', { msg: message, userId: props.loggedInUser.id });
+    socket.emit('chat message', { msg: message, userId: props.userData.id });
   }
 
-  //If message doesn't match loggedInUser.id get that users id and fetch picture from the database
+  //If message doesn't match userData.id get that users id and fetch picture from the database
 
   return (
     <div className="chatWindow">
       <div className="chatOutput">
-        {props.messages.map((message, index) => {
-          console.log(props.loggedInUser);
-          console.log(message.userData);
-          if (props.loggedInUser && message.userData) {
-            const currentUser = props.loggedInUser.id === message.userData.id;
-
+        {props.chatMessages && props.chatMessages.map((message, index) => {
+          if (props.userData && message.userData) {
+            const currentUser = props.userData.id === message.userData.id;
             return <ChatMessage key={index} currentUser={currentUser} userData={[message.userData]} message={message.message} />
-
           }
         })}
-
       </div>
       <ChatInput onSubmit={chatSubmit} />
     </div>

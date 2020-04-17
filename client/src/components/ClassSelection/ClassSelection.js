@@ -19,7 +19,8 @@ export default function ClassSelection(props) {
   }, []);
   
   const { fetchQuests, fetchClasses, fetchProgress, fetchVillagers, fetchBadges, fetchClassBadges, fetchUserBadges } = props;
-    
+  
+
   const changeClass = name => {
     if (name === 'Choose a class') {
       return;
@@ -78,7 +79,19 @@ export default function ClassSelection(props) {
             </div>
           }
       </section>
-      { classItem && <QuestList classItem={classItem} userQuests={props.state.userQuests} villagers={props.state.villagers}/> }
+      { classItem && 
+        <QuestList
+          chatMessages={props.state.chatMessages}
+          socket={props.state.socket}
+          knownUsers={props.state.knownUsers}
+          classItem={classItem} 
+          userQuests={props.state.userQuests} 
+          villagers={props.state.villagers}
+          newUserCheck={props.newUserCheck}
+          openNewSocket={props.openNewSocket}
+          addNewMessage={props.addNewMessage}
+          userData={props.state.userData}
+        /> }
     </section>
   );
 }

@@ -8,7 +8,7 @@ export default function ChatInput(props) {
 
   return (
     <div className="chatInput">
-      <form>
+      <form className="input-form">
         <input
           className="input"
           name="message"

@@ -1,8 +1,10 @@
 
 .chatOutput {
+  margin-top: 1em;
   background-color: whitesmoke;
   display:flex;
   flex-direction: column;
-
+  min-height: 4em;
+  max-height: 15em;
 }
 
