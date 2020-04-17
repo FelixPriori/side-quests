@@ -4,14 +4,6 @@ import Button from '../Button/Button';
 import BadgeBox from '../BadgeBox/BadgeBox';
 
 export default function Profile(props) {
-  const { fetchBadges, fetchUserBadges, fetchUserData } = props;
-
-  useEffect(() => {
-    fetchBadges();
-    fetchUserBadges();
-    fetchUserData();
-
-  }, []);
 
   const { username, first_name, last_name, email, avatar, adventurer } = props.state.userData;
   const { userBadges } = props.state;

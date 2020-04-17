@@ -10,13 +10,6 @@ export default function CreateQuestForm(props) {
   const [address, setAddress] = useState("");
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchUserData();
-    // fetchQuestsByVillager();
-  }, [])
-
-  const { fetchUserData } = props;
-
   function handleSubmit() {
     const data = { questType, name, description, address };
     axios.post('/quests/new', data)

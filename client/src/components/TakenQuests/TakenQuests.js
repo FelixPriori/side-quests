@@ -4,12 +4,6 @@ import TakenQuestItem from './TakenQuestItem';
 
 export default function TakenQuests(props) {
 
-  const {fetchQuestsByAdventurer} = props;
-
-  useEffect(() => {
-    fetchQuestsByAdventurer();
-  });  
-
   const currentQuests = props.state.questsByAdventurer && props.state.questsByAdventurer.map((quest, index) => {
     return (
       <TakenQuestItem

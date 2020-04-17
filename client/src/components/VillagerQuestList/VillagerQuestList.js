@@ -7,14 +7,6 @@ export default function VillagerQuestList(props) {
   //quests should be all the quests that the villager has made
   //Which is served at the /users/:villagerId/quests route
 
-
-  useEffect(() => {
-    fetchUserData();
-    fetchQuestsByVillager();
-  }, [])
-
-  const { fetchUserData, fetchQuestsByVillager } = props;
-
   //All i need to do is map all the quests by a specific villager
   const quests = props.state.questsByVillager && props.state.questsByVillager.map((quest, index) => {
     return (

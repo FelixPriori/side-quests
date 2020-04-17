@@ -8,18 +8,6 @@ const { checkLocked, filterLocked } = require('../../helpers/badgeHelpers');
 export default function ClassSelection(props) {
   const [ classItem, setClassItem ] = useState(null);
   const [ classProgress, setClassProgress ] = useState(null);
-  
-  useEffect(() => {
-    fetchQuests();
-    fetchProgress();
-    fetchBadges();
-    fetchVillagers();
-    fetchClasses();
-    fetchUserBadges();
-  }, []);
-  
-  const { fetchQuests, fetchClasses, fetchProgress, fetchVillagers, fetchBadges, fetchClassBadges, fetchUserBadges } = props;
-  
 
   const changeClass = name => {
     if (name === 'Choose a class') {
@@ -29,7 +17,6 @@ export default function ClassSelection(props) {
     const selectedClassProgress = props.state.classesProgressData.find(classProgress => selectedClass.id === classProgress.class_id)
     setClassItem(selectedClass);
     setClassProgress(selectedClassProgress);
-    fetchClassBadges(selectedClass.id);
   };
 
   const lockedBadges = props.state.classBadges && checkLocked(props.state.classBadges, props.state.userBadges);
