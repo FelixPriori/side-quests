@@ -36,6 +36,8 @@ import QuestListItem from './QuestListItem';
   }
 */
 
+
+
 export default function QuestList(props) {
 
   const { userQuests, classItem, villagers } = props;
@@ -59,10 +61,18 @@ export default function QuestList(props) {
   const quests = villagerQuests && villagerQuests.map((quest, index) => {
     const villargerName = Object.keys(quest)[0]
     return (
-      <QuestListItem 
+      <QuestListItem
+        newUserCheck={props.newUserCheck}
+        openNewSocket={props.openNewSocket}
+        addNewMessage={props.addNewMessage}
+        chatMessages={props.chatMessages}
+        socket={props.socket}
+        knownUsers={props.knownUsers}
         key={index} 
         userQuests={quest[villargerName]} 
         villager={villargerName}
+        onOpen={props.onOpen}
+        userData={props.userData}
       />
     )
   })

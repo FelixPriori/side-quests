@@ -13,6 +13,7 @@
 
   p, h3 {
     color: $color1;
+    text-align: left;
   }
   button {
     align-self: flex-end;
@@ -25,11 +26,8 @@
 
 .quest-footer {
   display: flex;
-  align-items: flex-end;
-  .username {
-    margin: auto;
-  }
+  margin-left: auto;
   button {
-    margin-left: auto;
+    margin: 0.5em;
   }
 }

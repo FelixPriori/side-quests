@@ -10,12 +10,8 @@ import CreateQuestForm from '../CreateQuest/CreateQuestForm';
 import ClassSelection from '../ClassSelection/ClassSelection';
 import Profile from '../Profile/Profile';
 import Loading from '../Loading/Loading';
-import ChatWindow from '../ChatWindow/ChatWindow';
-import ChatMessage from '../ChatMessage/ChatMessage';
 
 import openSocket from "socket.io-client";
-
-const { data } = require('../../__mock__/data.js');
 
 const LOGIN = 'LOGIN';
 const REGISTER = 'REGISTER';
@@ -89,7 +85,6 @@ export default function App() {
         {
           message: msgObj.msg,
           userData: prevState.knownUsers[msgObj.userId]
-
         }]
       }
     });
@@ -116,8 +111,6 @@ export default function App() {
     let socket = openSocket('localhost:8081');
 
     socket.on('connect', function () {
-      console.log('connected!');
-
       socket.on('chat message', (msgObj) => {
         newUserCheck(msgObj);
       });
@@ -291,7 +284,6 @@ export default function App() {
           onRegister={() => changeView(REGISTER)}
           onProgress={() => changeView(CLASSES)}
           onProfile={() => changeView(PROFILE)}
-          onChat={() => changeView(CHAT)}
         />
         : <Navbar
           onLogin={() => changeView(LOGIN)}
@@ -323,6 +315,9 @@ export default function App() {
             fetchBadges={fetchBadges}
             fetchClassBadges={fetchClassBadges}
             fetchUserBadges={fetchUserBadges}
+            newUserCheck={newUserCheck}
+            openNewSocket={openNewSocket}
+            addNewMessage={addNewMessage}
           />}
         {view === PROFILE &&
           <Profile
@@ -335,13 +330,6 @@ export default function App() {
           <RegisterForm
             userData={state.userData}
             onProfile={() => changeView(PROFILE)}
-          />}
-        {view === CHAT &&
-          <ChatWindow
-            socket={state.socket}
-            openNewSocket={openNewSocket}
-            messages={state.chatMessages}
-            loggedInUser={state.userData}
           />}
       </main>
     </div>

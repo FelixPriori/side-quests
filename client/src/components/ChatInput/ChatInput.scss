@@ -1,17 +1,21 @@
+@import '../../styles/palette.scss';
+
 .chatInput {
-  background-color: lightseagreen;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.input {
-  width: 40rem;
-  border-radius: 25px;
-  padding-left: 1em;
-}
-
-button {
-  margin-left: 1em;
+  background-color: $color3;
+  .input-form {
+    display: flex;
+    .input {
+      margin: 0.2em;
+      border-radius: 25px;
+      padding-left: 1em;
+      height: auto;
+      flex-grow: 20;
+      overflow:auto;
+    }
+    button {
+      margin:0.2em;
+      flex-grow: 1;
+      align-self: center;
+    }
+  }
 }
