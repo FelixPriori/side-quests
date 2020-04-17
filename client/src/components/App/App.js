@@ -11,6 +11,7 @@ import ClassSelection from '../ClassSelection/ClassSelection';
 import Profile from '../Profile/Profile';
 import Loading from '../Loading/Loading';
 import ChatWindow from '../ChatWindow/ChatWindow';
+import VillagerQuestList from '../VillagerQuestList/VillagerQuestList';
 
 import openSocket from "socket.io-client";
 
@@ -25,6 +26,7 @@ const PROFILE = 'PROFILE';
 const EDIT = 'EDIT';
 const LOADING = 'LOADING';
 const CHAT = 'CHAT';
+const VILLAGER_QUESTS = 'VILLAGER_QUESTS';
 
 export default function App() {
   const [view, setView] = useState(LOGIN);
@@ -40,7 +42,8 @@ export default function App() {
     socket: [],
     chatMessages: [],
     knownUsers: {},
-    classBadges: []
+    classBadges: [],
+    questsByVillager: []
   });
 
   function isEmpty(obj) {
@@ -94,6 +97,19 @@ export default function App() {
         });
       })
       .catch(e => console.log(e))
+  }
+
+  const fetchQuestsByVillager = () => {
+    axios
+      .get(`/users/${state.userData.id}/quests`)
+      .then(response => {
+        setState(prevState => {
+          return {
+            ...prevState,
+            questsByVillager: response.data
+          }
+        })
+      })
   }
 
   //Socket.io
@@ -308,6 +324,7 @@ export default function App() {
           onProgress={() => changeView(CLASSES)}
           onProfile={() => changeView(PROFILE)}
           onChat={() => changeView(CHAT)}
+          onVillagerQuests={() => changeView(VILLAGER_QUESTS)}
         />
         : <Navbar
           onLogin={() => changeView(LOGIN)}
@@ -361,6 +378,8 @@ export default function App() {
             messages={state.chatMessages}
             loggedInUser={state.userData}
           />}
+        {view === VILLAGER_QUESTS &&
+          <VillagerQuestList state={state} fetchQuestsByVillager={fetchQuestsByVillager} fetchUserData={fetchUserData} />}
       </main>
     </div>
   );

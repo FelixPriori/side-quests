@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 
 
-const { allVillagers, getAllUserClassProgress, checkUserQuests, allUsers, getUser, allQuests, getQuest, createNewQuest, deleteQuest, editQuest, completeQuest, getBadgesByUser, allAchievements, getAchievement, allBadges, getBadge, allClasses, getClass, checkUserLogin, getBadgesByClass } = require('../db/helpers');
+const { getQuestsByVillager, allVillagers, getAllUserClassProgress, checkUserQuests, allUsers, getUser, allQuests, getQuest, createNewQuest, deleteQuest, editQuest, completeQuest, getBadgesByUser, allAchievements, getAchievement, allBadges, getBadge, allClasses, getClass, checkUserLogin, getBadgesByClass } = require('../db/helpers');
 
 module.exports = () => {
 
@@ -71,6 +71,14 @@ module.exports = () => {
       res.send(result);
     })
   });
+
+  //Change arguments to proper
+  router.get("/users/:villagerId/quests", (req, res) => {
+    getQuestsByVillager(req.params.villagerId).then(result => {
+      res.send(result);
+    })
+  });
+
 
   //Can't know the ID before it is created change this
   router.post("/quests/new", (req, res) => {

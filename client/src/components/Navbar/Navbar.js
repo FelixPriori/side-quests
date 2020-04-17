@@ -40,6 +40,7 @@ function UserMenu(props) {
             </span>
             : <span className="button-group">
               <Dropdown.Item navbar onClick={props.onCreate}>Create Quest</Dropdown.Item>
+              <Dropdown.Item navbar onClick={props.onVillagerQuests}>Quests</Dropdown.Item>
               <Dropdown.Item navbar onClick={props.onProfile}>Profile</Dropdown.Item>
             </span>
           }

@@ -249,6 +249,14 @@ const editProfile = function (username, firstName, lastName, email, password, av
   return db.query(queryStr, [username, firstName, lastName, email, password, avatar, adventurer, userId]).then();
 }
 
+const getQuestsByVillager = function (villagerId) {
+  const queryStr = `
+  SELECT * 
+  FROM quests
+  WHERE villager_id = $1
+  `
+  return db.query(queryStr, [villagerId]).then(res => res.rows);
+}
 
 const increaseClassLevel = function (userId, classId, amount) {
   const queryStr = `
@@ -525,5 +533,6 @@ module.exports = {
   checkUserQuests,
   getAllUserClassProgress,
   editProfile,
-  allVillagers
+  allVillagers,
+  getQuestsByVillager
 }

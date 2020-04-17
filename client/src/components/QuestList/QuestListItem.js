@@ -3,18 +3,6 @@ import './QuestListItem.scss';
 import Button from '../Button/Button';
 import { ChatDotsFill } from 'react-bootstrap-icons';
 
-/* 
-  {
-    id: 1,
-    name: 'Hungry for some soup!',
-    description: 'I am at home and feeling very sick. Can someone bring me some some soup please?',
-    completed: false,
-    latitude: 330,
-    longitude: 123,
-    class_id: 1,
-    villager_id: 1
-  }
-*/
 
 export default function QuestListItem(props) {
   const { name, description } = props.userQuests;
@@ -26,7 +14,7 @@ export default function QuestListItem(props) {
       <footer className="quest-footer">
         <p className="username">Villager: {props.villager}</p>
         <Button confirm>Accept Quest</Button>
-        <Button confirm><ChatDotsFill/></Button>
+        <Button confirm><ChatDotsFill /></Button>
       </footer>
     </div>
   )
