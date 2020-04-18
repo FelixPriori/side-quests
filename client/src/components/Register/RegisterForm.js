@@ -103,22 +103,8 @@ export default function RegisterForm(props) {
           onChange={event => setConfirmPassword(event.target.value)}
         />
       </form>
-      <section className="register__actions">
 
-        {edit
-          value={confirmPassword}
-          data-testid="confirmPassword-input"
-          onChange={event => setConfirmPassword(event.target.value)}
-        />
-      </form>
-      <section className="register__actions">
 
-        {edit
-          value={confirmPassword}
-          data-testid="confirmPassword-input"
-          onChange={event => setConfirmPassword(event.target.value)}
-        />
-      </form>
       <section className="register__actions">
 
         {edit

@@ -36,16 +36,7 @@ export default function QuestListItem(props) {
             <Button danger>Delete</Button>
           </div>
         </div>
-        {confirmation &&
-        <div className="alert alert-danger">
-          <p className="alert-msg">Are you sure you wish to delete this quest?</p>
-          <div className='btn-group'>
-            <Button confirm onClick={() => setConfirmation(false)}>Cancel</Button>
-            <Button danger>Delete</Button>
-          </div>
-        </div>
       }
-    </div>
     </div >
   )
 }
