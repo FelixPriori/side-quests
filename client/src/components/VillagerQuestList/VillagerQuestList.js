@@ -22,12 +22,13 @@ export default function VillagerQuestList(props) {
       }))
     });
   }
+  
 
-
-  //All i need to do is map all the quests by a specific villager
   const quests = props.state.questsByVillager && props.state.questsByVillager.map((quest, index) => {
+    const questAdventuer = quest.adventurer_id && props.state.adventurers.find(adventurer => adventurer.id === quest.adventurer_id)
     return (
       <VillagerQuestListItem
+        adventurer={questAdventuer}
         key={index}
         villagerQuest={quest}
         onEdit={props.onEdit}
@@ -42,9 +43,9 @@ export default function VillagerQuestList(props) {
         <h2>Your Created Quests</h2>
       </div>
       <div className="quest-list-items">
-        {quests
+        {quests.length
           ? quests.reverse()
-          : <div className="alert alert-danger">You currently do not have any created quests.</div>
+          : <div className="alert alert-danger">You do not have any created quests.</div>
         }
       </div>
     </section>

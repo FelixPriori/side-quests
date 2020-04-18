@@ -44,6 +44,7 @@ export default function App() {
     username: '',
     view: LOGIN,
     loggedIn: false,
+    adventurers: [],
     // socket: [],
     // chatMessages: [],
     // knownUsers: {},
@@ -88,6 +89,7 @@ export default function App() {
       const getBadges = axios.get('/badges');
       const getQuestsByVillager = axios.get(`/users/${state.userData.id}/quests`);
       const getQuestsByAdventurer = axios.get(`/users/adventurer/${state.userData.id}/quests`);
+      const getAdventurers = axios.get(`/adventurers`);
       Promise.all([
         getUserBadges,
         getUserQuest,
@@ -96,7 +98,8 @@ export default function App() {
         getVillagers,
         getBadges,
         getQuestsByVillager,
-        getQuestsByAdventurer
+        getQuestsByAdventurer,
+        getAdventurers
       ])
         .then(
           ([
@@ -107,7 +110,8 @@ export default function App() {
             { data: villagers },
             { data: badges },
             { data: questsByVillager },
-            { data: questsByAdventurer }
+            { data: questsByAdventurer },
+            { data: adventurers }
           ]) => {
             setState({
               ...state,
@@ -118,15 +122,14 @@ export default function App() {
               villagers,
               badges,
               questsByVillager,
-              questsByAdventurer
+              questsByAdventurer,
+              adventurers
             });
           }
         )
         .catch((err) => console.log(err));
     }
   }, [state.loggedIn]);
-
-
 
   //Socket.io
   // const addNewMessage = function (msgObj) {
@@ -227,7 +230,8 @@ export default function App() {
           adventurer: false,
           username: '',
           loggedIn: false,
-          view: LOGIN
+          view: LOGIN,
+          adventurers: [],
         }));
       })
       .catch((error) => console.log(error));
@@ -246,9 +250,9 @@ export default function App() {
           onRegister={() => changeView(REGISTER)}
           onProgress={() => changeView(CLASSES)}
           onProfile={() => changeView(PROFILE)}
-          // onChat={() => changeView(CHAT)}
           onVillagerQuests={() => changeView(VILLAGER_QUESTS)}
           onTaken={() => changeView(TAKEN)}
+          // onChat={() => changeView(CHAT)}
         />
       ) : (
           <Navbar
@@ -305,8 +309,15 @@ export default function App() {
             loggedInUser={state.userData}
           />
         )} */}
-        {state.view === VILLAGER_QUESTS && <VillagerQuestList state={state} setState={setState} />}
-        {state.view === TAKEN && <TakenQuests state={state} />}
+        {state.view === VILLAGER_QUESTS && 
+          <VillagerQuestList 
+            state={state}
+            setState={setState}
+          />}
+        {state.view === TAKEN && 
+          <TakenQuests 
+            state={state} 
+          />}
       </main>
     </div>
   );

@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 
 
-const { acceptQuest, getQuestsByVillager, allVillagers, getAllUserClassProgress, checkUserQuests, allUsers, getUser, allQuests, getQuest, createNewQuest, deleteQuest, editQuest, completeQuest, getBadgesByUser, allBadges, getBadge, allClasses, getClass, checkUserLogin, getBadgesByClass, getQuestsByAdventurer } = require('../db/helpers');
+const { acceptQuest, getQuestsByVillager, allVillagers, getAllUserClassProgress, checkUserQuests, allUsers, getUser, allQuests, getQuest, createNewQuest, deleteQuest, editQuest, completeQuest, getBadgesByUser, allBadges, getBadge, allClasses, getClass, checkUserLogin, getBadgesByClass, getQuestsByAdventurer, allAdventurers } = require('../db/helpers');
 
 
 module.exports = () => {
@@ -35,6 +35,11 @@ module.exports = () => {
     })
   });
 
+  router.get('/adventurers', (req, res) => {
+    allAdventurers().then(result => {
+      res.json(result);
+    })
+  });
 
   router.get("/userQuests", (req, res) => {
     checkUserQuests(req.session.userId).then(result => {
