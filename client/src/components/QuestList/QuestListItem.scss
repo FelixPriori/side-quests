@@ -30,4 +30,16 @@
   button {
     margin: 0.5em;
   }
+  .checkmark-div{
+    border: 0.2em solid $shadow1;
+    border-radius: 50%;
+    padding: 0.2em;
+    background-color: $color1;
+    .checkmark {
+      width: 2em;
+      height: 2em;
+      color: $color4;
+    }
+  }
 }
+
