@@ -22,6 +22,7 @@ export default function RegisterForm(props) {
     axios.post(`/register`, data)
       .then(() => props.onLogin())
       .catch(e => setError(e));
+
   }
 
 
