@@ -30,6 +30,9 @@
   button {
     margin: 0.5em;
   }
+}
+
+
   .checkmark-div{
     border: 0.2em solid $shadow1;
     border-radius: 50%;
@@ -41,5 +44,12 @@
       color: $color4;
     }
   }
-}
+
+  @media only screen and (min-width: 1024px) {
+  
+    .quest-item {
+      width: 40em
+    }
+  }
+
 
