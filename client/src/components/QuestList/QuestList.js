@@ -2,9 +2,6 @@ import React from 'react';
 import './QuestList.scss';
 import QuestListItem from './QuestListItem';
 
-
-
-
 export default function QuestList(props) {
 
   const { userQuests, classItem, villagers } = props;
