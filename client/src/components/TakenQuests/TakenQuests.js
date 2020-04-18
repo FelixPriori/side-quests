@@ -5,10 +5,12 @@ import TakenQuestItem from './TakenQuestItem';
 export default function TakenQuests(props) {
 
   const currentQuests = props.state.questsByAdventurer && props.state.questsByAdventurer.map((quest, index) => {
+    const villager = props.state.villagers.filter(villager => quest.villager_id === villager.id)
     return (
       <TakenQuestItem
         key={index}
         quest={quest}
+        villager={villager}
       />
     )
   })

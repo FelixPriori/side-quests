@@ -1,5 +1,9 @@
 @import '../../styles/palette.scss';
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
 main {
   font-family: $paragraph;
   background-color: $color3;
@@ -23,3 +27,4 @@ main {
 button {
   align-self: flex-end;
 }
+

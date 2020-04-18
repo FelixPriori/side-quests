@@ -56,8 +56,6 @@ export default function ClassSelection(props) {
       </option>
     );
   })
-
-  console.log("CLASSITEM:", classItem);
   return (
     <section className="quest-selection">
       <section className="select-class">

@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
 import './TakenQuestItem.scss';
 import Button from '../Button/Button';
+import { Check } from 'react-bootstrap-icons';
 
 export default function TakenQuestItem(props) {
-  const { name, description } = props.quest;
+  const { name, description, completed } = props.quest;
+  const { villager } = props;
   const [confirmation, setConfirmation ] = useState(false);
 
   return (
     <div className="quest-item">
       <h3>{name}</h3>
       <p>{description}</p>
-      <Button danger onClick={() => setConfirmation(true)}>Drop Quest</Button>
+      <div className="footer">
+        <p>
+          <strong>{villager[0].username}</strong><br/>
+          {completed ? "marked this quest as complete." : "posted this quest."}
+        </p>
+      {completed 
+      ? <div className="check-container">
+          <div className="checkmark-div"><Check className="checkmark"/></div>
+        </div>
+      : <Button danger onClick={() => setConfirmation(true)}>Drop Quest</Button>}
+      </div>
       { confirmation &&
         <div className="alert alert-danger">
           <p className="alert-msg">Are you sure you wish to drop this quest?</p>
