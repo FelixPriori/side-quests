@@ -9,6 +9,7 @@ const { checkLocked, filterLocked } = require('../../helpers/badgeHelpers');
 export default function ClassSelection(props) {
   const [classItem, setClassItem] = useState(null);
   const [classProgress, setClassProgress] = useState(null);
+  const [classBadges, setClassBadges] = useState(null)
 
   const changeClass = name => {
     if (name === 'Choose a class') {
