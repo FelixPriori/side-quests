@@ -96,6 +96,15 @@ const allVillagers = function () {
   return db.query(queryStr, [false]).then(res => res.rows);
 }
 
+const allAdventurers = function() {
+  const queryStr = `
+    SELECT *
+    FROM users
+    WHERE adventurer = $1
+  `
+  return db.query(queryStr, [true]).then(res => res.rows);
+}
+
 //Functions for front page of app
 const checkUserLogin = function (userId) {
   const queryStr = `
@@ -526,6 +535,7 @@ module.exports = {
   getAllUserClassProgress,
   editProfile,
   allVillagers,
+  allAdventurers,
   getQuestsByVillager,
   classProgressForNewUser,
   getUserByUsername

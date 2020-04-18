@@ -36,8 +36,8 @@ module.exports = () => {
 
   router.delete("/quests/:id/delete", (req, res) => {
 
-    deleteQuest(req.params.id).then(result => {
-      res.send(result);
+    deleteQuest(req.params.id).then(() => {
+      res.send();
     });
   });
 

@@ -32,7 +32,9 @@
   }
 }
 
-
+.check-container {
+  display: flex;
+  justify-content: flex-end;
   .checkmark-div{
     border: 0.2em solid $shadow1;
     border-radius: 50%;
@@ -44,6 +46,7 @@
       color: $color4;
     }
   }
+}
 
   @media only screen and (min-width: 1024px) {
   

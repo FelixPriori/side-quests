@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { allUsers, checkUserLogin, checkUserQuests, getAllUserClassProgress, getUser, getBadgesByUser, allVillagers } = require('../db/helpers');
+const { allUsers, checkUserLogin, checkUserQuests, getAllUserClassProgress, getUser, getBadgesByUser, allVillagers, allAdventurers } = require('../db/helpers');
 
 
 
@@ -57,6 +57,13 @@ module.exports = () => {
       res.json(result);
     })
   });
+
+  router.get('/adventurers', (req, res) => {
+    allAdventurers().then(result => {
+      res.json(result);
+    })
+  });
+
 
 
   return router;
