@@ -282,7 +282,8 @@ const setExperiencePoints = function (userId, classId, amount) {
     SET experience_points = $1
     WHERE adventurer_id = $2 AND class_id = $3;
   `
-  return db.query(queryStr, [amount, userId, classId]).then()
+  return db.query(queryStr, [amount, userId, classId])
+    .then(res => res.send())
 }
 
 const getClassProgress = function (userId, classId) {
@@ -403,14 +404,14 @@ const levelUpCheck = function (userId, experiencePoints, classId) {
   return db.query(queryStr, [userId]).then(res => {
     if (
       res.rows[0].experience_points + experiencePoints >=
-      res.rows[0].level * 100
+      (res.rows[0].level + 1) * 100
     ) {
       const extraPoints =
-        res.rows[0].experience_points +
-        experiencePoints -
-        (res.rows[0].level + 1) * 100
+        res.rows[0].experience_points
+        + experiencePoints
+        - (res.rows[0].level + 1) * 100
       increaseClassLevel(userId, classId, 1).then(() => {
-        setExperiencePoints(userId, classId, extraPoints).then(() => {
+        setExperiencePoints(userId, classId, 0).then(() => {
 
           //CHECK FOR BADGES
           badgeCheck(userId, classId);
