@@ -1,13 +1,5 @@
 const router = require('express').Router();
-// const cookieSession = require('cookie-session')
 const bcrypt = require('bcrypt');
-
-// router.use(
-//   cookieSession({
-//     name: 'session',
-//     keys: ['key1', 'key2']
-//   })
-// )
 
 
 const { checkIfUserExists, addUser, classProgressForNewUser, getUserByUsername } = require('../db/helpers')
@@ -51,7 +43,6 @@ module.exports = () => {
             return getUserByUsername(username).then(user => {
               classProgressForNewUser(user.id).then(() => {
                 //Log them in
-                console.log("got here");
                 req.session.userId = user.id;
                 req.session.save();
                 res.send();
