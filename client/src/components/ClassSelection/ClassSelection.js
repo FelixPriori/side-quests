@@ -7,9 +7,8 @@ import axios from "axios";
 const { checkLocked, filterLocked } = require('../../helpers/badgeHelpers');
 
 export default function ClassSelection(props) {
-  const [ classItem, setClassItem ] = useState(null);
-  const [ classProgress, setClassProgress ] = useState(null);
-  const [ classBadges, setClassBadges ] = useState(null)
+  const [classItem, setClassItem] = useState(null);
+  const [classProgress, setClassProgress] = useState(null);
 
   const changeClass = name => {
     if (name === 'Choose a class') {
@@ -57,6 +56,7 @@ export default function ClassSelection(props) {
     );
   })
 
+  console.log("CLASSITEM:", classItem);
   return (
     <section className="quest-selection">
       <section className="select-class">
@@ -74,7 +74,7 @@ export default function ClassSelection(props) {
         {classItem &&
           <div>
             <div className="content">
-              <img alt="avatar" src={classItem.avatar} />
+              <img alt="avatar" src={`/images/Icons/${classItem.id}.png`} />
               <span>
                 <h3>{classItem.name}</h3>
                 <p>{classItem.description}</p>
@@ -91,11 +91,11 @@ export default function ClassSelection(props) {
       </section>
       {classItem &&
         <QuestList
-        classItem={classItem}
-        userQuests={props.state.userQuests}
-        villagers={props.state.villagers}
-        userData={props.state.userData}
-        onAccept={acceptQuest}
+          classItem={classItem}
+          userQuests={props.state.userQuests}
+          villagers={props.state.villagers}
+          userData={props.state.userData}
+          onAccept={acceptQuest}
         // knownUsers={props.state.knownUsers}
         // chatMessages={props.state.chatMessages}
         // socket={props.state.socket}
