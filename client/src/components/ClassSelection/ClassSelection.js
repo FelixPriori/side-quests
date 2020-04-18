@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './ClassSelection.scss';
 import ClassProgress from '../ClassProgress/ClassProgress';
 import QuestList from '../QuestList/QuestList';
@@ -7,21 +7,8 @@ import axios from "axios";
 const { checkLocked, filterLocked } = require('../../helpers/badgeHelpers');
 
 export default function ClassSelection(props) {
-  const [classItem, setClassItem] = useState(null);
-  const [classProgress, setClassProgress] = useState(null);
-
-  useEffect(() => {
-    fetchUserData();
-    fetchQuests();
-    fetchProgress();
-    fetchBadges();
-    fetchVillagers();
-    fetchClasses();
-    fetchUserBadges();
-  }, []);
-
-  const { fetchUserData, fetchQuests, fetchClasses, fetchProgress, fetchVillagers, fetchBadges, fetchClassBadges, fetchUserBadges } = props;
-
+  const [ classItem, setClassItem ] = useState(null);
+  const [ classProgress, setClassProgress ] = useState(null);
 
   const changeClass = name => {
     if (name === 'Choose a class') {
@@ -31,7 +18,6 @@ export default function ClassSelection(props) {
     const selectedClassProgress = props.state.classesProgressData.find(classProgress => selectedClass.id === classProgress.class_id)
     setClassItem(selectedClass);
     setClassProgress(selectedClassProgress);
-    fetchClassBadges(selectedClass.id);
   };
 
   const lockedBadges = props.state.classBadges && checkLocked(props.state.classBadges, props.state.userBadges);
@@ -102,17 +88,17 @@ export default function ClassSelection(props) {
       </section>
       {classItem &&
         <QuestList
-          chatMessages={props.state.chatMessages}
-          socket={props.state.socket}
-          knownUsers={props.state.knownUsers}
-          classItem={classItem}
-          userQuests={props.state.userQuests}
-          villagers={props.state.villagers}
-          newUserCheck={props.newUserCheck}
-          openNewSocket={props.openNewSocket}
-          addNewMessage={props.addNewMessage}
-          userData={props.state.userData}
-          onAccept={acceptQuest}
+        classItem={classItem}
+        userQuests={props.state.userQuests}
+        villagers={props.state.villagers}
+        userData={props.state.userData}
+        onAccept={acceptQuest}
+        // knownUsers={props.state.knownUsers}
+        // chatMessages={props.state.chatMessages}
+        // socket={props.state.socket}
+        // newUserCheck={props.newUserCheck}
+        // openNewSocket={props.openNewSocket}
+        // addNewMessage={props.addNewMessage}
         />}
     </section>
   );

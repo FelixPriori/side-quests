@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './CreateQuestForm.scss';
 import Button from '../Button/Button';
 import axios from 'axios';
@@ -9,13 +9,6 @@ export default function CreateQuestForm(props) {
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
   const [error, setError] = useState(null);
-
-  useEffect(() => {
-    fetchUserData();
-    // fetchQuestsByVillager();
-  }, [])
-
-  const { fetchUserData } = props;
 
   function handleSubmit() {
     const data = { questType, name, description, address };

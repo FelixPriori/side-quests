@@ -104,10 +104,7 @@ export default function RegisterForm(props) {
           onChange={event => setConfirmPassword(event.target.value)}
         />
       </form>
-
-
       <section className="register__actions">
-
         {edit
           ? <section>
             <Button onClick={props.onProfile} danger>Cancel</Button>

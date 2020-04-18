@@ -1,20 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './VillagerQuestListItem.scss';
 import Button from '../Button/Button';
 import { Check } from 'react-bootstrap-icons';
 const classnames = require('classnames');
 
 export default function QuestListItem(props) {
-  const { name, description, id, completed } = props.villagerQuest;
-  const { fetchQuestsByVillager } = props;
+  const { name, description, completed } = props.villagerQuest;
   const questItemClass = classnames("quest-item", {
     "completed": completed,
   });
   const [confirmation, setConfirmation] = useState(false);
-
-  useEffect(() => {
-    fetchQuestsByVillager();
-  }, [])
 
   return (
     <div className={questItemClass}>

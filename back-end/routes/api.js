@@ -76,7 +76,7 @@ module.exports = () => {
   //Change arguments to proper
   router.get("/users/:villagerId/quests", (req, res) => {
     getQuestsByVillager(req.params.villagerId).then(result => {
-      res.send();
+      res.send(result);
     })
   });
 

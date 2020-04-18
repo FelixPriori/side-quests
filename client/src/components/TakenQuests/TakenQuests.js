@@ -1,14 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './TakenQuests.scss';
 import TakenQuestItem from './TakenQuestItem';
 
 export default function TakenQuests(props) {
-
-  const {fetchQuestsByAdventurer} = props;
-
-  useEffect(() => {
-    fetchQuestsByAdventurer();
-  });  
 
   const currentQuests = props.state.questsByAdventurer && props.state.questsByAdventurer.map((quest, index) => {
     return (
