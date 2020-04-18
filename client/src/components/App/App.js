@@ -112,33 +112,33 @@ export default function App() {
     }
   }, [state.loggedIn]);
 
-  // useEffect(() => {
-  //   axios
-  //     .get('/checkSession')
-  //     .then((response) => {
-  //       console.log('USE EFFECT: CheckSession');
-  //       if (!isEmpty(response.data[0])) {
-  //         console.log('USE EFFECT: CheckSession => user retrieved');
+  useEffect(() => {
+    axios
+      .get('/checkSession')
+      .then((response) => {
+        console.log('USE EFFECT: CheckSession');
+        if (!isEmpty(response.data[0])) {
+          console.log('USE EFFECT: CheckSession => user retrieved');
 
-  //         setState((prevState) => {
-  //           return {
-  //             ...prevState,
-  //             userData: response.data[0],
-  //             view: response.data[0]
-  //               ? response.data[0].adventurer
-  //                 ? SHOW
-  //                 : CREATE
-  //               : LOGIN,
-  //             sessions: response.data[0].id,
-  //             adventurer: response.data[0].adventurer,
-  //             username: response.data[0].first_name,
-  //             loggedIn: true,
-  //           };
-  //         });
-  //       }
-  //     })
-  //     .catch((error) => console.log(error));
-  // }, []);
+          setState((prevState) => {
+            return {
+              ...prevState,
+              userData: response.data[0],
+              view: response.data[0]
+                ? response.data[0].adventurer
+                  ? SHOW
+                  : CREATE
+                : LOGIN,
+              sessions: response.data[0].id,
+              adventurer: response.data[0].adventurer,
+              username: response.data[0].first_name,
+              loggedIn: true,
+            };
+          });
+        }
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   const fetchUserData = () => {
     axios
