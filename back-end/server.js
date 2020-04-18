@@ -57,7 +57,6 @@ app.use("/", badgeRoutes());
 app.use("/", classRoutes());
 
 
-
 //Run when client connects
 const server = app.listen(8081);
 
