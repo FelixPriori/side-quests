@@ -11,6 +11,7 @@ const sass = require("node-sass-middleware");
 const cors = require('cors');
 const morgan = require('morgan');
 const session = require('express-session');
+
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
@@ -37,39 +38,45 @@ app.use(session({
   cookie: { secure: false }
 }));
 // Separated Routes for each Resource
-// Note: Feel free to replace the example routes below with your own
+
 const registerRoutes = require("./routes/register");
 const loginRoutes = require("./routes/login");
-const apiRoutes = require("./routes/api");
 const editProfileRoutes = require("./routes/editProfile");
-
-// io.set('origins', 'http://localhost:8081');
+const questRoutes = require("./routes/quests");
+const userRoutes = require('./routes/users');
+const badgeRoutes = require('./routes/badges');
+const classRoutes = require('./routes/classes');
 
 // Mount all resource routes
-// Note: Feel free to replace the example routes below with your own
 app.use("/", registerRoutes());
 app.use("/", loginRoutes());
-app.use("/", apiRoutes());
 app.use("/", editProfileRoutes());
-// Note: mount other resources here, using the same pattern above
+app.use("/", questRoutes());
+app.use("/", userRoutes());
+app.use("/", badgeRoutes());
+app.use("/", classRoutes());
+
 
 
 //Run when client connects
-
-
 const server = app.listen(8081);
-const io = require('socket.io').listen(server);
 
-io.on('connection', socket => {
-  console.log("New WS connection...");
 
-  socket.on('disconnect', () => {
-    console.log('user disconnected');
-  });
 
-  socket.on('chat message', (msgObj) => {
-    console.log("msgObj:", msgObj);
-    console.log("message: ", msgObj.msg, msgObj.userId);
-    io.emit('chat message', msgObj);
-  });
-});
+//For socket.io websockets
+
+// const io = require('socket.io').listen(server);
+
+// io.on('connection', socket => {
+//   console.log("New WS connection...");
+
+//   socket.on('disconnect', () => {
+//     console.log('user disconnected');
+//   });
+
+//   socket.on('chat message', (msgObj) => {
+//     console.log("msgObj:", msgObj);
+//     console.log("message: ", msgObj.msg, msgObj.userId);
+//     io.emit('chat message', msgObj);
+//   });
+// });
