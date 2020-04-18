@@ -252,7 +252,7 @@ export default function App() {
           onProfile={() => changeView(PROFILE)}
           onVillagerQuests={() => changeView(VILLAGER_QUESTS)}
           onTaken={() => changeView(TAKEN)}
-          // onChat={() => changeView(CHAT)}
+        // onChat={() => changeView(CHAT)}
         />
       ) : (
           <Navbar
@@ -270,13 +270,13 @@ export default function App() {
           />
         )}
         {state.view === REGISTER && (
-          <RegisterForm 
-            onLogin={handleLogin} 
+          <RegisterForm
+            onLogin={handleLogin}
             onProfile={() => changeView(PROFILE)}
           />
         )}
         {state.view === CREATE && (
-          <CreateQuestForm 
+          <CreateQuestForm
             onCreate={() => changeView(VILLAGER_QUESTS)}
             state={state}
             setState={setState}
@@ -295,7 +295,7 @@ export default function App() {
           <Profile onEdit={() => changeView(EDIT)} state={state} edit={true} />
         )}
         {state.view === EDIT && (
-          <RegisterForm 
+          <RegisterForm
             userData={state.userData}
             onLogin={handleLogin}
             onProfile={changeView}
@@ -309,14 +309,15 @@ export default function App() {
             loggedInUser={state.userData}
           />
         )} */}
-        {state.view === VILLAGER_QUESTS && 
-          <VillagerQuestList 
+        {state.view === VILLAGER_QUESTS &&
+          <VillagerQuestList
             state={state}
             setState={setState}
           />}
-        {state.view === TAKEN && 
-          <TakenQuests 
-            state={state} 
+        {state.view === TAKEN &&
+          <TakenQuests
+            state={state}
+            setState={setState}
           />}
       </main>
     </div>

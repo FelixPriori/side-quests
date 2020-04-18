@@ -96,7 +96,7 @@ const allVillagers = function () {
   return db.query(queryStr, [false]).then(res => res.rows);
 }
 
-const allAdventurers = function() {
+const allAdventurers = function () {
   const queryStr = `
     SELECT *
     FROM users
@@ -236,6 +236,16 @@ const deleteQuest = function (questId) {
   `
   return db.query(queryStr, [questId]).then()
 }
+
+const dropQuest = function (questId) {
+  const queryStr = `
+  UPDATE quests
+  SET adventurer_id = null
+  WHERE id = $1;
+  `
+  return db.query(queryStr, [questId]).then();
+}
+
 
 const editQuest = function (
   questId,
@@ -412,7 +422,7 @@ const levelUpCheck = function (userId, experiencePoints, classId) {
   `
   return db.query(queryStr, [userId]).then(res => {
     if (
-      res.rows[0].experience_points + experiencePoints 
+      res.rows[0].experience_points + experiencePoints
       >= res.rows[0].level * 100
     ) {
       // uncomment if exp varies
@@ -538,5 +548,6 @@ module.exports = {
   allAdventurers,
   getQuestsByVillager,
   classProgressForNewUser,
-  getUserByUsername
+  getUserByUsername,
+  dropQuest
 }

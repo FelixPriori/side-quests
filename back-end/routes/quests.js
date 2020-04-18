@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 
 
-const { createNewQuest, acceptQuest, completeQuest, deleteQuest, editQuest, getQuestsByVillager, allQuests, getQuest, getQuestsByAdventurer } = require('../db/helpers');
+const { dropQuest, createNewQuest, acceptQuest, completeQuest, deleteQuest, editQuest, getQuestsByVillager, allQuests, getQuest, getQuestsByAdventurer } = require('../db/helpers');
 
 
 module.exports = () => {
@@ -25,6 +25,10 @@ module.exports = () => {
       .then(() => {
         res.send();
       });
+  });
+
+  router.post("/quests/:id/drop", (req, res) => {
+    dropQuest(req.params.id).then(() => res.send());
   });
 
   router.post("/quests/:id/completeQuest/:classId", (req, res) => {
