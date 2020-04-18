@@ -37,7 +37,6 @@ export default function App() {
     villagers: [],
     badges: [],
     userBadges: [],
-    classBadges: [],
     questsByVillager: [],
     questsByAdventurer: [],
     sessions: 0,
@@ -89,7 +88,6 @@ export default function App() {
       const getBadges = axios.get('/badges');
       const getQuestsByVillager = axios.get(`/users/${state.userData.id}/quests`);
       const getQuestsByAdventurer = axios.get(`/users/adventurer/${state.userData.id}/quests`);
-      const getClassBadges = axios.get(`/classes/${state.userData.id}/badges`);
       Promise.all([
         getUserBadges,
         getUserQuest,
@@ -98,8 +96,7 @@ export default function App() {
         getVillagers,
         getBadges,
         getQuestsByVillager,
-        getQuestsByAdventurer,
-        getClassBadges,
+        getQuestsByAdventurer
       ])
         .then(
           ([
@@ -110,8 +107,7 @@ export default function App() {
             { data: villagers },
             { data: badges },
             { data: questsByVillager },
-            { data: questsByAdventurer },
-            { data: classBadges },
+            { data: questsByAdventurer }
           ]) => {
             setState({
               ...state,
@@ -122,8 +118,7 @@ export default function App() {
               villagers,
               badges,
               questsByVillager,
-              questsByAdventurer,
-              classBadges,
+              questsByAdventurer
             });
           }
         )
