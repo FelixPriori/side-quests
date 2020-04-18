@@ -80,7 +80,6 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    console.log(state)
     if (state.loggedIn) {
       const getUserBadges = axios.get(`/users/${state.userData.id}/badges`);
       const getUserQuest = axios.get('/quests');
@@ -278,7 +277,11 @@ export default function App() {
           />
         )}
         {state.view === CREATE && (
-          <CreateQuestForm onCreate={() => changeView(VILLAGER_QUESTS)} />
+          <CreateQuestForm 
+            onCreate={() => changeView(VILLAGER_QUESTS)}
+            state={state}
+            setState={setState}
+          />
         )}
         {state.view === SHOW && (
           <ClassSelection

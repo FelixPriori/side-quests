@@ -9,11 +9,31 @@ export default function CreateQuestForm(props) {
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
   const [error, setError] = useState(null);
-
+  
   function handleSubmit() {
     const data = { questType, name, description, address };
+    const oldQuests = props.state.questsByVillager;
+    const newQuest = {
+      id: oldQuests.length,
+      name: name,
+      description: description,
+      completed: false,
+      class_id: questType,
+      villager_id: props.state.userData.id,
+      adventurer_id: null,
+      experience_points: 100
+    }
+    oldQuests.push(newQuest);
     axios.post('/quests/new', data)
-      .then(() => props.onCreate())
+      .then(() => {
+        props.setState( prevState => {
+          return {
+            ...prevState,
+            questsByVillager: oldQuests
+          }
+        })
+        props.onCreate()
+      })
       .catch(e => setError(e.response.data));
   }
 

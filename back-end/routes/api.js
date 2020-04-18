@@ -90,15 +90,21 @@ module.exports = () => {
   //Can't know the ID before it is created change this
   router.post("/quests/new", (req, res) => {
     const { questType, name, description } = req.body;
-
-    createNewQuest(name, description, false, 0, 0, questType, req.session.userId).then();
+    const createError = "All fields must be filled out"
+    if (!questType || !name || !description ) {
+      res.status(401).send(createError);
+    }
+    createNewQuest(name, description, false, 0, 0, questType, req.session.userId)
+      .then(() => {
+        res.send()
+      });
   });
 
   router.post("/quests/:id/acceptQuest", (req, res) => {
-
-    acceptQuest(req.params.id, req.session.userId).then(() => {
-      res.send();
-    }
+    acceptQuest(req.params.id, req.session.userId)
+      .then(() => {
+        res.send();
+      }
     );
   });
 

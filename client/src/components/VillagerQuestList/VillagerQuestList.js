@@ -16,7 +16,6 @@ export default function VillagerQuestList(props) {
           return quest;
         }
       })
-
       props.setState(prevState => ({
         ...prevState,
         questsByVillager: quests
@@ -44,7 +43,7 @@ export default function VillagerQuestList(props) {
       </div>
       <div className="quest-list-items">
         {quests
-          ? quests
+          ? quests.reverse()
           : <div className="alert alert-danger">You currently do not have any created quests.</div>
         }
       </div>
