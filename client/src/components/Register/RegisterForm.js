@@ -21,17 +21,15 @@ export default function RegisterForm(props) {
     const data = { email, password, confirmPassword, firstName, lastName, username, accountType, avatar };
     axios.post(`/register`, data)
       .then(() => props.onLogin())
-      .catch(e => setError(e));
-
+      .catch(e => setError(e.response.data));
   }
-
 
   //if props.edit then use this for the onclick instead
   function handleEditSubmit() {
     const data = { email, password, confirmPassword, firstName, lastName, username, accountType, avatar };
     axios.post('/users/edit', data)
-      .then(() => props.onProfile('PROFILE'))
-      .catch(e => setError(e));
+      .then(() => props.onLogin(true))
+      .catch(e => setError(e.response.data));
   }
 
   return (

@@ -198,7 +198,7 @@ export default function App() {
     }, 500);
   };
 
-  const handleLogin = () => {
+  const handleLogin = (edit) => {
     return axios
       .get('/checkSession')
       .then((response) => {
@@ -210,7 +210,7 @@ export default function App() {
             adventurer: response.data[0].adventurer,
             username: response.data[0].first_name,
             loggedIn: true,
-            view: response.data[0].adventurer ? SHOW : CREATE
+            view: edit ? PROFILE : response.data[0].adventurer ? SHOW : CREATE
           };
         });
       })
@@ -272,7 +272,10 @@ export default function App() {
           />
         )}
         {state.view === REGISTER && (
-          <RegisterForm onLogin={handleLogin} onProfile={() => changeView(PROFILE)} />
+          <RegisterForm 
+            onLogin={handleLogin} 
+            onProfile={() => changeView(PROFILE)}
+          />
         )}
         {state.view === CREATE && (
           <CreateQuestForm onCreate={() => changeView(VILLAGER_QUESTS)} />
@@ -290,7 +293,11 @@ export default function App() {
           <Profile onEdit={() => changeView(EDIT)} state={state} edit={true} />
         )}
         {state.view === EDIT && (
-          <RegisterForm userData={state.userData} onProfile={changeView} />
+          <RegisterForm 
+            userData={state.userData}
+            onLogin={handleLogin}
+            onProfile={changeView}
+          />
         )}
         {/* {state.view === CHAT && (
           <ChatWindow
