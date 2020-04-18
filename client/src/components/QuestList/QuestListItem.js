@@ -27,11 +27,11 @@ export default function QuestListItem(props) {
       <p>{description}</p>
       <footer className="quest-footer">
         {adventurer_id
-          ? <div className="checkmark"><Check /></div>
+          ? <div className="checkmark-div"><Check className="checkmark" /></div>
           : <div className="btn-group">
-              <Button confirm onClick={() => onAccept(props.userQuests.id)}>Accept Quest</Button>
-              {/* <Button confirm onClick={() => toggleChat()}><ChatDotsFill /></Button> */}
-            </div>
+            <Button confirm onClick={() => onAccept(props.userQuests.id)}>Accept Quest</Button>
+            {/* <Button confirm onClick={() => toggleChat()}><ChatDotsFill /></Button> */}
+          </div>
         }
       </footer>
       {/* {viewChat &&

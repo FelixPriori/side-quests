@@ -277,13 +277,13 @@ const increaseClassLevel = function (userId, classId, amount) {
 }
 
 const setExperiencePoints = function (userId, classId, amount) {
+  console.log(arguments);
   const queryStr = `
     UPDATE class_progress
     SET experience_points = $1
     WHERE adventurer_id = $2 AND class_id = $3;
   `
-  return db.query(queryStr, [amount, userId, classId])
-    .then(res => res.send())
+  return db.query(queryStr, [amount, userId, classId]).then()
 }
 
 const getClassProgress = function (userId, classId) {
@@ -403,13 +403,14 @@ const levelUpCheck = function (userId, experiencePoints, classId) {
   `
   return db.query(queryStr, [userId]).then(res => {
     if (
-      res.rows[0].experience_points + experiencePoints >=
-      (res.rows[0].level + 1) * 100
+      res.rows[0].experience_points + experiencePoints 
+      >= res.rows[0].level * 100
     ) {
-      const extraPoints =
-        res.rows[0].experience_points
-        + experiencePoints
-        - (res.rows[0].level + 1) * 100
+      // uncomment if exp varies
+      // const extraPoints =
+      //   res.rows[0].experience_points
+      //   + experiencePoints
+      //   - res.rows[0].level * 100
       increaseClassLevel(userId, classId, 1).then(() => {
         setExperiencePoints(userId, classId, 0).then(() => {
 
