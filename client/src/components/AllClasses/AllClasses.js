@@ -11,7 +11,7 @@ export default function AllClasses(props) {
   }
   return (
     <div className="all-classses">
-      <h2>All Class Progress</h2>
+      <h2>Class Progress</h2>
       <div className="class-items">
         {toRender}
       </div>

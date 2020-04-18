@@ -11,12 +11,14 @@
   z-index: 10;
   h1 {
     margin-right: 1em;
+    font-weight:700;
   }
   .nav-items {
     display: flex;
     margin-left: auto;
     button, h3 {
       margin-right: 1em;
+      font-weight:700;
     }
     button {
       height: 100%;
@@ -51,7 +53,7 @@
     h3 {
       color: $color2;
       font-family: $title;
-      align-self: center;
+      align-self: flex-end;
     }
   }
 }

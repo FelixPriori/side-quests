@@ -10,6 +10,9 @@ main {
   min-height: 100vh;
   top: 5em;
   position: relative;
+  h2 {
+    font-weight: 700;
+  }
 }
 
 .custom-select:focus  {
