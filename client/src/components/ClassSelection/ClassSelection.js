@@ -3,6 +3,7 @@ import './ClassSelection.scss';
 import ClassProgress from '../ClassProgress/ClassProgress';
 import QuestList from '../QuestList/QuestList';
 import BadgeBox from '../BadgeBox/BadgeBox';
+import axios from "axios";
 const { checkLocked, filterLocked } = require('../../helpers/badgeHelpers');
 
 export default function ClassSelection(props) {
@@ -22,10 +23,29 @@ export default function ClassSelection(props) {
   const lockedBadges = props.state.classBadges && checkLocked(props.state.classBadges, props.state.userBadges);
   const unlockedForClass = lockedBadges && filterLocked(lockedBadges, props.state.classBadges);
 
+
+
+  const acceptQuest = function (questId) {
+    axios.post(`/quests/${questId}/acceptQuest`).then(() => {
+      const quests = props.state.userQuests.map(quest => {
+        if (quest.id === questId) {
+          quest.adventurer_id = props.state.userData.id;
+        }
+        return quest;
+      })
+
+      props.setState(prevState => ({
+        ...prevState,
+        userQuests: quests
+      }))
+    });
+  }
+
+
   const classList = props.state.classesData && props.state.classesData.map((classData, index) => {
     const { name } = classData;
     return (
-      <option 
+      <option
         key={index}
         value={name}
       >
@@ -39,8 +59,8 @@ export default function ClassSelection(props) {
       <section className="select-class">
         <h2> Select a class </h2>
         <div className="menu">
-          <select 
-            id="classes" 
+          <select
+            id="classes"
             className="browser-default custom-select"
             onChange={e => changeClass(e.currentTarget.value)}
           >
@@ -48,37 +68,38 @@ export default function ClassSelection(props) {
             {classList}
           </select>
         </div>
-          {classItem && 
-            <div>
-              <div className="content">
-                <img alt="avatar" src={classItem.avatar}/>
-                <span>
-                  <h3>{classItem.name}</h3>
-                  <p>{classItem.description}</p>
-                </span>
-              </div>
-              <div className="class-badges">
-                <h3>Badges:</h3>
-                <BadgeBox badges={unlockedForClass} lockedBadges={lockedBadges}/>
-              </div>
-              <h3>Class Progress:</h3>
-              { classProgress && <ClassProgress data={classProgress}/> }
+        {classItem &&
+          <div>
+            <div className="content">
+              <img alt="avatar" src={classItem.avatar} />
+              <span>
+                <h3>{classItem.name}</h3>
+                <p>{classItem.description}</p>
+              </span>
             </div>
-          }
+            <div className="class-badges">
+              <h3>Badges:</h3>
+              <BadgeBox badges={unlockedForClass} lockedBadges={lockedBadges} />
+            </div>
+            <h3>Class Progress:</h3>
+            {classProgress && <ClassProgress data={classProgress} />}
+          </div>
+        }
       </section>
-      { classItem && 
+      {classItem &&
         <QuestList
           chatMessages={props.state.chatMessages}
           socket={props.state.socket}
           knownUsers={props.state.knownUsers}
-          classItem={classItem} 
-          userQuests={props.state.userQuests} 
+          classItem={classItem}
+          userQuests={props.state.userQuests}
           villagers={props.state.villagers}
           newUserCheck={props.newUserCheck}
           openNewSocket={props.openNewSocket}
           addNewMessage={props.addNewMessage}
           userData={props.state.userData}
-        /> }
+          onAccept={acceptQuest}
+        />}
     </section>
   );
 }

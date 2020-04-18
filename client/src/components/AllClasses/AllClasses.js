@@ -7,7 +7,7 @@ export default function AllClasses(props) {
   const AllClassesNames = props.classesData.map(data => <h3 key={data.id}> {data.name}</h3>)
   const toRender = [];
   for (let i = 0; i < AllClassesProgressArray.length; i++) {
-    toRender.push(<div className="class-item">{AllClassesNames[i]}{AllClassesProgressArray[i]}</div>);
+    toRender.push(<div key={i} className="class-item">{AllClassesNames[i]}{AllClassesProgressArray[i]}</div>);
   }
   return (
     <div className="all-classses">

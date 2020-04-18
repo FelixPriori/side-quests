@@ -4,7 +4,8 @@ const bcrypt = require('bcrypt');
 
 
 
-const { getQuestsByVillager, allVillagers, getAllUserClassProgress, checkUserQuests, allUsers, getUser, allQuests, getQuest, createNewQuest, deleteQuest, editQuest, completeQuest, getBadgesByUser, allBadges, getBadge, allClasses, getClass, checkUserLogin, getBadgesByClass, getQuestsByAdventurer } = require('../db/helpers');
+const { acceptQuest, getQuestsByVillager, allVillagers, getAllUserClassProgress, checkUserQuests, allUsers, getUser, allQuests, getQuest, createNewQuest, deleteQuest, editQuest, completeQuest, getBadgesByUser, allBadges, getBadge, allClasses, getClass, checkUserLogin, getBadgesByClass, getQuestsByAdventurer } = require('../db/helpers');
+
 
 module.exports = () => {
 
@@ -75,7 +76,7 @@ module.exports = () => {
   //Change arguments to proper
   router.get("/users/:villagerId/quests", (req, res) => {
     getQuestsByVillager(req.params.villagerId).then(result => {
-      res.send(result);
+      res.send();
     })
   });
 
@@ -93,6 +94,22 @@ module.exports = () => {
     createNewQuest(name, description, false, 0, 0, questType, req.session.userId).then();
   });
 
+  router.post("/quests/:id/acceptQuest", (req, res) => {
+
+    acceptQuest(req.params.id, req.session.userId).then(() => {
+      res.send();
+    }
+    );
+  });
+
+  router.post("/quests/:id/completeQuest/:classId", (req, res) => {
+
+    completeQuest(req.params.id, req.body.adventurerId, req.params.classId).then(() => {
+      res.send();
+    });
+
+  });
+
   router.delete("/quests/:id/delete", (req, res) => {
 
     deleteQuest(req.params.id).then(result => {
@@ -105,7 +122,6 @@ module.exports = () => {
     editQuest(req.params.id).then(result => {
       res.send(result);
     });
-
   });
 
 

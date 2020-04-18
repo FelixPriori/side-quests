@@ -251,19 +251,14 @@ export default function App() {
             view: response.data[0].adventurer ? SHOW: CREATE
           };
         });
-        // response.data[0].adventurer ? changeView(SHOW) : changeView(CREATE);
       })
       .catch((error) => console.log(error));
   };
 
   const handleLogout = () => {
-    console.log('Handle Logout');
-
     return axios
       .post('/logout')
       .then(() => {
-        console.log('Logging out');
-
         setState((prev) => ({
           ...prev,
           classesProgressData: [],
@@ -278,7 +273,6 @@ export default function App() {
           loggedIn: false,
           view: LOGIN
         }));
-        // changeView(LOGIN);
       })
       .catch((error) => console.log(error));
   };
@@ -324,6 +318,7 @@ export default function App() {
         {state.view === SHOW && (
           <ClassSelection
             state={state}
+            setState={setState}
             newUserCheck={newUserCheck}
             openNewSocket={openNewSocket}
             addNewMessage={addNewMessage}
@@ -343,7 +338,7 @@ export default function App() {
             loggedInUser={state.userData}
           />
         )}
-        {state.view === VILLAGER_QUESTS && <VillagerQuestList state={state} />}
+        {state.view === VILLAGER_QUESTS && <VillagerQuestList state={state} setState={setState}/>}
         {state.view === TAKEN && <TakenQuests state={state} />}
       </main>
     </div>

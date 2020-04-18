@@ -10,7 +10,7 @@ const bcrypt = require('bcrypt');
 // )
 
 
-const { checkIfUserExists, addUser } = require('../db/helpers')
+const { checkIfUserExists, addUser, classProgressForNewUser, getUserByUsername } = require('../db/helpers')
 
 module.exports = () => {
   router.post('/register', (req, res) => {
@@ -19,12 +19,12 @@ module.exports = () => {
       firstName,
       lastName,
       email,
+      avatar,
       password,
       accountType
+
     } = req.body
     const hashedPassword = bcrypt.hashSync(password, 10)
-    // console.log(req.body)
-
     const EMPTY_ERROR = 'Please fill the registration information.'
 
 
@@ -39,14 +39,25 @@ module.exports = () => {
     } else {
       checkIfUserExists(email).then(userCheck => {
         if (!userCheck) {
-          addUser(
+          return addUser(
             username,
             firstName,
             lastName,
             email,
             hashedPassword,
-            accountType
-          ).then()
+            accountType,
+            avatar
+          ).then(() => {
+            return getUserByUsername(username).then(user => {
+              classProgressForNewUser(user.id).then(() => {
+                //Log them in
+                console.log("got here");
+                req.session.userId = user.id;
+                req.session.save();
+                res.send();
+              });
+            })
+          })
         } else {
           console.log('Error: User already exists with that email');
         }
