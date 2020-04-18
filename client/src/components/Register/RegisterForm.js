@@ -113,5 +113,8 @@ export default function RegisterForm(props) {
         }
       </section>
     </section>
+
+
+
   );
 }
