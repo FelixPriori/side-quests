@@ -27,7 +27,7 @@ export default function QuestListItem(props) {
       <p>{description}</p>
       <footer className="quest-footer">
         {adventurer_id
-          ? <div className="checkmark-div"><Check className="checkmark" /></div>
+          ? <div className="check-container"><div className="checkmark-div"><Check className="checkmark" /></div></div>
           : <div className="btn-group">
             <Button confirm onClick={() => onAccept(props.userQuests.id)}>Accept Quest</Button>
             {/* <Button confirm onClick={() => toggleChat()}><ChatDotsFill /></Button> */}

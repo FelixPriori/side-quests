@@ -7,10 +7,10 @@
 
 .footer {
   display:flex;
-  p, .check-container{
+  p, .check-container, .btn{
     align-self: flex-end;
   }
-  .check-container {
+  .check-container, .btn {
     margin-left: auto;
   }
   .checkmark-div{
