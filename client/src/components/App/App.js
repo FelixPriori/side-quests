@@ -49,11 +49,11 @@ export default function App() {
     // chatMessages: [],
     // knownUsers: {},
   });
-  
+
   function isEmpty(obj) {
     return !obj || Object.keys(obj).length === 0;
   }
-  
+
   useEffect(() => {
     axios
       .get('/checkSession')
@@ -199,7 +199,7 @@ export default function App() {
   };
 
   const handleLogin = () => {
-     return axios
+    return axios
       .get('/checkSession')
       .then((response) => {
         setState((prevState) => {
@@ -210,7 +210,7 @@ export default function App() {
             adventurer: response.data[0].adventurer,
             username: response.data[0].first_name,
             loggedIn: true,
-            view: response.data[0].adventurer ? SHOW: CREATE
+            view: response.data[0].adventurer ? SHOW : CREATE
           };
         });
       })
@@ -257,11 +257,11 @@ export default function App() {
           onTaken={() => changeView(TAKEN)}
         />
       ) : (
-        <Navbar
-          onLogin={() => changeView(LOGIN)}
-          onRegister={() => changeView(REGISTER)}
-        />
-      )}
+          <Navbar
+            onLogin={() => changeView(LOGIN)}
+            onRegister={() => changeView(REGISTER)}
+          />
+        )}
       <main>
         {state.view === LOADING && <Loading />}
         {state.view === LOGIN && <LoginForm onLogin={() => handleLogin()} />}
@@ -272,7 +272,7 @@ export default function App() {
           />
         )}
         {state.view === REGISTER && (
-          <RegisterForm onProfile={() => changeView(PROFILE)} />
+          <RegisterForm onLogin={handleLogin} onProfile={() => changeView(PROFILE)} />
         )}
         {state.view === CREATE && (
           <CreateQuestForm onCreate={() => changeView(VILLAGER_QUESTS)} />
@@ -281,9 +281,9 @@ export default function App() {
           <ClassSelection
             state={state}
             setState={setState}
-            // newUserCheck={newUserCheck}
-            // openNewSocket={openNewSocket}
-            // addNewMessage={addNewMessage}
+          // newUserCheck={newUserCheck}
+          // openNewSocket={openNewSocket}
+          // addNewMessage={addNewMessage}
           />
         )}
         {state.view === PROFILE && (
@@ -300,7 +300,7 @@ export default function App() {
             loggedInUser={state.userData}
           />
         )} */}
-        {state.view === VILLAGER_QUESTS && <VillagerQuestList state={state} setState={setState}/>}
+        {state.view === VILLAGER_QUESTS && <VillagerQuestList state={state} setState={setState} />}
         {state.view === TAKEN && <TakenQuests state={state} />}
       </main>
     </div>
