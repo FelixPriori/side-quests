@@ -88,17 +88,17 @@ export default function ClassSelection(props) {
       </section>
       {classItem &&
         <QuestList
-          chatMessages={props.state.chatMessages}
-          socket={props.state.socket}
-          knownUsers={props.state.knownUsers}
-          classItem={classItem}
-          userQuests={props.state.userQuests}
-          villagers={props.state.villagers}
-          newUserCheck={props.newUserCheck}
-          openNewSocket={props.openNewSocket}
-          addNewMessage={props.addNewMessage}
-          userData={props.state.userData}
-          onAccept={acceptQuest}
+        classItem={classItem}
+        userQuests={props.state.userQuests}
+        villagers={props.state.villagers}
+        userData={props.state.userData}
+        onAccept={acceptQuest}
+        // knownUsers={props.state.knownUsers}
+        // chatMessages={props.state.chatMessages}
+        // socket={props.state.socket}
+        // newUserCheck={props.newUserCheck}
+        // openNewSocket={props.openNewSocket}
+        // addNewMessage={props.addNewMessage}
         />}
     </section>
   );

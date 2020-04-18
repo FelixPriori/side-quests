@@ -14,7 +14,7 @@ import ChatWindow from '../ChatWindow/ChatWindow';
 import VillagerQuestList from '../VillagerQuestList/VillagerQuestList';
 import TakenQuests from '../TakenQuests/TakenQuests';
 
-import openSocket from 'socket.io-client';
+// import openSocket from 'socket.io-client';
 
 const LOGIN = 'LOGIN';
 const REGISTER = 'REGISTER';
@@ -140,80 +140,56 @@ export default function App() {
       .catch((error) => console.log(error));
   }, []);
 
-  const fetchUserData = () => {
-    axios
-      .get('/checkSession')
-      .then((response) => {
-        if (!isEmpty(response.data[0])) {
-          setState((prevState) => {
-            return {
-              ...prevState,
-              userData: response.data[0],
-              view: response.data[0]
-                ? response.data[0].adventurer
-                  ? SHOW
-                  : CREATE
-                : LOGIN,
-              sessions: response.data[0].id,
-              adventurer: response.data[0].adventurer,
-              username: response.data[0].first_name,
-            };
-          });
-        }
-      })
-      .catch((e) => console.log(e));
-  };
-
   //Socket.io
-  const addNewMessage = function (msgObj) {
-    setState((prevState) => {
-      return {
-        ...prevState,
-        chatMessages: [
-          ...prevState.chatMessages,
-          {
-            message: msgObj.msg,
-            userData: prevState.knownUsers[msgObj.userId],
-          },
-        ],
-      };
-    });
-  };
+  // const addNewMessage = function (msgObj) {
+  //   setState((prevState) => {
+  //     return {
+  //       ...prevState,
+  //       chatMessages: [
+  //         ...prevState.chatMessages,
+  //         {
+  //           message: msgObj.msg,
+  //           userData: prevState.knownUsers[msgObj.userId],
+  //         },
+  //       ],
+  //     };
+  //   });
+  // };
 
-  const newUserCheck = function (msgObj) {
-    if (state.knownUsers[msgObj.userId]) {
-      addNewMessage(msgObj);
-    } else {
-      axios.get(`/users/${msgObj.userId}`).then((results) => {
-        setState((prevState) => {
-          return {
-            ...prevState,
-            knownUsers: {
-              ...prevState.knownUsers,
-              [msgObj.userId]: results.data[0],
-            },
-          };
-        });
-        addNewMessage(msgObj);
-      });
-    }
-  };
+  // const newUserCheck = function (msgObj) {
+  //   if (state.knownUsers[msgObj.userId]) {
+  //     addNewMessage(msgObj);
+  //   } else {
+  //     axios.get(`/users/${msgObj.userId}`).then((results) => {
+  //       setState((prevState) => {
+  //         return {
+  //           ...prevState,
+  //           knownUsers: {
+  //             ...prevState.knownUsers,
+  //             [msgObj.userId]: results.data[0],
+  //           },
+  //         };
+  //       });
+  //       addNewMessage(msgObj);
+  //     });
+  //   }
+  // };
 
-  const openNewSocket = () => {
-    let socket = openSocket('localhost:8081');
+  // const openNewSocket = () => {
+  //   let socket = openSocket('localhost:8081');
 
-    socket.on('connect', function () {
-      socket.on('chat message', (msgObj) => {
-        newUserCheck(msgObj);
-      });
-      setState((prevState) => {
-        return {
-          ...prevState,
-          socket: socket,
-        };
-      });
-    });
-  };
+  //   socket.on('connect', function () {
+  //     socket.on('chat message', (msgObj) => {
+  //       newUserCheck(msgObj);
+  //     });
+  //     setState((prevState) => {
+  //       return {
+  //         ...prevState,
+  //         socket: socket,
+  //       };
+  //     });
+  //   });
+  // };
 
   const changeView = (viewType) => {
     setState({
@@ -319,9 +295,9 @@ export default function App() {
           <ClassSelection
             state={state}
             setState={setState}
-            newUserCheck={newUserCheck}
-            openNewSocket={openNewSocket}
-            addNewMessage={addNewMessage}
+            // newUserCheck={newUserCheck}
+            // openNewSocket={openNewSocket}
+            // addNewMessage={addNewMessage}
           />
         )}
         {state.view === PROFILE && (
@@ -330,14 +306,14 @@ export default function App() {
         {state.view === EDIT && (
           <RegisterForm userData={state.userData} onProfile={changeView} />
         )}
-        {state.view === CHAT && (
+        {/* {state.view === CHAT && (
           <ChatWindow
             socket={state.socket}
             openNewSocket={openNewSocket}
             messages={state.chatMessages}
             loggedInUser={state.userData}
           />
-        )}
+        )} */}
         {state.view === VILLAGER_QUESTS && <VillagerQuestList state={state} setState={setState}/>}
         {state.view === TAKEN && <TakenQuests state={state} />}
       </main>

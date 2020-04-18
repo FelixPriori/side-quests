@@ -37,6 +37,6 @@ export default function QuestListItem(props) {
           </div>
         </div>
       }
-    </div>
+    </div >
   )
 }
