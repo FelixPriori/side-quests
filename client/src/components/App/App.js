@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.scss';
-import axios from "axios";
+import axios from 'axios';
 
 import AllClasses from '../AllClasses/AllClasses';
 import Navbar from '../Navbar/Navbar';
@@ -14,7 +14,7 @@ import ChatWindow from '../ChatWindow/ChatWindow';
 import VillagerQuestList from '../VillagerQuestList/VillagerQuestList';
 import TakenQuests from '../TakenQuests/TakenQuests';
 
-import openSocket from "socket.io-client";
+import openSocket from 'socket.io-client';
 
 const LOGIN = 'LOGIN';
 const REGISTER = 'REGISTER';
@@ -45,8 +45,9 @@ export default function App() {
     questsByAdventurer: [],
     sessions: 0,
     adventurer: false,
-    username: "",
-    view: LOGIN
+    username: '',
+    view: LOGIN,
+    loggedIn: false,
   });
 
   function isEmpty(obj) {
@@ -54,7 +55,7 @@ export default function App() {
   }
 
   useEffect(() => {
-    if (!isEmpty(state.userData)) {
+    if (state.loggedIn) {
       console.log('SECOND SIDE EFFECT >>>>>>>');
       const getUserBadges = axios.get(`/users/${state.userData.id}/badges`);
       const getUserQuest = axios.get('/quests');
@@ -62,8 +63,12 @@ export default function App() {
       const getClassesProgress = axios.get('/userClassProgress');
       const getVillagers = axios.get('/villagers');
       const getBadges = axios.get('/badges');
-      const getQuestsByVillager = axios.get(`/users/${state.userData.id}/quests`);
-      const getQuestsByAdventurer = axios.get(`/users/adventurer/${state.userData.id}/quests`);
+      const getQuestsByVillager = axios.get(
+        `/users/${state.userData.id}/quests`
+      );
+      const getQuestsByAdventurer = axios.get(
+        `/users/adventurer/${state.userData.id}/quests`
+      );
       const getClassBadges = axios.get(`/classes/${state.userData.id}/badges`);
 
       Promise.all([
@@ -75,7 +80,7 @@ export default function App() {
         getBadges,
         getQuestsByVillager,
         getQuestsByAdventurer,
-        getClassBadges
+        getClassBadges,
       ])
         .then(
           ([
@@ -85,9 +90,9 @@ export default function App() {
             { data: classesProgressData },
             { data: villagers },
             { data: badges },
-            { data: questsByVillager},
-            { data: questsByAdventurer},
-            { data: classBadges}
+            { data: questsByVillager },
+            { data: questsByAdventurer },
+            { data: classBadges },
           ]) => {
             setState({
               ...state,
@@ -99,44 +104,48 @@ export default function App() {
               badges,
               questsByVillager,
               questsByAdventurer,
-              classBadges
+              classBadges,
             });
           }
         )
         .catch((err) => console.log(err));
     }
-  }, [state.userData]);
+  }, [state.loggedIn]);
 
-  useEffect(() => {
-    axios
-      .get('/checkSession')
-      .then(response => {
-        if (!isEmpty(response.data[0])) {
-          setState(prevState => {
-            return {
-              ...prevState,
-              userData: response.data[0],
-              view: response.data[0]
-                ? response.data[0].adventurer
-                  ? SHOW
-                  : CREATE
-                : LOGIN,
-              sessions: response.data[0].id,
-              adventurer: response.data[0].adventurer,
-              username: response.data[0].first_name
-            };
-          });
-        }
-      })
-      .catch(error => console.log(error))
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get('/checkSession')
+  //     .then((response) => {
+  //       console.log('USE EFFECT: CheckSession');
+  //       if (!isEmpty(response.data[0])) {
+  //         console.log('USE EFFECT: CheckSession => user retrieved');
+
+  //         setState((prevState) => {
+  //           return {
+  //             ...prevState,
+  //             userData: response.data[0],
+  //             view: response.data[0]
+  //               ? response.data[0].adventurer
+  //                 ? SHOW
+  //                 : CREATE
+  //               : LOGIN,
+  //             sessions: response.data[0].id,
+  //             adventurer: response.data[0].adventurer,
+  //             username: response.data[0].first_name,
+  //             loggedIn: true,
+  //           };
+  //         });
+  //       }
+  //     })
+  //     .catch((error) => console.log(error));
+  // }, []);
 
   const fetchUserData = () => {
     axios
       .get('/checkSession')
-      .then(response => {
+      .then((response) => {
         if (!isEmpty(response.data[0])) {
-          setState(prevState => {
+          setState((prevState) => {
             return {
               ...prevState,
               userData: response.data[0],
@@ -147,25 +156,27 @@ export default function App() {
                 : LOGIN,
               sessions: response.data[0].id,
               adventurer: response.data[0].adventurer,
-              username: response.data[0].first_name
+              username: response.data[0].first_name,
             };
           });
         }
       })
-      .catch(e => console.log(e))
-  }
+      .catch((e) => console.log(e));
+  };
 
   //Socket.io
   const addNewMessage = function (msgObj) {
-    setState(prevState => {
+    setState((prevState) => {
       return {
         ...prevState,
-        chatMessages: [...prevState.chatMessages,
-        {
-          message: msgObj.msg,
-          userData: prevState.knownUsers[msgObj.userId]
-        }]
-      }
+        chatMessages: [
+          ...prevState.chatMessages,
+          {
+            message: msgObj.msg,
+            userData: prevState.knownUsers[msgObj.userId],
+          },
+        ],
+      };
     });
   };
 
@@ -173,18 +184,20 @@ export default function App() {
     if (state.knownUsers[msgObj.userId]) {
       addNewMessage(msgObj);
     } else {
-      axios.get(`/users/${msgObj.userId}`).then(results => {
-
-        setState(prevState => {
+      axios.get(`/users/${msgObj.userId}`).then((results) => {
+        setState((prevState) => {
           return {
             ...prevState,
-            knownUsers: { ...prevState.knownUsers, [msgObj.userId]: results.data[0] }
-          }
+            knownUsers: {
+              ...prevState.knownUsers,
+              [msgObj.userId]: results.data[0],
+            },
+          };
         });
-        addNewMessage(msgObj)
-      })
+        addNewMessage(msgObj);
+      });
     }
-  }
+  };
 
   const openNewSocket = () => {
     let socket = openSocket('localhost:8081');
@@ -193,51 +206,66 @@ export default function App() {
       socket.on('chat message', (msgObj) => {
         newUserCheck(msgObj);
       });
-      setState(prevState => {
+      setState((prevState) => {
         return {
           ...prevState,
-          socket: socket
+          socket: socket,
         };
       });
     });
-  }
+  };
 
   const changeView = (viewType) => {
     setState({
       ...state,
-      view: LOADING
-    })
+      view: LOADING,
+    });
     setTimeout(() => {
       setState({
         ...state,
-        view: viewType
-      })
-    }, 500)
+        view: viewType,
+      });
+    }, 500);
   };
 
   const handleLogin = () => {
-    return axios
+
+    console.log("Handle Login");
+    
+
+     return axios
       .get('/checkSession')
-      .then(response => {
-        setState(prevState => {
+      .then((response) => {
+
+        console.log("Setting login state");
+        
+
+        setState((prevState) => {
           return {
             ...prevState,
             userData: response.data[0],
             sessions: response.data[0].id,
             adventurer: response.data[0].adventurer,
             username: response.data[0].first_name,
+            loggedIn: true,
+            view: response.data[0].adventurer ? SHOW: CREATE
           };
         });
-        response.data[0].adventurer ? changeView(SHOW) : changeView(CREATE);
+        // response.data[0].adventurer ? changeView(SHOW) : changeView(CREATE);
       })
-      .catch(error => console.log(error))
+      .catch((error) => console.log(error));
   };
 
   const handleLogout = () => {
+    console.log('Handle Logout');
+
     return axios
       .post('/logout')
       .then(() => {
-        setState({
+        console.log('Logging out');
+
+        setState((prev) => ({
+          ...prev,
           classesProgressData: [],
           classesData: [],
           userData: {},
@@ -246,17 +274,19 @@ export default function App() {
           badges: [],
           sessions: 0,
           adventurer: false,
-          username: ""
-        });
-        changeView(LOGIN);
+          username: '',
+          loggedIn: false,
+          view: LOGIN
+        }));
+        // changeView(LOGIN);
       })
-      .catch(error => console.log(error))
+      .catch((error) => console.log(error));
   };
 
   return (
     <div className="App">
-      { state.sessions
-        ? <Navbar
+      {state.sessions ? (
+        <Navbar
           user={state.username}
           adventurer={state.adventurer}
           onQuests={() => changeView(SHOW)}
@@ -270,65 +300,52 @@ export default function App() {
           onVillagerQuests={() => changeView(VILLAGER_QUESTS)}
           onTaken={() => changeView(TAKEN)}
         />
-        : <Navbar
+      ) : (
+        <Navbar
           onLogin={() => changeView(LOGIN)}
           onRegister={() => changeView(REGISTER)}
         />
-      }
+      )}
       <main>
         {state.view === LOADING && <Loading />}
-        {state.view === LOGIN &&
-          <LoginForm
-            onLogin={() => handleLogin()}
-          />}
-        {state.view === CLASSES &&
+        {state.view === LOGIN && <LoginForm onLogin={() => handleLogin()} />}
+        {state.view === CLASSES && (
           <AllClasses
             classesData={state.classesData}
             classesProgressData={state.classesProgressData}
-          />}
-        {state.view === REGISTER && 
-          <RegisterForm 
-            onProfile={() => changeView(PROFILE)} 
-          />}
-        {state.view === CREATE && 
-          <CreateQuestForm 
-            onCreate={() => changeView(VILLAGER_QUESTS)}
-          />}
-        {state.view === SHOW
-          && <ClassSelection
+          />
+        )}
+        {state.view === REGISTER && (
+          <RegisterForm onProfile={() => changeView(PROFILE)} />
+        )}
+        {state.view === CREATE && (
+          <CreateQuestForm onCreate={() => changeView(VILLAGER_QUESTS)} />
+        )}
+        {state.view === SHOW && (
+          <ClassSelection
             state={state}
             newUserCheck={newUserCheck}
             openNewSocket={openNewSocket}
             addNewMessage={addNewMessage}
-          />}
-        {state.view === PROFILE &&
-          <Profile
-            onEdit={() => changeView(EDIT)}
-            state={state}
-            edit={true}
-          />}
-        {state.view === EDIT &&
-          <RegisterForm
-            userData={state.userData}
-            onProfile={changeView}
-          />}
-      {state.view === CHAT &&
-        <ChatWindow
-          socket={state.socket}
-          openNewSocket={openNewSocket}
-          messages={state.chatMessages}
-          loggedInUser={state.userData}
-        />}
-      {state.view === VILLAGER_QUESTS &&
-        <VillagerQuestList 
-          state={state}
-        />}
-      { state.view === TAKEN &&
-        <TakenQuests
-          state={state}
-        />
-      }
+          />
+        )}
+        {state.view === PROFILE && (
+          <Profile onEdit={() => changeView(EDIT)} state={state} edit={true} />
+        )}
+        {state.view === EDIT && (
+          <RegisterForm userData={state.userData} onProfile={changeView} />
+        )}
+        {state.view === CHAT && (
+          <ChatWindow
+            socket={state.socket}
+            openNewSocket={openNewSocket}
+            messages={state.chatMessages}
+            loggedInUser={state.userData}
+          />
+        )}
+        {state.view === VILLAGER_QUESTS && <VillagerQuestList state={state} />}
+        {state.view === TAKEN && <TakenQuests state={state} />}
       </main>
-    </div >
+    </div>
   );
 }
