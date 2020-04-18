@@ -52,7 +52,7 @@ export default function QuestList(props) {
       </div>
       <div className="quest-list-items">
         {quests.length
-          ? quests
+          ? quests.reverse()
           : <div className="alert alert-danger">There are currently no {classItem.name.toLowerCase()} quests available</div>
         }
       </div>

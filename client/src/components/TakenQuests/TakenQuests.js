@@ -18,7 +18,7 @@ export default function TakenQuests(props) {
       <h2>Your current quests</h2>
       <div className="current-quest-list">
         { currentQuests
-          ? currentQuests
+          ? currentQuests.reverse()
           : <div className="alert alert-danger">You currently do not have any created quests.</div>
         }
       </div>
