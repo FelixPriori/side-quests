@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './QuestListItem.scss';
 import Button from '../Button/Button';
-import ChatWindow from '../ChatWindow/ChatWindow';
-import { ChatDotsFill } from 'react-bootstrap-icons';
 import { Check } from 'react-bootstrap-icons';
+// import ChatWindow from '../ChatWindow/ChatWindow';
+// import { ChatDotsFill } from 'react-bootstrap-icons';
 
 export default function QuestListItem(props) {
   // const [viewChat, setViewChat] = useState(false);
@@ -17,8 +17,8 @@ export default function QuestListItem(props) {
   // };
 
 
-  // const { newUserCheck, openNewSocket, addNewMessage, socket, chatMessages, knownUsers } = props;
-  const { userData, onAccept } = props;
+  // const { userData, newUserCheck, openNewSocket, addNewMessage, socket, chatMessages, knownUsers } = props;
+  const { onAccept } = props;
 
   return (
     <div className="quest-item">

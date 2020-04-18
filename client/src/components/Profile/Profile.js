@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './Profile.scss';
 import Button from '../Button/Button';
 import BadgeBox from '../BadgeBox/BadgeBox';

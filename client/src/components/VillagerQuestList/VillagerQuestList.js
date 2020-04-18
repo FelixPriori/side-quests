@@ -1,17 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import './VillagerQuestList.scss';
 import VillagerQuestListItem from './VillagerQuestListItem';
 import axios from "axios";
 
 export default function VillagerQuestList(props) {
-
-  useEffect(() => {
-    fetchUserData();
-    fetchQuestsByVillager();
-  }, [])
-
-
-  const { fetchUserData, fetchQuestsByVillager } = props;
 
   const completeQuest = function (classId, questId, adventurerId) {
     const data = { adventurerId };
@@ -41,7 +33,6 @@ export default function VillagerQuestList(props) {
         villagerQuest={quest}
         onEdit={props.onEdit}
         onComplete={completeQuest}
-        fetchQuestsByVillager={fetchQuestsByVillager}
       />
     )
   })

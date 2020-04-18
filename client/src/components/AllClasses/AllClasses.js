@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './AllClasses.scss';
 import ClassProgress from '../ClassProgress/ClassProgress';
 

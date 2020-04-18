@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './ClassSelection.scss';
 import ClassProgress from '../ClassProgress/ClassProgress';
 import QuestList from '../QuestList/QuestList';

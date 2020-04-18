@@ -10,11 +10,11 @@ import CreateQuestForm from '../CreateQuest/CreateQuestForm';
 import ClassSelection from '../ClassSelection/ClassSelection';
 import Profile from '../Profile/Profile';
 import Loading from '../Loading/Loading';
-import ChatWindow from '../ChatWindow/ChatWindow';
 import VillagerQuestList from '../VillagerQuestList/VillagerQuestList';
 import TakenQuests from '../TakenQuests/TakenQuests';
 
 // import openSocket from 'socket.io-client';
+// import ChatWindow from '../ChatWindow/ChatWindow';
 
 const LOGIN = 'LOGIN';
 const REGISTER = 'REGISTER';
@@ -24,9 +24,9 @@ const SHOW = 'SHOW';
 const PROFILE = 'PROFILE';
 const EDIT = 'EDIT';
 const LOADING = 'LOADING';
-const CHAT = 'CHAT';
 const VILLAGER_QUESTS = 'VILLAGER_QUESTS';
 const TAKEN = 'TAKEN';
+// const CHAT = 'CHAT';
 
 export default function App() {
   const [state, setState] = useState({
@@ -37,9 +37,6 @@ export default function App() {
     villagers: [],
     badges: [],
     userBadges: [],
-    socket: [],
-    chatMessages: [],
-    knownUsers: {},
     classBadges: [],
     questsByVillager: [],
     questsByAdventurer: [],
@@ -48,29 +45,52 @@ export default function App() {
     username: '',
     view: LOGIN,
     loggedIn: false,
+    // socket: [],
+    // chatMessages: [],
+    // knownUsers: {},
   });
-
+  
   function isEmpty(obj) {
     return !obj || Object.keys(obj).length === 0;
   }
+  
+  useEffect(() => {
+    axios
+      .get('/checkSession')
+      .then((response) => {
+        if (!isEmpty(response.data[0])) {
+          setState((prevState) => {
+            return {
+              ...prevState,
+              userData: response.data[0],
+              view: response.data[0]
+                ? response.data[0].adventurer
+                  ? SHOW
+                  : CREATE
+                : LOGIN,
+              sessions: response.data[0].id,
+              adventurer: response.data[0].adventurer,
+              username: response.data[0].first_name,
+              loggedIn: true,
+            };
+          });
+        }
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   useEffect(() => {
+    console.log(state)
     if (state.loggedIn) {
-      console.log('SECOND SIDE EFFECT >>>>>>>');
       const getUserBadges = axios.get(`/users/${state.userData.id}/badges`);
       const getUserQuest = axios.get('/quests');
       const getClasses = axios.get('/classes');
       const getClassesProgress = axios.get('/userClassProgress');
       const getVillagers = axios.get('/villagers');
       const getBadges = axios.get('/badges');
-      const getQuestsByVillager = axios.get(
-        `/users/${state.userData.id}/quests`
-      );
-      const getQuestsByAdventurer = axios.get(
-        `/users/adventurer/${state.userData.id}/quests`
-      );
+      const getQuestsByVillager = axios.get(`/users/${state.userData.id}/quests`);
+      const getQuestsByAdventurer = axios.get(`/users/adventurer/${state.userData.id}/quests`);
       const getClassBadges = axios.get(`/classes/${state.userData.id}/badges`);
-
       Promise.all([
         getUserBadges,
         getUserQuest,
@@ -112,33 +132,7 @@ export default function App() {
     }
   }, [state.loggedIn]);
 
-  useEffect(() => {
-    axios
-      .get('/checkSession')
-      .then((response) => {
-        console.log('USE EFFECT: CheckSession');
-        if (!isEmpty(response.data[0])) {
-          console.log('USE EFFECT: CheckSession => user retrieved');
 
-          setState((prevState) => {
-            return {
-              ...prevState,
-              userData: response.data[0],
-              view: response.data[0]
-                ? response.data[0].adventurer
-                  ? SHOW
-                  : CREATE
-                : LOGIN,
-              sessions: response.data[0].id,
-              adventurer: response.data[0].adventurer,
-              username: response.data[0].first_name,
-              loggedIn: true,
-            };
-          });
-        }
-      })
-      .catch((error) => console.log(error));
-  }, []);
 
   //Socket.io
   // const addNewMessage = function (msgObj) {
@@ -205,17 +199,9 @@ export default function App() {
   };
 
   const handleLogin = () => {
-
-    console.log("Handle Login");
-    
-
      return axios
       .get('/checkSession')
       .then((response) => {
-
-        console.log("Setting login state");
-        
-
         setState((prevState) => {
           return {
             ...prevState,
@@ -266,7 +252,7 @@ export default function App() {
           onRegister={() => changeView(REGISTER)}
           onProgress={() => changeView(CLASSES)}
           onProfile={() => changeView(PROFILE)}
-          onChat={() => changeView(CHAT)}
+          // onChat={() => changeView(CHAT)}
           onVillagerQuests={() => changeView(VILLAGER_QUESTS)}
           onTaken={() => changeView(TAKEN)}
         />
