@@ -13,6 +13,7 @@ function LoginMenu(props) {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
+          <Dropdown.Item onClick={props.onAbout}>About</Dropdown.Item>
           <Dropdown.Item onClick={props.onLogin}>Login</Dropdown.Item>
           <Dropdown.Item onClick={props.onRegister}>Register</Dropdown.Item>
         </Dropdown.Menu>
@@ -33,12 +34,14 @@ function UserMenu(props) {
         <Dropdown.Menu>
           {props.adventurer
             ? <span className="button-group">
+              <Dropdown.Item onClick={props.onAbout}>About</Dropdown.Item>
               <Dropdown.Item onClick={props.onQuests}>Quests</Dropdown.Item>
+              <Dropdown.Item onClick={props.onTaken}>Accepted Quests</Dropdown.Item>
               <Dropdown.Item onClick={props.onProgress}>Progress</Dropdown.Item>
               <Dropdown.Item onClick={props.onProfile}>Profile</Dropdown.Item>
-              <Dropdown.Item onClick={props.onTaken}>Taken Quests</Dropdown.Item>
             </span>
             : <span className="button-group">
+              <Dropdown.Item onClick={props.onAbout}>About</Dropdown.Item>
               <Dropdown.Item onClick={props.onCreate}>Create Quest</Dropdown.Item>
               <Dropdown.Item onClick={props.onVillagerQuests}>Quests</Dropdown.Item>
               <Dropdown.Item onClick={props.onProfile}>Profile</Dropdown.Item>
