@@ -19,8 +19,16 @@ export default function QuestListItem(props) {
         {props.adventurer &&
           <div>
             <p>
-              <strong>{props.adventurer.username}</strong><br />
-              {completed ? "completed this quest." : "is currently assisting."}
+              <strong>{props.adventurer.username}</strong><br/>
+              {completed 
+                ? "completed this quest." 
+                : "is currently assisting."}<br/>
+              {!completed 
+                && 
+                  <a 
+                    href={`mailto: ${props.adventurer.email}?subject=${name}`}>
+                      Email {props.adventurer.username}
+                  </a>}
             </p>
           </div>
         }
@@ -30,8 +38,11 @@ export default function QuestListItem(props) {
           </div>
           : <div className="btn-group">
             <Button danger onClick={() => setConfirmation(true)}>Cancel</Button>
-            {props.adventurer &&
-              <Button confirm onClick={() => props.onComplete(props.villagerQuest.class_id, props.villagerQuest.id, props.villagerQuest.adventurer_id)}>Complete</Button>}
+            { props.adventurer &&
+              <div className="btn-group">
+                <Button confirm><a className="inside-anchor" href="https://hangouts.google.com/call/4vTdHBEPZQ6TnGAwr570AEEE?no_rd" target="_blank">Hangout</a></Button>
+                <Button confirm onClick={() => props.onComplete(props.villagerQuest.class_id, props.villagerQuest.id, props.villagerQuest.adventurer_id)}>Complete</Button>
+              </div>}
           </div>
         }
       </div>
