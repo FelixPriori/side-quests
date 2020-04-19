@@ -2,7 +2,6 @@ import React from 'react';
 import './QuestListItem.scss';
 import Button from '../Button/Button';
 import CheckSeal from '../CheckSeal/CheckSeal';
-import { Check } from 'react-bootstrap-icons';
 // import ChatWindow from '../ChatWindow/ChatWindow';
 // import { ChatDotsFill } from 'react-bootstrap-icons';
 

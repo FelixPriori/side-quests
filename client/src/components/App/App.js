@@ -12,7 +12,6 @@ import Profile from '../Profile/Profile';
 import Loading from '../Loading/Loading';
 import VillagerQuestList from '../VillagerQuestList/VillagerQuestList';
 import TakenQuests from '../TakenQuests/TakenQuests';
-import About from '../About/About';
 
 // import openSocket from 'socket.io-client';
 // import ChatWindow from '../ChatWindow/ChatWindow';
@@ -27,7 +26,6 @@ const EDIT = 'EDIT';
 const LOADING = 'LOADING';
 const VILLAGER_QUESTS = 'VILLAGER_QUESTS';
 const TAKEN = 'TAKEN';
-const ABOUT = 'ABOUT';
 // const CHAT = 'CHAT';
 
 export default function App() {
@@ -44,7 +42,7 @@ export default function App() {
     sessions: 0,
     adventurer: false,
     username: '',
-    view: ABOUT,
+    view: LOGIN,
     loggedIn: false,
     adventurers: [],
     // socket: [],
@@ -254,19 +252,16 @@ export default function App() {
           onProfile={() => changeView(PROFILE)}
           onVillagerQuests={() => changeView(VILLAGER_QUESTS)}
           onTaken={() => changeView(TAKEN)}
-          onAbout={() => changeView(ABOUT)}
         // onChat={() => changeView(CHAT)}
         />
       ) : (
           <Navbar
             onLogin={() => changeView(LOGIN)}
             onRegister={() => changeView(REGISTER)}
-            onAbout={() => changeView(ABOUT)}
           />
         )}
       <main>
         {state.view === LOADING && <Loading />}
-        {state.view === ABOUT && <About/>}
         {state.view === LOGIN && <LoginForm onLogin={() => handleLogin()} />}
         {state.view === CLASSES && (
           <AllClasses

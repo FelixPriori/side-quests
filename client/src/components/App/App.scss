@@ -28,3 +28,8 @@ button {
   align-self: flex-end;
 }
 
+h1 {
+  color: $color1;
+  font-family: $title;
+  text-shadow: 1px 1px $shadow1;
+}

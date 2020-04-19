@@ -81,7 +81,7 @@ export default function RegisterForm(props) {
         <input
           name="avatar"
           type="url"
-          placeholder={"Link to avatar"}
+          placeholder={"Link to avatar (optional)"}
           value={avatar}
           data-testid="avatar-input"
           onChange={event => setAvatar(event.target.value)}

@@ -1,7 +1,41 @@
 @import '../../styles/palette.scss';
 
-h1 {
-  color: $color1;
-  font-family: $title;
-  text-shadow: 1px 1px $shadow1;
+.logo-div {
+  display: flex;
+  .logo {
+    width: 3em;
+  }
+  .letters-div {
+    display: flex;
+    flex-direction: row;
+    .s-div, .q-div {
+      display: flex
+    }
+    .s-div {
+      h1 {
+        margin-right: 0;
+        color: $color1;
+        font-family: $title;
+        text-shadow: 1px 1px $shadow1;
+      }
+      p {
+        font-family: $title;
+        color: $color1;
+        margin-top: 1.3em;
+      }
+    }
+    .q-div{
+      h1 {
+        margin-right: 0;
+        color: $color1;
+        font-family: $title;
+        text-shadow: 1px 1px $shadow1;
+      }
+      p {
+        font-family: $title;
+        color: $color1;
+        margin-top: 1.3em;
+      }
+    }
+  }
 }
