@@ -6,7 +6,7 @@ const { checkIfUserExists, addUser, classProgressForNewUser, getUserByUsername }
 
 module.exports = () => {
   router.post('/register', (req, res) => {
-    const {
+    let {
       username,
       firstName,
       lastName,
@@ -14,7 +14,6 @@ module.exports = () => {
       avatar,
       password,
       accountType
-
     } = req.body
     const hashedPassword = bcrypt.hashSync(password, 10)
     const EMPTY_ERROR = 'Please fill the registration information.'
@@ -25,7 +24,9 @@ module.exports = () => {
     } else if (accountType === 2) {
       accountType = true;
     }
-
+    if (!avatar) {
+      avatar = 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png';
+    }
     if (!username || !email || !password) {
       res.send(EMPTY_ERROR)
     } else {

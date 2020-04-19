@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './TakenQuestItem.scss';
 import Button from '../Button/Button';
-import { Check } from 'react-bootstrap-icons';
 import CheckSeal from '../CheckSeal/CheckSeal';
 
 export default function TakenQuestItem(props) {

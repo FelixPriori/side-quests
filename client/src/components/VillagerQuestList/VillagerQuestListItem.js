@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './VillagerQuestListItem.scss';
 import Button from '../Button/Button';
-import { Check } from 'react-bootstrap-icons';
 import CheckSeal from '../CheckSeal/CheckSeal';
 import axios from "axios";
 

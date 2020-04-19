@@ -57,7 +57,7 @@ function UserMenu(props) {
 export default function Navbar(props) {
   return (
     <header className="nav-container">
-      <Logo />
+      <Logo onClick={props.onAbout}/>
       {props.user
         ? <UserMenu {...props} />
         : <LoginMenu {...props} />
