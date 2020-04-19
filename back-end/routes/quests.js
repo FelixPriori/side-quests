@@ -9,15 +9,16 @@ const { dropQuest, createNewQuest, acceptQuest, completeQuest, deleteQuest, edit
 module.exports = () => {
 
   router.post("/quests/new", (req, res) => {
-    const { questType, name, description } = req.body;
+    const { questType, name, description, city } = req.body;
     const createError = "All fields must be filled out"
-    if (!questType || !name || !description) {
+    if (!questType || !name || !description || !city) {
       res.status(401).send(createError);
+    } else {
+      createNewQuest(name, description, false, city, questType, req.session.userId)
+        .then(() => {
+          res.send()
+        });
     }
-    createNewQuest(name, description, false, 0, 0, questType, req.session.userId)
-      .then(() => {
-        res.send()
-      });
   });
 
   router.post("/quests/:id/acceptQuest", (req, res) => {

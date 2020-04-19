@@ -7,7 +7,7 @@ import { Check } from 'react-bootstrap-icons';
 
 export default function QuestListItem(props) {
   // const [viewChat, setViewChat] = useState(false);
-  const { name, description, adventurer_id } = props.userQuests;
+  const { name, description, adventurer_id, city } = props.userQuests;
   // const toggleChat = () => {
   //   if (viewChat) {
   //     setViewChat(false)
@@ -16,7 +16,6 @@ export default function QuestListItem(props) {
   //   }
   // };
 
-
   // const { userData, newUserCheck, openNewSocket, addNewMessage, socket, chatMessages, knownUsers } = props;
   const { onAccept } = props;
 
@@ -24,6 +23,7 @@ export default function QuestListItem(props) {
     <div className="quest-item">
       <h3>{name}</h3>
       <p className="username">Villager: {props.villager.username}</p>
+      <p>Location: {city}</p>
       <p>{description}</p>
       <footer className="quest-footer">
         {adventurer_id
