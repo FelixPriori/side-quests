@@ -7,29 +7,30 @@ export default function CreateQuestForm(props) {
   const [questType, setQuestType] = useState(null);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
   const [error, setError] = useState(null);
   
   function handleSubmit() {
-    const data = { questType, name, description, address };
-    const oldQuests = props.state.questsByVillager;
-    const newQuest = {
-      id: oldQuests.length,
-      name: name,
-      description: description,
-      completed: false,
-      class_id: questType,
-      villager_id: props.state.userData.id,
-      adventurer_id: null,
-      experience_points: 100
-    }
-    oldQuests.push(newQuest);
+    const data = { questType, name, description, city };
     axios.post('/quests/new', data)
       .then(() => {
+        const { questsByVillager } = props.state;
+        const newQuest = {
+          id: questsByVillager.length,
+          name: name,
+          description: description,
+          completed: false,
+          city: city,
+          class_id: questType,
+          villager_id: props.state.userData.id,
+          adventurer_id: null,
+          experience_points: 100
+        };
+        questsByVillager.push(newQuest);
         props.setState( prevState => {
           return {
             ...prevState,
-            questsByVillager: oldQuests
+            questsByVillager: questsByVillager
           }
         })
         props.onCreate()
@@ -78,12 +79,12 @@ export default function CreateQuestForm(props) {
           onChange={event => setDescription(event.target.value)}
         />
         <input
-          name="address"
+          name="city"
           type="text"
-          placeholder={"(OPTIONAL) Enter address"}
-          value={address}
+          placeholder={"Enter city"}
+          value={city}
           data-testid="address-input"
-          onChange={event => setAddress(event.target.value)}
+          onChange={event => setCity(event.target.value)}
         />
       </form>
       <section className="register__actions">
