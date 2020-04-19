@@ -10,20 +10,8 @@ export default function QuestList(props) {
     return quest.class_id === classItem.id && quest.completed === false;
   })
 
-  const villagerForQuest = (villagers, validQuests) => {
-    const output = [];
-    for (const quest of validQuests) {
-      const questObject = {}
-      const villager = villagers && villagers.find(villager => villager.id === quest.villager_id);
-      questObject[villager.username] = quest;
-      output.push(questObject);
-    }
-    return output;
-  };
-
-  const villagerQuests = villagerForQuest(villagers, validQuests);
-  const quests = villagerQuests && villagerQuests.map((quest, index) => {
-    const villagerName = Object.keys(quest)[0];
+  const questItems = validQuests && validQuests.map((quest, index) => {
+    const villager = villagers && villagers.find(villager => villager.id === quest.villager_id);
     return (
       <QuestListItem
         // newUserCheck={props.newUserCheck}
@@ -33,14 +21,14 @@ export default function QuestList(props) {
         // socket={props.socket}
         // knownUsers={props.knownUsers}
         key={index}
-        userQuests={quest[villagerName]}
-        villager={villagerName}
+        userQuests={quest}
+        villager={villager}
         onOpen={props.onOpen}
         userData={props.userData}
         onAccept={props.onAccept}
       />
     )
-  })
+  });
 
   return (
     <section className="quest-list">
@@ -48,8 +36,8 @@ export default function QuestList(props) {
         <h2>Quests for {classItem.name}</h2>
       </div>
       <div className="quest-list-items">
-        {quests.length
-          ? quests.reverse()
+        {questItems.length
+          ? questItems.reverse()
           : <div className="alert alert-danger">There are currently no {classItem.name.toLowerCase()} quests available</div>
         }
       </div>

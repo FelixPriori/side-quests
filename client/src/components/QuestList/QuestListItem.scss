@@ -18,6 +18,10 @@
   button {
     align-self: flex-end;
   }
+  .links {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .quest-item:hover {
@@ -26,13 +30,13 @@
 
 .quest-footer {
   display: flex;
-  margin-left: auto;
   button {
     margin: 0.5em;
   }
 }
 
 .check-container {
+  margin-left: auto;
   display: flex;
   justify-content: flex-end;
   .checkmark-div{
