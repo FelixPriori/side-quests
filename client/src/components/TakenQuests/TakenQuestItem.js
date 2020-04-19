@@ -16,6 +16,12 @@ export default function TakenQuestItem(props) {
         <p>
           <strong>{villager[0].username}</strong><br/>
           {completed ? "marked this quest as complete." : "posted this quest."}
+          {!completed 
+            && 
+              <a 
+                href={`mailto: ${villager[0].email}?subject=${name}`}>
+                  Email {villager[0].username}
+              </a>}
         </p>
       {completed 
       ? <div className="check-container">

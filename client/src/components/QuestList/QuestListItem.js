@@ -23,9 +23,15 @@ export default function QuestListItem(props) {
   return (
     <div className="quest-item">
       <h3>{name}</h3>
-      <p className="username">Villager: {props.villager}</p>
+      <p className="username">Villager: {props.villager.username}</p>
       <p>{description}</p>
       <footer className="quest-footer">
+        {adventurer_id
+            &&
+            <a 
+              href={`mailto: ${props.villager.email}?subject=${name}`}>
+                Email {props.villager.username}
+            </a>}
         {adventurer_id
           ? <div className="check-container"><div className="checkmark-div"><Check className="checkmark" /></div></div>
           : <div className="btn-group">

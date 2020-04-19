@@ -20,7 +20,15 @@ export default function QuestListItem(props) {
           <div>
             <p>
               <strong>{props.adventurer.username}</strong><br/>
-              {completed ? "completed this quest." : "is currently assisting."}
+              {completed 
+                ? "completed this quest." 
+                : "is currently assisting."}<br/>
+              {!completed 
+                && 
+                  <a 
+                    href={`mailto: ${props.adventurer.email}?subject=${name}`}>
+                      Email {props.adventurer.username}
+                  </a>}
             </p>
           </div>
         }
