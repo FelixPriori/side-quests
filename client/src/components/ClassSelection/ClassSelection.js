@@ -37,9 +37,14 @@ export default function ClassSelection(props) {
         return quest;
       })
 
+      const newQuest = props.state.userQuests.find(quest => quest.id === questId);
+      newQuest.adventurer_id = props.state.userData.id;
+      const newAdventurerQuests = [...props.state.questsByAdventurer, newQuest];
+
       props.setState(prevState => ({
         ...prevState,
-        userQuests: quests
+        userQuests: quests,
+        questsByAdventurer: newAdventurerQuests
       }))
     });
   }
@@ -95,12 +100,7 @@ export default function ClassSelection(props) {
           villagers={props.state.villagers}
           userData={props.state.userData}
           onAccept={acceptQuest}
-        // knownUsers={props.state.knownUsers}
-        // chatMessages={props.state.chatMessages}
-        // socket={props.state.socket}
-        // newUserCheck={props.newUserCheck}
-        // openNewSocket={props.openNewSocket}
-        // addNewMessage={props.addNewMessage}
+          setState={props.setState}
         />}
     </section>
   );

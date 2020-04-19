@@ -13,11 +13,12 @@ module.exports = () => {
     const createError = "All fields must be filled out"
     if (!questType || !name || !description) {
       res.status(401).send(createError);
+    } else {
+      createNewQuest(name, description, false, 0, 0, questType, req.session.userId)
+        .then(() => {
+          res.send()
+        });
     }
-    createNewQuest(name, description, false, 0, 0, questType, req.session.userId)
-      .then(() => {
-        res.send()
-      });
   });
 
   router.post("/quests/:id/acceptQuest", (req, res) => {
