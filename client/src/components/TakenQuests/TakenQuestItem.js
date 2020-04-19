@@ -15,7 +15,7 @@ export default function TakenQuestItem(props) {
       <div className="footer">
         <p>
           <strong>{villager[0].username}</strong><br/>
-          {completed ? "marked this quest as complete." : "posted this quest."}
+          {completed ? "marked this quest as complete." : "posted this quest."} <br/>
           {!completed 
             && 
               <a 
