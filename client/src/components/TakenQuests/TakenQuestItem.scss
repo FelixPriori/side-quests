@@ -5,6 +5,7 @@
   flex-flow: wrap;
   justify-content: space-around;
   .quest-item {
+    height: 0%;
     display: flex;
     flex-direction: column;
     border: 0.2em solid $color2;
