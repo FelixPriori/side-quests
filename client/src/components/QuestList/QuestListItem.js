@@ -1,6 +1,7 @@
 import React from 'react';
 import './QuestListItem.scss';
 import Button from '../Button/Button';
+import CheckSeal from '../CheckSeal/CheckSeal';
 import { Check } from 'react-bootstrap-icons';
 // import ChatWindow from '../ChatWindow/ChatWindow';
 // import { ChatDotsFill } from 'react-bootstrap-icons';
@@ -27,17 +28,17 @@ export default function QuestListItem(props) {
       <p>{description}</p>
       <footer className="quest-footer">
         {adventurer_id
-            &&
-            <div className="links">
-              <a href="https://hangouts.google.com/call/4vTdHBEPZQ6TnGAwr570AEEE?no_rd" target="_blank"><Button confirm>Hangout</Button></a>   
-              <a 
-                href={`mailto: ${props.villager.email}?subject=${name}`}>
-                  Email {props.villager.username}
-              </a>
-            </div>
-            }
+          &&
+          <div className="links">
+            <a href="https://hangouts.google.com/call/4vTdHBEPZQ6TnGAwr570AEEE?no_rd" target="_blank"><Button confirm>Hangout</Button></a>
+            <a
+              href={`mailto: ${props.villager.email}?subject=${name}`}>
+              Email {props.villager.username}
+            </a>
+          </div>
+        }
         {adventurer_id
-          ? <div className="check-container"><div className="checkmark-div"><Check className="checkmark" /></div></div>
+          ? <div className="check-container"><CheckSeal /></div>
           : <div className="btn-group">
             <Button confirm onClick={() => onAccept(props.userQuests.id)}>Accept Quest</Button>
             {/* <Button confirm onClick={() => toggleChat()}><ChatDotsFill /></Button> */}

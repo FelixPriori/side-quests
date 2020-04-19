@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './TakenQuestItem.scss';
 import Button from '../Button/Button';
 import { Check } from 'react-bootstrap-icons';
+import CheckSeal from '../CheckSeal/CheckSeal';
 
 export default function TakenQuestItem(props) {
   const { name, description, completed } = props.quest;
@@ -14,23 +15,23 @@ export default function TakenQuestItem(props) {
       <p>{description}</p>
       <div className="footer">
         <p>
-          <strong>{villager[0].username}</strong><br/>
-          {completed ? "marked this quest as complete." : "posted this quest."} <br/>
-          {!completed 
-            && 
-              <a 
-                href={`mailto: ${villager[0].email}?subject=${name}`}>
-                  Email {villager[0].username}
-              </a>}
+          <strong>{villager[0].username}</strong><br />
+          {completed ? "marked this quest as complete." : "posted this quest."} <br />
+          {!completed
+            &&
+            <a
+              href={`mailto: ${villager[0].email}?subject=${name}`}>
+              Email {villager[0].username}
+            </a>}
         </p>
-      {completed 
-      ? <div className="check-container">
-          <div className="checkmark-div"><Check className="checkmark"/></div>
-        </div>
-      : <div className="btn btn-group">
-          <a href="https://hangouts.google.com/call/4vTdHBEPZQ6TnGAwr570AEEE?no_rd" target="_blank"><Button confirm>Hangout</Button></a>
-          <Button danger onClick={() => setConfirmation(true)}>Drop Quest</Button>
-        </div>
+        {completed
+          ? <div className="check-container">
+            <CheckSeal />
+          </div>
+          : <div className="btn btn-group">
+            <a href="https://hangouts.google.com/call/4vTdHBEPZQ6TnGAwr570AEEE?no_rd" target="_blank"><Button confirm>Hangout</Button></a>
+            <Button danger onClick={() => setConfirmation(true)}>Drop Quest</Button>
+          </div>
         }
       </div>
       {confirmation &&

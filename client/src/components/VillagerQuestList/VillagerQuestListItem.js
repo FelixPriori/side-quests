@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import './VillagerQuestListItem.scss';
 import Button from '../Button/Button';
 import { Check } from 'react-bootstrap-icons';
+import CheckSeal from '../CheckSeal/CheckSeal';
+import axios from "axios";
+
 const classnames = require('classnames');
+
 
 export default function QuestListItem(props) {
   const { name, description, completed } = props.villagerQuest;
@@ -10,6 +14,37 @@ export default function QuestListItem(props) {
     "completed": completed,
   });
   const [confirmation, setConfirmation] = useState(false);
+
+  const completeQuest = function (classId, questId, adventurerId) {
+    const data = { adventurerId };
+    axios.post(`/quests/${questId}/completeQuest/${classId}`, data).then(() => {
+      const quests = props.state.questsByVillager.map(quest => {
+        if (quest.id === questId) {
+          quest.completed = true;
+          return quest;
+        } else {
+          return quest;
+        }
+      })
+      props.setState(prevState => ({
+        ...prevState,
+        questsByVillager: quests
+      }))
+    });
+  }
+
+  const cancelQuest = function (questId) {
+
+    axios.delete(`/quests/${questId}/delete`).then(() => {
+      //UPDATE THE STATE AFTER
+      const quests = props.state.questsByVillager.filter(quest => quest.id !== questId);
+      props.setState(prevState => ({
+        ...prevState,
+        questsByVillager: quests
+      }))
+      setConfirmation(false);
+    });
+  }
 
   return (
     <div className={questItemClass}>
@@ -19,29 +54,29 @@ export default function QuestListItem(props) {
         {props.adventurer &&
           <div>
             <p>
-              <strong>{props.adventurer.username}</strong><br/>
-              {completed 
-                ? "completed this quest." 
-                : "is currently assisting."}<br/>
-              {!completed 
-                && 
-                  <a 
-                    href={`mailto: ${props.adventurer.email}?subject=${name}`}>
-                      Email {props.adventurer.username}
-                  </a>}
+              <strong>{props.adventurer.username}</strong><br />
+              {completed
+                ? "completed this quest."
+                : "is currently assisting."}<br />
+              {!completed
+                &&
+                <a
+                  href={`mailto: ${props.adventurer.email}?subject=${name}`}>
+                  Email {props.adventurer.username}
+                </a>}
             </p>
           </div>
         }
         {completed
           ? <div className="check-container">
-            <div className="checkmark-div"><Check className="checkmark" /></div>
+            <CheckSeal />
           </div>
           : <div className="btn-group">
             <Button danger onClick={() => setConfirmation(true)}>Cancel</Button>
-            { props.adventurer &&
+            {props.adventurer &&
               <div className="btn-group">
                 <Button confirm><a className="inside-anchor" href="https://hangouts.google.com/call/4vTdHBEPZQ6TnGAwr570AEEE?no_rd" target="_blank">Hangout</a></Button>
-                <Button confirm onClick={() => props.onComplete(props.villagerQuest.class_id, props.villagerQuest.id, props.villagerQuest.adventurer_id)}>Complete</Button>
+                <Button confirm onClick={() => completeQuest(props.villagerQuest.class_id, props.villagerQuest.id, props.villagerQuest.adventurer_id)}>Complete</Button>
               </div>}
           </div>
         }
@@ -51,7 +86,7 @@ export default function QuestListItem(props) {
           <p className="alert-msg">Are you sure you wish to delete this quest?</p>
           <div className='btn-group'>
             <Button confirm onClick={() => setConfirmation(false)}>Cancel</Button>
-            <Button danger onClick={() => props.onDelete(props.villagerQuest.id)} > Delete</Button>
+            <Button danger onClick={() => cancelQuest(props.villagerQuest.id)} > Delete</Button>
           </div>
         </div>
       }

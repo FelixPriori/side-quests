@@ -5,50 +5,19 @@ import axios from "axios";
 
 export default function VillagerQuestList(props) {
 
-  const completeQuest = function (classId, questId, adventurerId) {
-    const data = { adventurerId };
-    axios.post(`/quests/${questId}/completeQuest/${classId}`, data).then(() => {
-      const quests = props.state.questsByVillager.map(quest => {
-        if (quest.id === questId) {
-          quest.completed = true;
-          return quest;
-        } else {
-          return quest;
-        }
-      })
-      props.setState(prevState => ({
-        ...prevState,
-        questsByVillager: quests
-      }))
-    });
-  }
-
-  const cancelQuest = function (questId) {
-
-    axios.delete(`/quests/${questId}/delete`).then(() => {
-      //UPDATE THE STATE AFTER
-      const quests = props.state.questsByVillager.filter(quest => quest.id !== questId);
-      props.setState(prevState => ({
-        ...prevState,
-        questsByVillager: quests
-      }))
-    });
-  }
-
-
   const quests = props.state.questsByVillager && props.state.questsByVillager.map((quest, index) => {
     const questAdventurer = quest.adventurer_id && props.state.adventurers.find(adventurer => adventurer.id === quest.adventurer_id)
     return (
       <VillagerQuestListItem
         adventurer={questAdventurer}
         key={index}
+        state={props.state}
+        setState={props.setState}
         villagerQuest={quest}
         onEdit={props.onEdit}
-        onComplete={completeQuest}
-        onDelete={cancelQuest}
       />
     );
-  })
+  });
 
   return (
     <section className="quest-list">
@@ -62,6 +31,6 @@ export default function VillagerQuestList(props) {
         }
       </div>
     </section>
-  )
+  );
 
 }
