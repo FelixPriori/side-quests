@@ -28,10 +28,14 @@ export default function QuestListItem(props) {
       <footer className="quest-footer">
         {adventurer_id
             &&
-            <a 
-              href={`mailto: ${props.villager.email}?subject=${name}`}>
-                Email {props.villager.username}
-            </a>}
+            <div className="links">
+              <a href="https://hangouts.google.com/call/4vTdHBEPZQ6TnGAwr570AEEE?no_rd" target="_blank"><Button confirm>Hangout</Button></a>   
+              <a 
+                href={`mailto: ${props.villager.email}?subject=${name}`}>
+                  Email {props.villager.username}
+              </a>
+            </div>
+            }
         {adventurer_id
           ? <div className="check-container"><div className="checkmark-div"><Check className="checkmark" /></div></div>
           : <div className="btn-group">

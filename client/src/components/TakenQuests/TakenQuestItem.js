@@ -27,7 +27,11 @@ export default function TakenQuestItem(props) {
       ? <div className="check-container">
           <div className="checkmark-div"><Check className="checkmark"/></div>
         </div>
-      : <Button danger onClick={() => setConfirmation(true)}>Drop Quest</Button>}
+      : <div className="btn btn-group">
+          <a href="https://hangouts.google.com/call/4vTdHBEPZQ6TnGAwr570AEEE?no_rd" target="_blank"><Button confirm>Hangout</Button></a>
+          <Button danger onClick={() => setConfirmation(true)}>Drop Quest</Button>
+        </div>
+        }
       </div>
       { confirmation &&
         <div className="alert alert-danger">
