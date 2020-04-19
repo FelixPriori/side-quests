@@ -1,0 +1,42 @@
+@import '../../styles/palette.scss';
+
+.about {
+  display: flex;
+  flex-direction: column;
+  .about-title {
+    align-self: center;
+    font-weight: 700;
+  }
+  .about-articles{
+    display:flex;
+    flex-flow: wrap;
+    justify-content: center;
+    .left-article {
+      padding: 1em;
+      display:flex;
+      flex-direction: column;
+      align-items: flex-start;
+      .prgph {
+        color: $color1;
+        max-width: 45vw;
+        min-width: 400px;
+        text-align: left;
+      }
+    }
+    .right-article {
+      padding: 1em;
+      display:flex;
+      flex-direction: column;
+      align-items: flex-end;
+      .prgph-right {
+        color: $color1;
+        max-width: 45vw;
+        min-width: 400px;
+        text-align: right;
+      }
+      .table {
+        color: $color1;
+      }
+    }
+  }
+}
