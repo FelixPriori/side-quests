@@ -4,10 +4,14 @@ import QuestListItem from './QuestListItem';
 
 export default function QuestList(props) {
 
-  const { userQuests, classItem, villagers } = props;
+  const { userQuests, classItem, villagers, userData } = props;
 
   const validQuests = userQuests && userQuests.filter(quest => {
-    return quest.class_id === classItem.id && quest.completed === false;
+    // to show a quest:
+    // 1. its class must be selected
+    // 2. the quest must not be completed
+    // 3. the adventurer assigned must be yourself or there are no adventurers assigned
+    return quest.class_id === classItem.id && !quest.completed && (quest.adventurer_id === userData.id || !quest.adventurer_id);
   })
 
   const questItems = validQuests && validQuests.map((quest, index) => {

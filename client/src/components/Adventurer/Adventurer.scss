@@ -1,0 +1,15 @@
+@import '../../styles/palette.scss';
+
+
+.adventurer {
+  display: flex;
+  justify-content: space-between;
+  img {
+    margin-top: 0.2em;
+  }
+  h1 {
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+    font-weight: 700;
+  }
+}

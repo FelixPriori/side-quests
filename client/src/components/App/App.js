@@ -13,6 +13,8 @@ import Loading from '../Loading/Loading';
 import VillagerQuestList from '../VillagerQuestList/VillagerQuestList';
 import TakenQuests from '../TakenQuests/TakenQuests';
 import About from '../About/About';
+import Adventurer from '../Adventurer/Adventurer';
+import Villager from '../Villager/Villager';
 
 // import openSocket from 'socket.io-client';
 // import ChatWindow from '../ChatWindow/ChatWindow';
@@ -265,6 +267,8 @@ export default function App() {
           />
         )}
       <main>
+        {state.adventurer && state.loggedIn && <Adventurer/>}
+        {!state.adventurer && state.loggedIn && <Villager/>}
         {state.view === LOADING && <Loading />}
         {state.view === LOGIN && <LoginForm onLogin={() => handleLogin()} />}
         {state.view === CLASSES && (
