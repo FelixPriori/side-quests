@@ -21,7 +21,7 @@ export default function About(props) {
           </p>
         </article>
         <article className="right-article">
-          <h2>Get started<img className="aboutImgs" src="/images/about/getStartedIcon.png"></img></h2>
+          <h2><img className="aboutImgs" src="/images/about/getStartedIcon.png"></img>Get started</h2>
           <p className="prgph-right">
             To get started, simply go to the <strong>'register'</strong> page, and pick which account type you'd like to have. If you choose Adventurer, it means that you want to take on quests and help people. If you choose villager, it means that you want to give out quests and requrie assistance. Don't worry, you can always change your account type later on.
           </p>
@@ -40,7 +40,7 @@ export default function About(props) {
           </p>
         </article>
         <article className="right-article">
-          <h2>Adventurer<img className="aboutImgs" src="/images/about/AdventurerIcon.png"></img></h2>
+          <h2><img className="aboutImgs" src="/images/about/AdventurerIcon.png"></img>Adventurer</h2>
           <p className="prgph-right">
             <u>View the quest listing:</u><br />
             To see all the quests available for completion, just go to the navbar's <strong>'Quests'</strong> tab. From there, you can pick a class, which will display the quests that are available for that particular class. You can also view the description for each class, which will tell you more about what is expected of you depending on the class that is chosen.<br /><br />

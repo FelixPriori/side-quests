@@ -259,6 +259,7 @@ export default function App() {
         />
       ) : (
           <Navbar
+            onAbout={() => changeView(ABOUT)}
             onLogin={() => changeView(LOGIN)}
             onRegister={() => changeView(REGISTER)}
           />
