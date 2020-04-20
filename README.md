@@ -10,9 +10,23 @@ SideQuests is a web app which facilitates helping people in need, solving curren
 - As someone who likes to do things right, I like to be able to ask details about the task that I'm asked to do.
 - As someone with a lot of free time, I like to spend some time helping those who are most in need in my area.
 - (stretch) As someone who still wants to pay for my own things, I like to be able to decide if my errand that I am asking for is free or if I will pay for it.
-- (stretch) As someone who likes to keep things above board, I like to be able to take a picture of my receipts and tie them to an errand.
-- (stretch) As someone who is competitive, I like to keep track of the other players, and see where I stand in the leaderboard.
-- (stretch) As someone who uses the app for help a lot, I want to be able to review who helps me, so that if I have a bad experience, I can avoid the person for next time.
+
+## Getting Started
+
+To get started, you must install the dependencies in both the back-end and the front-end, and then run them in parallel.
+
+### Getting the back-end ready:
+
+1. Go to the back-end directory and run `npm install` to install all the dependencies;
+2. Create a psql database, and seed it from the root directory `\i back-end/db/db_setup`;
+3. Make a copy of the `.env.example,` rename it to `.env`, and fill in all the details;
+4. Run `npm run dev`.
+
+### Getting the front-end ready:
+1. Go to the client directory and run `npm install` to install all the dependencies;
+2. Make sure the back-end is ready and running;
+3. Run `npm start`;
+4. Go to http://localhost:3000 and enjoy _Side-Quests_.
 
 ## Stacks
 
@@ -20,7 +34,6 @@ SideQuests is a web app which facilitates helping people in need, solving curren
 * React
 * Scss
 * Bootstrap
-* Socket.io
 
 ### Back End
 * Express.js
