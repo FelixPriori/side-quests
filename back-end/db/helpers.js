@@ -207,22 +207,20 @@ const createNewQuest = function (
   name,
   description,
   completed,
-  latitude,
-  longitude,
+  city,
   class_id,
   villager_id
 ) {
   const queryStr = `
-    INSERT INTO quests (name, description, completed, latitude, longitude, class_id, villager_id)
-    VALUES ($1, $2, $3, $4, $5, $6, $7);
+    INSERT INTO quests (name, description, completed, city, class_id, villager_id)
+    VALUES ($1, $2, $3, $4, $5, $6);
   `
   return db
     .query(queryStr, [
       name,
       description,
       completed,
-      latitude,
-      longitude,
+      city,
       class_id,
       villager_id
     ])
@@ -252,16 +250,14 @@ const editQuest = function (
   name,
   description,
   completed,
-  latitude,
-  longitude,
   classId
 ) {
   const queryStr = `
     UPDATE quests 
-    SET name = $1, description = $2, completed = $3, latitude = $4, longitude = $5, class_id = $6
-    WHERE quests.id = $7;
+    SET name = $1, description = $2, completed = $3, class_id = $4
+    WHERE quests.id = $5;
   `
-  return db.query(queryStr, [name, description, completed, latitude, longitude, classId, questId])
+  return db.query(queryStr, [name, description, completed, classId, questId])
     .then()
 }
 
