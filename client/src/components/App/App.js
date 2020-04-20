@@ -302,7 +302,7 @@ export default function App() {
           <RegisterForm
             userData={state.userData}
             onLogin={handleLogin}
-            onProfile={changeView}
+            onProfile={() => changeView(PROFILE)}
           />
         )}
         {/* {state.view === CHAT && (
