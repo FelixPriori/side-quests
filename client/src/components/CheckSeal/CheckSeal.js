@@ -5,6 +5,6 @@ import "./CheckSeal.scss";
 export default function CheckSeal(props) {
 
   return (
-    <img className="checkSeal" src="/images/CheckSeal.png"></img>
+    <img className="checkSeal" alt="seal" src="/images/CheckSeal.png"></img>
   );
 }

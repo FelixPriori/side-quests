@@ -3,7 +3,7 @@ import './Logo.scss';
 
 export default function Logo() {
   return <div className="logo-div">
-    <img className="logo" src="/images/scrollIcon.png"></img>
+    <img className="logo" alt="scroll" src="/images/scrollIcon.png"></img>
     <div className="letters-div">
       <div className="s-div">
         <h1>S</h1>

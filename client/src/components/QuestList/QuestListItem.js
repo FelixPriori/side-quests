@@ -28,17 +28,17 @@ export default function QuestListItem(props) {
       <footer className="quest-footer">
         {adventurer_id
           &&
-          <div className="links">
-            <a href="https://hangouts.google.com/call/4vTdHBEPZQ6TnGAwr570AEEE?no_rd" target="_blank"><Button confirm>Hangout</Button></a>
+          <div className="links btn btn-group">
+            <a href="https://hangouts.google.com/call/4vTdHBEPZQ6TnGAwr570AEEE?no_rd" target="_blank" rel="noopener noreferrer"><Button confirm>Hangout</Button></a>
             <a
               href={`mailto: ${props.villager.email}?subject=${name}`}>
-              Email {props.villager.username}
+              <Button confirm>Email {props.villager.username}</Button>
             </a>
           </div>
         }
         {adventurer_id
           ? <div className="check-container"><CheckSeal /></div>
-          : <div className="btn-group">
+          : <div>
             <Button confirm onClick={() => onAccept(props.userQuests.id)}>Accept Quest</Button>
             {/* <Button confirm onClick={() => toggleChat()}><ChatDotsFill /></Button> */}
           </div>

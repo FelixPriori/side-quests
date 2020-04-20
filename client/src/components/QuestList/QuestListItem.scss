@@ -1,8 +1,7 @@
 @import '../../styles/palette.scss';
 
-
 .quest-item {
-
+  height: 100% !important;
   display: flex;
   flex-direction: column;
   border: 0.2em solid $color2;
@@ -19,8 +18,13 @@
     align-self: flex-end;
   }
   .links {
+    align-self: flex-end;
     display: flex;
-    flex-direction: column;
+    padding: 0;
+    margin-left: 0 !important;
+    button {
+      margin-right: 0;
+    }
   }
 }
 
@@ -30,8 +34,10 @@
 
 .quest-footer {
   display: flex;
+  justify-content: flex-end;
   button {
     margin: 0.5em;
+    margin-left: auto;
   }
 }
 

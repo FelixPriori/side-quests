@@ -1,7 +1,6 @@
 import React from "react";
 import './VillagerQuestList.scss';
 import VillagerQuestListItem from './VillagerQuestListItem';
-import axios from "axios";
 
 export default function VillagerQuestList(props) {
 
