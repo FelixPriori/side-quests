@@ -10,7 +10,7 @@ VALUES
   ),
   ( --3
     'Druid',
-    'Druids love a companion and are happy to help your furry friends stay in tip top shape. Whether it\''s babysitting, or simply giving the dog a walk, Druids are happy to help!',
+    'Druids love a companion and are happy to help your furry friends stay in tip top shape. Whether it\''s babysitting, or simply giving the dog a walk, Druids are happy to help!'
   ),
   ( --4
     'Monk',

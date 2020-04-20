@@ -28,7 +28,7 @@ export default function TakenQuestItem(props) {
             <CheckSeal />
           </div>
           : <div className="btn btn-group">
-            <a href="https://hangouts.google.com/call/4vTdHBEPZQ6TnGAwr570AEEE?no_rd" target="_blank"><Button confirm>Hangout</Button></a>
+            <a href="https://hangouts.google.com/call/4vTdHBEPZQ6TnGAwr570AEEE?no_rd" target="_blank" rel="noopener noreferrer"><Button confirm>Hangout</Button></a>
             <Button danger onClick={() => setConfirmation(true)}>Drop Quest</Button>
           </div>
         }

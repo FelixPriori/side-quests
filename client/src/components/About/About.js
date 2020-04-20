@@ -7,7 +7,7 @@ export default function About(props) {
       <h1 className="about-title">Side Quests</h1>
       <div className="about-articles">
         <article className="left-article">
-          <h2>About<img className="aboutImgs" src="/images/about/aboutIcon.png"></img></h2>
+          <h2>About<img alt="questionmark" className="aboutImgs" src="/images/about/aboutIcon.png"></img></h2>
           <p className="prgph">
             Side-Quests is an app where we connect volunteers with people in need.
             People needing help play the role of the villager and volunteers register
@@ -21,13 +21,13 @@ export default function About(props) {
           </p>
         </article>
         <article className="right-article">
-          <h2><img className="aboutImgs" src="/images/about/getStartedIcon.png"></img>Get started</h2>
+          <h2><img className="aboutImgs" alt="ladder" src="/images/about/getStartedIcon.png"></img>Get started</h2>
           <p className="prgph-right">
             To get started, simply go to the <strong>'register'</strong> page, and pick which account type you'd like to have. If you choose Adventurer, it means that you want to take on quests and help people. If you choose villager, it means that you want to give out quests and requrie assistance. Don't worry, you can always change your account type later on.
           </p>
         </article>
         <article className="left-article">
-          <h2>Villagers<img className="aboutImgs" src="/images/about/villagerIcon.png"></img></h2>
+          <h2>Villagers<img className="aboutImgs" alt="handshake" src="/images/about/villagerIcon.png"></img></h2>
           <p className="prgph">
             <u>Creating a quest:</u> <br />
             To create a quest, go to the menu in the nav-bar, choose the <strong>'Create Quest'</strong> option, and fill in the form. Make sure that you fill in all the details. Once the quest is created, adventurers will be able to see your quest and take it on if they want to.<br /><br />
@@ -40,7 +40,7 @@ export default function About(props) {
           </p>
         </article>
         <article className="right-article">
-          <h2><img className="aboutImgs" src="/images/about/AdventurerIcon.png"></img>Adventurer</h2>
+          <h2><img className="aboutImgs" alt="swordshield" src="/images/about/AdventurerIcon.png"></img>Adventurer</h2>
           <p className="prgph-right">
             <u>View the quest listing:</u><br />
             To see all the quests available for completion, just go to the navbar's <strong>'Quests'</strong> tab. From there, you can pick a class, which will display the quests that are available for that particular class. You can also view the description for each class, which will tell you more about what is expected of you depending on the class that is chosen.<br /><br />

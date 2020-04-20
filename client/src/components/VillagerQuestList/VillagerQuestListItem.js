@@ -74,7 +74,7 @@ export default function QuestListItem(props) {
             <Button danger onClick={() => setConfirmation(true)}>Cancel</Button>
             {props.adventurer &&
               <div className="btn-group">
-                <Button confirm><a className="inside-anchor" href="https://hangouts.google.com/call/4vTdHBEPZQ6TnGAwr570AEEE?no_rd" target="_blank">Hangout</a></Button>
+                <Button confirm><a className="inside-anchor" href="https://hangouts.google.com/call/4vTdHBEPZQ6TnGAwr570AEEE?no_rd" target="_blank" rel="noopener noreferrer">Hangout</a></Button>
                 <Button confirm onClick={() => completeQuest(props.villagerQuest.class_id, props.villagerQuest.id, props.villagerQuest.adventurer_id)}>Complete</Button>
               </div>}
           </div>
