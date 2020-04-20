@@ -79,3 +79,21 @@
     }
   }
 }
+
+.footer {
+  display: flex;
+  flex-flow: wrap;
+  .assisting {
+    max-width: 25%;
+  }
+  .email-link {
+    color: #FFF;
+    text-decoration: none;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .all-btns {
+    width: 100%;
+  }
+}

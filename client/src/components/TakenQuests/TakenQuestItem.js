@@ -16,12 +16,6 @@ export default function TakenQuestItem(props) {
         <p>
           <strong>{villager[0].username}</strong><br />
           {completed ? "marked this quest as complete." : "posted this quest."} <br />
-          {!completed
-            &&
-            <a
-              href={`mailto: ${villager[0].email}?subject=${name}`}>
-              Email {villager[0].username}
-            </a>}
         </p>
         {completed
           ? <div className="check-container">
@@ -29,6 +23,10 @@ export default function TakenQuestItem(props) {
           </div>
           : <div className="btn btn-group">
             <a href="https://hangouts.google.com/call/4vTdHBEPZQ6TnGAwr570AEEE?no_rd" target="_blank" rel="noopener noreferrer"><Button confirm>Hangout</Button></a>
+            <a
+              href={`mailto: ${villager[0].email}?subject=${name}`}>
+              <Button confirm>Email {villager[0].username}</Button>
+            </a>
             <Button danger onClick={() => setConfirmation(true)}>Drop Quest</Button>
           </div>
         }
