@@ -11,7 +11,7 @@ export default function Profile(props) {
   return (
     <section className='profile'>
       <h2>Your profile</h2>
-      <img alt="avatar" src={avatar} />
+      <img alt="avatar" src="/images/defaultAvatar.png" />
       <table className="table table-striped table-bordered">
         <tbody>
           <tr>
