@@ -19,7 +19,7 @@ To get started, you must install the dependencies in both the back-end and the f
 
 1. Go to the back-end directory and run `npm install` to install all the dependencies;
 2. Create a psql database, and seed it from the root directory `\i back-end/db/db_setup`;
-3. Make a copy of the `.env.example,` rename it to `.env`, and fill in all the details;
+3. Make a copy of the `.env.example`, rename it to `.env`, and fill in all the details;
 4. Run `npm run dev`.
 
 ### Getting the front-end ready:
