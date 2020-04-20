@@ -12,6 +12,7 @@ import Profile from '../Profile/Profile';
 import Loading from '../Loading/Loading';
 import VillagerQuestList from '../VillagerQuestList/VillagerQuestList';
 import TakenQuests from '../TakenQuests/TakenQuests';
+import About from '../About/About';
 
 // import openSocket from 'socket.io-client';
 // import ChatWindow from '../ChatWindow/ChatWindow';
@@ -27,6 +28,7 @@ const LOADING = 'LOADING';
 const VILLAGER_QUESTS = 'VILLAGER_QUESTS';
 const TAKEN = 'TAKEN';
 // const CHAT = 'CHAT';
+const ABOUT = 'ABOUT';
 
 export default function App() {
   const [state, setState] = useState({
@@ -252,6 +254,7 @@ export default function App() {
           onProfile={() => changeView(PROFILE)}
           onVillagerQuests={() => changeView(VILLAGER_QUESTS)}
           onTaken={() => changeView(TAKEN)}
+          onAbout={() => changeView(ABOUT)}
         // onChat={() => changeView(CHAT)}
         />
       ) : (
@@ -319,6 +322,9 @@ export default function App() {
             state={state}
             setState={setState}
           />}
+        {state.view === ABOUT &&
+          <About />
+        }
       </main>
     </div>
   );
