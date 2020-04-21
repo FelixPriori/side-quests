@@ -49,7 +49,7 @@ export default function CreateQuestForm(props) {
     <section className="create-quest">
       <h3>Create Quest</h3>
       {error && <div className="alert alert-danger">{error}</div>}
-      <form onSubmit={event => event.preventDefault()} autoComplete="off">
+      <form className="create-quest-form" onSubmit={event => event.preventDefault()} autoComplete="off">
         <select onChange={event => changeQuestType(event.currentTarget.value)} className="browser-default custom-select">
           <option defaultValue>Type of Quest</option>
           <option value="1">Errand</option>
@@ -89,7 +89,6 @@ export default function CreateQuestForm(props) {
       </form>
       <section className="register__actions">
         <Button onClick={handleSubmit} confirm>Confirm</Button>
-        <Button danger>Cancel</Button>
       </section>
     </section>
   )
