@@ -2,11 +2,30 @@ import React, { useState } from 'react';
 import './TakenQuestItem.scss';
 import Button from '../Button/Button';
 import CheckSeal from '../CheckSeal/CheckSeal';
+import axios from "axios";
 
 export default function TakenQuestItem(props) {
   const { name, description, completed } = props.quest;
   const { villager } = props;
   const [confirmation, setConfirmation] = useState(false);
+
+  const dropQuest = function (questId) {
+    axios.post(`/quests/${questId}/drop`).then(() => {
+      const quests = props.state.questsByAdventurer.filter(quest => quest.id !== questId);
+      const newAllQuests = props.state.userQuests.map(quest => {
+        if (quest.id === questId) {
+          quest.adventurer_id = null;
+        }
+        return quest;
+      });
+      props.setState(prevState => ({
+        ...prevState,
+        questsByAdventurer: quests,
+        userQuests: newAllQuests
+      }));
+      setConfirmation(false);
+    });
+  }
 
   return (
     <div className="quest-item">
@@ -36,7 +55,7 @@ export default function TakenQuestItem(props) {
           <p className="alert-msg">Are you sure you wish to drop this quest?</p>
           <div className='btn-group'>
             <Button confirm onClick={() => setConfirmation(false)}>Cancel</Button>
-            <Button danger onClick={() => props.onDrop(props.quest.id)}>Delete</Button>
+            <Button danger onClick={() => dropQuest(props.quest.id)}>Delete</Button>
           </div>
         </div>
       }

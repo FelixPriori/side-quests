@@ -5,15 +5,6 @@ import axios from "axios";
 
 export default function TakenQuests(props) {
 
-  const dropQuest = function (questId) {
-    axios.post(`/quests/${questId}/drop`).then(() => {
-      const quests = props.state.questsByAdventurer.filter(quest => quest.id !== questId);
-      props.setState(prevState => ({
-        ...prevState,
-        questsByAdventurer: quests
-      }))
-    });
-  }
 
   const currentQuests = props.state.questsByAdventurer && props.state.questsByAdventurer
     .sort((a, b) =>  b.completed - a.completed)
@@ -24,7 +15,8 @@ export default function TakenQuests(props) {
         key={index}
         quest={quest}
         villager={villager}
-        onDrop={dropQuest}
+        state={props.state}
+        setState={props.setState}
       />
     )
   });
