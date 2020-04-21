@@ -1,7 +1,6 @@
 import React from 'react';
 import './TakenQuests.scss';
 import TakenQuestItem from './TakenQuestItem';
-import axios from "axios";
 
 export default function TakenQuests(props) {
 

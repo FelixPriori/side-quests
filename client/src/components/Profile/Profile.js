@@ -5,7 +5,7 @@ import BadgeBox from '../BadgeBox/BadgeBox';
 
 export default function Profile(props) {
 
-  const { username, first_name, last_name, email, avatar, adventurer } = props.state.userData;
+  const { username, first_name, last_name, email, adventurer } = props.state.userData;
   const { userBadges } = props.state;
 
   return (

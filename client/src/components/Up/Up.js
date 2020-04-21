@@ -10,25 +10,25 @@ export default function Up() {
     window.pageYOffset > 500 
       ? setShow('visible')
       : setShow('hidden')
-  }
+  };
 
   useEffect(() => {
     const checkScroll = () => {
       window.addEventListener("scroll", shouldItShow);
-    }
+    }; 
     checkScroll();
     return () => {
       window.removeEventListener("scroll", shouldItShow);
     };
-  })
+  });
 
   return (
-    <button 
+    <button
       className="up" 
       style={{visibility: show}}
       onClick={() => window.scroll({top: 0, behavior: 'smooth'})}
     >
       <ChevronDoubleUp className="arrow"/>
     </button>
-  )
+  );
 }
