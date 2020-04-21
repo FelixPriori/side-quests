@@ -15,6 +15,7 @@ import TakenQuests from '../TakenQuests/TakenQuests';
 import About from '../About/About';
 import Adventurer from '../Adventurer/Adventurer';
 import Villager from '../Villager/Villager';
+import Up from '../Up/Up';
 
 // import openSocket from 'socket.io-client';
 // import ChatWindow from '../ChatWindow/ChatWindow';
@@ -330,6 +331,7 @@ export default function App() {
         {state.view === ABOUT &&
           <About />
         }
+        <Up/>
       </main>
     </div>
   );

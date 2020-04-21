@@ -7,7 +7,8 @@ export default function VillagerQuestList(props) {
   const quests = props.state.questsByVillager && props.state.questsByVillager
     .sort((a, b) =>  b.completed - a.completed)
     .map((quest, index) => {
-      const questAdventurer = quest.adventurer_id && props.state.adventurers.find(adventurer => adventurer.id === quest.adventurer_id)
+      const questAdventurer = quest.adventurer_id && props.state.adventurers
+        .find(adventurer => adventurer.id === quest.adventurer_id)
       return (
         <VillagerQuestListItem
           adventurer={questAdventurer}

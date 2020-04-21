@@ -1,0 +1,23 @@
+@import '../../styles/palette.scss';
+.up {
+  background-color: $color1;
+  height: 3em;
+  width: 3em;
+  border-radius: 50%;
+  border: 0.15em solid $shadow1;
+  box-shadow: 0.1em 0.1em 0 0 $color5;
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+  opacity: 50%;
+  .arrow {
+    color: $color5;
+    margin: auto;
+    height: 1.5em;
+    width: 1.5em;
+  }
+}
+
+.up:hover {
+  opacity: 100%;
+}
