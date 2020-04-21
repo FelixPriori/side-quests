@@ -7,7 +7,7 @@ export default function Up() {
   const [show, setShow] = useState('hidden');
 
   const shouldItShow = () => {
-    window.pageYOffset > 500 
+    window.pageYOffset > 500
       ? setShow('visible')
       : setShow('hidden')
   };
@@ -24,11 +24,11 @@ export default function Up() {
 
   return (
     <button
-      className="up" 
-      style={{visibility: show}}
-      onClick={() => window.scroll({top: 0, behavior: 'smooth'})}
+      className="up"
+      style={{ visibility: show }}
+      onClick={() => window.scroll({ top: 0, behavior: 'smooth' })}
     >
-      <ChevronDoubleUp className="arrow"/>
+      <img className="scrollArrow" src="/images/arrowForScroll.png"></img>
     </button>
   );
 }

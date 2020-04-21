@@ -10,14 +10,17 @@
   bottom: 5%;
   right: 5%;
   opacity: 50%;
-  .arrow {
-    color: $color5;
-    margin: auto;
-    height: 1.5em;
-    width: 1.5em;
-  }
+  .scrollArrow {
+    width: 2em;
+    height: 2em;
+    margin-left:0.1em;
+    margin-bottom: 0.3em;
+  } 
 }
 
 .up:hover {
   opacity: 100%;
+}
+.up:focus {
+  outline: none;
 }
