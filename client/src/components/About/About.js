@@ -56,9 +56,9 @@ export default function About(props) {
             Once your villager has marked the quest as completed, you will recieve some experience. Each quest completed gives you 100exp. Everytime you level up, your experience points go back to 0. You can find an overview of the progress for each of your classes on the <strong>'Progress'</strong> tab in the navbar. <br /><u>Note:</u> below you will find a table explaining the required experience points for each level.<br /><br />
             <u>Badges:</u><br />
             Badges are class specific rewards that you can aquire by completing certain requirements. To view all the available badges, pick a class in the <strong>'Quests'</strong> tab. You can view the requirement by hovering over the badges. Once you obtain a badge, it will no longer be greyed out on the <strong>'Quests'</strong> tab, and it will appear on your <strong>'Profile'</strong> page.<br /><br />
-
             <u>Leveling table:</u><br />
-            <table class="table table-striped">
+          </p>
+            <table className="table table-striped">
               <thead>
                 <tr>
                   <th scope="col">level</th>
@@ -88,7 +88,6 @@ export default function About(props) {
                 </tr>
               </tbody>
             </table>
-          </p>
         </article>
       </div>
     </section>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './Up.scss';
-import { ChevronDoubleUp } from 'react-bootstrap-icons';
 
 export default function Up() {
 
@@ -28,7 +27,7 @@ export default function Up() {
       style={{ visibility: show }}
       onClick={() => window.scroll({ top: 0, behavior: 'smooth' })}
     >
-      <img className="scrollArrow" src="/images/arrowForScroll.png"></img>
+      <img alt="scroll arrow" className="scrollArrow" src="/images/arrowForScroll.png"></img>
     </button>
   );
 }
