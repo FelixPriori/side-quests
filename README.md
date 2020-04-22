@@ -42,6 +42,30 @@ To get started, you must install the dependencies in both the back-end and the f
 ### Database
 * PostgreSQL
 
+## Finishd Product
+
+About page:
+![about](./docs/about.png)
+
+Class selection & available quests:
+![pick class](./docs/adventurer.png)
+
+All quests that have been accepted:
+![accepted quests](./docs/accepted.png)
+
+Progress for all classes:
+![class progress](./docs/progress.png)
+
+User profile:
+![user profile](./docs/profile.png)
+
+Villager view, create a new quest:
+![villager create](./docs/create.png)
+
+Villager's created quests:
+![created quests](./docs/created.png)
+
+
 ## Routes
 
 | HTTP METHOD  | URL PATTERN        | USE                      |
