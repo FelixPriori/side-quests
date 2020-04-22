@@ -10,8 +10,15 @@ export default function QuestList(props) {
     // to show a quest:
     // 1. its class must be selected
     // 2. the quest must not be completed
-    // 3. the adventurer assigned must be yourself or there are no adventurers assigned
-    return quest.class_id === classItem.id && !quest.completed && (quest.adventurer_id === userData.id || !quest.adventurer_id);
+    // 3. the adventurer assigned must be yourself or 4. there are no adventurers assigned
+    // 5. the villager who created the quest cannot be the current user (accout switch edge case)
+    return (
+      quest.class_id === classItem.id //1.
+      && !quest.completed //2.
+      && (quest.adventurer_id === userData.id //3.
+      || !quest.adventurer_id) //4.
+      && quest.villager_id !== userData.id //5.
+    );
   })
 
   const questItems = validQuests && validQuests.map((quest, index) => {
