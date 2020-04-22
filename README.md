@@ -42,7 +42,7 @@ To get started, you must install the dependencies in both the back-end and the f
 ### Database
 * PostgreSQL
 
-## Finishd Product
+## Finished Product
 
 About page:
 
