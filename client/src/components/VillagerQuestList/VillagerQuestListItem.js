@@ -64,17 +64,20 @@ export default function QuestListItem(props) {
           ? <div className="check-container">
             <CheckSeal />
           </div>
-          : <div className="btn-group all-btns">
-            <Button danger onClick={() => setConfirmation(true)}>Cancel</Button>
-            {props.adventurer &&
-              <div className="btn-group">
-                <Button confirm><a className="inside-anchor" href="https://hangouts.google.com/call/4vTdHBEPZQ6TnGAwr570AEEE?no_rd" target="_blank" rel="noopener noreferrer">Hangout</a></Button>
-                <Button confirm><a className="email-link"
-                  href={`mailto: ${props.adventurer.email}?subject=${name}`}>
-                  Email
-                </a></Button>
-                <Button confirm onClick={() => completeQuest(props.villagerQuest.class_id, props.villagerQuest.id, props.villagerQuest.adventurer_id)}>Complete</Button>
-              </div>}
+          : <div className="all-btns">
+
+            {props.adventurer 
+              ? <div className="btn-group">
+                  <Button danger onClick={() => setConfirmation(true)}>Cancel</Button>
+                  <Button confirm><a className="inside-anchor" href="https://hangouts.google.com/call/4vTdHBEPZQ6TnGAwr570AEEE?no_rd" target="_blank" rel="noopener noreferrer">Hangout</a></Button>
+                  <Button confirm><a className="email-link"
+                    href={`mailto: ${props.adventurer.email}?subject=${name}`}>
+                    Email
+                  </a></Button>
+                  <Button confirm onClick={() => completeQuest(props.villagerQuest.class_id, props.villagerQuest.id, props.villagerQuest.adventurer_id)}>Complete</Button>
+                </div>
+              : <Button className="one-btn" danger onClick={() => setConfirmation(true)}>Cancel</Button>
+            }
           </div>
         }
       </div>

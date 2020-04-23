@@ -1,9 +1,5 @@
 @import '../../styles/palette.scss';
 
-.completed {
-  opacity: 25%;
-}
-
 .inside-anchor, .inside-anchor:hover{
   text-decoration: none;
   color: #FFF;
@@ -69,6 +65,7 @@
     .alert {
       margin-top: 1em;
       display: flex;
+      align-items: center;
       p {
         text-justify: center;
         color: $color4;
@@ -83,12 +80,20 @@
 .footer {
   display: flex;
   flex-flow: wrap;
+  justify-content: space-between;
+  align-items: center;
   .assisting {
     max-width: 25%;
   }
   .email-link {
     color: #FFF;
     text-decoration: none;
+  }
+  .all-btns {
+    display: flex;
+    .btn-group {
+      width: 100%;
+    }
   }
 }
 
