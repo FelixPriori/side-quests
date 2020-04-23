@@ -40,14 +40,21 @@ export default function TakenQuestItem(props) {
           ? <div className="check-container">
             <CheckSeal />
           </div>
-          : <div className="btn btn-group">
-            <a href="https://hangouts.google.com/call/4vTdHBEPZQ6TnGAwr570AEEE?no_rd" target="_blank" rel="noopener noreferrer"><Button confirm>Hangout</Button></a>
-            <a
-              href={`mailto: ${villager[0].email}?subject=${name}`}>
-              <Button confirm>Email {villager[0].username}</Button>
-            </a>
-            <Button danger onClick={() => setConfirmation(true)}>Drop Quest</Button>
-          </div>
+          : <div className="all-btns">
+              <div className="btn-group">
+                <Button danger onClick={() => setConfirmation(true)}>Drop Quest</Button>
+                <Button confirm>
+                  <a href="https://hangouts.google.com/call/4vTdHBEPZQ6TnGAwr570AEEE?no_rd" target="_blank" rel="noopener noreferrer">
+                    Hangout
+                  </a>
+                </Button>
+                <Button confirm>
+                  <a href={`mailto: ${villager[0].email}?subject=${name}`}>
+                    Email {villager[0].username}
+                  </a>
+                </Button>
+              </div>
+            </div>
         }
       </div>
       {confirmation &&
@@ -55,7 +62,7 @@ export default function TakenQuestItem(props) {
           <p className="alert-msg">Are you sure you wish to drop this quest?</p>
           <div className='btn-group'>
             <Button confirm onClick={() => setConfirmation(false)}>Cancel</Button>
-            <Button danger onClick={() => dropQuest(props.quest.id)}>Delete</Button>
+            <Button danger onClick={() => dropQuest(props.quest.id)}>Drop</Button>
           </div>
         </div>
       }
