@@ -59,6 +59,7 @@ export default function App() {
     return !obj || Object.keys(obj).length === 0;
   }
 
+  //Get Initial state data
   useEffect(() => {
     axios
       .get('/checkSession')
@@ -268,8 +269,8 @@ export default function App() {
           />
         )}
       <main>
-        {state.adventurer && state.loggedIn && <Adventurer/>}
-        {!state.adventurer && state.loggedIn && <Villager/>}
+        {state.adventurer && state.loggedIn && <Adventurer />}
+        {!state.adventurer && state.loggedIn && <Villager />}
         {state.view === LOADING && <Loading />}
         {state.view === LOGIN && <LoginForm onLogin={() => handleLogin()} />}
         {state.view === CLASSES && (
@@ -331,7 +332,7 @@ export default function App() {
         {state.view === ABOUT &&
           <About />
         }
-        <Up/>
+        <Up />
       </main>
     </div>
   );

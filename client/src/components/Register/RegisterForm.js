@@ -15,6 +15,7 @@ export default function RegisterForm(props) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
+  const [confirmChangePassword, setConfirmChangePassword] = useState("");
 
   //Possibly implement axios over fetch?
   function handleSubmit() {
@@ -26,7 +27,7 @@ export default function RegisterForm(props) {
 
   //if props.edit then use this for the onclick instead
   function handleEditSubmit() {
-    const data = { email, password, confirmPassword, firstName, lastName, username, accountType, avatar };
+    const data = { email, password, confirmPassword, confirmChangePassword, firstName, lastName, username, accountType, avatar };
     axios.post('/users/edit', data)
       .then(() => props.onLogin(true))
       .catch(e => setError(e.response.data));
@@ -89,7 +90,8 @@ export default function RegisterForm(props) {
         <input
           name="password"
           type="password"
-          placeholder={"Enter password"}
+          placeholder={"Enter new password"}
+          value={password}
           data-testid="password-input"
           onChange={event => setPassword(event.target.value)}
         />
@@ -101,6 +103,22 @@ export default function RegisterForm(props) {
           data-testid="confirmPassword-input"
           onChange={event => setConfirmPassword(event.target.value)}
         />
+        {edit ?
+          <form onSubmit={(event => event.preventDefault())} autoComplete="off">
+            Enter current password to confirm changes:
+          <input
+              name="password"
+              type="password"
+              placeholder={"Enter password"}
+              value={confirmChangePassword}
+              data-testid="password-input"
+              onChange={event => setConfirmChangePassword(event.target.value)}
+            />
+          </form>
+          : null
+        }
+
+
       </form>
       <section className="register__actions">
         {edit
