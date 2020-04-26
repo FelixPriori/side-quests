@@ -136,6 +136,31 @@ export default function App() {
           }
         )
         .catch((err) => console.log(err));
+    } else {
+      //needs userQuests
+      const getUserQuest = axios.get('/quests');
+      //villagers
+      const getVillagers = axios.get('/villagers');
+
+      const getClasses = axios.get('/classes');
+      Promise.all([
+        getUserQuest,
+        getVillagers,
+        getClasses
+      ]).then(
+        ([
+          { data: userQuests },
+          { data: villagers },
+          { data: classesData }
+        ]) => {
+          setState({
+            ...state,
+            userQuests,
+            villagers,
+            classesData
+          });
+        }
+      ).catch(e => console.log(e));
     }
   }, [state.loggedIn]);
 
