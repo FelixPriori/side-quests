@@ -15,6 +15,41 @@
   .nav-items {
     display: flex;
     margin-left: auto;
+    align-items: center;
+    .notification-button, 
+    .notification-button:active, 
+    .notification-button:hover,
+    .notification-button:focus,
+    .notification-button:not(:disabled):not(.disabled):active {
+      border: none;
+      background-color: inherit;
+      box-shadow: none;
+      outline: 0;
+      .notification-bell {
+        width: 1.5em;
+        height: 1.5em;
+        color: $color1;
+        outline: 0;
+      }
+    }
+    .dot {
+      position: fixed;
+      top: 1.75em;
+      right: 7.3em;
+      height: 0.60em;
+      width: 0.60em;
+      background-color: red;
+      border-radius: 50%;
+      display: inline-block;
+      margin: 0;
+    }
+    #dropdown-basic {
+      height: 3em;
+      .avatar-icon {
+        width: 1.5em;
+        border-radius: 50%;
+      }
+    }
     button, h3 {
       margin-right: 1em;
     }

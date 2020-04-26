@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import './Navbar.scss';
 import Logo from '../Logo/Logo';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { List } from 'react-bootstrap-icons';
+import { List, Bell, Dot } from 'react-bootstrap-icons';
 
 function LoginMenu(props) {
   return (
@@ -22,13 +22,32 @@ function LoginMenu(props) {
   );
 }
 
+function NotificationsBell(props) {
+  const [newNotification, setNewNotification] = useState(true);
+  return (
+    <div className="notifications">
+      <button 
+        className="notification-button" 
+        onClick={() => setNewNotification(newNotification ? false : true)}
+      >
+        <Bell className="notification-bell"/>
+      </button>
+      {newNotification && <span className="dot"></span>}
+    </div>
+  )
+}
+
 function UserMenu(props) {
   return (
     <span className="nav-items">
-      <h3>Welcome, {props.user}</h3>
-      <Dropdown>
+        <NotificationsBell/>
+        <Dropdown>
         <Dropdown.Toggle id="dropdown-basic">
-          <List />
+          <img
+            alt="avatar"
+            className="avatar-icon"
+            src={props.state.userData.avatar}>
+          </img>
         </Dropdown.Toggle>
 
         <Dropdown.Menu>

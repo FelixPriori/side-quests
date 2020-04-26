@@ -249,6 +249,7 @@ export default function App() {
         <Navbar
           user={state.username}
           adventurer={state.adventurer}
+          state={state}
           onQuests={() => changeView(SHOW)}
           onCreate={() => changeView(CREATE)}
           onLogout={() => handleLogout()}
