@@ -16,6 +16,7 @@ import About from '../About/About';
 import Adventurer from '../Adventurer/Adventurer';
 import Villager from '../Villager/Villager';
 import Up from '../Up/Up';
+import TeaserPage from "../TeaserPage/TeaserPage";
 
 // import openSocket from 'socket.io-client';
 // import ChatWindow from '../ChatWindow/ChatWindow';
@@ -32,6 +33,7 @@ const VILLAGER_QUESTS = 'VILLAGER_QUESTS';
 const TAKEN = 'TAKEN';
 // const CHAT = 'CHAT';
 const ABOUT = 'ABOUT';
+const TEASER = 'TEASER';
 
 export default function App() {
   const [state, setState] = useState({
@@ -259,6 +261,7 @@ export default function App() {
           onVillagerQuests={() => changeView(VILLAGER_QUESTS)}
           onTaken={() => changeView(TAKEN)}
           onAbout={() => changeView(ABOUT)}
+
         // onChat={() => changeView(CHAT)}
         />
       ) : (
@@ -266,6 +269,7 @@ export default function App() {
             onAbout={() => changeView(ABOUT)}
             onLogin={() => changeView(LOGIN)}
             onRegister={() => changeView(REGISTER)}
+            onTeaser={() => changeView(TEASER)}
           />
         )}
       <main>
@@ -332,6 +336,10 @@ export default function App() {
         {state.view === ABOUT &&
           <About />
         }
+        {state.view === TEASER &&
+          <TeaserPage
+            state={state}
+          />}
         <Up />
       </main>
     </div>
