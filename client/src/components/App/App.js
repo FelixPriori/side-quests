@@ -16,6 +16,8 @@ import About from '../About/About';
 import Adventurer from '../Adventurer/Adventurer';
 import Villager from '../Villager/Villager';
 import Up from '../Up/Up';
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
 
 // import openSocket from 'socket.io-client';
 // import ChatWindow from '../ChatWindow/ChatWindow';
@@ -245,6 +247,7 @@ export default function App() {
 
   return (
     <div className="App">
+      <ReactNotification />
       {state.sessions ? (
         <Navbar
           user={state.username}

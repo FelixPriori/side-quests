@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import './Navbar.scss';
 import Logo from '../Logo/Logo';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { List, Bell, Dot } from 'react-bootstrap-icons';
+import { List, Bell } from 'react-bootstrap-icons';
+import { store } from 'react-notifications-component';
 
 function LoginMenu(props) {
   return (
@@ -28,7 +29,23 @@ function NotificationsBell(props) {
     <div className="notifications">
       <button 
         className="notification-button" 
-        onClick={() => setNewNotification(newNotification ? false : true)}
+        onClick={() => {
+          store.addNotification({
+            title: "Someone accepted your quest!",
+            message: "Make sure you tell communicate with them promptly",
+            type: "default",
+            insert: "top",
+            container: "top-right",
+            animationIn: ["animated", "fadeIn"],
+            animationOut: ["animated", "fadeOut"],
+            dismiss: {
+              duration: 5000,
+              onScreen: true,
+              pauseOnHover: true
+            }
+          });
+          setNewNotification(newNotification ? false : true)
+        }}
       >
         <Bell className="notification-bell"/>
       </button>

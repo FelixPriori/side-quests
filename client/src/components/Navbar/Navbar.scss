@@ -1,5 +1,17 @@
 @import '../../styles/palette.scss';
 
+.notification-container-top-right {
+  top: 6em !important;
+}
+
+.notification-default {
+  background-color: $color1 !important;
+  border-left: 8px solid $shadow1 !important;
+  .timer {
+    background-color: $color1 !important;
+  }
+}
+
 .nav-container {
   display: flex;
   background-color: $color4;
