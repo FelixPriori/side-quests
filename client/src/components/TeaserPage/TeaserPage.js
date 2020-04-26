@@ -10,7 +10,8 @@ export default function TeaserPage(props) {
   return (
     <section className="quest-selection">
       <section className="select-class">
-        {/* Title art img */}
+
+        <img className="titleImage" alt="titleImage" src="/images/titleArt.png"></img>
 
         <div className="content">
         </div>
