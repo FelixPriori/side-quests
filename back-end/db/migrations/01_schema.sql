@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS assigned_badges CASCADE;
 DROP TABLE IF EXISTS class_progress CASCADE;
 DROP TABLE IF EXISTS achievements CASCADE;
 DROP TABLE IF EXISTS unlocked_achievements CASCADE;
+DROP TABLE IF EXISTS notifications CASCADE;
 
 -- UPDATE users
 --   SET username = 'BobRobertson' AND first_name = 'Bob' AND last_name = 'Robertson' AND email = 'bob@example.com' AND password = '$2b$10$xPttDUv.c13m9X1ni9CqEOFk1P5exXZeq.2LL.YrztVIWMxi4FTVm' AND avatar = 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png' AND adventurer = false
@@ -63,3 +64,12 @@ CREATE TABLE class_progress (
   experience_points INTEGER DEFAULT 0,
   quest_count INTEGER DEFAULT 0
 );
+
+CREATE TABLE notifications (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  title VARCHAR(255) NOT NULL,
+  message VARCHAR(255) NOT NULL,
+  type VARCHAR(255) NOT NULL,
+  viewed BOOLEAN DEFAULT false
+)

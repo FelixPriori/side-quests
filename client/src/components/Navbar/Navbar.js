@@ -15,6 +15,7 @@ function LoginMenu(props) {
 
         <Dropdown.Menu>
           <Dropdown.Item onClick={props.onAbout}>About</Dropdown.Item>
+          <Dropdown.Item onClick={props.onTeaser}>Teaser</Dropdown.Item>
           <Dropdown.Item onClick={props.onLogin}>Login</Dropdown.Item>
           <Dropdown.Item onClick={props.onRegister}>Register</Dropdown.Item>
         </Dropdown.Menu>
@@ -93,7 +94,7 @@ function UserMenu(props) {
 export default function Navbar(props) {
   return (
     <header className="nav-container">
-      <Logo onClick={props.onAbout}/>
+      <Logo onClick={props.onAbout} />
       {props.user
         ? <UserMenu {...props} />
         : <LoginMenu {...props} />

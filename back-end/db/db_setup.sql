@@ -5,6 +5,7 @@
 \i back-end/db/seeds/04_assigned_badges.sql
 \i back-end/db/seeds/05_class_progress.sql
 \i back-end/db/seeds/06_quests.sql
+\i back-end/db/seeds/07_notifications.sql
 
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO quester;
 

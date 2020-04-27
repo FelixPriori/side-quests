@@ -18,6 +18,7 @@ import Villager from '../Villager/Villager';
 import Up from '../Up/Up';
 import ReactNotification from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
+import TeaserPage from "../TeaserPage/TeaserPage";
 
 // import openSocket from 'socket.io-client';
 // import ChatWindow from '../ChatWindow/ChatWindow';
@@ -34,6 +35,7 @@ const VILLAGER_QUESTS = 'VILLAGER_QUESTS';
 const TAKEN = 'TAKEN';
 // const CHAT = 'CHAT';
 const ABOUT = 'ABOUT';
+const TEASER = 'TEASER';
 
 export default function App() {
   const [state, setState] = useState({
@@ -52,6 +54,7 @@ export default function App() {
     view: LOGIN,
     loggedIn: false,
     adventurers: [],
+    userNotifications: []
     // socket: [],
     // chatMessages: [],
     // knownUsers: {},
@@ -98,6 +101,7 @@ export default function App() {
       const getQuestsByVillager = axios.get(`/users/${state.userData.id}/quests`);
       const getQuestsByAdventurer = axios.get(`/users/adventurer/${state.userData.id}/quests`);
       const getAdventurers = axios.get(`/adventurers`);
+      const getUserNotifications = axios.get(`/notifications/user/${state.userData.id}`)
       Promise.all([
         getUserBadges,
         getUserQuest,
@@ -107,7 +111,8 @@ export default function App() {
         getBadges,
         getQuestsByVillager,
         getQuestsByAdventurer,
-        getAdventurers
+        getAdventurers,
+        getUserNotifications
       ])
         .then(
           ([
@@ -119,7 +124,8 @@ export default function App() {
             { data: badges },
             { data: questsByVillager },
             { data: questsByAdventurer },
-            { data: adventurers }
+            { data: adventurers },
+            { data: userNotifications }
           ]) => {
             setState({
               ...state,
@@ -131,11 +137,37 @@ export default function App() {
               badges,
               questsByVillager,
               questsByAdventurer,
-              adventurers
+              adventurers,
+              userNotifications
             });
           }
         )
         .catch((err) => console.log(err));
+    } else {
+      //needs userQuests
+      const getUserQuest = axios.get('/quests');
+      //villagers
+      const getVillagers = axios.get('/villagers');
+
+      const getClasses = axios.get('/classes');
+      Promise.all([
+        getUserQuest,
+        getVillagers,
+        getClasses
+      ]).then(
+        ([
+          { data: userQuests },
+          { data: villagers },
+          { data: classesData }
+        ]) => {
+          setState({
+            ...state,
+            userQuests,
+            villagers,
+            classesData
+          });
+        }
+      ).catch(e => console.log(e));
     }
   }, [state.loggedIn]);
 
@@ -240,6 +272,7 @@ export default function App() {
           loggedIn: false,
           view: LOGIN,
           adventurers: [],
+          userNotifications: []
         }));
       })
       .catch((error) => console.log(error));
@@ -253,6 +286,7 @@ export default function App() {
           user={state.username}
           adventurer={state.adventurer}
           state={state}
+          setState={setState}
           onQuests={() => changeView(SHOW)}
           onCreate={() => changeView(CREATE)}
           onLogout={() => handleLogout()}
@@ -270,6 +304,7 @@ export default function App() {
             onAbout={() => changeView(ABOUT)}
             onLogin={() => changeView(LOGIN)}
             onRegister={() => changeView(REGISTER)}
+            onTeaser={() => changeView(TEASER)}
           />
         )}
       <main>
@@ -336,6 +371,10 @@ export default function App() {
         {state.view === ABOUT &&
           <About />
         }
+        {state.view === TEASER &&
+          <TeaserPage
+            state={state}
+          />}
         <Up />
       </main>
     </div>

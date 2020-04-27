@@ -513,6 +513,24 @@ const increaseQuestCount = function (userId, classId, amount) {
   return db.query(queryStr, [amount, userId, classId]).then()
 }
 
+const getUserNotifications = function (userId) {
+  const queryStr = `
+    SELECT *
+    FROM notifications
+    WHERE user_id = $1;
+  `
+  return db.query(queryStr, [userId]).then(res => res.rows)
+}
+
+const viewNotification = function(id) {
+  const queryStr = `
+    UPDATE notifications
+    SET viewed = true
+    WHERE id = $1;
+  `
+  return db.query(queryStr, [id]).then()
+}
+
 module.exports = {
   correctPassword,
   checkIfUserExists,
@@ -545,5 +563,7 @@ module.exports = {
   getQuestsByVillager,
   classProgressForNewUser,
   getUserByUsername,
-  dropQuest
+  dropQuest,
+  getUserNotifications,
+  viewNotification
 }

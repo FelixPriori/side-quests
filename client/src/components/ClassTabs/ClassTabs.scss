@@ -1,0 +1,19 @@
+@import '../../styles/palette.scss';
+
+.classTab {
+  background-color: $color4;
+  width: 40em;
+  margin: 0;
+  padding: 1em;
+}
+
+.classTabOutline {
+  background-color: $color2;
+  width: 40em;
+  margin:0;
+  
+}
+
+a {
+  color: $color4;
+}

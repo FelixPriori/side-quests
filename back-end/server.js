@@ -46,6 +46,7 @@ const questRoutes = require("./routes/quests");
 const userRoutes = require('./routes/users');
 const badgeRoutes = require('./routes/badges');
 const classRoutes = require('./routes/classes');
+const notificationRoutes = require('./routes/notifications');
 
 // Mount all resource routes
 app.use("/", registerRoutes());
@@ -55,6 +56,7 @@ app.use("/", questRoutes());
 app.use("/", userRoutes());
 app.use("/", badgeRoutes());
 app.use("/", classRoutes());
+app.use("/", notificationRoutes());
 
 
 //Run when client connects
