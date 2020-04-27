@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './Navbar.scss';
 import Logo from '../Logo/Logo';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -25,27 +25,41 @@ function LoginMenu(props) {
 }
 
 function NotificationsBell(props) {
-  const [newNotification, setNewNotification] = useState(true);
+  const [newNotification, setNewNotification] = useState(false);
+  const [notifications, setNotifications] = useState(null);
+
+  useEffect(() => {
+    const notificationsToShow = props.userNotifications.filter(notification => !notification.viewed);
+    setNotifications(notificationsToShow);
+    setNewNotification(notificationsToShow.length ? true : false);
+  }, [])
+  
+  const showNotifications = (notifications) => {
+    notifications.forEach(notification => {
+      store.addNotification({
+        title: notification.title,
+        message: notification.message,
+        type: notification.type,
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animated", "fadeIn"],
+        animationOut: ["animated", "fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true,
+          pauseOnHover: true
+        }
+      });
+    })
+  }
+
   return (
     <div className="notifications">
       <button 
         className="notification-button" 
         onClick={() => {
-          store.addNotification({
-            title: "Someone accepted your quest!",
-            message: "Make sure you tell communicate with them promptly",
-            type: "default",
-            insert: "top",
-            container: "top-right",
-            animationIn: ["animated", "fadeIn"],
-            animationOut: ["animated", "fadeOut"],
-            dismiss: {
-              duration: 5000,
-              onScreen: true,
-              pauseOnHover: true
-            }
-          });
-          setNewNotification(newNotification ? false : true)
+          showNotifications(notifications)
+          setNewNotification(false)
         }}
       >
         <Bell className="notification-bell"/>
@@ -58,7 +72,7 @@ function NotificationsBell(props) {
 function UserMenu(props) {
   return (
     <span className="nav-items">
-        <NotificationsBell/>
+        <NotificationsBell userNotifications={props.state.userNotifications}/>
         <Dropdown>
         <Dropdown.Toggle id="dropdown-basic">
           <img

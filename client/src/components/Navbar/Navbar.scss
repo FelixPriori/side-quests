@@ -12,6 +12,14 @@
   }
 }
 
+.notification-danger {
+  background-color: $color4 !important;
+  border-left: 8px solid $shadow4 !important;
+  .timer {
+    background-color: $color4 !important;
+  }
+}
+
 .nav-container {
   display: flex;
   background-color: $color4;
