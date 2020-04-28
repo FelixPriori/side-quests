@@ -17,6 +17,7 @@ import Adventurer from '../Adventurer/Adventurer';
 import Villager from '../Villager/Villager';
 import Up from '../Up/Up';
 import TeaserPage from "../TeaserPage/TeaserPage";
+import GuestProfile from "../GuestProfile/GuestProfile";
 
 // import openSocket from 'socket.io-client';
 // import ChatWindow from '../ChatWindow/ChatWindow';
@@ -34,6 +35,7 @@ const TAKEN = 'TAKEN';
 // const CHAT = 'CHAT';
 const ABOUT = 'ABOUT';
 const TEASER = 'TEASER';
+const GUEST_PROFILE = 'GUEST_PROFILE';
 
 export default function App() {
   const [state, setState] = useState({
@@ -52,6 +54,7 @@ export default function App() {
     view: TEASER,
     loggedIn: false,
     adventurers: [],
+    guestInfo: [],
     // socket: [],
     // chatMessages: [],
     // knownUsers: {},
@@ -262,10 +265,24 @@ export default function App() {
           loggedIn: false,
           view: LOGIN,
           adventurers: [],
+          guestInfo: [],
         }));
       })
       .catch((error) => console.log(error));
   };
+
+  const getGuestProfile = function (id) {
+    console.log("got here");
+    axios.get(`/users/${id}`).then(response => {
+
+      setState((prev) => ({
+        ...prev,
+        guestInfo: response.data[0],
+        view: GUEST_PROFILE,
+      }))
+    });
+  }
+
 
   return (
     <div className="App">
@@ -322,6 +339,7 @@ export default function App() {
           <ClassSelection
             state={state}
             setState={setState}
+            onGuestProfile={getGuestProfile}
           // newUserCheck={newUserCheck}
           // openNewSocket={openNewSocket}
           // addNewMessage={addNewMessage}
@@ -354,6 +372,7 @@ export default function App() {
           <TakenQuests
             state={state}
             setState={setState}
+            onGuestProfile={getGuestProfile}
           />}
         {state.view === ABOUT &&
           <About />
@@ -362,6 +381,9 @@ export default function App() {
           <TeaserPage
             state={state}
           />}
+        {state.view === GUEST_PROFILE &&
+          <GuestProfile state={state} />
+        }
         <Up />
       </main>
     </div>

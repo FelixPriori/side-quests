@@ -67,10 +67,10 @@ const addUser = function (
   avatar
 ) {
   const queryStr = `
-    INSERT INTO users (username, first_name, last_name, email, password, avatar, adventurer)
+    INSERT INTO users (username, first_name, last_name, email, password, avatar, adventurer, bio)
     VALUES
     (
-      $1, $2, $3, $4, $5, $6, $7
+      $1, $2, $3, $4, $5, $6, $7, $8
     );
   `
 
@@ -82,7 +82,8 @@ const addUser = function (
       email,
       password,
       avatar,
-      adventurer
+      adventurer,
+      "Edit your profile to add a bio."
     ])
     .then()
 }
@@ -261,15 +262,15 @@ const editQuest = function (
     .then()
 }
 
-const editProfile = function (username, firstName, lastName, email, password, avatar, adventurer, userId) {
+const editProfile = function (username, firstName, lastName, email, password, avatar, adventurer, userId, bio) {
   const queryStr = `
     UPDATE users
-    SET username = $1, first_name = $2, last_name = $3, email = $4, password = $5, avatar = $6, adventurer = $7
-    WHERE users.id = $8
+    SET username = $1, first_name = $2, last_name = $3, email = $4, password = $5, avatar = $6, adventurer = $7, bio = $8
+    WHERE users.id = $9
   `
 
   console.log("arguments: ", arguments);
-  return db.query(queryStr, [username, firstName, lastName, email, password, avatar, adventurer, userId]).then();
+  return db.query(queryStr, [username, firstName, lastName, email, password, avatar, adventurer, bio, userId]).then();
 }
 
 const getQuestsByVillager = function (villagerId) {

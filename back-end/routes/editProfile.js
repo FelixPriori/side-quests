@@ -8,7 +8,7 @@ const { editProfile, correctPassword } = require('../db/helpers');
 module.exports = () => {
 
   router.post('/users/edit', (req, res) => {
-    let { email, password, confirmPassword, confirmChangePassword, firstName, lastName, username, avatar, accountType } = req.body;
+    let { email, password, confirmPassword, confirmChangePassword, firstName, lastName, username, avatar, accountType, bio } = req.body;
     console.log("Email", email);
     console.log('First name', firstName);
     console.log("ConfirmChangePassword", confirmChangePassword);
@@ -33,7 +33,7 @@ module.exports = () => {
             }
           } else {
             const hashedPassword = bcrypt.hashSync(confirmChangePassword, 10);
-            editProfile(username, firstName, lastName, email, hashedPassword, avatar, accountType, req.session.userId)
+            editProfile(username, firstName, lastName, email, hashedPassword, avatar, accountType, req.session.userId, bio)
               .then(() => {
                 res.send();
               });

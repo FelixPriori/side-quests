@@ -16,6 +16,8 @@ export default function RegisterForm(props) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
   const [confirmChangePassword, setConfirmChangePassword] = useState("");
+  const [bio, setBio] = useState("");
+
 
   //Possibly implement axios over fetch?
   function handleSubmit() {
@@ -27,7 +29,7 @@ export default function RegisterForm(props) {
 
   //if props.edit then use this for the onclick instead
   function handleEditSubmit() {
-    const data = { email, password, confirmPassword, confirmChangePassword, firstName, lastName, username, accountType, avatar };
+    const data = { email, password, confirmPassword, confirmChangePassword, firstName, lastName, username, accountType, avatar, bio };
     axios.post('/users/edit', data)
       .then(() => props.onLogin(true))
       .catch(e => setError(e.response.data));
