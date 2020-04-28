@@ -8,10 +8,10 @@ export default function GuestProfile(props) {
   console.log(props.state.guestInfo);
   return (
     <section className="profile">
-      <img src={props.state.guestInfo.avatar}></img>
-      <h3>{props.state.guestInfo.username}</h3>
-      <p>{props.state.guestInfo.bio}</p>
-      <BadgeBox />
+      <img src={props.state.guestInfo[0].avatar}></img>
+      <h3>{props.state.guestInfo[0].username}</h3>
+      <p>{props.state.guestInfo[0].bio}</p>
+      <BadgeBox badges={props.state.guestBadges} />
     </section>
   );
 }

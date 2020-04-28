@@ -16,7 +16,7 @@ export default function RegisterForm(props) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
   const [confirmChangePassword, setConfirmChangePassword] = useState("");
-  const [bio, setBio] = useState("");
+  const [bio, setBio] = useState(props.userData ? props.userData.bio : "");
 
 
   //Possibly implement axios over fetch?
@@ -89,6 +89,15 @@ export default function RegisterForm(props) {
           data-testid="avatar-input"
           onChange={event => setAvatar(event.target.value)}
         />
+        <textarea
+          name="bio"
+          type="text-area"
+          placeholder={"Enter a new bio"}
+          value={bio}
+          data-testid="bio-input"
+          onChange={event => setBio(event.target.value)}
+        />
+        <br></br>
         <input
           name="password"
           type="password"

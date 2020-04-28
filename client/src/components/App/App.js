@@ -55,6 +55,7 @@ export default function App() {
     loggedIn: false,
     adventurers: [],
     guestInfo: [],
+    guestBadges: [],
     // socket: [],
     // chatMessages: [],
     // knownUsers: {},
@@ -266,21 +267,33 @@ export default function App() {
           view: LOGIN,
           adventurers: [],
           guestInfo: [],
+          guestBadges: []
         }));
       })
       .catch((error) => console.log(error));
   };
 
   const getGuestProfile = function (id) {
-    console.log("got here");
-    axios.get(`/users/${id}`).then(response => {
+    const getUserInfo = axios.get(`/users/${id}`);
+    const getUserBadges = axios.get(`/users/${state.userData.id}/badges`);
 
-      setState((prev) => ({
-        ...prev,
-        guestInfo: response.data[0],
-        view: GUEST_PROFILE,
-      }))
-    });
+
+    Promise.all([
+      getUserInfo,
+      getUserBadges
+    ]).then(
+      ([
+        { data: guestInfo },
+        { data: guestBadges },
+      ]) => setState((prevState) => {
+        return {
+          ...prevState,
+          guestInfo,
+          guestBadges,
+          view: GUEST_PROFILE
+        };
+      })
+    ).catch(e => console.log(e));
   }
 
 

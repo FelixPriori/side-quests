@@ -5,7 +5,7 @@ import BadgeBox from '../BadgeBox/BadgeBox';
 
 export default function Profile(props) {
 
-  const { username, first_name, last_name, email, adventurer } = props.state.userData;
+  const { username, first_name, last_name, email, adventurer, bio } = props.state.userData;
   const { userBadges } = props.state;
 
   return (
@@ -41,12 +41,17 @@ export default function Profile(props) {
               : <td> Villager </td>
             }
           </tr>
+          <tr>
+            <td className="start">Bio</td>
+            <td>{bio}</td>
+          </tr>
           {adventurer &&
             <tr>
               <td className="start">Badges</td>
               <td> {<BadgeBox badges={userBadges} />} </td>
             </tr>
           }
+
         </tbody>
       </table>
       <Button onClick={props.onEdit} confirm>Edit Account</Button>
