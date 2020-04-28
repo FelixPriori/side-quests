@@ -17,13 +17,6 @@ export default function QuestListItem(props) {
   //   }
   // };
 
-  const onHangout = function () {
-    console.log("got here");
-    axios.get('https://hangouts.google.com/start').then((res) => {
-      console.log(res);
-    })
-  }
-
 
   // const { userData, newUserCheck, openNewSocket, addNewMessage, socket, chatMessages, knownUsers } = props;
   const { onAccept } = props;
@@ -38,7 +31,7 @@ export default function QuestListItem(props) {
         {adventurer_id
           &&
           <div className="links btn btn-group">
-            <a onClick={() => onHangout()} href="https://hangouts.google.com/call/4vTdHBEPZQ6TnGAwr570AEEE?no_rd" target="_blank" rel="noopener noreferrer"><Button confirm>Hangout</Button></a>
+            <a href="https://hangouts.google.com/call/4vTdHBEPZQ6TnGAwr570AEEE?no_rd" target="_blank" rel="noopener noreferrer"><Button confirm>Hangout</Button></a>
             <a
               href={`mailto: ${props.villager.email}?subject=${name}`}>
               <Button confirm>Email {props.villager.username}</Button>

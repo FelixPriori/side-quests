@@ -50,7 +50,6 @@
         p {
           font-family: $paragraph;
           color: $color1;
-          text-shadow: 0.5px 0.5px $highlight1;
           text-align: left;
         }
       }
@@ -70,5 +69,5 @@
     }
 
     .titleImage {
-      height: 15em;
+      height: 25%;
     }
