@@ -49,7 +49,7 @@ export default function App() {
     sessions: 0,
     adventurer: false,
     username: '',
-    view: LOGIN,
+    view: TEASER,
     loggedIn: false,
     adventurers: [],
     // socket: [],

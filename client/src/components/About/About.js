@@ -58,36 +58,36 @@ export default function About(props) {
             Badges are class specific rewards that you can aquire by completing certain requirements. To view all the available badges, pick a class in the <strong>'Quests'</strong> tab. You can view the requirement by hovering over the badges. Once you obtain a badge, it will no longer be greyed out on the <strong>'Quests'</strong> tab, and it will appear on your <strong>'Profile'</strong> page.<br /><br />
             <u>Leveling table:</u><br />
           </p>
-            <table className="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">level</th>
-                  <th scope="col">Required Experience</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>100</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>200</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>300</td>
-                </tr>
-                <tr>
-                  <td>...</td>
-                  <td>...</td>
-                </tr>
-                <tr>
-                  <td>n</td>
-                  <td>n * 100</td>
-                </tr>
-              </tbody>
-            </table>
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Level</th>
+                <th scope="col">Required Experience</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>100</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>200</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>300</td>
+              </tr>
+              <tr>
+                <td>...</td>
+                <td>...</td>
+              </tr>
+              <tr>
+                <td>n</td>
+                <td>n * 100</td>
+              </tr>
+            </tbody>
+          </table>
         </article>
       </div>
     </section>

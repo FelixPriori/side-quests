@@ -2,18 +2,30 @@
 
 .classTab {
   background-color: $color4;
-  width: 40em;
+  width: 25em;
   margin: 0;
   padding: 1em;
+  min-height: 25em;
 }
 
 .classTabOutline {
   background-color: $color2;
-  width: 40em;
+  width: 25em;
   margin:0;
   
 }
 
 a {
   color: $color4;
+}
+
+@media only screen and (min-width: 1024px) {
+  
+  .classTabOutline, .classTab {
+    width: 35em;
+  }
+  .classTab {
+    min-height: 20em;
+  }
+
 }
