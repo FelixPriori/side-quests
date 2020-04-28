@@ -17,30 +17,36 @@ To get started, you must install the dependencies in both the back-end and the f
 
 ### Getting the back-end ready:
 
-1. Go to the back-end directory and run `npm install` to install all the dependencies;
-2. Create a psql database, and seed it from the root directory `\i back-end/db/db_setup`;
-3. Make a copy of the `.env.example`, rename it to `.env`, and fill in all the details;
-4. Run `npm run dev`.
+1. Go to the "back-end" directory and run `npm install` to install all the dependencies
+2. Create a psql database, e.g. `create database sidequests;` using the psql client
+3. Create a new psql user, e.g. `create user quester;` using the psql client
+4. Seed the database from the root directory `\i back-end/db/db_setup` (note: this will drop your db tables if they already exist)
+5. Make a copy of the `.env.example`, rename it to `.env`, and fill in the db config details
+6. Run `npm run dev`
 
 ### Getting the front-end ready:
-1. Go to the client directory and run `npm install` to install all the dependencies;
-2. Make sure the back-end is ready and running;
-3. Run `npm start`;
-4. Go to http://localhost:3000 and enjoy _Side-Quests_.
+
+1. Go to the "client" directory and run `npm install` to install all the dependencies
+2. Make sure the back-end is ready and running
+3. Run `npm start`
+4. Go to http://localhost:3000 and enjoy _Side-Quests_!
 
 ## Stacks
 
 ### Front End
-* React
-* Scss
-* Bootstrap
+
+- React
+- Scss
+- Bootstrap
 
 ### Back End
-* Express.js
-* Node.js
+
+- Express.js
+- Node.js
 
 ### Database
-* PostgreSQL
+
+- PostgreSQL
 
 ## Finished Product
 
@@ -72,24 +78,24 @@ Villager's created quests:
 
 ![created quests](./docs/created.png)
 
-
 ## Routes
 
-| HTTP METHOD  | URL PATTERN        | USE                      |
-| ------------ | :----------------- |--------------------------|
-| POST         | /register          | Register new user        |
-| POST         | /login             | Login existing user      |
-| GET          | /users             | Get users                |
-| GET          | /users/:id         | Get data for user        |
-| GET          | /quests            | Get all the quests       |
-| POST         | /quests/:id/new    | Add a new quest          |
-| GET          | /quests/:id        | Get a single quest       |
-| PUT          | /quests/:id/edit   | Edit a quest             |
-| DELETE       | /quests/:id/delete | Delete a quest           |
-| GET          | /badges            | Get all badges           |
-| GET          | /badges/:id        | Get a single badge       |
-| GET          | /classes           | Get all classes          |
-| GET          | /classes/:id       | Get a single class       |
+| HTTP METHOD | URL PATTERN        | USE                 |
+| ----------- | :----------------- | ------------------- |
+| POST        | /register          | Register new user   |
+| POST        | /login             | Login existing user |
+| GET         | /users             | Get users           |
+| GET         | /users/:id         | Get data for user   |
+| GET         | /quests            | Get all the quests  |
+| POST        | /quests/:id/new    | Add a new quest     |
+| GET         | /quests/:id        | Get a single quest  |
+| PUT         | /quests/:id/edit   | Edit a quest        |
+| DELETE      | /quests/:id/delete | Delete a quest      |
+| GET         | /badges            | Get all badges      |
+| GET         | /badges/:id        | Get a single badge  |
+| GET         | /classes           | Get all classes     |
+| GET         | /classes/:id       | Get a single class  |
 
 ## ERD
+
 ![ERD](./docs/SideQuests_ERD.png)
