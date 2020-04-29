@@ -1,7 +1,5 @@
 const router = require("express").Router();
 
-
-
 //Helper functions
 const { correctPassword } = require("../db/helpers");
 
