@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { allBadges, getBadge } = require("../db/helpers");
+const { allBadges, getBadge } = require("../../db/helpers");
 
 module.exports = () => {
   router.get("/badges", (req, res) => {

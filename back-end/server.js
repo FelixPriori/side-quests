@@ -35,13 +35,13 @@ app.use(
 );
 
 // Separated Routes for each Resource
-const registerRoutes = require("./routes/register");
-const loginRoutes = require("./routes/login");
-const editProfileRoutes = require("./routes/editProfile");
-const questRoutes = require("./routes/quests");
-const userRoutes = require("./routes/users");
-const badgeRoutes = require("./routes/badges");
-const classRoutes = require("./routes/classes");
+const registerRoutes = require("./src/routes/register");
+const loginRoutes = require("./src/routes/login");
+const editProfileRoutes = require("./src/routes/editProfile");
+const questRoutes = require("./src/routes/quests");
+const userRoutes = require("./src/routes/users");
+const badgeRoutes = require("./src/routes/badges");
+const classRoutes = require("./src/routes/classes");
 
 // Mount all resource routes
 app.use("/", registerRoutes());

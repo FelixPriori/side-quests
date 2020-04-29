@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { allUsers, checkUserLogin, checkUserQuests, getAllUserClassProgress, getUser, getBadgesByUser, allVillagers, allAdventurers } = require('../db/helpers');
+const { allUsers, checkUserLogin, checkUserQuests, getAllUserClassProgress, getUser, getBadgesByUser, allVillagers, allAdventurers } = require('../../db/helpers');
 
 
 

@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 //Helper functions
-const { correctPassword } = require("../db/helpers");
+const { correctPassword } = require("../../db/helpers");
 
 module.exports = () => {
   router.post(`/login`, (req, res) => {

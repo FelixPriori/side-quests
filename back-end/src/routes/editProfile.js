@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 
 
-const { editProfile, correctPassword } = require('../db/helpers');
+const { editProfile, correctPassword } = require('../../db/helpers');
 
 module.exports = () => {
 
