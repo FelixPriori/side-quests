@@ -6,6 +6,7 @@
     "server": "node server.js",
     "dev": "nodemon server",
     "lint": "eslint -c .eslintrc.json --ext .js . --fix",
+    "lint:fix": "eslint -c .eslintrc.json --ext .js . --fix",
     "test": "NODE_ENV=test jest --forceExit",
     "test:watch": "jest --watch"
   },
@@ -34,8 +35,14 @@
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-plugin-import": "^2.20.2",
+    "husky": "^4.2.5",
     "jest": "^25.5.1",
     "nodemon": "^2.0.3",
     "supertest": "^4.0.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   }
 }
