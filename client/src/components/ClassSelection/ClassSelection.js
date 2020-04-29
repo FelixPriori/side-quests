@@ -101,6 +101,7 @@ export default function ClassSelection(props) {
           userData={props.state.userData}
           onAccept={acceptQuest}
           setState={props.setState}
+          onGuestProfile={props.onGuestProfile}
         />}
     </section>
   );

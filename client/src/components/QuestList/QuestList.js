@@ -16,7 +16,7 @@ export default function QuestList(props) {
       quest.class_id === classItem.id //1.
       && !quest.completed //2.
       && (quest.adventurer_id === userData.id //3.
-      || !quest.adventurer_id) //4.
+        || !quest.adventurer_id) //4.
       && quest.villager_id !== userData.id //5.
     );
   })
@@ -37,6 +37,7 @@ export default function QuestList(props) {
         onOpen={props.onOpen}
         userData={props.userData}
         onAccept={props.onAccept}
+        onGuestProfile={props.onGuestProfile}
       />
     )
   });
