@@ -16,7 +16,7 @@ module.exports = () => {
     console.log(req.body);
     if (!confirmChangePassword) {
       console.log("Please input your password to change your account settings.");
-      res.status(401).send("Please input your password to change your account settings.")
+      res.status(401).send("Please input your password to change your account settings.");
     } else {
       correctPassword(email, confirmChangePassword).then(user => {
         if (user) {
@@ -52,4 +52,4 @@ module.exports = () => {
 
 
   return router;
-}
+};

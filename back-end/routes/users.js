@@ -43,7 +43,7 @@ module.exports = () => {
     getUser(req.params.id).then(result => {
       res.send(result);
     });
-  })
+  });
 
   router.get("/users/:id/badges", (req, res) => {
     getBadgesByUser(req.params.id).then(result => {
@@ -55,16 +55,16 @@ module.exports = () => {
   router.get("/villagers", (req, res) => {
     allVillagers().then(result => {
       res.json(result);
-    })
+    });
   });
 
   router.get('/adventurers', (req, res) => {
     allAdventurers().then(result => {
       res.json(result);
-    })
+    });
   });
 
 
 
   return router;
-}
+};
