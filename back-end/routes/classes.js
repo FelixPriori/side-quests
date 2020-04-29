@@ -24,7 +24,7 @@ module.exports = () => {
     getBadgesByClass(req.params.id).then(result => {
       res.send(result);
     });
-  })
+  });
 
   return router;
-}
+};

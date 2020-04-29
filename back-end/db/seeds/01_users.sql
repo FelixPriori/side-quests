@@ -31,4 +31,3 @@ VALUES
     'TP1990', 'Sarah', 'Palmer', 'sarah@example.com', '$2b$10$xPttDUv.c13m9X1ni9CqEOFk1P5exXZeq.2LL.YrztVIWMxi4FTVm', '/images/defaultAvatar.png', false, ''
   );
   
-
