@@ -53,4 +53,9 @@ app.use("/", badgeRoutes());
 app.use("/", classRoutes());
 
 // Run when client connects
-app.listen(8081);
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(8081);
+}
+
+module.exports = app;
+
