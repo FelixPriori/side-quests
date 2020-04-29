@@ -89,14 +89,19 @@ export default function RegisterForm(props) {
           data-testid="avatar-input"
           onChange={event => setAvatar(event.target.value)}
         />
-        <textarea
-          name="bio"
-          type="text-area"
-          placeholder={"Enter a new bio"}
-          value={bio}
-          data-testid="bio-input"
-          onChange={event => setBio(event.target.value)}
-        />
+        {edit ?
+          <textarea
+            name="bio"
+            type="text-area"
+            placeholder={"Enter a new bio"}
+            value={bio}
+            data-testid="bio-input"
+            onChange={event => setBio(event.target.value)}
+          />
+          :
+          null
+        }
+
         <br></br>
         <input
           name="password"

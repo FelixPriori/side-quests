@@ -5,13 +5,13 @@ import BadgeBox from '../BadgeBox/BadgeBox';
 
 export default function Profile(props) {
 
-  const { username, first_name, last_name, email, adventurer, bio } = props.state.userData;
+  const { username, first_name, last_name, email, adventurer, avatar, bio } = props.state.userData;
   const { userBadges } = props.state;
 
   return (
     <section className='profile'>
       <h2>Your profile</h2>
-      <img alt="avatar" src="/images/defaultAvatar.png" />
+      <img alt="avatar" src={avatar} />
       <table className="table table-striped table-bordered">
         <tbody>
           <tr>
