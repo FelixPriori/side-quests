@@ -5,9 +5,9 @@
   "scripts": {
     "server": "node server.js",
     "dev": "nodemon server",
-    "lint": "eslint -c .eslintrc.json --ext .js .",
+    "lint": "eslint -c .eslintrc.json --ext .js . --fix",
     "lint:fix": "eslint -c .eslintrc.json --ext .js . --fix",
-    "test": "jest",
+    "test": "NODE_ENV=test jest --forceExit",
     "test:watch": "jest --watch"
   },
   "dependencies": {
