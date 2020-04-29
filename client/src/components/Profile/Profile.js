@@ -49,6 +49,10 @@ export default function Profile(props) {
             <td className="start">Bio</td>
             <td>{bio}</td>
           </tr>
+          <tr>
+            <td className="start">Bio</td>
+            <td>{bio}</td>
+          </tr>
           {adventurer && (
             <tr>
               <td className="start">Badges</td>

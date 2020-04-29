@@ -24,7 +24,7 @@ export default function QuestListItem(props) {
   return (
     <div className="quest-item">
       <h3>{name}</h3>
-      {props.villager && <p className="username">Villager: {props.villager.username}</p>}
+      {props.villager && <p className="username" onClick={() => props.onGuestProfile(props.villager.id)}>Villager: {props.villager.username} </p>}
       <p>Location: {city}</p>
       <p>{description}</p>
       <footer className="quest-footer">
