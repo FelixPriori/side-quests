@@ -28,7 +28,7 @@ module.exports = () => {
       avatar = 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png';
     }
     if (!username || !email || !password) {
-      res.send(EMPTY_ERROR)
+      res.status(401).send(EMPTY_ERROR)
     } else {
       checkIfUserExists(email).then(userCheck => {
         if (!userCheck) {
