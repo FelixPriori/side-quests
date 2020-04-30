@@ -1,9 +1,8 @@
 /* eslint-disable camelcase */
-/* eslint-disable no-undef */
+
 const app = require("../server.js");
 const supertest = require("supertest");
 const request = supertest(app);
-
 describe("badges", () => {
   it("should return an array of objects", async (done) => {
     const response = await request.get("/badges");
@@ -17,8 +16,9 @@ describe("badges", () => {
       criteria_type: "quest",
       class_id: 1,
     });
-    done();
+    
   });
+
   it("should return a single badge object", async (done) => {
     const response = await request.get("/badges/1");
     expect(response.status).toBe(200);
@@ -31,7 +31,7 @@ describe("badges", () => {
       criteria_type: "quest",
       class_id: 1,
     });
-    done();
+    
   });
 });
 
@@ -46,8 +46,9 @@ describe("classes", () => {
       description:
         "Rogues like to help people from the shadows by sneaking to the nearest store to deliver needed supplies",
     });
-    done();
+    
   });
+
   it("should return a single class object", async (done) => {
     const response = await request.get("/classes/1");
     expect(response.status).toBe(200);
@@ -58,8 +59,9 @@ describe("classes", () => {
       description:
         "Rogues like to help people from the shadows by sneaking to the nearest store to deliver needed supplies",
     });
-    done();
+    
   });
+  
   it("should return the badges associated with the specified class", async (done) => {
     const response = await request.get("/classes/1/badges");
     expect(response.status).toBe(200);
@@ -72,7 +74,7 @@ describe("classes", () => {
       criteria_type: "quest",
       class_id: 1,
     });
-    done();
+    
   });
 });
 
@@ -93,7 +95,7 @@ describe("users", () => {
       adventurer: true,
       bio: "",
     });
-    done();
+    
   });
 
   it("should return a user based on id equalling 1", async (done) => {
@@ -111,7 +113,7 @@ describe("users", () => {
       adventurer: true,
       bio: "",
     });
-    done();
+    
   });
 
   it("should return an array of villagers", async (done) => {
@@ -129,7 +131,7 @@ describe("users", () => {
       adventurer: false,
       bio: "",
     });
-    done();
+    
   });
 
   it("should return an array of adventurers", async (done) => {
@@ -147,7 +149,7 @@ describe("users", () => {
       adventurer: true,
       bio: "",
     });
-    done();
+    
   });
 });
 
@@ -166,7 +168,7 @@ describe("quests", () => {
       villager_id: 6,
       experience_points: 100,
     });
-    done();
+    
   });
 
   it("should return a quest based on the villager id = 6", async (done) => {
@@ -183,7 +185,7 @@ describe("quests", () => {
       villager_id: 6,
       experience_points: 100,
     });
-    done();
+    
   });
 
   it("should return an array of all the quests", async (done) => {
@@ -200,6 +202,6 @@ describe("quests", () => {
       villager_id: 6,
       experience_points: 100,
     });
-    done();
+    
   });
 });
