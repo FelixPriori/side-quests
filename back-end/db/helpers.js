@@ -1,5 +1,7 @@
+/* eslint-disable camelcase */
 const db = require("./index");
 const bcrypt = require("bcrypt");
+// const Sequelize = require('sequelize');
 
 const correctPassword = function (email, password) {
   const queryStr = `
