@@ -1,27 +1,23 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const { allClasses, getClass, getBadgesByClass } = require('../db/helpers');
-
+const { allClasses, getClass, getBadgesByClass } = require("../db/helpers");
 
 module.exports = () => {
-
   router.get("/classes", (req, res) => {
-
-    allClasses().then(result => {
+    allClasses().then((result) => {
       res.send(result);
     });
   });
 
   router.get("/classes/:id", (req, res) => {
-
-    getClass(req.params.id).then(result => {
+    getClass(req.params.id).then((result) => {
       res.send(result);
     });
   });
 
   router.get("/classes/:id/badges", (req, res) => {
-    getBadgesByClass(req.params.id).then(result => {
+    getBadgesByClass(req.params.id).then((result) => {
       res.send(result);
     });
   });
