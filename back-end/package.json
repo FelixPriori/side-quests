@@ -37,12 +37,18 @@
     "eslint-plugin-import": "^2.20.2",
     "husky": "^4.2.5",
     "jest": "^25.5.1",
+    "lint-staged": "^10.2.1",
     "nodemon": "^2.0.3",
+    "prettier": "2.0.5",
     "supertest": "^4.0.2"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint"
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.{js,css,md}": "prettier --write"
   }
 }
