@@ -1,41 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import './App.scss';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import "./App.scss";
+import axios from "axios";
 
-import AllClasses from '../AllClasses/AllClasses';
-import Navbar from '../Navbar/Navbar';
-import LoginForm from '../Login/LoginForm';
-import RegisterForm from '../Register/RegisterForm';
-import CreateQuestForm from '../CreateQuest/CreateQuestForm';
-import ClassSelection from '../ClassSelection/ClassSelection';
-import Profile from '../Profile/Profile';
-import Loading from '../Loading/Loading';
-import VillagerQuestList from '../VillagerQuestList/VillagerQuestList';
-import TakenQuests from '../TakenQuests/TakenQuests';
-import About from '../About/About';
-import Adventurer from '../Adventurer/Adventurer';
-import Villager from '../Villager/Villager';
-import Up from '../Up/Up';
+import AllClasses from "../AllClasses/AllClasses";
+import Navbar from "../Navbar/Navbar";
+import LoginForm from "../Login/LoginForm";
+import RegisterForm from "../Register/RegisterForm";
+import CreateQuestForm from "../CreateQuest/CreateQuestForm";
+import ClassSelection from "../ClassSelection/ClassSelection";
+import Profile from "../Profile/Profile";
+import Loading from "../Loading/Loading";
+import VillagerQuestList from "../VillagerQuestList/VillagerQuestList";
+import TakenQuests from "../TakenQuests/TakenQuests";
+import About from "../About/About";
+import Adventurer from "../Adventurer/Adventurer";
+import Villager from "../Villager/Villager";
+import Up from "../Up/Up";
 import TeaserPage from "../TeaserPage/TeaserPage";
 import GuestProfile from "../GuestProfile/GuestProfile";
 
 // import openSocket from 'socket.io-client';
 // import ChatWindow from '../ChatWindow/ChatWindow';
 
-const LOGIN = 'LOGIN';
-const REGISTER = 'REGISTER';
-const CLASSES = 'CLASSES';
-const CREATE = 'CREATE';
-const SHOW = 'SHOW';
-const PROFILE = 'PROFILE';
-const EDIT = 'EDIT';
-const LOADING = 'LOADING';
-const VILLAGER_QUESTS = 'VILLAGER_QUESTS';
-const TAKEN = 'TAKEN';
+const LOGIN = "LOGIN";
+const REGISTER = "REGISTER";
+const CLASSES = "CLASSES";
+const CREATE = "CREATE";
+const SHOW = "SHOW";
+const PROFILE = "PROFILE";
+const EDIT = "EDIT";
+const LOADING = "LOADING";
+const VILLAGER_QUESTS = "VILLAGER_QUESTS";
+const TAKEN = "TAKEN";
 // const CHAT = 'CHAT';
-const ABOUT = 'ABOUT';
-const TEASER = 'TEASER';
-const GUEST_PROFILE = 'GUEST_PROFILE';
+const ABOUT = "ABOUT";
+const TEASER = "TEASER";
+const GUEST_PROFILE = "GUEST_PROFILE";
 
 export default function App() {
   const [state, setState] = useState({
@@ -50,7 +50,7 @@ export default function App() {
     questsByAdventurer: [],
     sessions: 0,
     adventurer: false,
-    username: '',
+    username: "",
     view: TEASER,
     loggedIn: false,
     adventurers: [],
@@ -68,7 +68,7 @@ export default function App() {
   //Get Initial state data
   useEffect(() => {
     axios
-      .get('/checkSession')
+      .get("/checkSession")
       .then((response) => {
         if (!isEmpty(response.data[0])) {
           setState((prevState) => {
@@ -94,13 +94,17 @@ export default function App() {
   useEffect(() => {
     if (state.loggedIn) {
       const getUserBadges = axios.get(`/users/${state.userData.id}/badges`);
-      const getUserQuest = axios.get('/quests');
-      const getClasses = axios.get('/classes');
-      const getClassesProgress = axios.get('/userClassProgress');
-      const getVillagers = axios.get('/villagers');
-      const getBadges = axios.get('/badges');
-      const getQuestsByVillager = axios.get(`/users/${state.userData.id}/quests`);
-      const getQuestsByAdventurer = axios.get(`/users/adventurer/${state.userData.id}/quests`);
+      const getUserQuest = axios.get("/quests");
+      const getClasses = axios.get("/classes");
+      const getClassesProgress = axios.get("/userClassProgress");
+      const getVillagers = axios.get("/villagers");
+      const getBadges = axios.get("/badges");
+      const getQuestsByVillager = axios.get(
+        `/users/${state.userData.id}/quests`
+      );
+      const getQuestsByAdventurer = axios.get(
+        `/users/adventurer/${state.userData.id}/quests`
+      );
       const getAdventurers = axios.get(`/adventurers`);
       Promise.all([
         getUserBadges,
@@ -111,7 +115,7 @@ export default function App() {
         getBadges,
         getQuestsByVillager,
         getQuestsByAdventurer,
-        getAdventurers
+        getAdventurers,
       ])
         .then(
           ([
@@ -123,7 +127,7 @@ export default function App() {
             { data: badges },
             { data: questsByVillager },
             { data: questsByAdventurer },
-            { data: adventurers }
+            { data: adventurers },
           ]) => {
             setState({
               ...state,
@@ -135,33 +139,32 @@ export default function App() {
               badges,
               questsByVillager,
               questsByAdventurer,
-              adventurers
+              adventurers,
             });
           }
         )
         .catch((err) => console.log(err));
     } else {
-      const getUserQuest = axios.get('/quests');
-      const getVillagers = axios.get('/villagers');
-      const getClasses = axios.get('/classes');
-      Promise.all([
-        getUserQuest,
-        getVillagers,
-        getClasses
-      ]).then(
-        ([
-          { data: userQuests },
-          { data: villagers },
-          { data: classesData }
-        ]) => setState((prevState) => {
-          return {
-            ...prevState,
-            userQuests,
-            villagers,
-            classesData
-          };
-        })
-      ).catch(e => console.log(e));
+      const getUserQuest = axios.get("/quests");
+      const getVillagers = axios.get("/villagers");
+      const getClasses = axios.get("/classes");
+      Promise.all([getUserQuest, getVillagers, getClasses])
+        .then(
+          ([
+            { data: userQuests },
+            { data: villagers },
+            { data: classesData },
+          ]) =>
+            setState((prevState) => {
+              return {
+                ...prevState,
+                userQuests,
+                villagers,
+                classesData,
+              };
+            })
+        )
+        .catch((e) => console.log(e));
     }
   }, [state.loggedIn]);
 
@@ -231,7 +234,7 @@ export default function App() {
 
   const handleLogin = (edit) => {
     return axios
-      .get('/checkSession')
+      .get("/checkSession")
       .then((response) => {
         setState((prevState) => {
           return {
@@ -241,7 +244,7 @@ export default function App() {
             adventurer: response.data[0].adventurer,
             username: response.data[0].first_name,
             loggedIn: true,
-            view: edit ? PROFILE : response.data[0].adventurer ? SHOW : CREATE
+            view: edit ? PROFILE : response.data[0].adventurer ? SHOW : CREATE,
           };
         });
       })
@@ -250,7 +253,7 @@ export default function App() {
 
   const handleLogout = () => {
     return axios
-      .post('/logout')
+      .post("/logout")
       .then(() => {
         setState((prev) => ({
           ...prev,
@@ -262,12 +265,12 @@ export default function App() {
           badges: [],
           sessions: 0,
           adventurer: false,
-          username: '',
+          username: "",
           loggedIn: false,
           view: LOGIN,
           adventurers: [],
           guestInfo: [],
-          guestBadges: []
+          guestBadges: [],
         }));
       })
       .catch((error) => console.log(error));
@@ -275,27 +278,21 @@ export default function App() {
 
   const getGuestProfile = function (id) {
     const getUserInfo = axios.get(`/users/${id}`);
-    const getUserBadges = axios.get(`/users/${state.userData.id}/badges`);
+    const getUserBadges = axios.get(`/users/${id}/badges`);
 
-
-    Promise.all([
-      getUserInfo,
-      getUserBadges
-    ]).then(
-      ([
-        { data: guestInfo },
-        { data: guestBadges },
-      ]) => setState((prevState) => {
-        return {
-          ...prevState,
-          guestInfo,
-          guestBadges,
-          view: GUEST_PROFILE
-        };
-      })
-    ).catch(e => console.log(e));
-  }
-
+    Promise.all([getUserInfo, getUserBadges])
+      .then(([{ data: guestInfo }, { data: guestBadges }]) =>
+        setState((prevState) => {
+          return {
+            ...prevState,
+            guestInfo,
+            guestBadges,
+            view: GUEST_PROFILE,
+          };
+        })
+      )
+      .catch((e) => console.log(e));
+  };
 
   return (
     <div className="App">
@@ -314,16 +311,16 @@ export default function App() {
           onTaken={() => changeView(TAKEN)}
           onAbout={() => changeView(ABOUT)}
 
-        // onChat={() => changeView(CHAT)}
+          // onChat={() => changeView(CHAT)}
         />
       ) : (
-          <Navbar
-            onAbout={() => changeView(ABOUT)}
-            onLogin={() => changeView(LOGIN)}
-            onRegister={() => changeView(REGISTER)}
-            onTeaser={() => changeView(TEASER)}
-          />
-        )}
+        <Navbar
+          onAbout={() => changeView(ABOUT)}
+          onLogin={() => changeView(LOGIN)}
+          onRegister={() => changeView(REGISTER)}
+          onTeaser={() => changeView(TEASER)}
+        />
+      )}
       <main>
         {state.adventurer && state.loggedIn && <Adventurer />}
         {!state.adventurer && state.loggedIn && <Villager />}
@@ -353,9 +350,9 @@ export default function App() {
             state={state}
             setState={setState}
             onGuestProfile={getGuestProfile}
-          // newUserCheck={newUserCheck}
-          // openNewSocket={openNewSocket}
-          // addNewMessage={addNewMessage}
+            // newUserCheck={newUserCheck}
+            // openNewSocket={openNewSocket}
+            // addNewMessage={addNewMessage}
           />
         )}
         {state.view === PROFILE && (
@@ -376,27 +373,19 @@ export default function App() {
             loggedInUser={state.userData}
           />
         )} */}
-        {state.view === VILLAGER_QUESTS &&
-          <VillagerQuestList
-            state={state}
-            setState={setState}
-          />}
-        {state.view === TAKEN &&
+        {state.view === VILLAGER_QUESTS && (
+          <VillagerQuestList state={state} setState={setState} />
+        )}
+        {state.view === TAKEN && (
           <TakenQuests
             state={state}
             setState={setState}
             onGuestProfile={getGuestProfile}
-          />}
-        {state.view === ABOUT &&
-          <About />
-        }
-        {state.view === TEASER &&
-          <TeaserPage
-            state={state}
-          />}
-        {state.view === GUEST_PROFILE &&
-          <GuestProfile state={state} />
-        }
+          />
+        )}
+        {state.view === ABOUT && <About />}
+        {state.view === TEASER && <TeaserPage state={state} />}
+        {state.view === GUEST_PROFILE && <GuestProfile state={state} />}
         <Up />
       </main>
     </div>
