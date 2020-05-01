@@ -145,26 +145,17 @@ export default function App() {
         )
         .catch((err) => console.log(err));
     } else {
-      const getUserQuest = axios.get("/quests");
-      const getVillagers = axios.get("/villagers");
-      const getClasses = axios.get("/classes");
-      Promise.all([getUserQuest, getVillagers, getClasses])
-        .then(
-          ([
-            { data: userQuests },
-            { data: villagers },
-            { data: classesData },
-          ]) =>
-            setState((prevState) => {
-              return {
-                ...prevState,
-                userQuests,
-                villagers,
-                classesData,
-              };
-            })
-        )
-        .catch((e) => console.log(e));
+      const userQuest = await axios.get("/quests").data;
+      const villagers = await axios.get("/villagers").data;
+      const classesData = await axios.get("/classes").data;
+      setState((prevState) => {
+        return {
+          ...prevState,
+          userQuests,
+          villagers,
+          classesData,
+        };
+     });
     }
   }, [state.loggedIn]);
 
