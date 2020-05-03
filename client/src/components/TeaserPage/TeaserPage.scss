@@ -1,73 +1,64 @@
-@import '../../styles/palette.scss';
-
+@import "../../styles/palette.scss";
 
 .quest-selection {
   display: flex;
   flex-flow: wrap;
   justify-content: space-around;
 }
-
-  .quest-list {
+.select-class {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1em;
+  max-width: 45vw;
+  min-width: 400px;
+  h4,
+  h2 {
+    font-family: $title;
+    color: $color1;
+  }
+  h2 {
+    text-shadow: 1px 1px $shadow1;
+  }
+  section {
+    label {
+      font-family: $title;
+      color: $color1;
+    }
+  }
+  .content {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 45vw;
-    min-width: 400px;
-  }
-  .select-class {
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 1em;
-    max-width: 45vw;
-    min-width: 400px;
-  }
-  
-    h4, h2 {
-      font-family: $title;
-      color: $color1;
+    margin: 1em;
+    img {
+      max-height: 150px;
+      align-self: center;
     }
-    h2 {
-      text-shadow: 1px 1px $shadow1;
-    }
-    section {
-      label {
-        font-family: $title;
-        color: $color1;
-      }
-    }
-    .content {
+    span {
       display: flex;
+      flex-direction: column;
       margin: 1em;
-      img {
-        max-height: 150px;
-        align-self: center;
-      }
-      span {
-        display: flex;
-        flex-direction: column;
-        margin: 1em;
-        p {
-          font-family: $paragraph;
-          color: $color1;
-          text-align: left;
-        }
+      p {
+        font-family: $paragraph;
+        color: $color1;
+        text-align: left;
       }
     }
-    .class-badges {
-      display:flex;
-      align-items: center;
-      h3 {
-        margin-right: 1em;
-      }
-    }
+  }
+  .class-badges {
+    display: flex;
+    align-items: center;
     h3 {
-      font-family: $title;
-      color: $color1;
-      text-align: left;
-      margin-left: 1em;
+      margin-right: 1em;
     }
+  }
+  h3 {
+    font-family: $title;
+    color: $color1;
+    text-align: left;
+    margin-left: 1em;
+  }
 
-    .titleImage {
-      height: 25%;
-    }
+  .titleImage {
+    height: 25%;
+  }
+}
