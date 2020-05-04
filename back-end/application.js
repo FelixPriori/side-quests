@@ -1,5 +1,5 @@
 // load .env data into process.env
-require("dotenv").config();
+// require("dotenv").config();
 
 // Web server config
 const express = require("express");
@@ -19,6 +19,10 @@ const badgeRoutes = require("./src/routes/badges");
 const classRoutes = require("./src/routes/classes");
 
 module.exports = function application(ENV) {
+  if (ENV !== "test") {
+    require("dotenv").config();
+  }
+
   app.use(morgan("dev"));
   app.use(cors());
 
@@ -50,10 +54,6 @@ module.exports = function application(ENV) {
   app.use("/", userRoutes());
   app.use("/", badgeRoutes());
   app.use("/", classRoutes());
-
-  if (ENV === "development" || ENV === "test") {
-    //Execute the test db
-  }
 
   return app;
 };

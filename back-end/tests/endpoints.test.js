@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 require("../environment");
-const app = require("../application")("production");
+const app = require("../application")("test");
 const supertest = require("supertest");
 const request = supertest(app);
 
