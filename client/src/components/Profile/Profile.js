@@ -47,11 +47,7 @@ export default function Profile(props) {
           </tr>
           <tr>
             <td className="start">Bio</td>
-            <td>{bio}</td>
-          </tr>
-          <tr>
-            <td className="start">Bio</td>
-            <td>{bio}</td>
+            <td>{bio || "Edit your profile to add your bio!"}</td>
           </tr>
           {adventurer && (
             <tr>

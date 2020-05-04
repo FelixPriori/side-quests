@@ -1,19 +1,23 @@
-@import '../../styles/palette.scss';
+@import "../../styles/palette.scss";
 
-.inside-anchor, .inside-anchor:hover{
+.inside-anchor,
+.inside-anchor:hover {
   text-decoration: none;
-  color: #FFF;
+  color: #fff;
 }
 
 .footer {
-  display:flex;
-  p, .check-container, .btn{
+  display: flex;
+  p,
+  .check-container,
+  .btn {
     align-self: flex-end;
   }
-  .check-container, .btn {
+  .check-container,
+  .btn {
     margin-left: auto;
   }
-  .checkmark-div{
+  .checkmark-div {
     height: 3em;
     border: 0.2em solid $shadow1;
     border-radius: 50%;
@@ -32,7 +36,7 @@
   flex-flow: wrap;
   justify-content: center;
   .quest-item {
-    height:0%;
+    height: 0%;
     display: flex;
     flex-direction: column;
     border: 0.2em solid $color2;
@@ -52,13 +56,15 @@
         margin-left: auto;
       }
     }
-    p, h3 {
+    p,
+    h3 {
       color: $color1;
     }
     .quest-item:hover {
       opacity: 100%;
     }
-    .btn-group, .btn-group-vertical {
+    .btn-group,
+    .btn-group-vertical {
       display: flex;
       margin-left: auto;
     }
@@ -86,7 +92,7 @@
     max-width: 25%;
   }
   .email-link {
-    color: #FFF;
+    color: #fff;
     text-decoration: none;
   }
   .all-btns {
