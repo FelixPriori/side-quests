@@ -1,13 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { views } from "../helpers/appViews";
 
-const LOGIN = "LOGIN";
-const CREATE = "CREATE";
-const SHOW = "SHOW";
-const PROFILE = "PROFILE";
-const LOADING = "LOADING";
-const TEASER = "TEASER";
-const GUEST_PROFILE = "GUEST_PROFILE";
+function isEmpty(obj) {
+  return !obj || Object.keys(obj).length === 0;
+}
 
 export function useAppData() {
   const [state, setState] = useState({
@@ -23,16 +20,12 @@ export function useAppData() {
     sessions: 0,
     adventurer: false,
     username: "",
-    view: TEASER,
+    view: views.TEASER,
     loggedIn: false,
     adventurers: [],
     guestInfo: [],
     guestBadges: [],
   });
-
-  function isEmpty(obj) {
-    return !obj || Object.keys(obj).length === 0;
-  }
 
   useEffect(() => {
     axios
@@ -45,9 +38,9 @@ export function useAppData() {
               userData: response.data[0],
               view: response.data[0]
                 ? response.data[0].adventurer
-                  ? SHOW
-                  : CREATE
-                : LOGIN,
+                  ? views.SHOW
+                  : views.CREATE
+                : views.LOGIN,
               sessions: response.data[0].id,
               adventurer: response.data[0].adventurer,
               username: response.data[0].first_name,
@@ -148,7 +141,11 @@ export function useAppData() {
             adventurer: response.data[0].adventurer,
             username: response.data[0].first_name,
             loggedIn: true,
-            view: edit ? PROFILE : response.data[0].adventurer ? SHOW : CREATE,
+            view: edit
+              ? views.PROFILE
+              : response.data[0].adventurer
+              ? views.SHOW
+              : views.CREATE,
           };
         });
       })
@@ -171,7 +168,7 @@ export function useAppData() {
           adventurer: false,
           username: "",
           loggedIn: false,
-          view: LOGIN,
+          view: views.LOGIN,
           adventurers: [],
           guestInfo: [],
           guestBadges: [],
@@ -183,7 +180,7 @@ export function useAppData() {
   const changeView = (viewType) => {
     setState({
       ...state,
-      view: LOADING,
+      view: views.LOADING,
     });
     setTimeout(() => {
       setState({
@@ -204,7 +201,7 @@ export function useAppData() {
             ...prevState,
             guestInfo,
             guestBadges,
-            view: GUEST_PROFILE,
+            view: views.GUEST_PROFILE,
           };
         })
       )

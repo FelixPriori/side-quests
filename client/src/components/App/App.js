@@ -19,19 +19,7 @@ import TeaserPage from "../TeaserPage/TeaserPage";
 import GuestProfile from "../GuestProfile/GuestProfile";
 import { useAppData } from "../../hooks/useAppData";
 
-const LOGIN = "LOGIN";
-const REGISTER = "REGISTER";
-const CLASSES = "CLASSES";
-const CREATE = "CREATE";
-const SHOW = "SHOW";
-const PROFILE = "PROFILE";
-const EDIT = "EDIT";
-const LOADING = "LOADING";
-const VILLAGER_QUESTS = "VILLAGER_QUESTS";
-const TAKEN = "TAKEN";
-const ABOUT = "ABOUT";
-const TEASER = "TEASER";
-const GUEST_PROFILE = "GUEST_PROFILE";
+import { views } from "../../helpers/appViews";
 
 export default function App() {
   const {
@@ -49,79 +37,85 @@ export default function App() {
         <Navbar
           user={state.username}
           adventurer={state.adventurer}
-          onQuests={() => changeView(SHOW)}
-          onCreate={() => changeView(CREATE)}
+          onQuests={() => changeView(views.SHOW)}
+          onCreate={() => changeView(views.CREATE)}
           onLogout={() => handleLogout()}
-          onLogin={() => changeView(LOGIN)}
-          onRegister={() => changeView(REGISTER)}
-          onProgress={() => changeView(CLASSES)}
-          onProfile={() => changeView(PROFILE)}
-          onVillagerQuests={() => changeView(VILLAGER_QUESTS)}
-          onTaken={() => changeView(TAKEN)}
-          onAbout={() => changeView(ABOUT)}
+          onLogin={() => changeView(views.LOGIN)}
+          onRegister={() => changeView(views.REGISTER)}
+          onProgress={() => changeView(views.CLASSES)}
+          onProfile={() => changeView(views.PROFILE)}
+          onVillagerQuests={() => changeView(views.VILLAGER_QUESTS)}
+          onTaken={() => changeView(views.TAKEN)}
+          onAbout={() => changeView(views.ABOUT)}
         />
       ) : (
         <Navbar
-          onAbout={() => changeView(ABOUT)}
-          onLogin={() => changeView(LOGIN)}
-          onRegister={() => changeView(REGISTER)}
-          onTeaser={() => changeView(TEASER)}
+          onAbout={() => changeView(views.ABOUT)}
+          onLogin={() => changeView(views.LOGIN)}
+          onRegister={() => changeView(views.REGISTER)}
+          onTeaser={() => changeView(views.TEASER)}
         />
       )}
       <main>
         {state.adventurer && state.loggedIn && <Adventurer />}
         {!state.adventurer && state.loggedIn && <Villager />}
-        {state.view === LOADING && <Loading />}
-        {state.view === LOGIN && <LoginForm onLogin={() => handleLogin()} />}
-        {state.view === CLASSES && (
+        {state.view === views.LOADING && <Loading />}
+        {state.view === views.LOGIN && (
+          <LoginForm onLogin={() => handleLogin()} />
+        )}
+        {state.view === views.CLASSES && (
           <AllClasses
             classesData={state.classesData}
             classesProgressData={state.classesProgressData}
           />
         )}
-        {state.view === REGISTER && (
+        {state.view === views.REGISTER && (
           <RegisterForm
             onLogin={handleLogin}
-            onProfile={() => changeView(PROFILE)}
+            onProfile={() => changeView(views.PROFILE)}
           />
         )}
-        {state.view === CREATE && (
+        {state.view === views.CREATE && (
           <CreateQuestForm
-            onCreate={() => changeView(VILLAGER_QUESTS)}
+            onCreate={() => changeView(views.VILLAGER_QUESTS)}
             state={state}
             setState={setState}
           />
         )}
-        {state.view === SHOW && (
+        {state.view === views.SHOW && (
           <ClassSelection
             state={state}
             setState={setState}
             onGuestProfile={getGuestProfile}
           />
         )}
-        {state.view === PROFILE && (
-          <Profile onEdit={() => changeView(EDIT)} state={state} edit={true} />
+        {state.view === views.PROFILE && (
+          <Profile
+            onEdit={() => changeView(views.EDIT)}
+            state={state}
+            edit={true}
+          />
         )}
-        {state.view === EDIT && (
+        {state.view === views.EDIT && (
           <RegisterForm
             userData={state.userData}
             onLogin={handleLogin}
-            onProfile={() => changeView(PROFILE)}
+            onProfile={() => changeView(views.PROFILE)}
           />
         )}
-        {state.view === VILLAGER_QUESTS && (
+        {state.view === views.VILLAGER_QUESTS && (
           <VillagerQuestList state={state} setState={setState} />
         )}
-        {state.view === TAKEN && (
+        {state.view === views.TAKEN && (
           <TakenQuests
             state={state}
             setState={setState}
             onGuestProfile={getGuestProfile}
           />
         )}
-        {state.view === ABOUT && <About />}
-        {state.view === TEASER && <TeaserPage state={state} />}
-        {state.view === GUEST_PROFILE && <GuestProfile state={state} />}
+        {state.view === views.ABOUT && <About />}
+        {state.view === views.TEASER && <TeaserPage state={state} />}
+        {state.view === views.GUEST_PROFILE && <GuestProfile state={state} />}
         <Up />
       </main>
     </div>
