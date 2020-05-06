@@ -1,6 +1,3 @@
-// load .env data into process.env
-// require("dotenv").config();
-
 // Web server config
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -18,11 +15,7 @@ const userRoutes = require("./src/routes/users");
 const badgeRoutes = require("./src/routes/badges");
 const classRoutes = require("./src/routes/classes");
 
-module.exports = function application(ENV) {
-  if (ENV !== "test") {
-    require("dotenv").config();
-  }
-
+module.exports = function application() {
   app.use(morgan("dev"));
   app.use(cors());
 
