@@ -1,10 +1,11 @@
 /* eslint-disable camelcase */
-
-const app = require("../server.js");
+require("../environment");
+const app = require("../application")("test");
 const supertest = require("supertest");
 const request = supertest(app);
+
 describe("badges", () => {
-  it("should return an array of objects", async (done) => {
+  it("should return an array of objects", async () => {
     const response = await request.get("/badges");
     expect(response.status).toBe(200);
     expect(response.body.length).toBeGreaterThan(0);
@@ -16,10 +17,9 @@ describe("badges", () => {
       criteria_type: "quest",
       class_id: 1,
     });
-    
   });
 
-  it("should return a single badge object", async (done) => {
+  it("should return a single badge object", async () => {
     const response = await request.get("/badges/1");
     expect(response.status).toBe(200);
     expect(response.body.length).toBe(1);
@@ -31,12 +31,11 @@ describe("badges", () => {
       criteria_type: "quest",
       class_id: 1,
     });
-    
   });
 });
 
 describe("classes", () => {
-  it("should return an array of objects", async (done) => {
+  it("should return an array of objects", async () => {
     const response = await request.get("/classes");
     expect(response.status).toBe(200);
     expect(response.body.length).toBeGreaterThan(0);
@@ -46,10 +45,9 @@ describe("classes", () => {
       description:
         "Rogues like to help people from the shadows by sneaking to the nearest store to deliver needed supplies",
     });
-    
   });
 
-  it("should return a single class object", async (done) => {
+  it("should return a single class object", async () => {
     const response = await request.get("/classes/1");
     expect(response.status).toBe(200);
     expect(response.body.length).toBe(1);
@@ -59,10 +57,9 @@ describe("classes", () => {
       description:
         "Rogues like to help people from the shadows by sneaking to the nearest store to deliver needed supplies",
     });
-    
   });
-  
-  it("should return the badges associated with the specified class", async (done) => {
+
+  it("should return the badges associated with the specified class", async () => {
     const response = await request.get("/classes/1/badges");
     expect(response.status).toBe(200);
     expect(response.body.length).toBeGreaterThan(0);
@@ -74,12 +71,11 @@ describe("classes", () => {
       criteria_type: "quest",
       class_id: 1,
     });
-    
   });
 });
 
 describe("users", () => {
-  it("should return an array of all the user objects", async (done) => {
+  it("should return an array of all the user objects", async () => {
     const response = await request.get("/users");
     expect(response.status).toBe(200);
     expect(response.body.length).toBeGreaterThan(0);
@@ -95,10 +91,9 @@ describe("users", () => {
       adventurer: true,
       bio: "",
     });
-    
   });
 
-  it("should return a user based on id equalling 1", async (done) => {
+  it("should return a user based on id equalling 1", async () => {
     const response = await request.get("/users/1");
     expect(response.status).toBe(200);
     expect(response.body.length).toBe(1);
@@ -113,10 +108,9 @@ describe("users", () => {
       adventurer: true,
       bio: "",
     });
-    
   });
 
-  it("should return an array of villagers", async (done) => {
+  it("should return an array of villagers", async () => {
     const response = await request.get("/villagers");
     expect(response.status).toBe(200);
     expect(response.body.length).toBeGreaterThan(0);
@@ -131,10 +125,9 @@ describe("users", () => {
       adventurer: false,
       bio: "",
     });
-    
   });
 
-  it("should return an array of adventurers", async (done) => {
+  it("should return an array of adventurers", async () => {
     const response = await request.get("/adventurers");
     expect(response.status).toBe(200);
     expect(response.body.length).toBeGreaterThan(0);
@@ -149,12 +142,11 @@ describe("users", () => {
       adventurer: true,
       bio: "",
     });
-    
   });
 });
 
 describe("quests", () => {
-  it("should return a quest based on the id = 1 ", async (done) => {
+  it("should return a quest based on the id = 1 ", async () => {
     const response = await request.get("/quests/1");
     expect(response.status).toBe(200);
     expect(response.body.length).toBe(1);
@@ -168,10 +160,9 @@ describe("quests", () => {
       villager_id: 6,
       experience_points: 100,
     });
-    
   });
 
-  it("should return a quest based on the villager id = 6", async (done) => {
+  it("should return a quest based on the villager id = 6", async () => {
     const response = await request.get("/users/6/quests");
     expect(response.status).toBe(200);
     expect(response.body.length).toBeGreaterThan(0);
@@ -185,10 +176,9 @@ describe("quests", () => {
       villager_id: 6,
       experience_points: 100,
     });
-    
   });
 
-  it("should return an array of all the quests", async (done) => {
+  it("should return an array of all the quests", async () => {
     const response = await request.get("/quests");
     expect(response.status).toBe(200);
     expect(response.body.length).toBeGreaterThan(0);
@@ -202,6 +192,5 @@ describe("quests", () => {
       villager_id: 6,
       experience_points: 100,
     });
-    
   });
 });

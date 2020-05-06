@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 
-const { editProfile, correctPassword } = require("../db/helpers");
+const { editProfile, correctPassword } = require("../../db/helpers");
 
 module.exports = () => {
   router.post("/users/edit", (req, res) => {

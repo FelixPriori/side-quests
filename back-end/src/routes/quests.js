@@ -12,7 +12,7 @@ const {
   allQuests,
   getQuest,
   getQuestsByAdventurer,
-} = require("../db/helpers");
+} = require("../../db/helpers");
 
 module.exports = () => {
   router.post("/quests/new", (req, res) => {

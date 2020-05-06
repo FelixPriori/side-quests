@@ -6,7 +6,7 @@ const {
   addUser,
   classProgressForNewUser,
   getUserByUsername,
-} = require("../db/helpers");
+} = require("../../db/helpers");
 
 module.exports = () => {
   router.post("/register", (req, res) => {

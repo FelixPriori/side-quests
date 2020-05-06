@@ -10,7 +10,7 @@ const {
   getBadgesByUser,
   allVillagers,
   allAdventurers,
-} = require("../db/helpers");
+} = require("../../db/helpers");
 
 module.exports = () => {
   router.get("/users", (req, res) => {
