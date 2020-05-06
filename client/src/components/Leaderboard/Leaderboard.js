@@ -10,15 +10,37 @@ export default function Leaderboard(props) {
   //Highest level class leaderboard
 
   //Filter all users to check which one has the highest level
-  const leaderboardUsers = [];
+  const leaderboardUsers = props.users.;
+
+  const filterByQuests = function (users) {
+    let currentUser = {};
+    let currentMax = 0;
+
+
+    return currentUser;
+  }
+
+  const filterByClass = function (users) {
+    let currentUser = {};
+    let currentMax = 0;
+
+
+    return currentUser;
+
+  }
+
 
 
   return (
     <div className="leaderboard">
-      <header></header>
-      <div className="topUsers">
+      <table>
+        <tr>
+          <th>Rank</th>
+          <th>Username</th>
+          <th>Amount of Quests</th>
+        </tr>
         {leaderboardUsers}
-      </div>
+      </table>
     </div>
   );
 }
