@@ -1,6 +1,4 @@
-const app = require("./application")("development");
+const app = require("./application")();
 
 // Run when client connects
-if (process.env.NODE_ENV !== "test") {
-  app.listen(8081);
-}
+app.listen(8081);
