@@ -14,6 +14,6 @@ DB_PORT=
 
 And then:
 
-1. Create a test database which you can create using the psql client with `create database sidequests_tests;`
-2. If you've never run the tests for this project, seed the test database using `db/test_setup.sql`
+1. Create a test database, e.g. `create database sidequests_tests;` using the psql client
+2. Seed the test database from the root directory `\i back-end/db/test_setup` (note: this will drop your db tables if they already exist)
 3. Run `npm run test`
