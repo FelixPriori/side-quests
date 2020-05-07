@@ -1,6 +1,6 @@
 import React from "react";
-import BadgeBox from '../components/BadgeBox/BadgeBox';
+import { BadgeBox } from "../components/BadgeBox/BadgeBox";
 
-export default { title: 'BadgeBox' }
+export default { title: "BadgeBox" };
 
-export const badgeBox = () => <BadgeBox />
+export const badgeBox = () => <BadgeBox />;

@@ -1,7 +1,7 @@
 import React from "react";
 import "./Profile.scss";
 import Button from "../Button/Button";
-import BadgeBox from "../BadgeBox/BadgeBox";
+import { BadgeBox } from "../BadgeBox/BadgeBox";
 
 export default function Profile(props) {
   const {
