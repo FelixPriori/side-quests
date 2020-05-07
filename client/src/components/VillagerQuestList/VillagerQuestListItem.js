@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./VillagerQuestListItem.scss";
 import Button from "../Button/Button";
-import CheckSeal from "../CheckSeal/CheckSeal";
+import { CheckSeal } from "../CheckSeal/CheckSeal";
 import axios from "axios";
 
 const classnames = require("classnames");
