@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Badge from "../Badge/Badge";
+import { Badge } from "../Badge/Badge";
 import "./BadgeBox.scss";
 
 export const BadgeBox = (props) => {
