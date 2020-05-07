@@ -7,7 +7,7 @@ import LoginForm from "../Login/LoginForm";
 import RegisterForm from "../Register/RegisterForm";
 import CreateQuestForm from "../CreateQuest/CreateQuestForm";
 import ClassSelection from "../ClassSelection/ClassSelection";
-import Profile from "../Profile/Profile";
+import { Profile } from "../Profile/Profile";
 import Loading from "../Loading/Loading";
 import VillagerQuestList from "../VillagerQuestList/VillagerQuestList";
 import TakenQuests from "../TakenQuests/TakenQuests";
@@ -92,8 +92,8 @@ export default function App() {
         {state.view === views.PROFILE && (
           <Profile
             onEdit={() => changeView(views.EDIT)}
-            state={state}
-            edit={true}
+            userData={state.userData}
+            userBadges={state.userBadges}
           />
         )}
         {state.view === views.EDIT && (
