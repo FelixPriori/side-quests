@@ -45,7 +45,7 @@ function VillagerQuests(props) {
 export default function GuestProfile(props) {
   return (
     <section className="guest-profile">
-      <div class="user-details">
+      <div className="user-details">
         <img src={props.state.guestInfo[0].avatar}></img>
         <h3>{props.state.guestInfo[0].username}'s Profile</h3>
         {props.state.guestInfo[0].bio ? (
@@ -54,7 +54,7 @@ export default function GuestProfile(props) {
           <p>This user does not have a bio yet.</p>
         )}
       </div>
-      <div class="user-progress">
+      <div className="user-progress">
         <BadgeBox badges={props.state.guestBadges} />
         <VillagerQuests
           villagerId={props.state.guestInfo[0].id}
