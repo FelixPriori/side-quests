@@ -1,0 +1,10 @@
+@import '../../styles/palette.scss';
+
+
+.table thead {
+  background-color: $color2;
+}
+
+.table tbody {
+  background-color: $highlight1;
+}

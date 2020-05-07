@@ -10,6 +10,7 @@ const {
   getBadgesByUser,
   allVillagers,
   allAdventurers,
+  getAllClassProgress,
 } = require("../../db/helpers");
 
 module.exports = () => {
@@ -32,6 +33,12 @@ module.exports = () => {
 
   router.get("/userQuests", (req, res) => {
     checkUserQuests(req.session.userId).then((result) => {
+      res.json(result);
+    });
+  });
+
+  router.get("/classProgress", (req, res) => {
+    getAllClassProgress().then((result) => {
       res.json(result);
     });
   });
