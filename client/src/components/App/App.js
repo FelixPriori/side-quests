@@ -114,7 +114,9 @@ export default function App() {
           />
         )}
         {state.view === views.ABOUT && <About />}
-        {state.view === views.TEASER && <TeaserPage state={state} />}
+        {state.view === views.TEASER && (
+          <TeaserPage classesData={state.classesData} />
+        )}
         {state.view === views.GUEST_PROFILE && <GuestProfile state={state} />}
         <Up />
       </main>

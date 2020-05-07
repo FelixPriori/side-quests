@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import ClassTabs from "../ClassTabs/ClassTabs";
 import "./TeaserPage.scss";
 
@@ -15,8 +17,12 @@ export const TeaserPage = (props) => {
         <div className="content"></div>
         <h4>Sign in or Register to help people in need!</h4>
         <br></br>
-        <ClassTabs classData={props.state.classesData} />
+        <ClassTabs classData={props.classesData} />
       </section>
     </section>
   );
+};
+
+TeaserPage.propTypes = {
+  classesData: PropTypes.array.isRequired,
 };
