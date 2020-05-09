@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import "./Profile.scss";
 import Button from "../Button/Button";
-import { BadgeBox } from "../BadgeBox/BadgeBox";
+import BadgeBox from "../BadgeBox/BadgeBox";
 
 export const Profile = (props) => {
   const {
