@@ -1,9 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import "./Profile.scss";
 import Button from "../Button/Button";
-import BadgeBox from "../BadgeBox/BadgeBox";
+import { BadgeBox } from "../BadgeBox/BadgeBox";
 
-export default function Profile(props) {
+export const Profile = (props) => {
   const {
     username,
     first_name,
@@ -12,8 +14,8 @@ export default function Profile(props) {
     adventurer,
     avatar,
     bio,
-  } = props.state.userData;
-  const { userBadges } = props.state;
+  } = props.userData;
+  const { userBadges } = props.userBadges;
 
   return (
     <section className="profile">
@@ -62,4 +64,18 @@ export default function Profile(props) {
       </Button>
     </section>
   );
-}
+};
+
+Profile.propTypes = {
+  userData: PropTypes.exact({
+    username: PropTypes.string,
+    first_name: PropTypes.string,
+    last_name: PropTypes.string,
+    email: PropTypes.string,
+    adventurer: PropTypes.string,
+    avatar: PropTypes.string,
+    bio: PropTypes.string,
+  }).isRequired,
+  userBadges: PropTypes.array.isRequired,
+  onEdit: PropTypes.func.isRequired,
+};
