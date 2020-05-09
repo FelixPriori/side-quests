@@ -22,6 +22,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "lint": "eslint -c .eslintrc.json --ext .jsx --ext .js src/ --fix",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s ./public",
     "build-storybook": "build-storybook -s public"
@@ -46,6 +47,8 @@
     "@storybook/addon-links": "^5.3.18",
     "@storybook/addons": "^5.3.18",
     "@storybook/preset-create-react-app": "^2.1.1",
-    "@storybook/react": "^5.3.18"
+    "@storybook/react": "^5.3.18",
+    "eslint": "^6.8.0",
+    "eslint-plugin-react": "^7.19.0"
   }
 }
