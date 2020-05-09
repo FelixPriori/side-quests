@@ -527,6 +527,14 @@ const increaseQuestCount = function (userId, classId, amount) {
   return db.query(queryStr, [amount, userId, classId]).then();
 };
 
+const getAllClassProgress = function () {
+  const queryStr = `
+  SELECT * 
+  FROM class_progress;
+  `;
+  return db.query(queryStr, []).then();
+};
+
 module.exports = {
   correctPassword,
   checkIfUserExists,
@@ -560,4 +568,5 @@ module.exports = {
   classProgressForNewUser,
   getUserByUsername,
   dropQuest,
+  getAllClassProgress,
 };

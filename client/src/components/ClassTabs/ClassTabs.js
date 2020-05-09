@@ -1,15 +1,14 @@
 import React, { useState } from "react";
+import "./ClassTabs.scss";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
-
-import "./ClassTabs.scss";
 
 export default function ClassTabs(props) {
   const [key, setKey] = useState("Rogue");
 
   const allTabs =
     props.classData &&
-    props.classData.map((oneClass) => {
+    props.classData.map((oneClass, index) => {
       return (
         <Tab
           eventKey={oneClass.name}

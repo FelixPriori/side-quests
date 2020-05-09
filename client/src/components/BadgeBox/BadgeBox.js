@@ -1,10 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
-
-import { Badge } from "../Badge/Badge";
+import Badge from "../Badge/Badge";
 import "./BadgeBox.scss";
 
-export const BadgeBox = (props) => {
+export default function BadgeBox(props) {
   const { lockedBadges, badges } = props;
   const unlocked =
     badges && badges.map((badge) => <Badge key={badge.id} badge={badge} />);
@@ -20,9 +18,4 @@ export const BadgeBox = (props) => {
       {locked}
     </div>
   );
-};
-
-BadgeBox.propTypes = {
-  lockedBadges: PropTypes.array.isRequired,
-  badges: PropTypes.array.isRequired,
-};
+}

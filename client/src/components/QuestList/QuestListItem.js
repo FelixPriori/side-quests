@@ -1,7 +1,10 @@
 import React from "react";
 import "./QuestListItem.scss";
 import Button from "../Button/Button";
-import { CheckSeal } from "../CheckSeal/CheckSeal";
+import CheckSeal from "../CheckSeal/CheckSeal";
+import axios from "axios";
+// import ChatWindow from '../ChatWindow/ChatWindow';
+// import { ChatDotsFill } from 'react-bootstrap-icons';
 
 export default function QuestListItem(props) {
   // const [viewChat, setViewChat] = useState(false);

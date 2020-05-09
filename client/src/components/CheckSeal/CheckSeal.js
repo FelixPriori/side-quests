@@ -1,8 +1,8 @@
 import React from "react";
 import "./CheckSeal.scss";
 
-export const CheckSeal = () => {
+export default function CheckSeal(props) {
   return (
     <img className="checkSeal" alt="seal" src="/images/CheckSeal.png"></img>
   );
-};
+}

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./Badge.scss";
-import { BadgeHover } from "../BadgeHover/BadgeHover";
+import BadgeHover from "../BadgeHover/BadgeHover";
 
-export const Badge = (props) => {
+export default function Badge(props) {
   const [popUp, setPopUp] = useState(false);
 
   return (
@@ -32,4 +32,4 @@ export const Badge = (props) => {
       )}
     </div>
   );
-};
+}

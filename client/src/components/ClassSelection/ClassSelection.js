@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./ClassSelection.scss";
 import ClassProgress from "../ClassProgress/ClassProgress";
 import QuestList from "../QuestList/QuestList";
-import { BadgeBox } from "../BadgeBox/BadgeBox";
+import BadgeBox from "../BadgeBox/BadgeBox";
 import axios from "axios";
 const { checkLocked, filterLocked } = require("../../helpers/badgeHelpers");
 
