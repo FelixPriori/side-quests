@@ -9,8 +9,8 @@ export default function Leaderboard(props) {
   //and
   //Highest level class leaderboard
 
-  //Filter all users to check which one has the highest level
 
+  //Filter all users to check which one has the highest level
 
   const compareByQuests = function (users) {
 
