@@ -1,13 +1,23 @@
 const sequelize = require("../../server");
 const { DataTypes } = require("sequelize");
+const { Classes } = require("./classes");
+const { Users } = require("./users");
 
 const ClassProgress = sequelize.define("ClassProgress", {
   classId: {
     type: DataTypes.INTEGER,
+    references: {
+      model: Classes,
+      key: "id",
+    },
     allowNull: false,
   },
   adventurerId: {
     type: DataTypes.INTEGER,
+    references: {
+      model: Users,
+      key: "id",
+    },
     allowNull: false,
   },
   level: {
