@@ -15,7 +15,7 @@ import About from "../About/About";
 import Adventurer from "../Adventurer/Adventurer";
 import Villager from "../Villager/Villager";
 import Up from "../Up/Up";
-import { TeaserPage } from "../TeaserPage/TeaserPage";
+import TeaserPage from "../TeaserPage/TeaserPage";
 import GuestProfile from "../GuestProfile/GuestProfile";
 import { useAppData } from "../../hooks/useAppData";
 

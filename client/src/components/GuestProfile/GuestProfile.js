@@ -1,6 +1,6 @@
 import React from "react";
 import "./GuestProfile.scss";
-import { BadgeBox } from "../BadgeBox/BadgeBox";
+import BadgeBox from "../BadgeBox/BadgeBox";
 import QuestListItem from "../QuestList/QuestListItem";
 
 function VillagerQuests(props) {
