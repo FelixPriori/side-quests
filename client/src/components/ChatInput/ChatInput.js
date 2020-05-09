@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import './ChatInput.scss';
-
+import "./ChatInput.scss";
 
 export default function ChatInput(props) {
-
-  const [message, setMessage] = useState("")
+  const [message, setMessage] = useState("");
 
   return (
     <div className="chatInput">
@@ -16,15 +14,20 @@ export default function ChatInput(props) {
           placeholder={"Send Message"}
           value={message}
           data-testid="message-input"
-          onChange={event => setMessage(event.target.value)}
+          onChange={(event) => setMessage(event.target.value)}
         />
-        <button onClick={event => {
-          event.preventDefault();
-          props.onSubmit(message);
-          setMessage("");
-        }}
-          type="submit" className="btn btn-primary">Send</button>
+        <button
+          onClick={(event) => {
+            event.preventDefault();
+            props.onSubmit(message);
+            setMessage("");
+          }}
+          type="submit"
+          className="btn btn-primary"
+        >
+          Send
+        </button>
       </form>
     </div>
-  )
+  );
 }

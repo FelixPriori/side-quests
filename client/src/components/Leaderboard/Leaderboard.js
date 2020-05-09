@@ -1,22 +1,17 @@
 import React from "react";
 import "./Leaderboard.scss";
 
-
 export default function Leaderboard(props) {
-
   //2 leaderboards
   //Quests completed leaderboard
   //and
   //Highest level class leaderboard
 
-
   //Filter all users to check which one has the highest level
 
   const compareByQuests = function (users) {
-
-
     return 0;
-  }
+  };
 
   function compareByClass(a, b) {
     if (a.quest_count > b.quest_count) return 1;
@@ -26,15 +21,12 @@ export default function Leaderboard(props) {
   }
 
   const filterByClass = function (classProgress) {
-
     const sortedObjects = classProgress.sort(compareByClass);
 
     return sortedObjects;
-
-  }
+  };
 
   //filterByClass(testClassData);
-
 
   return (
     <div className="leaderboard">
@@ -74,28 +66,27 @@ const testClassData = [
     adventurer_id: 1,
     level: 3,
     experience_points: 300,
-    quest_count: 18
+    quest_count: 18,
   },
   {
     class_id: 2,
     adventurer_id: 1,
     level: 3,
     experience_points: 200,
-    quest_count: 5
+    quest_count: 5,
   },
   {
     class_id: 3,
     adventurer_id: 1,
     level: 5,
     experience_points: 300,
-    quest_count: 10
+    quest_count: 10,
   },
   {
     class_id: 1,
     adventurer_id: 1,
     level: 3,
     experience_points: 300,
-    quest_count: 23
+    quest_count: 23,
   },
-
 ];

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import './TakenQuestItem.scss';
-import Button from '../Button/Button';
-import CheckSeal from '../CheckSeal/CheckSeal';
+import React, { useState } from "react";
+import "./TakenQuestItem.scss";
+import Button from "../Button/Button";
+import CheckSeal from "../CheckSeal/CheckSeal";
 import axios from "axios";
 
 export default function TakenQuestItem(props) {
@@ -11,21 +11,23 @@ export default function TakenQuestItem(props) {
 
   const dropQuest = function (questId) {
     axios.post(`/quests/${questId}/drop`).then(() => {
-      const quests = props.state.questsByAdventurer.filter(quest => quest.id !== questId);
-      const newAllQuests = props.state.userQuests.map(quest => {
+      const quests = props.state.questsByAdventurer.filter(
+        (quest) => quest.id !== questId
+      );
+      const newAllQuests = props.state.userQuests.map((quest) => {
         if (quest.id === questId) {
           quest.adventurer_id = null;
         }
         return quest;
       });
-      props.setState(prevState => ({
+      props.setState((prevState) => ({
         ...prevState,
         questsByAdventurer: quests,
-        userQuests: newAllQuests
+        userQuests: newAllQuests,
       }));
       setConfirmation(false);
     });
-  }
+  };
 
   return (
     <div className="quest-item">
@@ -33,39 +35,54 @@ export default function TakenQuestItem(props) {
       <p>{description}</p>
       <div className="footer">
         <p>
-          <strong>{villager[0].username}</strong><br />
-          {completed ? "marked this quest as complete." : "posted this quest."} <br />
+          <strong>{villager[0].username}</strong>
+          <br />
+          {completed
+            ? "marked this quest as complete."
+            : "posted this quest."}{" "}
+          <br />
         </p>
-        {completed
-          ? <div className="check-container">
+        {completed ? (
+          <div className="check-container">
             <CheckSeal />
           </div>
-          : <div className="all-btns">
-              <div className="btn-group">
-                <Button danger onClick={() => setConfirmation(true)}>Drop Quest</Button>
-                <Button confirm>
-                  <a href="https://hangouts.google.com/call/4vTdHBEPZQ6TnGAwr570AEEE?no_rd" target="_blank" rel="noopener noreferrer">
-                    Hangout
-                  </a>
-                </Button>
-                <Button confirm>
-                  <a href={`mailto: ${villager[0].email}?subject=${name}`}>
-                    Email {villager[0].username}
-                  </a>
-                </Button>
-              </div>
+        ) : (
+          <div className="all-btns">
+            <div className="btn-group">
+              <Button danger onClick={() => setConfirmation(true)}>
+                Drop Quest
+              </Button>
+              <Button confirm>
+                <a
+                  href="https://hangouts.google.com/call/4vTdHBEPZQ6TnGAwr570AEEE?no_rd"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Hangout
+                </a>
+              </Button>
+              <Button confirm>
+                <a href={`mailto: ${villager[0].email}?subject=${name}`}>
+                  Email {villager[0].username}
+                </a>
+              </Button>
             </div>
-        }
+          </div>
+        )}
       </div>
-      {confirmation &&
+      {confirmation && (
         <div className="alert alert-danger">
           <p className="alert-msg">Are you sure you wish to drop this quest?</p>
-          <div className='btn-group'>
-            <Button confirm onClick={() => setConfirmation(false)}>Cancel</Button>
-            <Button danger onClick={() => dropQuest(props.quest.id)}>Drop</Button>
+          <div className="btn-group">
+            <Button confirm onClick={() => setConfirmation(false)}>
+              Cancel
+            </Button>
+            <Button danger onClick={() => dropQuest(props.quest.id)}>
+              Drop
+            </Button>
           </div>
         </div>
-      }
+      )}
     </div>
-  )
+  );
 }

@@ -1,19 +1,21 @@
-import React from 'react';
-import './ClassProgress.scss';
+import React from "react";
+import "./ClassProgress.scss";
 
 export default function ClassProgress(props) {
-
   const { level, experience_points, quest_count } = props.data;
 
   const toNextLevel = (level, experience) => {
     const totalRequired = (level + 1) * 100;
     const expDifference = totalRequired - experience;
-    const percentage = Math.round(experience / totalRequired * 100);
+    const percentage = Math.round((experience / totalRequired) * 100);
     const questsNeeded = expDifference / 100;
     return { questsNeeded, expDifference, percentage };
-  }
+  };
 
-  const { questsNeeded, expDifference, percentage } = toNextLevel(level, experience_points);
+  const { questsNeeded, expDifference, percentage } = toNextLevel(
+    level,
+    experience_points
+  );
 
   return (
     <section className="progress-section">
@@ -40,5 +42,5 @@ export default function ClassProgress(props) {
         </span>
       </div>
     </section>
-  )
+  );
 }

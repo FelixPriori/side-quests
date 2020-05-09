@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import './CreateQuestForm.scss';
-import Button from '../Button/Button';
-import axios from 'axios';
+import React, { useState } from "react";
+import "./CreateQuestForm.scss";
+import Button from "../Button/Button";
+import axios from "axios";
 
 export default function CreateQuestForm(props) {
   const [questType, setQuestType] = useState(null);
@@ -9,10 +9,11 @@ export default function CreateQuestForm(props) {
   const [description, setDescription] = useState("");
   const [city, setCity] = useState("");
   const [error, setError] = useState(null);
-  
+
   function handleSubmit() {
     const data = { questType, name, description, city };
-    axios.post('/quests/new', data)
+    axios
+      .post("/quests/new", data)
       .then(() => {
         const { questsByVillager } = props.state;
         const newQuest = {
@@ -24,33 +25,40 @@ export default function CreateQuestForm(props) {
           class_id: questType,
           villager_id: props.state.userData.id,
           adventurer_id: null,
-          experience_points: 100
+          experience_points: 100,
         };
         questsByVillager.push(newQuest);
-        props.setState( prevState => {
+        props.setState((prevState) => {
           return {
             ...prevState,
-            questsByVillager: questsByVillager
-          }
-        })
-        props.onCreate()
+            questsByVillager: questsByVillager,
+          };
+        });
+        props.onCreate();
       })
-      .catch(e => setError(e.response.data));
+      .catch((e) => setError(e.response.data));
   }
 
-  const changeQuestType = type => {
-    if (type === 'Type of Quest') {
+  const changeQuestType = (type) => {
+    if (type === "Type of Quest") {
       return;
     }
     setQuestType(type);
-  }
+  };
 
   return (
     <section className="create-quest">
       <h3>Create Quest</h3>
       {error && <div className="alert alert-danger">{error}</div>}
-      <form className="create-quest-form" onSubmit={event => event.preventDefault()} autoComplete="off">
-        <select onChange={event => changeQuestType(event.currentTarget.value)} className="browser-default custom-select">
+      <form
+        className="create-quest-form"
+        onSubmit={(event) => event.preventDefault()}
+        autoComplete="off"
+      >
+        <select
+          onChange={(event) => changeQuestType(event.currentTarget.value)}
+          className="browser-default custom-select"
+        >
           <option defaultValue>Type of Quest</option>
           <option value="1">Errand</option>
           <option value="2">Entertainment</option>
@@ -66,7 +74,7 @@ export default function CreateQuestForm(props) {
           placeholder={"Name your quest"}
           value={name}
           data-testid="name-input"
-          onChange={event => setName(event.target.value)}
+          onChange={(event) => setName(event.target.value)}
         />
         <textarea
           rows="4"
@@ -76,7 +84,7 @@ export default function CreateQuestForm(props) {
           placeholder={"Describe your quest"}
           value={description}
           data-testid="description-input"
-          onChange={event => setDescription(event.target.value)}
+          onChange={(event) => setDescription(event.target.value)}
         />
         <input
           name="city"
@@ -84,12 +92,14 @@ export default function CreateQuestForm(props) {
           placeholder={"Enter city"}
           value={city}
           data-testid="address-input"
-          onChange={event => setCity(event.target.value)}
+          onChange={(event) => setCity(event.target.value)}
         />
       </form>
       <section className="register__actions">
-        <Button onClick={handleSubmit} confirm>Confirm</Button>
+        <Button onClick={handleSubmit} confirm>
+          Confirm
+        </Button>
       </section>
     </section>
-  )
+  );
 }

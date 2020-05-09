@@ -1,8 +1,8 @@
 import React from "react";
-import './Navbar.scss';
-import Logo from '../Logo/Logo';
-import Dropdown from 'react-bootstrap/Dropdown';
-import { List } from 'react-bootstrap-icons';
+import "./Navbar.scss";
+import Logo from "../Logo/Logo";
+import Dropdown from "react-bootstrap/Dropdown";
+import { List } from "react-bootstrap-icons";
 
 function LoginMenu(props) {
   return (
@@ -33,36 +33,40 @@ function UserMenu(props) {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          {props.adventurer
-            ? <span className="button-group">
+          {props.adventurer ? (
+            <span className="button-group">
               <Dropdown.Item onClick={props.onAbout}>About</Dropdown.Item>
               <Dropdown.Item onClick={props.onQuests}>Quests</Dropdown.Item>
-              <Dropdown.Item onClick={props.onTaken}>Accepted Quests</Dropdown.Item>
+              <Dropdown.Item onClick={props.onTaken}>
+                Accepted Quests
+              </Dropdown.Item>
               <Dropdown.Item onClick={props.onProgress}>Progress</Dropdown.Item>
               <Dropdown.Item onClick={props.onProfile}>Profile</Dropdown.Item>
             </span>
-            : <span className="button-group">
+          ) : (
+            <span className="button-group">
               <Dropdown.Item onClick={props.onAbout}>About</Dropdown.Item>
-              <Dropdown.Item onClick={props.onCreate}>Create Quest</Dropdown.Item>
-              <Dropdown.Item onClick={props.onVillagerQuests}>Quests</Dropdown.Item>
+              <Dropdown.Item onClick={props.onCreate}>
+                Create Quest
+              </Dropdown.Item>
+              <Dropdown.Item onClick={props.onVillagerQuests}>
+                Quests
+              </Dropdown.Item>
               <Dropdown.Item onClick={props.onProfile}>Profile</Dropdown.Item>
             </span>
-          }
+          )}
           <Dropdown.Item onClick={props.onLogout}>Logout</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     </span>
-  )
+  );
 }
 
 export default function Navbar(props) {
   return (
     <header className="nav-container">
       <Logo onClick={props.onAbout} />
-      {props.user
-        ? <UserMenu {...props} />
-        : <LoginMenu {...props} />
-      }
+      {props.user ? <UserMenu {...props} /> : <LoginMenu {...props} />}
     </header>
-  )
+  );
 }
