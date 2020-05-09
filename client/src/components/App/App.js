@@ -7,7 +7,7 @@ import LoginForm from "../Login/LoginForm";
 import RegisterForm from "../Register/RegisterForm";
 import CreateQuestForm from "../CreateQuest/CreateQuestForm";
 import ClassSelection from "../ClassSelection/ClassSelection";
-import Profile from "../Profile/Profile";
+import { Profile } from "../Profile/Profile";
 import Loading from "../Loading/Loading";
 import VillagerQuestList from "../VillagerQuestList/VillagerQuestList";
 import TakenQuests from "../TakenQuests/TakenQuests";
@@ -15,7 +15,7 @@ import About from "../About/About";
 import Adventurer from "../Adventurer/Adventurer";
 import Villager from "../Villager/Villager";
 import Up from "../Up/Up";
-import TeaserPage from "../TeaserPage/TeaserPage";
+import { TeaserPage } from "../TeaserPage/TeaserPage";
 import GuestProfile from "../GuestProfile/GuestProfile";
 import { useAppData } from "../../hooks/useAppData";
 
@@ -92,8 +92,8 @@ export default function App() {
         {state.view === views.PROFILE && (
           <Profile
             onEdit={() => changeView(views.EDIT)}
-            state={state}
-            edit={true}
+            userData={state.userData}
+            userBadges={state.userBadges}
           />
         )}
         {state.view === views.EDIT && (
@@ -114,7 +114,9 @@ export default function App() {
           />
         )}
         {state.view === views.ABOUT && <About />}
-        {state.view === views.TEASER && <TeaserPage state={state} />}
+        {state.view === views.TEASER && (
+          <TeaserPage classesData={state.classesData} />
+        )}
         {state.view === views.GUEST_PROFILE && <GuestProfile state={state} />}
         <Up />
       </main>

@@ -1,6 +1,6 @@
 import React from "react";
-import Badge from '../components/Badge/Badge';
+import { Badge } from "../components/Badge/Badge";
 
-export default { title: "Badge" }
+export default { title: "Badge" };
 
-export const badge = () => <Badge classId={4} />
+export const badge = () => <Badge classId={4} />;

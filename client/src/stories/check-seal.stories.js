@@ -1,7 +1,6 @@
-import React from 'react';
-import CheckSeal from '../components/CheckSeal/CheckSeal';
+import React from "react";
+import { CheckSeal } from "../components/CheckSeal/CheckSeal";
 
+export default { title: "CheckSeal" };
 
-export default { title: 'CheckSeal' }
-
-export const checkSeal = () => <CheckSeal />
+export const checkSeal = () => <CheckSeal />;
