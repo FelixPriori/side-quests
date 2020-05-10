@@ -1,13 +1,13 @@
 const sequelize = require("../../server");
 const { DataTypes } = require("sequelize");
-const { Badges } = require("./badges");
-const { Users } = require("./users");
+const { Badge } = require("./badges");
+const { User } = require("./users");
 
-const AssignedBadges = sequelize.define("AssignedBadge", {
+const AssignedBadge = sequelize.define("AssignedBadge", {
   badgeId: {
     type: DataTypes.INTEGER,
     references: {
-      model: Badges,
+      model: Badge,
       key: "id",
     },
     allowNull: false,
@@ -15,11 +15,11 @@ const AssignedBadges = sequelize.define("AssignedBadge", {
   adventurerId: {
     type: DataTypes.INTEGER,
     references: {
-      model: Users,
+      model: User,
       key: "id",
     },
     allowNull: false,
   },
 });
 
-module.exports = AssignedBadges;
+module.exports = AssignedBadge;

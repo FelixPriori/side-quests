@@ -1,13 +1,13 @@
 const sequelize = require("../../server");
 const { DataTypes } = require("sequelize");
-const { Classes } = require("./classes");
-const { Users } = require("./users");
+const { Class } = require("./classes");
+const { User } = require("./users");
 
 const ClassProgress = sequelize.define("ClassProgress", {
   classId: {
     type: DataTypes.INTEGER,
     references: {
-      model: Classes,
+      model: Class,
       key: "id",
     },
     allowNull: false,
@@ -15,7 +15,7 @@ const ClassProgress = sequelize.define("ClassProgress", {
   adventurerId: {
     type: DataTypes.INTEGER,
     references: {
-      model: Users,
+      model: User,
       key: "id",
     },
     allowNull: false,
@@ -32,6 +32,11 @@ const ClassProgress = sequelize.define("ClassProgress", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+});
+
+ClassProgress.belongsTo(Class);
+ClassProgress.hasOne(User, {
+  foreignKey: "adventurerId",
 });
 
 module.exports = ClassProgress;

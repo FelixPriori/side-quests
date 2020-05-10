@@ -1,7 +1,8 @@
 const sequelize = require("../../server");
 const { DataTypes } = require("sequelize");
+const { Badge } = require("./badges");
 
-const Classes = sequelize.define("Class", {
+const Class = sequelize.define("Class", {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -12,4 +13,6 @@ const Classes = sequelize.define("Class", {
   },
 });
 
-module.exports = Classes;
+Class.hasMany(Badge);
+
+module.exports = Class;

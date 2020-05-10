@@ -1,7 +1,9 @@
 const sequelize = require("../../server");
 const { DataTypes } = require("sequelize");
+const { Class } = require("./classes");
+const { User } = require("./users");
 
-const Badges = sequelize.define("Badge", {
+const Badge = sequelize.define("Badge", {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -24,4 +26,7 @@ const Badges = sequelize.define("Badge", {
   },
 });
 
-module.exports = Badges;
+Badge.belongsTo(Class);
+Badge.belongsToMany(User, { through: "AssignedBadges" });
+
+module.exports = Badge;

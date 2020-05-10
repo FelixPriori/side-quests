@@ -1,9 +1,9 @@
 const sequelize = require("../../server");
 const { DataTypes } = require("sequelize");
-const { Classes } = require("./classes");
-const { Users } = require("./users");
+const { Class } = require("./classes");
+const { User } = require("./users");
 
-const Quests = sequelize.define("Quest", {
+const Quest = sequelize.define("Quest", {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -23,7 +23,7 @@ const Quests = sequelize.define("Quest", {
   classId: {
     type: DataTypes.INTEGER,
     references: {
-      model: Classes,
+      model: Class,
       key: "id",
     },
     allowNull: false,
@@ -31,7 +31,7 @@ const Quests = sequelize.define("Quest", {
   adventurerId: {
     type: DataTypes.INTEGER,
     references: {
-      model: Users,
+      model: User,
       key: "id",
     },
     defaultValue: null,
@@ -39,7 +39,7 @@ const Quests = sequelize.define("Quest", {
   villagerId: {
     type: DataTypes.INTEGER,
     references: {
-      model: Users,
+      model: User,
       key: "id",
     },
     allowNull: false,
@@ -51,4 +51,4 @@ const Quests = sequelize.define("Quest", {
   },
 });
 
-module.exports = Quests;
+module.exports = Quest;
