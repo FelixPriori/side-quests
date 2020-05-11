@@ -51,4 +51,14 @@ const Quest = sequelize.define("Quest", {
   },
 });
 
+Quest.belongsTo(User, {
+  foreignKey: "adventurerId",
+  as: "adventurer",
+});
+
+Quest.belongsTo(User, {
+  foreignKey: "villagerId",
+  as: "villager",
+});
+
 module.exports = Quest;
