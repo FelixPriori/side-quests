@@ -1,12 +1,6 @@
 const app = require("./application")();
-const { Sequelize } = require("sequelize");
+const sequelize = require("./db/sequelize");
 
-const sequelize = new Sequelize("side_quests", "quester", "quester", {
-  host: "localhost",
-  dialect: "postgres",
-});
-
-//Test db
 try {
   sequelize.authenticate();
   console.log("Connection has been established successfully.");
@@ -19,4 +13,4 @@ try {
 // Run when client connects
 app.listen(8081);
 
-module.exports = sequelize;
+// module.exports = sequelize;
