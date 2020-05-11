@@ -47,19 +47,19 @@ CREATE TABLE badges (
   requirement VARCHAR(255) NOT NULL,
   int_requirement INTEGER NOT NULL,
   criteria_type VARCHAR(255) NOT NULL,
-  class_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+  class_id INTEGER REFERENCES users(id) ON DELETE CASCADE NOT NULL
 );
 
 
 CREATE TABLE assigned_badges (
-  badge_id INTEGER REFERENCES badges(id) ON DELETE CASCADE,
-  adventurer_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+  badge_id INTEGER REFERENCES badges(id) ON DELETE CASCADE NOT NULL,
+  adventurer_id INTEGER REFERENCES users(id) ON DELETE CASCADE NOT NULL
 );
 
 
 CREATE TABLE class_progress (
-  class_id INTEGER REFERENCES classes(id) ON DELETE CASCADE,
-  adventurer_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  class_id INTEGER REFERENCES classes(id) ON DELETE CASCADE NOT NULL,
+  adventurer_id INTEGER REFERENCES users(id) ON DELETE CASCADE NOT NULL,
   level INTEGER DEFAULT 1,
   experience_points INTEGER DEFAULT 0,
   quest_count INTEGER DEFAULT 0
