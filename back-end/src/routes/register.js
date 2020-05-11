@@ -36,18 +36,6 @@ module.exports = () => {
     } else {
       checkIfUserExists(email).then((userCheck) => {
         if (!userCheck) {
-          // users
-          //   .create({
-          //     username,
-          //     password: hashedPassword,
-          //     firstName,
-          //     lastName,
-          //     email,
-          //     adventurer: accountType,
-          //     avatar,
-          //   })
-          //   .then(() => {});
-
           return addUser(
             username,
             firstName,
