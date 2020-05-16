@@ -1,7 +1,6 @@
 const sequelize = require("../sequelize");
 const { DataTypes } = require("sequelize");
 const { Badge } = require("./badges");
-// const bcrypt = require("bcrypt");
 
 const User = sequelize.define("User", {
   username: {
