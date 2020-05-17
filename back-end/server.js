@@ -12,5 +12,3 @@ try {
 
 // Run when client connects
 app.listen(8081);
-
-// module.exports = sequelize;
