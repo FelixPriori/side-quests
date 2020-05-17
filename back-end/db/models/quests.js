@@ -34,6 +34,7 @@ const Quest = sequelize.define("Quest", {
       model: User,
       key: "id",
     },
+    allowNull: false,
     defaultValue: null,
   },
   villagerId: {

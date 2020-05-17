@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
-// const Users = require("../../db/models/users");
 
 const {
   checkIfUserExists,
