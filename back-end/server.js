@@ -1,12 +1,14 @@
 const app = require("./application")();
-// const { Sequelize } = require("sequelize");
+const sequelize = require("./db/sequelize");
 
-// const sequelize = new Sequelize("side_quests", "quester", "quester", {
-//   host: "localhost",
-//   dialect: "postgres",
-// });
+try {
+  sequelize.authenticate();
+  console.log(`Connection to '${process.env.DB_NAME}' has been established successfully.`);
+} catch (error) {
+  console.error("Unable to connect to the database:", error);
+}
 
-//Test db
+//Note: To close connection use sequelize.close()
 
 // Run when client connects
 app.listen(8081);
