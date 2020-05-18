@@ -47,7 +47,7 @@ describe("user model", () => {
       villagerId: villager.id,
     });
     // test
-    const quests = User.findByPk(1).getQuests();
+    const adventurerQuests = User.findByPk(adventurer.id).getQuests();
     // expectations
     expect(quests.length).toEqual(2);
   });
