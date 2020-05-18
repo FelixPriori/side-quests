@@ -13,6 +13,6 @@ const Class = sequelize.define("Class", {
   },
 });
 
-Class.hasMany(Badge);
+Class.hasMany(Badge, { as: "badges", foreignKey: "classId" });
 
 module.exports = Class;
