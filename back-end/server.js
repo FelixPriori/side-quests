@@ -3,7 +3,7 @@ const sequelize = require("./db/sequelize");
 
 try {
   sequelize.authenticate();
-  console.log("Connection has been established successfully.");
+  console.log(`Connection to '${process.env.DB_NAME}' has been established successfully.`);
 } catch (error) {
   console.error("Unable to connect to the database:", error);
 }
@@ -12,5 +12,3 @@ try {
 
 // Run when client connects
 app.listen(8081);
-
-// module.exports = sequelize;
