@@ -4,7 +4,7 @@ const faker = require("faker");
 // sequelizeClient.sync({ force: true, match: /_test$/ });
 
 describe("user relationships", () => {
-  it("can fetch the related quests", async () => {
+  it("can fetch the associated quests", async () => {
     // data creation
     const villager = User.create({
       username: faker.internet.userName(),
