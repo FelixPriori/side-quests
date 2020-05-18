@@ -6,7 +6,7 @@ const faker = require("faker");
 describe("user model", () => {
   it("can fetch the associated quests", async () => {
     // data creation
-    const villager = User.create({
+    const villager = await User.create({
       username: faker.internet.userName(),
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
@@ -28,7 +28,7 @@ describe("user model", () => {
       bio: faker.lorem.paragraph(),
     });
 
-    Quest.create({
+    await Quest.create({
       name: faker.name.jobType(),
       description: faker.lorem.paragraph(),
       completed: false,
@@ -38,7 +38,7 @@ describe("user model", () => {
       villagerId: villager.id,
     });
 
-    Quest.create({
+    await Quest.create({
       name: faker.name.jobType(),
       description: faker.lorem.paragraph(),
       completed: false,
@@ -49,6 +49,6 @@ describe("user model", () => {
     // test
     const adventurerQuests = User.findByPk(adventurer.id).getQuests();
     // expectations
-    expect(quests.length).toEqual(2);
+    expect(adventurerQuests.length).toEqual(2);
   });
 });
