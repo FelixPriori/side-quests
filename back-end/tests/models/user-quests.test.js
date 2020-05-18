@@ -3,7 +3,7 @@ const Quest = require("../../db/models/quests");
 const faker = require("faker");
 // sequelizeClient.sync({ force: true, match: /_test$/ });
 
-describe("user relationships", () => {
+describe("user model", () => {
   it("can fetch the associated quests", async () => {
     // data creation
     const villager = User.create({
