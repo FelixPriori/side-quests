@@ -1,15 +1,21 @@
+require("../../environment");
+const { testDbConnection } = require("../../db/test_db_connection");
 const User = require("../../db/models/users");
 const Quest = require("../../db/models/quests");
 const faker = require("faker");
 // sequelizeClient.sync({ force: true, match: /_test$/ });
 
 describe("user model", () => {
+  beforeAll(async () => {
+    await testDbConnection();
+  });
+
   it("can fetch the associated quests", async () => {
-    // data creation
+    // test data creation
     const villager = await User.create({
       username: faker.internet.userName(),
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
+      first_name: faker.name.firstName(),
+      last_name: faker.name.lastName(),
       email: faker.internet.email(),
       password: faker.internet.password(),
       avatar: faker.internet.avatar(),
@@ -19,8 +25,8 @@ describe("user model", () => {
 
     const adventurer = await User.create({
       username: faker.internet.userName(),
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
+      first_name: faker.name.firstName(),
+      last_name: faker.name.lastName(),
       email: faker.internet.email(),
       password: faker.internet.password(),
       avatar: faker.internet.avatar(),
@@ -33,9 +39,9 @@ describe("user model", () => {
       description: faker.lorem.paragraph(),
       completed: false,
       city: faker.address.city(),
-      classId: 1,
-      adventurerId: adventurer.id,
-      villagerId: villager.id,
+      class_id: 1,
+      adventurer_id: adventurer.id,
+      villager_id: villager.id,
     });
 
     await Quest.create({
@@ -43,11 +49,14 @@ describe("user model", () => {
       description: faker.lorem.paragraph(),
       completed: false,
       city: faker.address.city(),
-      classId: 1,
-      villagerId: villager.id,
+      class_id: 1,
+      adventurer_id: adventurer.id,
+      villager_id: villager.id,
     });
+
     // test
-    const adventurerQuests = User.findByPk(adventurer.id).getQuests();
+    const adventurerQuests = await User.findByPk(adventurer.id).getQuests();
+
     // expectations
     expect(adventurerQuests.length).toEqual(2);
   });
