@@ -17,7 +17,7 @@ describe("user model", () => {
       bio: faker.lorem.paragraph(),
     });
 
-    const adventurer = User.create({
+    const adventurer = await User.create({
       username: faker.internet.userName(),
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
