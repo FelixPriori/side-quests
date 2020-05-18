@@ -1,65 +1,71 @@
 const sequelize = require("../sequelize");
 const { DataTypes } = require("sequelize");
-const { Class } = require("./classes");
-const { User } = require("./users");
+const Class = require("./classes");
+const User = require("./users");
 
-const Quest = sequelize.define("Quest", {
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  description: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
-  completed: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false,
-  },
-  city: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  classId: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: Class,
-      key: "id",
+const Quest = sequelize.define(
+  "quest",
+  {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    allowNull: false,
-  },
-  adventurerId: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: User,
-      key: "id",
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false,
     },
-    allowNull: false,
-    defaultValue: null,
-  },
-  villagerId: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: User,
-      key: "id",
+    completed: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
-    allowNull: false,
+    city: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    class_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: Class,
+        key: "id",
+      },
+      allowNull: false,
+    },
+    adventurer_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: User,
+        key: "id",
+      },
+      allowNull: false,
+      defaultValue: null,
+    },
+    villager_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: User,
+        key: "id",
+      },
+      allowNull: false,
+    },
+    experience_points: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 100,
+    },
   },
-  experiencePoints: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    defaultValue: 100,
-  },
-});
+  {
+    timestamps: false,
+  }
+);
 
-Quest.belongsTo(User, {
-  foreignKey: "adventurerId",
-  as: "adventurer",
-});
+// Quest.belongsTo(User, {
+//   foreignKey: "adventurerId",
+//   as: "adventurer",
+// });
 
-Quest.belongsTo(User, {
-  foreignKey: "villagerId",
-  as: "villager",
-});
+// Quest.belongsTo(User, {
+//   foreignKey: "villagerId",
+//   as: "villager",
+// });
 
 module.exports = Quest;
