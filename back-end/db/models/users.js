@@ -1,7 +1,5 @@
 const sequelize = require("../sequelize");
 const { DataTypes } = require("sequelize");
-// const Quest = require("./quests");
-// const Badge = require("./badges");
 
 const User = sequelize.define(
   "user",

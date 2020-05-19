@@ -1,8 +1,10 @@
+const faker = require("faker");
+
 require("../../environment");
 const { testDbConnection } = require("../../db/test_db_connection");
 const User = require("../../db/models/users");
 const Quest = require("../../db/models/quests");
-const faker = require("faker");
+require("../../db/models/relationships");
 
 // test data
 let villager;
