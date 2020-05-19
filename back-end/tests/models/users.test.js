@@ -1,10 +1,7 @@
-const faker = require("faker");
-
 require("../../environment");
 const { testDbConnection } = require("../../db/test_db_connection");
 const User = require("../../db/models/users");
-const Quest = require("../../db/models/quests");
-const { createVillager, createAdventurer } = require("../seeds");
+const { createVillager, createAdventurer, createQuest } = require("../seeds");
 require("../../db/models/relationships");
 
 //test data
@@ -18,29 +15,11 @@ describe("user model", () => {
     await testDbConnection();
   });
 
-  describe("villager", () => {
+  describe("when user is a villager", () => {
     beforeEach(async () => {
       villager = await createVillager();
-
-      quest1 = await Quest.create({
-        name: faker.name.jobType(),
-        description: faker.lorem.paragraph(),
-        completed: false,
-        city: faker.address.city(),
-        class_id: 1,
-        adventurer_id: null,
-        villager_id: villager.id,
-      });
-
-      quest2 = await Quest.create({
-        name: faker.name.jobType(),
-        description: faker.lorem.paragraph(),
-        completed: false,
-        city: faker.address.city(),
-        class_id: 1,
-        adventurer_id: null,
-        villager_id: villager.id,
-      });
+      quest1 = await createQuest({ villager });
+      quest2 = await createQuest({ villager });
     });
 
     it("can fetch the associated quests", async () => {
@@ -53,29 +32,11 @@ describe("user model", () => {
     });
   });
 
-  describe("adventurer", () => {
+  describe("when user is an adventurer", () => {
     beforeEach(async () => {
       adventurer = await createAdventurer();
-
-      quest1 = await Quest.create({
-        name: faker.name.jobType(),
-        description: faker.lorem.paragraph(),
-        completed: false,
-        city: faker.address.city(),
-        class_id: 1,
-        adventurer_id: adventurer.id,
-        villager_id: villager.id,
-      });
-
-      quest2 = await Quest.create({
-        name: faker.name.jobType(),
-        description: faker.lorem.paragraph(),
-        completed: false,
-        city: faker.address.city(),
-        class_id: 1,
-        adventurer_id: adventurer.id,
-        villager_id: villager.id,
-      });
+      quest1 = await createQuest({ villager, adventurer });
+      quest2 = await createQuest({ villager, adventurer });
     });
 
     it("can fetch the associated quests", async () => {

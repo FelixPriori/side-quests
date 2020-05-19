@@ -1,5 +1,6 @@
 const faker = require("faker");
 const User = require("../db/models/users");
+const Quest = require("../db/models/quests");
 
 const commonUserFields = {
   username: faker.internet.userName(),
@@ -17,4 +18,15 @@ const createVillager = async () =>
 const createAdventurer = async () =>
   User.create({ ...commonUserFields, adventurer: true });
 
-module.exports = { createVillager, createAdventurer };
+const createQuest = async (options) =>
+  Quest.create({
+    name: faker.name.jobType(),
+    description: faker.lorem.paragraph(),
+    completed: false,
+    city: faker.address.city(),
+    class_id: 1,
+    adventurer_id: options.adventurer && options.adventurer.id,
+    villager_id: options.villager && options.villager.id,
+  });
+
+module.exports = { createVillager, createAdventurer, createQuest };

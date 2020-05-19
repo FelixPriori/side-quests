@@ -1,8 +1,6 @@
-const faker = require("faker");
-
 require("../../environment");
 const { testDbConnection } = require("../../db/test_db_connection");
-const { createVillager, createAdventurer } = require("../seeds");
+const { createVillager, createAdventurer, createQuest } = require("../seeds");
 const Quest = require("../../db/models/quests");
 require("../../db/models/relationships");
 
@@ -16,19 +14,10 @@ describe("quest model", () => {
     await testDbConnection();
   });
 
-  describe("villager", () => {
+  describe("when quest is associated with a villager", () => {
     beforeEach(async () => {
       villager = await createVillager();
-
-      quest = await Quest.create({
-        name: faker.name.jobType(),
-        description: faker.lorem.paragraph(),
-        completed: false,
-        city: faker.address.city(),
-        class_id: 1,
-        adventurer_id: null,
-        villager_id: villager.id,
-      });
+      quest = await createQuest({ villager });
     });
 
     it("can fetch the associated villager", async () => {
@@ -39,19 +28,10 @@ describe("quest model", () => {
     });
   });
 
-  describe("adventurer", () => {
+  describe("when quest is associated with an adventurer", () => {
     beforeEach(async () => {
       adventurer = await createAdventurer();
-
-      quest = await Quest.create({
-        name: faker.name.jobType(),
-        description: faker.lorem.paragraph(),
-        completed: false,
-        city: faker.address.city(),
-        class_id: 1,
-        adventurer_id: adventurer.id,
-        villager_id: villager.id,
-      });
+      quest = await createQuest({ adventurer, villager });
     });
 
     it("can fetch the associated adventurer", async () => {
