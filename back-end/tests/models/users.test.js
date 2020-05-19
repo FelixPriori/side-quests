@@ -4,6 +4,7 @@ require("../../environment");
 const { testDbConnection } = require("../../db/test_db_connection");
 const User = require("../../db/models/users");
 const Quest = require("../../db/models/quests");
+const { createVillager } = require("../seeds");
 require("../../db/models/relationships");
 
 //test data
@@ -12,20 +13,10 @@ let villager;
 describe("user model", () => {
   beforeAll(async () => {
     await testDbConnection();
-    // await sequelize.sync({ force: true, match: /_test$/ });
   });
 
   beforeEach(async () => {
-    villager = await User.create({
-      username: faker.internet.userName(),
-      first_name: faker.name.firstName(),
-      last_name: faker.name.lastName(),
-      email: faker.internet.email(),
-      password: faker.internet.password(),
-      avatar: faker.internet.avatar(),
-      adventurer: false,
-      bio: faker.lorem.paragraph(),
-    });
+    villager = await createVillager();
 
     await Quest.create({
       name: faker.name.jobType(),
