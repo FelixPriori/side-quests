@@ -15,3 +15,8 @@ User.hasMany(Quest, {
   foreignKey: "villager_id",
   as: "villagerQuests",
 });
+
+User.hasMany(Quest, {
+  foreignKey: "adventurer_id",
+  as: "adventurerQuests",
+});
