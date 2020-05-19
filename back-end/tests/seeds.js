@@ -1,6 +1,7 @@
 const faker = require("faker");
 const User = require("../db/models/users");
 const Quest = require("../db/models/quests");
+const Badge = require("../db/models/badges");
 
 const commonUserFields = {
   username: faker.internet.userName(),
@@ -25,8 +26,17 @@ const createQuest = async (options) =>
     completed: false,
     city: faker.address.city(),
     class_id: 1,
-    adventurer_id: options.adventurer && options.adventurer.id,
-    villager_id: options.villager && options.villager.id,
+    ...options,
   });
 
-module.exports = { createVillager, createAdventurer, createQuest };
+const createBadge = async (options) =>
+  Badge.create({
+    name: "A stealthy aquaintance",
+    requirement: "Complete 1 Rogue Quest",
+    int_requirement: 1,
+    criteria_type: "quest",
+    class_id: 1,
+    ...options,
+  });
+
+module.exports = { createVillager, createAdventurer, createQuest, createBadge };

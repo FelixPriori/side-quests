@@ -16,7 +16,7 @@ describe("quest model", () => {
   describe("when quest is associated with a villager", () => {
     beforeEach(async () => {
       villager = await createVillager();
-      quest = await createQuest({ villager });
+      quest = await createQuest({ villager_id: villager.id });
     });
 
     it("can fetch the associated villager", async () => {
@@ -30,7 +30,10 @@ describe("quest model", () => {
   describe("when quest is associated with an adventurer", () => {
     beforeEach(async () => {
       adventurer = await createAdventurer();
-      quest = await createQuest({ adventurer, villager });
+      quest = await createQuest({
+        adventurer_id: adventurer.id,
+        villager_id: villager.id,
+      });
     });
 
     it("can fetch the associated adventurer", async () => {

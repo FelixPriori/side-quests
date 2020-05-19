@@ -17,8 +17,8 @@ describe("user model", () => {
   describe("when user is a villager", () => {
     beforeEach(async () => {
       villager = await createVillager();
-      quest1 = await createQuest({ villager });
-      quest2 = await createQuest({ villager });
+      quest1 = await createQuest({ villager_id: villager.id });
+      quest2 = await createQuest({ villager_id: villager.id });
     });
 
     it("can fetch the associated quests", async () => {
@@ -34,8 +34,14 @@ describe("user model", () => {
   describe("when user is an adventurer", () => {
     beforeEach(async () => {
       adventurer = await createAdventurer();
-      quest1 = await createQuest({ villager, adventurer });
-      quest2 = await createQuest({ villager, adventurer });
+      quest1 = await createQuest({
+        villager_id: villager.id,
+        adventurer_id: adventurer.id,
+      });
+      quest2 = await createQuest({
+        villager_id: villager.id,
+        adventurer_id: adventurer.id,
+      });
     });
 
     it("can fetch the associated quests", async () => {
