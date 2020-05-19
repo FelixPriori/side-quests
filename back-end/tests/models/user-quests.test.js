@@ -3,11 +3,12 @@ const { testDbConnection } = require("../../db/test_db_connection");
 const User = require("../../db/models/users");
 const Quest = require("../../db/models/quests");
 const faker = require("faker");
-// sequelizeClient.sync({ force: true, match: /_test$/ });
+const sequelize = require("../../db/sequelize");
 
 describe("user model", () => {
   beforeAll(async () => {
     await testDbConnection();
+    await sequelize.sync({ force: true, match: /_test$/ });
   });
 
   it("can fetch the associated quests", async () => {
@@ -50,14 +51,12 @@ describe("user model", () => {
       completed: false,
       city: faker.address.city(),
       class_id: 1,
-      adventurer_id: adventurer.id,
+      adventurer_id: null,
       villager_id: villager.id,
     });
-
     // test
-    const adventurerQuests = await User.findByPk(adventurer.id).getQuests();
-
+    const villagerQuests = await Quest.findByPk(villager.id).getQuests();
     // expectations
-    expect(adventurerQuests.length).toEqual(2);
+    expect(villagerQuests.length).toEqual(2);
   });
 });
