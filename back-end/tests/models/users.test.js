@@ -4,7 +4,7 @@ const User = require("../../db/models/users");
 const { createVillager, createAdventurer, createQuest } = require("../seeds");
 require("../../db/models/relationships");
 
-//test data
+// test data
 let villager;
 let adventurer;
 let quest1;
