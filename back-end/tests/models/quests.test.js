@@ -1,4 +1,3 @@
-require("../../environment");
 const { testDbConnection } = require("../../db/test_db_connection");
 const { createVillager, createAdventurer, createQuest } = require("../seeds");
 const Quest = require("../../db/models/quests");

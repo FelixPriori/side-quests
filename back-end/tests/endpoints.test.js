@@ -1,5 +1,3 @@
-/* eslint-disable camelcase */
-require("../environment");
 const app = require("../application")();
 const supertest = require("supertest");
 const request = supertest(app);
