@@ -40,14 +40,13 @@ const createBadge = async (options) =>
     ...options,
   });
 
-const createClass = async (options) => {
+const createClass = async (options) =>
   Class.create({
     name: "Rogue",
     description:
       "Rogues like to help people from the shadows by sneaking to the nearest store to deliver needed supplies",
     ...options,
   });
-};
 
 module.exports = {
   createVillager,
