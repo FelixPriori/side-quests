@@ -1,10 +1,11 @@
 const app = require("../application")();
 const supertest = require("supertest");
 const request = supertest(app);
-const { createBadge } = require("./seeds");
+const { createBadge, createClass } = require("./seeds");
 
 // test data
 let badge;
+let classInstance;
 
 describe("badges", () => {
   beforeEach(async () => {
@@ -31,42 +32,34 @@ describe("badges", () => {
 });
 
 describe("classes", () => {
+  beforeEach(async () => {
+    classInstance = await createClass();
+    badge = await createBadge({ class_id: classInstance.id });
+  });
+
   it("should return an array of objects", async () => {
     const response = await request.get("/classes");
     expect(response.status).toBe(200);
-    expect(response.body.length).toBeGreaterThan(0);
-    expect(response.body[0]).toMatchObject({
-      id: 1,
-      name: "Rogue",
-      description:
-        "Rogues like to help people from the shadows by sneaking to the nearest store to deliver needed supplies",
-    });
+
+    const classes = response.body;
+    expect(classes.length).toBeGreaterThan(0);
+
+    const specificClass = classes.find((e) => e.id === classInstance.id);
+    expect(specificClass).toMatchObject(classInstance.dataValues);
   });
 
   it("should return a single class object", async () => {
-    const response = await request.get("/classes/1");
+    const response = await request.get(`/classes/${classInstance.id}`);
     expect(response.status).toBe(200);
     expect(response.body.length).toBe(1);
-    expect(response.body[0]).toMatchObject({
-      id: 1,
-      name: "Rogue",
-      description:
-        "Rogues like to help people from the shadows by sneaking to the nearest store to deliver needed supplies",
-    });
+    expect(response.body[0]).toMatchObject(classInstance.dataValues);
   });
 
   it("should return the badges associated with the specified class", async () => {
-    const response = await request.get("/classes/1/badges");
+    const response = await request.get(`/classes/${classInstance.id}/badges`);
     expect(response.status).toBe(200);
     expect(response.body.length).toBeGreaterThan(0);
-    expect(response.body[0]).toMatchObject({
-      id: 1,
-      name: "A stealthy aquaintance",
-      requirement: "Complete 1 Rogue Quest",
-      int_requirement: 1,
-      criteria_type: "quest",
-      class_id: 1,
-    });
+    expect(response.body[0]).toMatchObject(badge.dataValues);
   });
 });
 
