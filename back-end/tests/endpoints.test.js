@@ -1,11 +1,20 @@
 const app = require("../application")();
 const supertest = require("supertest");
 const request = supertest(app);
-const { createBadge, createClass } = require("./seeds");
+const {
+  createBadge,
+  createClass,
+  createUser,
+  createVillager,
+  createAdventurer,
+} = require("./seeds");
 
 // test data
 let badge;
 let classInstance;
+let user;
+let villager;
+let adventurer;
 
 describe("badges", () => {
   beforeEach(async () => {
@@ -64,73 +73,62 @@ describe("classes", () => {
 });
 
 describe("users", () => {
+  beforeEach(async () => {
+    user = await createUser();
+  });
+
   it("should return an array of all the user objects", async () => {
     const response = await request.get("/users");
     expect(response.status).toBe(200);
-    expect(response.body.length).toBeGreaterThan(0);
-    expect(response.body[0].id).toBe(1);
-    expect(response.body[0]).toMatchObject({
-      id: 1,
-      username: "BobRobertson",
-      first_name: "Bob",
-      last_name: "Robertson",
-      email: "bob@example.com",
-      password: "$2b$10$xPttDUv.c13m9X1ni9CqEOFk1P5exXZeq.2LL.YrztVIWMxi4FTVm",
-      avatar: "/images/defaultAvatar.png",
-      adventurer: true,
-      bio: "",
-    });
+
+    const users = response.body;
+    expect(users.length).toBeGreaterThan(0);
+
+    const specificUser = users.find((e) => e.id === user.id);
+    expect(specificUser).toMatchObject(user.dataValues);
   });
 
-  it("should return a user based on id equalling 1", async () => {
-    const response = await request.get("/users/1");
+  it("should return a user with a specific id", async () => {
+    const response = await request.get(`/users/${user.id}`);
     expect(response.status).toBe(200);
-    expect(response.body.length).toBe(1);
-    expect(response.body[0]).toMatchObject({
-      id: 1,
-      username: "BobRobertson",
-      first_name: "Bob",
-      last_name: "Robertson",
-      email: "bob@example.com",
-      password: "$2b$10$xPttDUv.c13m9X1ni9CqEOFk1P5exXZeq.2LL.YrztVIWMxi4FTVm",
-      avatar: "/images/defaultAvatar.png",
-      adventurer: true,
-      bio: "",
-    });
+
+    const specificUser = response.body;
+    expect(specificUser.length).toBe(1);
+    expect(specificUser).toMatchObject(user.dataValues);
+  });
+});
+
+describe("villagers", () => {
+  beforeEach(async () => {
+    villager = await createVillager();
   });
 
   it("should return an array of villagers", async () => {
     const response = await request.get("/villagers");
     expect(response.status).toBe(200);
-    expect(response.body.length).toBeGreaterThan(0);
-    expect(response.body[0]).toMatchObject({
-      id: 2,
-      username: "AlAlbertson",
-      first_name: "Al",
-      last_name: "Albertson",
-      email: "al@example.com",
-      password: "$2b$10$xPttDUv.c13m9X1ni9CqEOFk1P5exXZeq.2LL.YrztVIWMxi4FTVm",
-      avatar: "/images/defaultAvatar.png",
-      adventurer: false,
-      bio: "",
-    });
+
+    const villagers = response.body;
+    expect(villagers.length).toBeGreaterThan(0);
+
+    const specificVillager = villagers.find((e) => e.id === villager.id);
+    expect(specificVillager).toMatchObject(villager.dataValues);
+  });
+});
+
+describe("adventurers", () => {
+  beforeEach(async () => {
+    adventurer = await createAdventurer();
   });
 
   it("should return an array of adventurers", async () => {
     const response = await request.get("/adventurers");
     expect(response.status).toBe(200);
-    expect(response.body.length).toBeGreaterThan(0);
-    expect(response.body[0]).toMatchObject({
-      id: 1,
-      username: "BobRobertson",
-      first_name: "Bob",
-      last_name: "Robertson",
-      email: "bob@example.com",
-      password: "$2b$10$xPttDUv.c13m9X1ni9CqEOFk1P5exXZeq.2LL.YrztVIWMxi4FTVm",
-      avatar: "/images/defaultAvatar.png",
-      adventurer: true,
-      bio: "",
-    });
+
+    const adventurers = response.body;
+    expect(adventurers.length).toBeGreaterThan(0);
+
+    const specificAdventurer = adventurers.find((e) => e.id === adventurer.id);
+    expect(specificAdventurer).toMatchObject(adventurer.dataValues);
   });
 });
 
