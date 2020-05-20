@@ -1,5 +1,6 @@
 const sequelize = require("../sequelize");
 const { DataTypes } = require("sequelize");
+
 const Class = require("./classes");
 const User = require("./users");
 
@@ -56,15 +57,5 @@ const Quest = sequelize.define(
     timestamps: false,
   }
 );
-
-Quest.belongsTo(User, {
-  foreignKey: "adventurer_id",
-  as: "adventurer",
-});
-
-Quest.belongsTo(User, {
-  foreignKey: "villager_id",
-  as: "villager",
-});
 
 module.exports = Quest;

@@ -1,36 +1,32 @@
-/* eslint-disable camelcase */
-require("../environment");
 const app = require("../application")();
 const supertest = require("supertest");
 const request = supertest(app);
+const { createBadge } = require("./seeds");
+
+// test data
+let badge;
 
 describe("badges", () => {
+  beforeEach(async () => {
+    badge = await createBadge();
+  });
+
   it("should return an array of objects", async () => {
     const response = await request.get("/badges");
     expect(response.status).toBe(200);
-    expect(response.body.length).toBeGreaterThan(0);
-    expect(response.body[0]).toMatchObject({
-      id: 1,
-      name: "A stealthy aquaintance",
-      requirement: "Complete 1 Rogue Quest",
-      int_requirement: 1,
-      criteria_type: "quest",
-      class_id: 1,
-    });
+
+    const badges = response.body;
+    expect(badges.length).toBeGreaterThan(0);
+
+    const specificBadge = badges.find((e) => e.id === badge.id);
+    expect(specificBadge).toMatchObject(badge.dataValues);
   });
 
   it("should return a single badge object", async () => {
-    const response = await request.get("/badges/1");
+    const response = await request.get(`/badges/${badge.id}`);
     expect(response.status).toBe(200);
     expect(response.body.length).toBe(1);
-    expect(response.body[0]).toMatchObject({
-      id: 1,
-      name: "A stealthy aquaintance",
-      requirement: "Complete 1 Rogue Quest",
-      int_requirement: 1,
-      criteria_type: "quest",
-      class_id: 1,
-    });
+    expect(response.body[0]).toMatchObject(badge.dataValues);
   });
 });
 
