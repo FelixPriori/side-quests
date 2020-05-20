@@ -12,6 +12,7 @@ const commonUserFields = {
   password: faker.internet.password(),
   avatar: faker.internet.avatar(),
   bio: faker.lorem.paragraph(),
+  adventurer: faker.random.boolean(),
 };
 
 const createVillager = async () =>
@@ -19,6 +20,8 @@ const createVillager = async () =>
 
 const createAdventurer = async () =>
   User.create({ ...commonUserFields, adventurer: true });
+
+const createUser = async () => User.create({ ...commonUserFields });
 
 const createQuest = async (options) =>
   Quest.create({
@@ -51,6 +54,7 @@ const createClass = async (options) =>
 module.exports = {
   createVillager,
   createAdventurer,
+  createUser,
   createQuest,
   createBadge,
   createClass,
