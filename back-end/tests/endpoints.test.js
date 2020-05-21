@@ -143,7 +143,7 @@ describe("quests", () => {
     });
   });
 
-  it.only("should return an array of all the quests", async () => {
+  it("should return an array of all the quests", async () => {
     const response = await request.get("/quests");
     expect(response.status).toBe(200);
 
