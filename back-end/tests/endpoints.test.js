@@ -92,8 +92,7 @@ describe("users", () => {
     const response = await request.get(`/users/${user.id}`);
     expect(response.status).toBe(200);
 
-    const specificUser = response.body;
-    expect(specificUser.length).toBe(1);
+    const specificUser = response.body[0];
     expect(specificUser).toMatchObject(user.dataValues);
   });
 });
