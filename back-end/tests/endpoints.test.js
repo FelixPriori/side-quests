@@ -7,6 +7,7 @@ const {
   createUser,
   createVillager,
   createAdventurer,
+  createQuest,
 } = require("./seeds");
 
 // test data
@@ -15,6 +16,7 @@ let classInstance;
 let user;
 let villager;
 let adventurer;
+let quest;
 
 describe("badges", () => {
   beforeEach(async () => {
@@ -132,51 +134,42 @@ describe("adventurers", () => {
 });
 
 describe("quests", () => {
-  it("should return a quest based on the id = 1 ", async () => {
-    const response = await request.get("/quests/1");
-    expect(response.status).toBe(200);
-    expect(response.body.length).toBe(1);
-    expect(response.body[0]).toMatchObject({
-      id: 1,
-      name: "Can't figure out this math problem.",
-      description: "I have a test coming up and I can't understand integrals.",
-      completed: false,
-      city: "Montreal",
-      class_id: 3,
-      villager_id: 6,
-      experience_points: 100,
+  beforeEach(async () => {
+    adventurer = await createAdventurer();
+    villager = await createVillager();
+    quest = await createQuest({
+      adventurer_id: adventurer.id,
+      villager_id: villager.id,
     });
   });
 
-  it("should return a quest based on the villager id = 6", async () => {
-    const response = await request.get("/users/6/quests");
-    expect(response.status).toBe(200);
-    expect(response.body.length).toBeGreaterThan(0);
-    expect(response.body[0]).toMatchObject({
-      id: 1,
-      name: "Can't figure out this math problem.",
-      description: "I have a test coming up and I can't understand integrals.",
-      completed: false,
-      city: "Montreal",
-      class_id: 3,
-      villager_id: 6,
-      experience_points: 100,
-    });
-  });
-
-  it("should return an array of all the quests", async () => {
+  it.only("should return an array of all the quests", async () => {
     const response = await request.get("/quests");
     expect(response.status).toBe(200);
-    expect(response.body.length).toBeGreaterThan(0);
-    expect(response.body[0]).toMatchObject({
-      id: 1,
-      name: "Can't figure out this math problem.",
-      description: "I have a test coming up and I can't understand integrals.",
-      completed: false,
-      city: "Montreal",
-      class_id: 3,
-      villager_id: 6,
-      experience_points: 100,
-    });
+
+    const quests = response.body;
+    expect(quests.length).toBeGreaterThan(0);
+
+    const specificQuest = quests.find((e) => e.id === quest.id);
+    expect(specificQuest).toMatchObject(quest.dataValues);
+  });
+
+  it("should return a quest based on the quest id", async () => {
+    const response = await request.get(`/quests/${quest.id}`);
+    expect(response.status).toBe(200);
+
+    const specificQuest = response.body[0];
+    expect(specificQuest).toMatchObject(quest.dataValues);
+  });
+
+  it("should return quests based on the villager's id", async () => {
+    const response = await request.get(`/users/${villager.id}/quests`);
+    expect(response.status).toBe(200);
+
+    const quests = response.body;
+    expect(quests.length).toBeGreaterThan(0);
+
+    const specificQuest = quests.find((e) => e.id === quest.id);
+    expect(specificQuest).toMatchObject(quest.dataValues);
   });
 });
