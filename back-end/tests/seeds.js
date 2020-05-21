@@ -21,7 +21,7 @@ const createVillager = async () =>
 const createAdventurer = async () =>
   User.create({ ...commonUserFields, adventurer: true });
 
-const createUser = async () => User.create({ ...commonUserFields });
+const createUser = async () => User.create(commonUserFields);
 
 const createQuest = async (options) =>
   Quest.create({

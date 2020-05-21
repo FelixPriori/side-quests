@@ -1,4 +1,3 @@
-const { testDbConnection } = require("../../db/test_db_connection");
 const User = require("../../db/models/users");
 const { createVillager, createAdventurer, createQuest } = require("../seeds");
 require("../../db/models/relationships");
@@ -10,10 +9,6 @@ let quest1;
 let quest2;
 
 describe("user model", () => {
-  beforeAll(async () => {
-    await testDbConnection();
-  });
-
   describe("when user is a villager", () => {
     beforeEach(async () => {
       villager = await createVillager();
