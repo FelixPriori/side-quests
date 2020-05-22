@@ -14,7 +14,7 @@ describe("quest model", () => {
       quest = await createQuest({ villager_id: villager.id });
     });
 
-    it("can fetch the associated villager", async () => {
+    it.only("can fetch the associated villager", async () => {
       const questForVillager = await Quest.findByPk(quest.id);
       const questVillager = await questForVillager.getVillager();
 
@@ -26,6 +26,7 @@ describe("quest model", () => {
     beforeEach(async () => {
       villager = await createVillager();
       adventurer = await createAdventurer();
+      villager = await createVillager();
       quest = await createQuest({
         adventurer_id: adventurer.id,
         villager_id: villager.id,
