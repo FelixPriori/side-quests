@@ -1,6 +1,6 @@
 const sequelize = require("../sequelize");
 const { DataTypes } = require("sequelize");
-// const Class = require("./classes");
+const Class = require("./classes");
 // const User = require("./users");
 
 const Badge = sequelize.define(
@@ -24,6 +24,10 @@ const Badge = sequelize.define(
     },
     class_id: {
       type: DataTypes.INTEGER,
+      references: {
+        model: Class,
+        key: "id",
+      },
       allowNull: false,
     },
   },
@@ -32,7 +36,6 @@ const Badge = sequelize.define(
   }
 );
 
-// Badge.belongsTo(Class);
 // Badge.belongsToMany(User, { through: "AssignedBadges" });
 
 module.exports = Badge;
