@@ -4,24 +4,40 @@ const Quest = require("../db/models/quests");
 const Badge = require("../db/models/badges");
 const Class = require("../db/models/classes");
 
+// hopefully faker's ability to generate unique values will be a reality soon
+// see https://github.com/Marak/faker.js/issues/692
+const uniqueEmail = () =>
+  Math.floor(Math.random() * 1000000000) + faker.internet.email();
+
 const commonUserFields = {
   username: faker.internet.userName(),
   first_name: faker.name.firstName(),
   last_name: faker.name.lastName(),
-  email: faker.internet.email(),
   password: faker.internet.password(),
   avatar: faker.internet.avatar(),
   bio: faker.lorem.paragraph(),
   adventurer: faker.random.boolean(),
+  // email needs to be dynamically generated
 };
 
-const createVillager = async () =>
-  User.create({ ...commonUserFields, adventurer: false });
+const createVillager = async (options) =>
+  User.create({
+    ...commonUserFields,
+    adventurer: false,
+    email: uniqueEmail(),
+    ...options,
+  });
 
-const createAdventurer = async () =>
-  User.create({ ...commonUserFields, adventurer: true });
+const createAdventurer = async (options) =>
+  User.create({
+    ...commonUserFields,
+    adventurer: true,
+    email: uniqueEmail(),
+    ...options,
+  });
 
-const createUser = async () => User.create(commonUserFields);
+const createUser = async () =>
+  User.create({ ...commonUserFields, email: uniqueEmail() });
 
 const createQuest = async (options) =>
   Quest.create({
