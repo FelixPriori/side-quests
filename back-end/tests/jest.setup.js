@@ -7,7 +7,6 @@ const {
 
 beforeAll(async (done) => {
   await testDbConnection();
-  // sync test db according to sequelize's models
   await syncTestDb();
   done();
 });
