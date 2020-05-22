@@ -1,11 +1,10 @@
 require("../environment");
-const { testDbConnection } = require("../db/test_db_connection");
+const { testDbConnection, syncTestDb } = require("../db/sequelize_helpers");
 
 beforeAll(async (done) => {
   await testDbConnection();
-  // TODO: create test data for the endpoint tests before enabling this below
-  // sync test db from sequelize models (this will remove all data in test db)
-  // sequelize.sync({ force: true, match: /_test$/ });
+  // sync test db according to sequelize's models
+  await syncTestDb();
   done();
 });
 
