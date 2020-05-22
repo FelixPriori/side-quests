@@ -14,7 +14,7 @@ describe("quest model", () => {
       quest = await createQuest({ villager_id: villager.id });
     });
 
-    it.only("can fetch the associated villager", async () => {
+    it("can fetch the associated villager", async () => {
       const questForVillager = await Quest.findByPk(quest.id);
       const questVillager = await questForVillager.getVillager();
 
