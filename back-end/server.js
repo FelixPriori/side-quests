@@ -1,14 +1,7 @@
 const app = require("./application")();
-const sequelize = require("./db/sequelize");
+const { testDbConnection } = require("./db/test_db_connection");
 
-try {
-  sequelize.authenticate();
-  console.log(`Connection to '${process.env.DB_NAME}' has been established successfully.`);
-} catch (error) {
-  console.error("Unable to connect to the database:", error);
-}
-
-//Note: To close connection use sequelize.close()
-
-// Run when client connects
-app.listen(8081);
+testDbConnection().then(() => {
+  // Run when client connects
+  app.listen(8081);
+});

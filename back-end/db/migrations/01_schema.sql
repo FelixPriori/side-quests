@@ -47,7 +47,7 @@ CREATE TABLE badges (
   requirement VARCHAR(255) NOT NULL,
   int_requirement INTEGER NOT NULL,
   criteria_type VARCHAR(255) NOT NULL,
-  class_id INTEGER REFERENCES users(id) ON DELETE CASCADE NOT NULL
+  class_id INTEGER REFERENCES classes(id) ON DELETE CASCADE NOT NULL
 );
 
 
