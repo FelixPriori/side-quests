@@ -24,6 +24,7 @@ describe("quest model", () => {
 
   describe("when quest is associated with an adventurer", () => {
     beforeEach(async () => {
+      villager = await createVillager();
       adventurer = await createAdventurer();
       quest = await createQuest({
         adventurer_id: adventurer.id,
