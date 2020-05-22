@@ -1,6 +1,5 @@
 const { createVillager, createAdventurer, createQuest } = require("../seeds");
 const Quest = require("../../db/models/quests");
-require("../../db/models/relationships");
 
 // test data
 let villager;

@@ -1,4 +1,5 @@
 const sequelize = require("./sequelize");
+require("./models/relationships");
 
 const syncTestDb = async () =>
   await sequelize.sync({ force: true, match: /_tests$/ });
