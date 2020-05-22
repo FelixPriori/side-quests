@@ -29,7 +29,7 @@ const createQuest = async (options) =>
     description: faker.lorem.paragraph(),
     completed: false,
     city: faker.address.city(),
-    class_id: 1,
+    class_id: (await createClass()).id,
     ...options,
   });
 
@@ -39,7 +39,7 @@ const createBadge = async (options) =>
     requirement: "Complete 1 Rogue Quest",
     int_requirement: 1,
     criteria_type: "quest",
-    class_id: 1,
+    class_id: (await createClass()).id,
     ...options,
   });
 
