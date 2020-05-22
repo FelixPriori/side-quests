@@ -29,6 +29,7 @@ describe("user model", () => {
   describe("when user is an adventurer", () => {
     beforeEach(async () => {
       adventurer = await createAdventurer();
+      villager = await createVillager();
       quest1 = await createQuest({
         villager_id: villager.id,
         adventurer_id: adventurer.id,
