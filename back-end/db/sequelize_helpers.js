@@ -1,5 +1,8 @@
 const sequelize = require("./sequelize");
 
+const syncTestDb = async () =>
+  await sequelize.sync({ force: true, match: /_tests$/ });
+
 const testDbConnection = async () => {
   try {
     await sequelize.authenticate();
@@ -14,6 +17,6 @@ const testDbConnection = async () => {
   }
 };
 
-//Note: To close connection use sequelize.close()
+const closeDbConnection = async () => sequelize.close();
 
-module.exports.testDbConnection = testDbConnection;
+module.exports = { testDbConnection, syncTestDb, closeDbConnection };
