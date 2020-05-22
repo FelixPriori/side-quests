@@ -26,7 +26,6 @@ describe("quest model", () => {
     beforeEach(async () => {
       villager = await createVillager();
       adventurer = await createAdventurer();
-      villager = await createVillager();
       quest = await createQuest({
         adventurer_id: adventurer.id,
         villager_id: villager.id,
