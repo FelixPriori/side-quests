@@ -1,5 +1,9 @@
 require("../environment");
-const { testDbConnection, syncTestDb } = require("../db/sequelize_helpers");
+const {
+  testDbConnection,
+  syncTestDb,
+  closeDbConnection,
+} = require("../db/sequelize_helpers");
 
 beforeAll(async (done) => {
   await testDbConnection();
@@ -9,5 +13,6 @@ beforeAll(async (done) => {
 });
 
 afterAll(async (done) => {
+  await closeDbConnection();
   done();
 });
