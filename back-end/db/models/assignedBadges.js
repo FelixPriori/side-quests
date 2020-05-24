@@ -1,7 +1,7 @@
 const sequelize = require("../sequelize");
 const { DataTypes } = require("sequelize");
-const { Badge } = require("./badges");
-const { User } = require("./users");
+const Badge = require("./badges");
+const User = require("./users");
 
 const AssignedBadge = sequelize.define(
   "assigned_badge",
