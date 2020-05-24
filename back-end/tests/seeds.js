@@ -68,11 +68,10 @@ const createClass = async (options) =>
     ...options,
   });
 
-const createProgress = async (options) => {
+const createProgress = async (options) =>
   ClassProgress.create({
     ...options,
   });
-};
 
 module.exports = {
   createVillager,
