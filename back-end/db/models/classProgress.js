@@ -24,14 +24,17 @@ const ClassProgress = sequelize.define(
     },
     level: {
       type: DataTypes.INTEGER,
+      defaultValue: 1,
       allowNull: false,
     },
     experience_points: {
       type: DataTypes.INTEGER,
+      defaultValue: 0,
       allowNull: false,
     },
     quest_count: {
       type: DataTypes.INTEGER,
+      defaultValue: 0,
       allowNull: false,
     },
   },
