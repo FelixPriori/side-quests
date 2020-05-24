@@ -11,8 +11,8 @@ describe("class progress model", () => {
     classInstance = await createClass();
     adventurer = await createAdventurer();
     classProgress = await createProgress({
-      adventurerId: adventurer.id,
-      classId: classInstance.id,
+      adventurer_id: adventurer.id,
+      class_id: classInstance.id,
     });
   });
   it("should have default values upon creation", async () => {
