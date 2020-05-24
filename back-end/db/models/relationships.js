@@ -29,7 +29,7 @@ ClassProgress.belongsTo(Class, {
   as: "classId",
 });
 
-ClassProgress.hasOne(User, {
+ClassProgress.belongsTo(User, {
   foreignKey: "adventurer_id",
   as: "adventurerId",
 });
