@@ -4,7 +4,7 @@ const Quest = require("../db/models/quests");
 const Badge = require("../db/models/badges");
 const Class = require("../db/models/classes");
 const ClassProgress = require("../db/models/classProgress");
-const AssignedBadge = require("../db/models/assignedBadge");
+const AssignedBadge = require("../db/models/assignedBadges");
 
 // hopefully faker's ability to generate unique values will be a reality soon
 // see https://github.com/Marak/faker.js/issues/692

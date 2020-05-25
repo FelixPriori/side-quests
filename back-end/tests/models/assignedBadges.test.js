@@ -3,7 +3,7 @@ const {
   createAdventurer,
   createBadge,
 } = require("../seeds");
-const AssignedBadge = require("../../db/models/assignedBadge");
+const AssignedBadge = require("../../db/models/assignedBadges");
 
 let assignedBadge;
 let adventurer;
