@@ -3,7 +3,7 @@ const User = require("./users");
 const Badge = require("./badges");
 const Class = require("./classes");
 const ClassProgress = require("./classProgress");
-const AssignedBadges = require("./assignedBadges");
+const AssignedBadge = require("./assignedBadges");
 
 Quest.belongsTo(User, {
   foreignKey: "villager_id",
@@ -35,12 +35,12 @@ ClassProgress.belongsTo(User, {
   as: "adventurer",
 });
 
-AssignedBadges.belongsTo(Badge, {
+AssignedBadge.belongsTo(Badge, {
   foreignKey: "badge_id",
   as: "badge",
 });
 
-AssignedBadges.belongsTo(User, {
+AssignedBadge.belongsTo(User, {
   foreignKey: "adventurer_id",
   as: "adventurer",
 });

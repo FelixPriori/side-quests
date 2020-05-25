@@ -1,9 +1,9 @@
 const {
-  createAssignedBadges,
+  createAssignedBadge,
   createAdventurer,
   createBadge,
 } = require("../seeds");
-const AssignedBadges = require("../../db/models/classProgress");
+const AssignedBadge = require("../../db/models/classProgress");
 
 let assignedBadges;
 let adventurer;
@@ -13,18 +13,18 @@ describe("assigned badges model", () => {
   beforeEach(async () => {
     adventurer = await createAdventurer();
     badge = await createBadge();
-    assignedBadges = await createAssignedBadges({
+    assignedBadges = await createAssignedBadge({
       badge_id: badge.id,
       adventurer_id: adventurer.id,
     });
   });
   it("can fetch the associated badge", async () => {
-    const badgeForAdventurer = await AssignedBadges.findByPk(assignedBadges.id);
+    const badgeForAdventurer = await AssignedBadge.findByPk(assignedBadges.id);
     const adventurerBadge = await badgeForAdventurer.getBadge();
     expect(adventurerBadge.id).toEqual(badge.id);
   });
   it("can fetch the associated adventurer", async () => {
-    const badgeForAdventurer = await AssignedBadges.findByPk(assignedBadges.id);
+    const badgeForAdventurer = await AssignedBadge.findByPk(assignedBadges.id);
     const adventurerFromBadge = await badgeForAdventurer.getAdventurer();
     expect(adventurerFromBadge.id).toEqual(adventurer.id);
   });
