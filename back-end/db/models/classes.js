@@ -1,6 +1,5 @@
 const sequelize = require("../sequelize");
 const { DataTypes } = require("sequelize");
-// const Badge = require("./badges");
 
 const Class = sequelize.define(
   "class",
@@ -18,7 +17,5 @@ const Class = sequelize.define(
     timestamps: false,
   }
 );
-
-// Class.hasMany(Badge, { as: "badges", foreignKey: "classId" });
 
 module.exports = Class;
