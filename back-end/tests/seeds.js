@@ -70,9 +70,7 @@ const createClass = async (options) =>
   });
 
 const createProgress = async (options) =>
-  ClassProgress.create({
-    ...options,
-  });
+  ClassProgress.create(options);
 
 const createAssignedBadges = async (options) =>
   AssignedBadges.create(options);
