@@ -27,22 +27,22 @@ User.hasMany(Quest, {
 
 ClassProgress.belongsTo(Class, {
   foreignKey: "class_id",
-  as: "classId",
+  as: "class",
 });
 
 ClassProgress.belongsTo(User, {
   foreignKey: "adventurer_id",
-  as: "adventurerId",
+  as: "adventurer",
 });
 
 AssignedBadges.belongsTo(Badge, {
   foreignKey: "badge_id",
-  as: "badgeId",
+  as: "badge",
 });
 
 AssignedBadges.belongsTo(User, {
   foreignKey: "adventurer_id",
-  as: "adventurerId",
+  as: "adventurer",
 });
 
 Badge.belongsTo(Class);
