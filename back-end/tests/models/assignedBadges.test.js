@@ -23,4 +23,9 @@ describe("assigned badges model", () => {
     const adventurerBadge = await badgeForAdventurer.getBadge();
     expect(adventurerBadge.id).toEqual(badge.id);
   });
+  it("can fetch the associated adventurer", async () => {
+    const badgeForAdventurer = await AssignedBadges.findByPk(assignedBadges.id);
+    const adventurerFromBadge = await badgeForAdventurer.getAdventurer();
+    expect(adventurerFromBadge.id).toEqual(adventurer.id);
+  });
 });
