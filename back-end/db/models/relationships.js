@@ -48,6 +48,5 @@ AssignedBadges.belongsTo(User, {
 Badge.belongsTo(Class);
 
 Class.hasMany(Badge, {
-  as: "badges",
   foreignKey: "class_id",
 });
