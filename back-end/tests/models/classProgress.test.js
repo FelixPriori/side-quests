@@ -21,4 +21,18 @@ describe("class progress model", () => {
     expect(newProgress.experience_points).toEqual(0);
     expect(newProgress.quest_count).toEqual(0);
   });
+  it("can fetch associated adventurer", async () => {
+    const progressForAdventurer = await ClassProgress.findByPk(
+      classProgress.id
+    );
+    const progressAdventurer = await progressForAdventurer.getAdventurer();
+    expect(progressAdventurer.id).toEqual(adventurer.id);
+  });
+  it("can fetch associated class", async () => {
+    const progressForAdventurer = await ClassProgress.findByPk(
+      classProgress.id
+    );
+    const progressClass = await progressForAdventurer.getClass();
+    expect(progressClass.id).toEqual(classInstance.id);
+  });
 });
