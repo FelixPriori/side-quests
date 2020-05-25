@@ -18,11 +18,13 @@ describe("assigned badges model", () => {
       adventurer_id: adventurer.id,
     });
   });
+
   it("can fetch the associated badge", async () => {
     const badgeForAdventurer = await AssignedBadge.findByPk(assignedBadge.id);
     const adventurerBadge = await badgeForAdventurer.getBadge();
     expect(adventurerBadge.id).toEqual(badge.id);
   });
+
   it("can fetch the associated adventurer", async () => {
     const badgeForAdventurer = await AssignedBadge.findByPk(assignedBadge.id);
     const adventurerFromBadge = await badgeForAdventurer.getAdventurer();

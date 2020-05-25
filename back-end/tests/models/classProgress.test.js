@@ -15,12 +15,14 @@ describe("class progress model", () => {
       class_id: classInstance.id,
     });
   });
+
   it("should have default values upon creation", async () => {
     const newProgress = await ClassProgress.findByPk(classProgress.id);
     expect(newProgress.level).toEqual(1);
     expect(newProgress.experience_points).toEqual(0);
     expect(newProgress.quest_count).toEqual(0);
   });
+
   it("can fetch associated adventurer", async () => {
     const progressForAdventurer = await ClassProgress.findByPk(
       classProgress.id
@@ -28,6 +30,7 @@ describe("class progress model", () => {
     const progressAdventurer = await progressForAdventurer.getAdventurer();
     expect(progressAdventurer.id).toEqual(adventurer.id);
   });
+
   it("can fetch associated class", async () => {
     const progressForAdventurer = await ClassProgress.findByPk(
       classProgress.id
