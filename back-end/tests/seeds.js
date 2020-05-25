@@ -75,9 +75,7 @@ const createProgress = async (options) =>
   });
 
 const createAssignedBadges = async (options) =>
-  AssignedBadges.create({
-    ...options,
-  });
+  AssignedBadges.create(options);
 
 module.exports = {
   createVillager,
