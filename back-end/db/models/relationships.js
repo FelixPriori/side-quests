@@ -17,7 +17,6 @@ Quest.belongsTo(User, {
 
 Quest.belongsTo(Class, {
   foreignKey: "class_id",
-  as: "class",
 });
 
 User.hasMany(Quest, {
@@ -32,7 +31,6 @@ User.hasMany(Quest, {
 
 ClassProgress.belongsTo(Class, {
   foreignKey: "class_id",
-  as: "class",
 });
 
 ClassProgress.belongsTo(User, {
@@ -40,14 +38,9 @@ ClassProgress.belongsTo(User, {
   as: "adventurer",
 });
 
-// User.belongsToMany(Badge, { through: "assigned_badges" });
-
 AssignedBadge.belongsTo(Badge, {
   foreignKey: "badge_id",
-  as: "badge",
 });
-
-// Badge.belongsToMany(User, { through: "assigned_badges" });
 
 AssignedBadge.belongsTo(User, {
   foreignKey: "adventurer_id",
@@ -56,9 +49,11 @@ AssignedBadge.belongsTo(User, {
 
 Badge.belongsTo(Class, {
   foreignKey: "class_id",
-  as: "class",
 });
 
 Class.hasMany(Badge, {
   foreignKey: "class_id",
 });
+
+// User.belongsToMany(Badge, { through: AssignedBadges });
+// Badge.belongsToMany(User, { through: AssignedBadges });
