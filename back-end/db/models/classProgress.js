@@ -6,7 +6,7 @@ const User = require("./users");
 const ClassProgress = sequelize.define(
   "class_progress",
   {
-    classId: {
+    class_id: {
       type: DataTypes.INTEGER,
       references: {
         model: Class,
@@ -14,7 +14,7 @@ const ClassProgress = sequelize.define(
       },
       allowNull: false,
     },
-    adventurerId: {
+    adventurer_id: {
       type: DataTypes.INTEGER,
       references: {
         model: User,
@@ -24,14 +24,17 @@ const ClassProgress = sequelize.define(
     },
     level: {
       type: DataTypes.INTEGER,
+      defaultValue: 1,
       allowNull: false,
     },
-    experiencePoints: {
+    experience_points: {
       type: DataTypes.INTEGER,
+      defaultValue: 0,
       allowNull: false,
     },
-    questCount: {
+    quest_count: {
       type: DataTypes.INTEGER,
+      defaultValue: 0,
       allowNull: false,
     },
   },
@@ -39,10 +42,5 @@ const ClassProgress = sequelize.define(
     timestamps: false,
   }
 );
-
-// ClassProgress.belongsTo(Class);
-// ClassProgress.hasOne(User, {
-//   foreignKey: "adventurerId",
-// });
 
 module.exports = ClassProgress;

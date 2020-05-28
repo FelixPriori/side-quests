@@ -1,16 +1,26 @@
-const { createVillager, createAdventurer, createQuest } = require("../seeds");
+const {
+  createVillager,
+  createAdventurer,
+  createQuest,
+  createClass,
+} = require("../seeds");
 const Quest = require("../../db/models/quests");
 
 // test data
 let villager;
 let adventurer;
 let quest;
+let classInstance;
 
 describe("quest model", () => {
   describe("when quest is associated with a villager", () => {
     beforeEach(async () => {
       villager = await createVillager();
-      quest = await createQuest({ villager_id: villager.id });
+      classInstance = await createClass();
+      quest = await createQuest({
+        villager_id: villager.id,
+        class_id: classInstance.id,
+      });
     });
 
     it("can fetch the associated villager", async () => {
@@ -19,15 +29,24 @@ describe("quest model", () => {
 
       expect(questVillager.id).toEqual(villager.id);
     });
+
+    it("can fetch the associated class", async () => {
+      const questForClass = await Quest.findByPk(quest.id);
+      const questClass = await questForClass.getClass();
+
+      expect(questClass.id).toEqual(classInstance.id);
+    });
   });
 
   describe("when quest is associated with an adventurer", () => {
     beforeEach(async () => {
       villager = await createVillager();
       adventurer = await createAdventurer();
+      classInstance = await createClass();
       quest = await createQuest({
         adventurer_id: adventurer.id,
         villager_id: villager.id,
+        class_id: classInstance.id,
       });
     });
 
@@ -36,6 +55,13 @@ describe("quest model", () => {
       const questAdventurer = await questForAdventurer.getAdventurer();
 
       expect(questAdventurer.id).toEqual(adventurer.id);
+    });
+
+    it("can fetch the associated class", async () => {
+      const questForClass = await Quest.findByPk(quest.id);
+      const questClass = await questForClass.getClass();
+
+      expect(questClass.id).toEqual(classInstance.id);
     });
   });
 });

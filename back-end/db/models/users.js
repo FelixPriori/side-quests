@@ -44,6 +44,5 @@ const User = sequelize.define(
   }
 );
 
-// User.belongsToMany(Badge, { through: "AssignedBadges" });
 
 module.exports = User;
