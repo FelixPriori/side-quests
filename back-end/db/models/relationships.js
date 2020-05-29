@@ -15,14 +15,9 @@ User.hasMany(Quest, { as: "villagerQuests" });
 
 User.hasMany(Quest, { as: "adventurerQuests" });
 
-ClassProgress.belongsTo(Class, {
-  foreignKey: "class_id",
-});
+ClassProgress.belongsTo(Class);
 
-ClassProgress.belongsTo(User, {
-  foreignKey: "adventurer_id",
-  as: "adventurer",
-});
+ClassProgress.belongsTo(User, { as: "adventurer" });
 
 AssignedBadge.belongsTo(Badge);
 

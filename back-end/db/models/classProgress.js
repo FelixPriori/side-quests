@@ -6,7 +6,7 @@ const User = require("./users");
 const ClassProgress = sequelize.define(
   "class_progress",
   {
-    class_id: {
+    classId: {
       type: DataTypes.INTEGER,
       references: {
         model: Class,
@@ -14,7 +14,7 @@ const ClassProgress = sequelize.define(
       },
       allowNull: false,
     },
-    adventurer_id: {
+    adventurerId: {
       type: DataTypes.INTEGER,
       references: {
         model: User,
