@@ -14,8 +14,8 @@ describe("assigned badges model", () => {
     adventurer = await createAdventurer();
     badge = await createBadge();
     assignedBadge = await createAssignedBadge({
-      badge_id: badge.id,
-      adventurer_id: adventurer.id,
+      badgeId: badge.id,
+      adventurerId: adventurer.id,
     });
   });
 
