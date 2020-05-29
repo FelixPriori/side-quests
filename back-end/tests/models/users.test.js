@@ -56,7 +56,7 @@ describe("user model", () => {
       expect(questIds).toEqual([quest1.id, quest2.id].sort());
     });
 
-    describe.only("when user has badges", () => {
+    describe("when user has badges", () => {
       beforeEach(async () => {
         badge = await createBadge();
         await createAssignedBadge({
