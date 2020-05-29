@@ -6,7 +6,7 @@ const User = require("./users");
 const AssignedBadge = sequelize.define(
   "assigned_badge",
   {
-    badge_id: {
+    badgeId: {
       type: DataTypes.INTEGER,
       references: {
         model: Badge,
@@ -14,7 +14,7 @@ const AssignedBadge = sequelize.define(
       },
       allowNull: false,
     },
-    adventurer_id: {
+    adventurerId: {
       type: DataTypes.INTEGER,
       references: {
         model: User,
