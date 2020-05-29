@@ -38,14 +38,9 @@ ClassProgress.belongsTo(User, {
   as: "adventurer",
 });
 
-AssignedBadge.belongsTo(Badge, {
-  foreignKey: "badge_id",
-});
+AssignedBadge.belongsTo(Badge);
 
-AssignedBadge.belongsTo(User, {
-  foreignKey: "adventurer_id",
-  as: "adventurer",
-});
+AssignedBadge.belongsTo(User);
 
 Badge.belongsTo(Class, {
   foreignKey: "class_id",
@@ -55,5 +50,5 @@ Class.hasMany(Badge, {
   foreignKey: "class_id",
 });
 
-// User.belongsToMany(Badge, { through: AssignedBadges });
-// Badge.belongsToMany(User, { through: AssignedBadges });
+User.belongsToMany(Badge, { through: AssignedBadge });
+Badge.belongsToMany(User, { through: AssignedBadge });

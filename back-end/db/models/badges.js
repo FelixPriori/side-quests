@@ -36,5 +36,4 @@ const Badge = sequelize.define(
   }
 );
 
-
 module.exports = Badge;

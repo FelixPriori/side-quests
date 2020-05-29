@@ -14,20 +14,24 @@ describe("assigned badges model", () => {
     adventurer = await createAdventurer();
     badge = await createBadge();
     assignedBadge = await createAssignedBadge({
-      badge_id: badge.id,
-      adventurer_id: adventurer.id,
+      badgeId: badge.id,
+      userId: adventurer.id,
     });
   });
 
   it("can fetch the associated badge", async () => {
-    const badgeForAdventurer = await AssignedBadge.findByPk(assignedBadge.id);
-    const adventurerBadge = await badgeForAdventurer.getBadge();
+    const userBadgeTuple = await AssignedBadge.findOne({
+      where: { badgeId: assignedBadge.badgeId, userId: adventurer.id },
+    });
+    const adventurerBadge = await userBadgeTuple.getBadge();
     expect(adventurerBadge.id).toEqual(badge.id);
   });
 
   it("can fetch the associated adventurer", async () => {
-    const badgeForAdventurer = await AssignedBadge.findByPk(assignedBadge.id);
-    const adventurerFromBadge = await badgeForAdventurer.getAdventurer();
+    const userBadgeTuple = await AssignedBadge.findOne({
+      where: { badgeId: assignedBadge.badgeId, userId: adventurer.id },
+    });
+    const adventurerFromBadge = await userBadgeTuple.getUser();
     expect(adventurerFromBadge.id).toEqual(adventurer.id);
   });
 });
