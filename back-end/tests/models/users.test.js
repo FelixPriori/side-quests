@@ -1,5 +1,11 @@
 const User = require("../../db/models/users");
-const { createVillager, createAdventurer, createQuest } = require("../seeds");
+const {
+  createVillager,
+  createAdventurer,
+  createQuest,
+  createBadge,
+  createAssignedBadge,
+} = require("../seeds");
 require("../../db/models/relationships");
 
 // test data
@@ -7,6 +13,7 @@ let villager;
 let adventurer;
 let quest1;
 let quest2;
+let badge;
 
 describe("user model", () => {
   describe("when user is a villager", () => {
@@ -47,6 +54,24 @@ describe("user model", () => {
       expect(adventurerQuests.length).toEqual(2);
       const questIds = adventurerQuests.map((q) => q.id).sort();
       expect(questIds).toEqual([quest1.id, quest2.id].sort());
+    });
+
+    describe.only("when user has badges", () => {
+      beforeEach(async () => {
+        badge = await createBadge();
+        await createAssignedBadge({
+          userId: adventurer.id,
+          badgeId: badge.id,
+        });
+      });
+
+      it("can fetch the associated badges", async () => {
+        const adventurerUser = await User.findByPk(adventurer.id);
+        const badges = await adventurerUser.getBadges();
+
+        expect(badges.length).toEqual(1);
+        expect(badges[0].id).toEqual(badge.id);
+      });
     });
   });
 });
