@@ -5,29 +5,15 @@ const Class = require("./classes");
 const ClassProgress = require("./classProgress");
 const AssignedBadge = require("./assignedBadges");
 
-Quest.belongsTo(User, {
-  foreignKey: "villager_id",
-  as: "villager",
-});
+Quest.belongsTo(User, { as: "villager" });
 
-Quest.belongsTo(User, {
-  foreignKey: "adventurer_id",
-  as: "adventurer",
-});
+Quest.belongsTo(User, { as: "adventurer" });
 
-Quest.belongsTo(Class, {
-  foreignKey: "class_id",
-});
+Quest.belongsTo(Class);
 
-User.hasMany(Quest, {
-  foreignKey: "villager_id",
-  as: "villagerQuests",
-});
+User.hasMany(Quest, { as: "villagerQuests" });
 
-User.hasMany(Quest, {
-  foreignKey: "adventurer_id",
-  as: "adventurerQuests",
-});
+User.hasMany(Quest, { as: "adventurerQuests" });
 
 ClassProgress.belongsTo(Class, {
   foreignKey: "class_id",
