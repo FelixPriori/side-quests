@@ -14,7 +14,7 @@ const AssignedBadge = sequelize.define(
       },
       allowNull: false,
     },
-    adventurerId: {
+    userId: {
       type: DataTypes.INTEGER,
       references: {
         model: User,
