@@ -18,8 +18,8 @@ describe("quest model", () => {
       villager = await createVillager();
       classInstance = await createClass();
       quest = await createQuest({
-        villager_id: villager.id,
-        class_id: classInstance.id,
+        villagerId: villager.id,
+        classId: classInstance.id,
       });
     });
 
@@ -44,9 +44,9 @@ describe("quest model", () => {
       adventurer = await createAdventurer();
       classInstance = await createClass();
       quest = await createQuest({
-        adventurer_id: adventurer.id,
-        villager_id: villager.id,
-        class_id: classInstance.id,
+        adventurerId: adventurer.id,
+        villagerId: villager.id,
+        classId: classInstance.id,
       });
     });
 
