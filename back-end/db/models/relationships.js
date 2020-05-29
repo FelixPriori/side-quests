@@ -23,13 +23,9 @@ AssignedBadge.belongsTo(Badge);
 
 AssignedBadge.belongsTo(User);
 
-Badge.belongsTo(Class, {
-  foreignKey: "class_id",
-});
+Badge.belongsTo(Class);
 
-Class.hasMany(Badge, {
-  foreignKey: "class_id",
-});
+Class.hasMany(Badge);
 
 User.belongsToMany(Badge, { through: AssignedBadge });
 Badge.belongsToMany(User, { through: AssignedBadge });

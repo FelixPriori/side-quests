@@ -14,13 +14,13 @@ let user2;
 describe("badges model", () => {
   beforeEach(async () => {
     classInstance = await createClass();
-    badge = await createBadge({ class_id: classInstance.id });
+    badge = await createBadge({ classId: classInstance.id });
   });
 
   it("can fetch associated class", async () => {
     const badgeForClass = await Badge.findByPk(badge.id);
     const classForBadge = await badgeForClass.getClass();
-    expect(classForBadge.id).toEqual(badge.class_id);
+    expect(classForBadge.id).toEqual(badge.classId);
   });
 
   describe("when badge has users", () => {

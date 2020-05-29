@@ -57,7 +57,7 @@ const createBadge = async (options) =>
     requirement: "Complete 1 Rogue Quest",
     int_requirement: 1,
     criteria_type: "quest",
-    class_id: (await createClass()).id,
+    classId: (await createClass()).id,
     ...options,
   });
 

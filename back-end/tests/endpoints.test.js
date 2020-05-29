@@ -45,7 +45,7 @@ describe("badges", () => {
 describe("classes", () => {
   beforeEach(async () => {
     classInstance = await createClass();
-    badge = await createBadge({ class_id: classInstance.id });
+    badge = await createBadge({ classId: classInstance.id });
   });
 
   it("should return an array of objects", async () => {
@@ -138,8 +138,8 @@ describe("quests", () => {
     adventurer = await createAdventurer();
     villager = await createVillager();
     quest = await createQuest({
-      adventurer_id: adventurer.id,
-      villager_id: villager.id,
+      adventurerId: adventurer.id,
+      villagerId: villager.id,
     });
   });
 

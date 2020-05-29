@@ -1,7 +1,6 @@
 const sequelize = require("../sequelize");
 const { DataTypes } = require("sequelize");
 const Class = require("./classes");
-// const User = require("./users");
 
 const Badge = sequelize.define(
   "badge",
@@ -22,7 +21,7 @@ const Badge = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    class_id: {
+    classId: {
       type: DataTypes.INTEGER,
       references: {
         model: Class,
