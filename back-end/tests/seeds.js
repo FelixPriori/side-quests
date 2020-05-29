@@ -47,7 +47,7 @@ const createQuest = async (options) =>
     description: faker.lorem.paragraph(),
     completed: false,
     city: faker.address.city(),
-    class_id: (await createClass()).id,
+    classId: (await createClass()).id,
     ...options,
   });
 
