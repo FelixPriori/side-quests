@@ -13,7 +13,8 @@ let villager;
 let adventurer;
 let quest1;
 let quest2;
-let badge;
+let badge1;
+let badge2;
 
 describe("user model", () => {
   describe("when user is a villager", () => {
@@ -58,10 +59,17 @@ describe("user model", () => {
 
     describe("when user has badges", () => {
       beforeEach(async () => {
-        badge = await createBadge();
+        badge1 = await createBadge();
+        badge2 = await createBadge();
+
+        // associate those 2 badges to the adventurer
         await createAssignedBadge({
           userId: adventurer.id,
-          badgeId: badge.id,
+          badgeId: badge1.id,
+        });
+        await createAssignedBadge({
+          userId: adventurer.id,
+          badgeId: badge2.id,
         });
       });
 
@@ -69,8 +77,9 @@ describe("user model", () => {
         const adventurerUser = await User.findByPk(adventurer.id);
         const badges = await adventurerUser.getBadges();
 
-        expect(badges.length).toEqual(1);
-        expect(badges[0].id).toEqual(badge.id);
+        expect(badges.length).toEqual(2);
+        const badgeIds = badges.map((b) => b.id).sort();
+        expect(badgeIds).toEqual([badge1.id, badge2.id].sort());
       });
     });
   });
