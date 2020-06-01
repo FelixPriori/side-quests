@@ -11,9 +11,9 @@ Quest.belongsTo(User, { as: "adventurer" });
 
 Quest.belongsTo(Class);
 
-User.hasMany(Quest, { as: "villagerQuests" });
+User.hasMany(Quest, { foreignKey: "villagerId", as: "villagerQuests" });
 
-User.hasMany(Quest, { as: "adventurerQuests" });
+User.hasMany(Quest, { foreignKey: "adventurerId", as: "adventurerQuests" });
 
 ClassProgress.belongsTo(Class);
 
