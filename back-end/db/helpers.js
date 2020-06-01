@@ -43,7 +43,7 @@ const getUserByUsername = function (username) {
 
 const classProgressForNewUser = function (userId) {
   const queryStr = `
-  INSERT INTO class_progress (class_id, adventurer_id, level, experience_points, quest_count)
+  INSERT INTO class_progress (classId, adventurerId, level, experience_points, quest_count)
   VALUES
   (1, $1, 0, 0, 0),
   (2, $1, 0, 0, 0),
@@ -119,7 +119,7 @@ const checkUserQuests = function (userId) {
   const queryStr = `
     SELECT * 
     FROM quests
-    WHERE adventurer_id = $1
+    WHERE adventurerId = $1
   `;
   return db.query(queryStr, [userId]).then((res) => res.rows);
 };
@@ -128,7 +128,7 @@ const getAllUserClassProgress = function (userId) {
   const queryStr = `
     SELECT * 
     FROM class_progress
-    WHERE adventurer_id = $1
+    WHERE adventurerId = $1
   `;
   return db.query(queryStr, [userId]).then((res) => res.rows);
 };
@@ -207,22 +207,15 @@ const createNewQuest = function (
   description,
   completed,
   city,
-  class_id,
-  villager_id
+  classId,
+  villagerId
 ) {
   const queryStr = `
-    INSERT INTO quests (name, description, completed, city, class_id, villager_id)
+    INSERT INTO quests (name, description, completed, city, classId, villagerId)
     VALUES ($1, $2, $3, $4, $5, $6);
   `;
   return db
-    .query(queryStr, [
-      name,
-      description,
-      completed,
-      city,
-      class_id,
-      villager_id,
-    ])
+    .query(queryStr, [name, description, completed, city, classId, villagerId])
     .then();
 };
 
@@ -237,7 +230,7 @@ const deleteQuest = function (questId) {
 const dropQuest = function (questId) {
   const queryStr = `
   UPDATE quests
-  SET adventurer_id = null
+  SET adventurerId = null
   WHERE id = $1;
   `;
   return db.query(queryStr, [questId]).then();
@@ -246,7 +239,7 @@ const dropQuest = function (questId) {
 const editQuest = function (questId, name, description, completed, classId) {
   const queryStr = `
     UPDATE quests 
-    SET name = $1, description = $2, completed = $3, class_id = $4
+    SET name = $1, description = $2, completed = $3, "classId" = $4
     WHERE quests.id = $5;
   `;
   return db
@@ -291,7 +284,7 @@ const getQuestsByVillager = function (villagerId) {
   const queryStr = `
     SELECT * 
     FROM quests
-    WHERE villager_id = $1
+    WHERE "villagerId" = $1
   `;
   return db.query(queryStr, [villagerId]).then((res) => res.rows);
 };
@@ -300,7 +293,7 @@ const increaseClassLevel = function (userId, classId, amount) {
   const queryStr = `
     UPDATE class_progress
     SET level = level + $1
-    WHERE adventurer_id = $2 AND class_id = $3;
+    WHERE adventurerId = $2 AND "classId" = $3;
   `;
 
   return db.query(queryStr, [amount, userId, classId]).then();
@@ -311,7 +304,7 @@ const setExperiencePoints = function (userId, classId, amount) {
   const queryStr = `
     UPDATE class_progress
     SET experience_points = $1
-    WHERE adventurer_id = $2 AND class_id = $3;
+    WHERE adventurerId = $2 AND "classId" = $3;
   `;
   return db.query(queryStr, [amount, userId, classId]).then();
 };
@@ -320,7 +313,7 @@ const getClassProgress = function (userId, classId) {
   const queryStr = `
     SELECT * 
     FROM class_progress
-    WHERE adventurer_id = $1 AND class_id = $2;
+    WHERE adventurerId = $1 AND "classId" = $2;
   `;
   return db.query(queryStr, [userId, classId]).then((res) => res.rows);
 };
@@ -329,7 +322,7 @@ const getAllBadgesForClass = function (classId) {
   const queryStr = `
     SELECT * 
     FROM badges
-    WHERE class_id = $1;
+    WHERE "classId" = $1;
   `;
   return db.query(queryStr, [classId]).then((res) => res.rows);
 };
@@ -338,7 +331,7 @@ const getUserBadgesByClass = function (userId, classId) {
   return getUserBadges(userId).then((userBadges) => {
     const classBadges = [];
     for (let i = 0; i < userBadges; i++) {
-      if (userBadges[i].class_id === classId) {
+      if (userBadges[i].classId === classId) {
         classBadges.push(userBadges[i]);
       }
     }
@@ -351,7 +344,7 @@ const unassignedBadgesForClass = function (userId, classId) {
     return getUserBadgesByClass(userId, classId).then((userBadges) => {
       for (let i = 0; i < badges.length; i++) {
         for (let y = 0; y < userBadges.length; y++) {
-          if ((badges[i].id = userBadges[y].badge_id)) {
+          if ((badges[i].id = userBadges[y].badgeId)) {
             badges.splice(i, 1);
           }
         }
@@ -363,7 +356,7 @@ const unassignedBadgesForClass = function (userId, classId) {
 
 const giveUserBadge = function (userId, badgeId) {
   const queryStr = `
-  INSERT INTO assigned_badges (adventurer_id, badge_id)
+  INSERT INTO assigned_badges (adventurerId, badgeId)
   VALUES
   ($1, $2);
   `;
@@ -422,7 +415,7 @@ const levelUpCheck = function (userId, experiencePoints, classId) {
   const queryStr = `
   SELECT *
   FROM class_progress
-  WHERE adventurer_id = $1;
+  WHERE adventurerId = $1;
   `;
   return db.query(queryStr, [userId]).then((res) => {
     if (
@@ -449,7 +442,7 @@ const levelUpCheck = function (userId, experiencePoints, classId) {
   });
 };
 
-const completeQuest = function (questId, adventurerId, class_id) {
+const completeQuest = function (questId, adventurerId, classId) {
   const queryStr = `
   UPDATE quests
   SET completed = true
@@ -459,8 +452,8 @@ const completeQuest = function (questId, adventurerId, class_id) {
   return db
     .query(queryStr, [questId])
     .then(() =>
-      increaseQuestCount(adventurerId, class_id, 1).then(() =>
-        levelUpCheck(adventurerId, 100, class_id)
+      increaseQuestCount(adventurerId, classId, 1).then(() =>
+        levelUpCheck(adventurerId, 100, classId)
       )
     );
 };
@@ -468,7 +461,7 @@ const completeQuest = function (questId, adventurerId, class_id) {
 const acceptQuest = function (questId, userId) {
   const queryStr = `
   UPDATE quests
-  SET adventurer_id = $1
+  SET adventurerId = $1
   WHERE id = $2;
   `;
   return db.query(queryStr, [userId, questId]).then();
@@ -478,8 +471,8 @@ const getUserBadges = function (userId) {
   const queryStr = `
   SELECT * 
   FROM users 
-  JOIN assigned_badges on assigned_badges.adventurer_id = id 
-  JOIN badges on badges.id = assigned_badges.badge_id 
+  JOIN assigned_badges on assigned_badges.adventurerId = id 
+  JOIN badges on badges.id = assigned_badges.badgeId 
   WHERE users.id = $1;
   `;
   return db.query(queryStr, [userId]).then((res) => res.rows);
@@ -489,8 +482,8 @@ const getBadgesByUser = function (userId) {
   const queryStr = `
     SELECT badges.* 
     FROM badges 
-    JOIN assigned_badges on assigned_badges.badge_id = badges.id
-    JOIN users on users.id = assigned_badges.adventurer_id
+    JOIN assigned_badges on assigned_badges.badgeId = badges.id
+    JOIN users on users.id = assigned_badges.adventurerId
     WHERE users.id = $1;
   `;
   return db.query(queryStr, [userId]).then((res) => res.rows);
@@ -500,7 +493,7 @@ const getBadgesByClass = function (classId) {
   const queryStr = `
     SELECT *
     FROM badges
-    WHERE class_id = $1;
+    WHERE "classId" = $1;
   `;
   return db.query(queryStr, [classId]).then((res) => res.rows);
 };
@@ -509,7 +502,7 @@ const getQuestsByAdventurer = function (userId) {
   const queryStr = `
     SELECT * 
     FROM quests
-    WHERE adventurer_id = $1;
+    WHERE adventurerId = $1;
   `;
   return db.query(queryStr, [userId]).then((res) => res.rows);
 };
@@ -518,7 +511,7 @@ const increaseQuestCount = function (userId, classId, amount) {
   const queryStr = `
   UPDATE class_progress
   SET quest_count = quest_count + $1
-  WHERE adventurer_id = $2 AND class_id = $3;
+  WHERE adventurerId = $2 AND "classId" = $3;
   `;
 
   return db.query(queryStr, [amount, userId, classId]).then();

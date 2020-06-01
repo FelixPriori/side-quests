@@ -1,4 +1,4 @@
-INSERT INTO badges (name, requirement, int_requirement, criteria_type, class_id)
+INSERT INTO badges (name, requirement, int_requirement, criteria_type, classId)
 VALUES 
   (
     'A stealthy aquaintance',

@@ -9,7 +9,7 @@ function VillagerQuests(props) {
   );
   const quests = props.state.userQuests
     .filter(
-      (quest) => quest.villager_id === props.villagerId && !quest.completed
+      (quest) => quest.villagerId === props.villagerId && !quest.completed
     )
     .map((quest, index) => {
       return (

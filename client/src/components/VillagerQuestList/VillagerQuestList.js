@@ -9,9 +9,9 @@ export default function VillagerQuestList(props) {
       .sort((a, b) => b.completed - a.completed)
       .map((quest, index) => {
         const questAdventurer =
-          quest.adventurer_id &&
+          quest.adventurerId &&
           props.state.adventurers.find(
-            (adventurer) => adventurer.id === quest.adventurer_id
+            (adventurer) => adventurer.id === quest.adventurerId
           );
         return (
           <VillagerQuestListItem

@@ -16,7 +16,7 @@ export default function TakenQuestItem(props) {
       );
       const newAllQuests = props.state.userQuests.map((quest) => {
         if (quest.id === questId) {
-          quest.adventurer_id = null;
+          quest.adventurerId = null;
         }
         return quest;
       });

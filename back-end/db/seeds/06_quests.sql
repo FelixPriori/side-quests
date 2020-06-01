@@ -1,4 +1,4 @@
-INSERT INTO quests (name, description, completed, city, class_id, villager_id)
+INSERT INTO quests (name, description, completed, city, classId, villagerId)
 VALUES
   ('Can''t figure out this math problem.', 'I have a test coming up and I can''t understand integrals.', false, 'Montreal', 3, 6),
   ('Need some soup', 'I''m sick and would really love some soup. I don''t want to go out and spread my virus.', false, 'Montreal', 6, 6),
@@ -13,7 +13,7 @@ VALUES
   ('My dog needs to take a walk', 'I broke my leg and my dog needs to take walks. Please help!', false, 'Montreal', 3, 9),
   ('Need pills from the pharmacy', 'I am out of medication and I need to take them ASAP', false, 'Montreal', 1, 2);
 
-INSERT INTO quests (name, description, completed, city, class_id, villager_id, adventurer_id)
+INSERT INTO quests (name, description, completed, city, classId, villagerId, adventurerId)
 VALUES
   ('Hungry for some soup!', 'I am at home and feeling very sick. Can someone bring me some some soup please?', true, 'Montreal', 6, 2, 1),
   ('My computer won''t start! Can someone help?', 'Ever since I installed this new app, my computer has been acting weird and won''t start', false, 'Montreal', 7, 2, 1);

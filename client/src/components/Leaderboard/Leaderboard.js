@@ -62,29 +62,29 @@ export default function Leaderboard(props) {
 
 const testClassData = [
   {
-    class_id: 1,
-    adventurer_id: 1,
+    classId: 1,
+    adventurerId: 1,
     level: 3,
     experience_points: 300,
     quest_count: 18,
   },
   {
-    class_id: 2,
-    adventurer_id: 1,
+    classId: 2,
+    adventurerId: 1,
     level: 3,
     experience_points: 200,
     quest_count: 5,
   },
   {
-    class_id: 3,
-    adventurer_id: 1,
+    classId: 3,
+    adventurerId: 1,
     level: 5,
     experience_points: 300,
     quest_count: 10,
   },
   {
-    class_id: 1,
-    adventurer_id: 1,
+    classId: 1,
+    adventurerId: 1,
     level: 3,
     experience_points: 300,
     quest_count: 23,

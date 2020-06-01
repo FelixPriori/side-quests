@@ -35,9 +35,9 @@ CREATE TABLE quests (
   description TEXT NOT NULL,
   completed BOOLEAN NOT NULL DEFAULT FALSE,
   city VARCHAR(255) NOT NULL,
-  class_id INTEGER REFERENCES classes(id),
-  villager_id INTEGER REFERENCES users(id),
-  adventurer_id INTEGER REFERENCES users(id) DEFAULT NULL,
+  classId INTEGER REFERENCES classes(id),
+  villagerId INTEGER REFERENCES users(id),
+  adventurerId INTEGER REFERENCES users(id) DEFAULT NULL,
   experience_points INTEGER NOT NULL DEFAULT 100
 );
 
@@ -47,19 +47,19 @@ CREATE TABLE badges (
   requirement VARCHAR(255) NOT NULL,
   int_requirement INTEGER NOT NULL,
   criteria_type VARCHAR(255) NOT NULL,
-  class_id INTEGER REFERENCES classes(id) ON DELETE CASCADE NOT NULL
+  classId INTEGER REFERENCES classes(id) ON DELETE CASCADE NOT NULL
 );
 
 
 CREATE TABLE assigned_badges (
-  badge_id INTEGER REFERENCES badges(id) ON DELETE CASCADE NOT NULL,
-  adventurer_id INTEGER REFERENCES users(id) ON DELETE CASCADE NOT NULL
+  badgeId INTEGER REFERENCES badges(id) ON DELETE CASCADE NOT NULL,
+  adventurerId INTEGER REFERENCES users(id) ON DELETE CASCADE NOT NULL
 );
 
 
 CREATE TABLE class_progress (
-  class_id INTEGER REFERENCES classes(id) ON DELETE CASCADE NOT NULL,
-  adventurer_id INTEGER REFERENCES users(id) ON DELETE CASCADE NOT NULL,
+  classId INTEGER REFERENCES classes(id) ON DELETE CASCADE NOT NULL,
+  adventurerId INTEGER REFERENCES users(id) ON DELETE CASCADE NOT NULL,
   level INTEGER DEFAULT 1,
   experience_points INTEGER DEFAULT 0,
   quest_count INTEGER DEFAULT 0

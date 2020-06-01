@@ -23,7 +23,7 @@ const Quest = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    class_id: {
+    classId: {
       type: DataTypes.INTEGER,
       references: {
         model: Class,
@@ -31,7 +31,7 @@ const Quest = sequelize.define(
       },
       allowNull: false,
     },
-    adventurer_id: {
+    adventurerId: {
       type: DataTypes.INTEGER,
       references: {
         model: User,
@@ -39,7 +39,7 @@ const Quest = sequelize.define(
       },
       defaultValue: null,
     },
-    villager_id: {
+    villagerId: {
       type: DataTypes.INTEGER,
       references: {
         model: User,

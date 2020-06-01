@@ -14,14 +14,14 @@ export default function Badge(props) {
       {props.locked ? (
         <img
           className="badgeImg locked"
-          alt={props.badge.class_id}
-          src={`/images/badges/${props.badge.class_id}.png`}
+          alt={props.badge.classId}
+          src={`/images/badges/${props.badge.classId}.png`}
         />
       ) : (
         <img
           className="badgeImg"
-          alt={props.badge.class_id}
-          src={`/images/badges/${props.badge.class_id}.png`}
+          alt={props.badge.classId}
+          src={`/images/badges/${props.badge.classId}.png`}
         />
       )}
       {popUp && (

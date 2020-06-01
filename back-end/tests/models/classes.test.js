@@ -8,8 +8,8 @@ let badge2;
 describe("class model", () => {
   beforeEach(async () => {
     classInstance = await createClass();
-    badge1 = await createBadge({ class_id: classInstance.id });
-    badge2 = await createBadge({ class_id: classInstance.id });
+    badge1 = await createBadge({ classId: classInstance.id });
+    badge2 = await createBadge({ classId: classInstance.id });
   });
 
   it("can fetch the associated badges", async () => {

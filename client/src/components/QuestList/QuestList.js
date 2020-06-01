@@ -14,11 +14,11 @@ export default function QuestList(props) {
       // the adventurer assigned must be either 3. yourself or 4. there are no adventurers assigned
       // 5. the villager who created the quest cannot be the current user (accout switch edge case)
       return (
-        quest.class_id === classItem.id && //1.
+        quest.classId === classItem.id && //1.
         !quest.completed && //2.
-        (quest.adventurer_id === userData.id || //3.
-          !quest.adventurer_id) && //4.
-        quest.villager_id !== userData.id //5.
+        (quest.adventurerId === userData.id || //3.
+          !quest.adventurerId) && //4.
+        quest.villagerId !== userData.id //5.
       );
     });
 
@@ -27,7 +27,7 @@ export default function QuestList(props) {
     validQuests.map((quest, index) => {
       const villager =
         villagers &&
-        villagers.find((villager) => villager.id === quest.villager_id);
+        villagers.find((villager) => villager.id === quest.villagerId);
       return (
         <QuestListItem
           // newUserCheck={props.newUserCheck}
