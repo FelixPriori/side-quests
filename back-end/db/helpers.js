@@ -208,14 +208,14 @@ const createNewQuest = function (
   completed,
   city,
   classId,
-  villager_id
+  villagerId
 ) {
   const queryStr = `
-    INSERT INTO quests (name, description, completed, city, classId, villager_id)
+    INSERT INTO quests (name, description, completed, city, classId, villagerId)
     VALUES ($1, $2, $3, $4, $5, $6);
   `;
   return db
-    .query(queryStr, [name, description, completed, city, classId, villager_id])
+    .query(queryStr, [name, description, completed, city, classId, villagerId])
     .then();
 };
 
@@ -284,7 +284,7 @@ const getQuestsByVillager = function (villagerId) {
   const queryStr = `
     SELECT * 
     FROM quests
-    WHERE villager_id = $1
+    WHERE "villagerId" = $1
   `;
   return db.query(queryStr, [villagerId]).then((res) => res.rows);
 };
