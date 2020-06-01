@@ -1,4 +1,4 @@
-INSERT INTO assigned_badges (adventurer_id, badge_id)
+INSERT INTO assigned_badges (adventurerId, badgeId)
 VALUES
   (1, 1),
   (1, 2),

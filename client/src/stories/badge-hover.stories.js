@@ -20,7 +20,7 @@ const badges = [
     requirement: "Complete 5 Alchemist Quests",
     int_requirement: 5,
     criteria_type: "quest",
-    class_id: 6,
+    classId: 6,
   },
   {
     id: 2,
@@ -30,7 +30,7 @@ const badges = [
     requirement: "Complete 5 Mage Quests",
     int_requirement: 5,
     criteria_type: "quest",
-    class_id: 5,
+    classId: 5,
   },
   {
     id: 3,
@@ -40,7 +40,7 @@ const badges = [
     requirement: "Complete 5 Monk Quests",
     int_requirement: 5,
     criteria_type: "quest",
-    class_id: 4,
+    classId: 4,
   },
   {
     id: 4,
@@ -50,7 +50,7 @@ const badges = [
     requirement: "Complete 5 Gadgeteer Quests",
     int_requirement: 5,
     criteria_type: "quest",
-    class_id: 7,
+    classId: 7,
   },
   {
     id: 5,
@@ -60,7 +60,7 @@ const badges = [
     requirement: "Complete 5 Rogue Quests",
     int_requirement: 5,
     criteria_type: "quest",
-    class_id: 1,
+    classId: 1,
   },
   {
     id: 6,
@@ -70,7 +70,7 @@ const badges = [
     requirement: "Complete 5 Druid Quests",
     int_requirement: 5,
     criteria_type: "quest",
-    class_id: 3,
+    classId: 3,
   },
   {
     id: 7,
@@ -80,6 +80,6 @@ const badges = [
     requirement: "Complete 5 Bard Quests",
     int_requirement: 5,
     criteria_type: "quest",
-    class_id: 2,
+    classId: 2,
   },
 ];

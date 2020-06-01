@@ -8,7 +8,7 @@ import axios from "axios";
 
 export default function QuestListItem(props) {
   // const [viewChat, setViewChat] = useState(false);
-  const { name, description, adventurer_id, city } = props.userQuests;
+  const { name, description, adventurerId, city } = props.userQuests;
   // const toggleChat = () => {
   //   if (viewChat) {
   //     setViewChat(false)
@@ -34,7 +34,7 @@ export default function QuestListItem(props) {
       <p>Location: {city}</p>
       <p>{description}</p>
       <footer className="quest-footer">
-        {adventurer_id && (
+        {adventurerId && (
           <div className="links btn btn-group">
             <a
               href="https://hangouts.google.com/call/4vTdHBEPZQ6TnGAwr570AEEE?no_rd"
@@ -48,7 +48,7 @@ export default function QuestListItem(props) {
             </a>
           </div>
         )}
-        {adventurer_id ? (
+        {adventurerId ? (
           <div className="check-container">
             <CheckSeal />
           </div>

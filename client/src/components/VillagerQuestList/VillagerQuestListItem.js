@@ -93,9 +93,9 @@ export default function QuestListItem(props) {
                   confirm
                   onClick={() =>
                     completeQuest(
-                      props.villagerQuest.class_id,
+                      props.villagerQuest.classId,
                       props.villagerQuest.id,
-                      props.villagerQuest.adventurer_id
+                      props.villagerQuest.adventurerId
                     )
                   }
                 >

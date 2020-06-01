@@ -19,11 +19,11 @@ export default function ClassSelection(props) {
       (classData) => classData.name === name
     );
     const selectedClassProgress = props.state.classesProgressData.find(
-      (classProgress) => selectedClass.id === classProgress.class_id
+      (classProgress) => selectedClass.id === classProgress.classId
     );
     const selectedClassBadges =
       props.state.badges &&
-      props.state.badges.filter((badge) => badge.class_id === selectedClass.id);
+      props.state.badges.filter((badge) => badge.classId === selectedClass.id);
     setClassItem(selectedClass);
     setClassProgress(selectedClassProgress);
     setClassBadges(selectedClassBadges);
@@ -38,7 +38,7 @@ export default function ClassSelection(props) {
     axios.post(`/quests/${questId}/acceptQuest`).then(() => {
       const quests = props.state.userQuests.map((quest) => {
         if (quest.id === questId) {
-          quest.adventurer_id = props.state.userData.id;
+          quest.adventurerId = props.state.userData.id;
         }
         return quest;
       });
@@ -46,7 +46,7 @@ export default function ClassSelection(props) {
       const newQuest = props.state.userQuests.find(
         (quest) => quest.id === questId
       );
-      newQuest.adventurer_id = props.state.userData.id;
+      newQuest.adventurerId = props.state.userData.id;
       const newAdventurerQuests = [...props.state.questsByAdventurer, newQuest];
 
       props.setState((prevState) => ({

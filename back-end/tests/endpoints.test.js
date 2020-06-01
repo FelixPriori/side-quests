@@ -173,3 +173,5 @@ describe("quests", () => {
     expect(specificQuest).toMatchObject(quest.dataValues);
   });
 });
+
+// /quests/:id/completeQuest/:classId

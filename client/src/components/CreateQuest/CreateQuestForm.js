@@ -22,9 +22,9 @@ export default function CreateQuestForm(props) {
           description: description,
           completed: false,
           city: city,
-          class_id: questType,
-          villager_id: props.state.userData.id,
-          adventurer_id: null,
+          classId: questType,
+          villagerId: props.state.userData.id,
+          adventurerId: null,
           experience_points: 100,
         };
         questsByVillager.push(newQuest);

@@ -67,8 +67,8 @@ const data = {
       completed: false,
       latitude: 330,
       longitude: 123,
-      class_id: 1,
-      villager_id: 1,
+      classId: 1,
+      villagerId: 1,
     },
     {
       id: 2,
@@ -78,8 +78,8 @@ const data = {
       completed: true,
       latitude: 330,
       longitude: 234,
-      class_id: 1,
-      villager_id: 1,
+      classId: 1,
+      villagerId: 1,
     },
     {
       id: 3,
@@ -88,8 +88,8 @@ const data = {
       completed: false,
       latitude: 321,
       longitude: 92,
-      class_id: 2,
-      villager_id: 1,
+      classId: 2,
+      villagerId: 1,
     },
     {
       id: 4,
@@ -98,8 +98,8 @@ const data = {
       completed: false,
       latitude: 321,
       longitude: 92,
-      class_id: 1,
-      villager_id: 1,
+      classId: 1,
+      villagerId: 1,
     },
   ],
 };

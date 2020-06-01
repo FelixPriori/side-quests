@@ -6,7 +6,7 @@ export default function AllClasses(props) {
   const classProgress = props.classesProgressData.map(
     (classProgress, index) => {
       const currentClass = props.classesData.find(
-        (classData) => classData.id === classProgress.class_id
+        (classData) => classData.id === classProgress.classId
       );
       return (
         <div key={index} className="class-item">

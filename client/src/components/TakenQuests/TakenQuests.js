@@ -9,7 +9,7 @@ export default function TakenQuests(props) {
       .sort((a, b) => b.completed - a.completed)
       .map((quest, index) => {
         const villager = props.state.villagers.filter(
-          (villager) => quest.villager_id === villager.id
+          (villager) => quest.villagerId === villager.id
         );
         return (
           <TakenQuestItem
