@@ -24,7 +24,7 @@
     "faker": "^4.1.0",
     "morgan": "~1.9.1",
     "node-gyp": "^6.1.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "node-sass-middleware": "^0.11.0",
     "pg": "^6.4.2",
     "pg-hstore": "^2.3.3",
